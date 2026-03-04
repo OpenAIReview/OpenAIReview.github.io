@@ -1,0 +1,616 @@
+{
+  "slug": "apep-0001-tex",
+  "title": "Do State Paid Sick Leave Mandates Increase Work Hours? Evidence from Low-Wage Service Sector Workers [TEX]",
+  "paragraphs": [
+    {
+      "index": 0,
+      "text": "\\documentclass[12pt]{article}\n\\usepackage[margin=1in]{geometry}\n\\usepackage{amsmath,amssymb}\n\\usepackage{graphicx}\n\\usepackage{booktabs}\n\\usepackage{natbib}\n\\usepackage{setspace}\n\\usepackage{hyperref}\n\\usepackage{float}\n\\usepackage{tikz}\n\\usepackage{pgfplots}\n\\pgfplotsset{compat=1.17}"
+    },
+    {
+      "index": 1,
+      "text": "\\title{Do State Paid Sick Leave Mandates Increase Work Hours? \\\\ Evidence from Low-Wage Service Sector Workers}"
+    },
+    {
+      "index": 2,
+      "text": "\\author{APEP Autonomous Research\\thanks{%\n  Autonomous Policy Evaluation Project.\n  This paper was autonomously generated using Claude Code.\n  Repository: https://github.com/dakoyana/auto-policy-evals Contributor: @dakoyana.}}"
+    },
+    {
+      "index": 3,
+      "text": "\\date{January 2026}\n\n\\begin{document}\n\n\\maketitle\n\n\\begin{abstract}\nThis paper examines whether state mandatory paid sick leave (PSL) laws increase work hours among low-wage service sector workers. Using a difference-in-differences design that exploits the staggered adoption of PSL mandates across 16 U.S. states between 2012 and 2022, I find that PSL laws increase weekly work hours by approximately 0.67 hours (2.4\\%) among low-wage service workers. Effects are larger for workers with children (+1.14 hours) and in high-contact occupations (+0.91 hours). Event study analyses show no evidence of pre-trends, with effects emerging immediately post-adoption and persisting over time. These findings suggest PSL mandates improve employment stability for vulnerable workers without the negative employment effects some critics predicted."
+    },
+    {
+      "index": 4,
+      "text": "\\medskip\n\\noindent \\textbf{JEL Codes:} J22, J32, J38, I18\n\n\\noindent \\textbf{Keywords:} Paid sick leave, labor supply, difference-in-differences, service workers, mandatory benefits\n\\end{abstract}"
+    },
+    {
+      "index": 5,
+      "text": "\\doublespacing\n\n\\section{Introduction}\n\nMandatory paid sick leave (PSL) has emerged as one of the most significant labor policy innovations in the United States over the past decade. Beginning with Connecticut in 2012, sixteen states plus the District of Columbia have enacted laws requiring employers to provide paid time off for worker or family illness. These policies represent a substantial expansion of worker protections, particularly for low-wage service sector employees who historically have had limited access to employer-provided benefits. Proponents argue that PSL improves public health outcomes by reducing ``presenteeism''---the phenomenon of employees working while sick---and provides crucial income security for vulnerable workers. Critics, however, raise concerns about potential negative employment effects, arguing that mandatory benefits increase labor costs and may reduce employment opportunities for the very workers the laws aim to help."
+    },
+    {
+      "index": 6,
+      "text": "This paper addresses a specific question within the PSL debate: do mandatory paid sick leave laws affect the intensive margin of labor supply---specifically, weekly work hours---among low-wage service sector workers? This population is particularly relevant for several reasons. First, service sector workers have historically had among the lowest rates of employer-provided sick leave, with Bureau of Labor Statistics data showing that only 50-60 percent of these workers had access to paid sick days before state mandates, compared to over 80 percent of professional and managerial workers. Second, service workers operate in high-contact environments---retail stores, restaurants, hotels---where illness transmission is particularly salient, creating strong public health justifications for PSL policies. Third, these workers disproportionately bear the costs of working while sick or losing income when staying home, as their lower wages and limited savings mean that even a few days of unpaid sick leave can create significant financial hardship."
+    },
+    {
+      "index": 7,
+      "text": "The empirical strategy exploits the staggered adoption of PSL mandates across states between 2012 and 2022 to implement a difference-in-differences (DiD) design. Using American Community Survey (ACS) Public Use Microdata Sample (PUMS) data on over 630,000 low-wage service worker observations, I compare changes in weekly work hours between states that adopted PSL mandates and those that did not, controlling for individual characteristics, state fixed effects, and year fixed effects. The staggered adoption pattern allows for estimation of event study specifications to assess pre-treatment trends and dynamic treatment effects, as well as implementation of modern heterogeneity-robust estimators developed by \\citet{callaway2021} to address concerns about negative weighting in two-way fixed effects models with staggered treatment timing."
+    },
+    {
+      "index": 8,
+      "text": "The main finding is that PSL mandates increase average weekly hours worked by 0.67 hours (standard error = 0.28), representing a 2.4 percent increase from a baseline of approximately 28 hours among low-wage service workers. This positive effect is statistically significant at the 5 percent level and economically meaningful---extrapolated to annual hours, it implies roughly 35 additional hours of work per year. Effects are heterogeneous across worker characteristics, with larger impacts observed among workers with children (+1.14 hours, p < 0.01) and those employed in high-contact service occupations such as food service and retail cashiers (+0.91 hours, p < 0.05). Event study estimates show no evidence of differential pre-treatment trends between PSL-adopting and non-adopting states, with treatment effects emerging immediately upon policy implementation and remaining stable over the post-treatment period."
+    },
+    {
+      "index": 9,
+      "text": "These results contribute to a growing literature on mandatory benefits and labor market outcomes, which has produced mixed findings depending on the specific policy and outcome examined. While \\citet{pichler2020} found null employment effects of PSL mandates in the four earliest-adopting states using Current Population Survey data, no prior study has examined intensive-margin hours responses using comprehensive microdata covering the full set of state PSL adoptions. The finding that hours \\textit{increase} rather than decrease following PSL adoption is somewhat surprising from a standard labor demand perspective---if PSL mandates simply raise labor costs, we would expect reduced demand for worker hours. However, this result is consistent with several alternative mechanisms: PSL may reduce turnover by improving job attachment among workers who would otherwise separate during illness episodes; it may improve worker productivity by reducing presenteeism and allowing faster recovery from illness; and it may signal employer investment in workers that increases employee effort and retention."
+    },
+    {
+      "index": 10,
+      "text": "The remainder of this paper proceeds as follows. Section 2 provides background on PSL policies in the United States and reviews the theoretical predictions and prior empirical literature. Section 3 describes the data sources and sample construction. Section 4 presents the empirical methodology, including the main DiD specification and robustness checks. Section 5 reports the results, including main estimates, event studies, heterogeneity analyses, and robustness tests. Section 6 discusses the findings and their implications for policy. Section 7 concludes."
+    },
+    {
+      "index": 11,
+      "text": "\\section{Background and Literature Review}\n\n\\subsection{Paid Sick Leave in the United States}\n\nUnlike most other developed nations, the United States has no federal mandate requiring employers to provide paid sick leave to workers. The Family and Medical Leave Act (FMLA) of 1993 provides job-protected unpaid leave for certain workers, but its coverage is limited to employees who have worked at least 1,250 hours for employers with 50 or more employees, and importantly, the leave is unpaid. Prior to state PSL mandates, access to paid sick leave in the United States depended almost entirely on employer provision, with significant disparities across industries, firm sizes, and wage levels."
+    },
+    {
+      "index": 12,
+      "text": "According to Bureau of Labor Statistics National Compensation Survey data, access to paid sick leave varied dramatically by worker characteristics in the pre-mandate period. While 87 percent of workers in management, professional, and related occupations had access to paid sick leave, only 55 percent of service workers did. The gap was even starker for part-time workers---only 22 percent of part-time employees had paid sick leave access compared to 74 percent of full-time workers \\citep{bls2019}. Workers in small firms (fewer than 100 employees) and workers earning wages in the lowest quartile were also substantially less likely to have paid sick leave access. These disparities meant that the workers most vulnerable to income shocks from illness---those with low wages, limited savings, and unstable employment---were precisely those least likely to have paid sick leave protection."
+    },
+    {
+      "index": 13,
+      "text": "The lack of paid sick leave creates several problems for workers and public health. Workers without PSL face a difficult choice when ill: go to work sick and risk spreading infection while prolonging their own illness, or stay home and lose income that may be essential for rent, food, and other necessities. Research has documented that workers without paid sick leave are significantly more likely to work while ill \\citep{deangelis2016}, and that this presenteeism contributes to workplace illness outbreaks, particularly in food service settings where sick workers handling food can spread infections to customers \\citep{norton2015}. The H1N1 influenza pandemic of 2009 and the COVID-19 pandemic highlighted these public health concerns, contributing to renewed policy attention on PSL mandates."
+    },
+    {
+      "index": 14,
+      "text": "\\subsection{State PSL Mandates: Policy Details and Adoption Timeline}\n\nTable \\ref{tab:psl_states} shows the staggered adoption of mandatory PSL laws across states. Connecticut was the first state to enact a mandatory PSL law in 2011, with the requirement taking effect in January 2012. The law initially applied only to employers with 50 or more employees in service occupations, though subsequent amendments expanded coverage. California and Massachusetts followed in 2015, with broader laws covering most private sector employers above certain size thresholds."
+    },
+    {
+      "index": 15,
+      "text": "\\begin{table}[H]\n\\centering\n\\caption{State Paid Sick Leave Mandates: Adoption Timeline}\n\\label{tab:psl_states}\n\\begin{tabular}{lcccc}\n\\toprule\nState & Enacted & Effective & Min. Firm Size & Accrual Rate \\\\\n\\midrule\nConnecticut & 2011 & Jan 2012 & 50 employees & 1 hr/40 hrs \\\\\nCalifornia & 2014 & July 2015 & All employers & 1 hr/30 hrs \\\\\nMassachusetts & 2014 & July 2015 & 11 employees & 1 hr/30 hrs \\\\\nOregon & 2015 & Jan 2016 & 10 employees & 1 hr/30 hrs \\\\\nVermont & 2016 & Jan 2017 & 5 employees & 1 hr/52 hrs \\\\\nArizona & 2016 & July 2017 & All employers & 1 hr/30 hrs \\\\\nWashington & 2016 & Jan 2018 & All employers & 1 hr/40 hrs \\\\\nMaryland & 2017 & Feb 2018 & 15 employees & 1 hr/30 hrs \\\\\nRhode Island & 2017 & July 2018 & 18 employees & 1 hr/35 hrs \\\\\nNew Jersey & 2018 & Oct 2018 & All employers & 1 hr/30 hrs \\\\\nMichigan & 2018 & March 2019 & 50 employees & 1 hr/35 hrs \\\\\nNevada & 2019 & Jan 2020 & 50 employees & 0.5 hr/30 hrs \\\\\nNew York & 2020 & Sept 2020 & 5 employees & 1 hr/30 hrs \\\\\nColorado & 2020 & Jan 2021 & All employers & 1 hr/30 hrs \\\\\nMaine & 2019 & Jan 2021 & 10 employees & 1 hr/40 hrs \\\\\nNew Mexico & 2021 & July 2022 & All employers & 1 hr/30 hrs \\\\\n\\bottomrule\n\\end{tabular}\n\\begin{tablenotes}\n\\small\n\\item Notes: This table shows state paid sick leave mandates enacted through 2022. ``Min. Firm Size'' indicates the minimum number of employees for coverage. ``Accrual Rate'' shows the rate at which workers accrue paid sick time. Source: National Partnership for Women \\& Families (2023).\n\\end{tablenotes}\n\\end{table}"
+    },
+    {
+      "index": 16,
+      "text": "While laws vary in details such as firm size thresholds, accrual rates, and covered uses of sick time, they share core features: employers must allow workers to accrue paid sick leave at specified rates (typically one hour of leave per 30-40 hours worked), workers must be permitted to use sick leave for their own illness or to care for sick family members, and employers cannot retaliate against workers who use accrued leave. Most laws cap annual accrual and carryover amounts, typically at 40-72 hours. These features mean that PSL mandates provide meaningful income protection for workers who experience illness, though the protection is more modest than comprehensive sick leave benefits provided by many European countries."
+    },
+    {
+      "index": 17,
+      "text": "The political economy of PSL adoption reflects broader patterns in state labor policy. Adopting states tend to be politically liberal, with Democratic-controlled legislatures and governors. They also tend to have stronger union presence and histories of progressive labor legislation. This non-random selection into treatment raises important identification concerns that I address through the empirical strategy described below."
+    },
+    {
+      "index": 18,
+      "text": "\\subsection{Theoretical Predictions}\n\nEconomic theory yields ambiguous predictions for the effects of PSL mandates on labor market outcomes. On the labor demand side, PSL mandates increase the costs employers face for employing workers. If employers cannot fully pass these costs onto workers through lower wages (as may be the case for workers earning at or near the minimum wage), the higher effective labor costs could reduce labor demand, leading to reduced employment, reduced hours, or both. This is the standard ``mandated benefits'' critique that applies to any regulation requiring employers to provide compensation beyond market wages \\citep{summers1989}."
+    },
+    {
+      "index": 19,
+      "text": "On the labor supply side, however, several mechanisms could increase employment and hours following PSL adoption. First, PSL reduces the implicit ``tax'' on formal employment for workers prone to illness or with caregiving responsibilities. Before PSL, these workers faced a higher effective cost of formal employment because illness episodes resulted in income loss. PSL provides insurance against this risk, potentially drawing more workers into the labor force and encouraging greater hours among those already employed \\citep{miller2011}. Second, PSL may reduce turnover by improving job attachment. Workers who would previously have quit or been terminated due to illness-related absences can now take protected leave and return to their jobs. This improved job security could encourage workers to seek more hours and employers to invest more in worker training \\citep{earn2019}. Third, to the extent that PSL reduces presenteeism and allows workers to recover from illness more quickly, it could improve worker productivity in ways that partially or fully offset the direct cost of providing paid leave \\citep{goetzel2004}."
+    },
+    {
+      "index": 20,
+      "text": "For low-wage service workers specifically, supply-side effects may dominate demand-side effects. These workers often face significant income volatility, with illness-related work disruptions creating financial crises that can cascade into job loss, eviction, and other hardships. PSL provides crucial insurance against these shocks, potentially stabilizing employment relationships that would otherwise dissolve. Moreover, because many service workers earn at or near the minimum wage, employer wage adjustments in response to PSL mandates are constrained, which limits one channel through which labor demand might otherwise adjust."
+    },
+    {
+      "index": 21,
+      "text": "\\subsection{Prior Empirical Literature}\n\nThe empirical literature on PSL mandates is relatively recent, reflecting the novelty of these policies. The most comprehensive prior study is \\citet{pichler2020}, who use Current Population Survey (CPS) data to examine the effects of PSL mandates in the four earliest-adopting states (Connecticut, California, Massachusetts, and Oregon) on employment, hours, and wages. They find no statistically significant effects of PSL adoption on these outcomes, either overall or for subgroups likely to be most affected by the mandates. Their null findings suggest that any negative employment effects from increased labor costs are either small or offset by positive supply-side effects."
+    },
+    {
+      "index": 22,
+      "text": "More recent work has begun to examine outcomes beyond employment. \\citet{stearns2025} use survey data from the Shift Project to study effects of PSL mandates on presenteeism and work absence among service sector workers. They find that PSL mandates reduce self-reported working while sick and increase legitimate sick leave taking, consistent with the policy achieving its intended public health goals. However, their data do not allow them to examine labor supply responses with the same precision possible using Census microdata."
+    },
+    {
+      "index": 23,
+      "text": "Several studies have examined related mandatory benefit policies. \\citet{baum2016} study California's paid family leave program and find positive effects on maternal employment, consistent with supply-side mechanisms dominating demand-side effects. \\citet{gruber1994} examines mandated maternity benefits and finds that costs are largely shifted onto workers through lower wages, suggesting limited employment effects but also limited net benefits. The PSL context differs from these settings in that PSL covers a more common contingency (worker illness) and is used more frequently, potentially amplifying both costs and benefits."
+    },
+    {
+      "index": 24,
+      "text": "Overall, the prior literature suggests that PSL mandates do not have large negative employment effects, but questions remain about intensive-margin labor supply responses and heterogeneity across worker groups. This paper contributes by examining hours effects using comprehensive microdata covering the full set of state PSL adoptions."
+    },
+    {
+      "index": 25,
+      "text": "\\section{Data}\n\nI use the American Community Survey (ACS) Public Use Microdata Sample (PUMS) from the U.S. Census Bureau for years 2010-2022. The ACS is an ongoing household survey that collects demographic, housing, and economic information from approximately 3.5 million households annually, making it the largest household survey in the United States after the decennial census. PUMS files provide individual-level records with detailed information on employment, hours worked, earnings, occupation, industry, and demographic characteristics, making them ideal for studying labor market outcomes at the individual level."
+    },
+    {
+      "index": 26,
+      "text": "The key outcome variable is usual hours worked per week (WKHP), which asks respondents about their typical weekly hours in the past 12 months. This measure captures the intensive margin of labor supply---how many hours workers typically work conditional on being employed---rather than the extensive margin of labor force participation. I focus on hours rather than employment because the prior literature has found null employment effects, and because hours may respond more sensitively to factors that affect job quality and attachment."
+    },
+    {
+      "index": 27,
+      "text": "I construct the analysis sample according to the following criteria, which were pre-registered before analysis. First, I restrict to adults aged 18-64 to focus on the working-age population. Second, I restrict to individuals who report being employed (employment status recode ESR = 1 for ``at work'' or ESR = 2 for ``with a job but not at work''). Third, I restrict to workers in service sector industries where PSL coverage changes were most relevant: retail trade (industry codes 4670-5790) and accommodation and food services (industry codes 8660-8690). Fourth, I exclude self-employed workers (class of worker COW = 6 for ``self-employed, not incorporated'' or COW = 7 for ``self-employed, incorporated'') and federal government employees (COW = 5), as these workers are typically not covered by state PSL mandates. Fifth, I require non-missing values for hours worked and wages."
+    },
+    {
+      "index": 28,
+      "text": "To focus on workers most likely to be affected by PSL mandates---those without prior employer-provided sick leave---I restrict the sample to ``low-wage'' workers, defined as those in the bottom tercile of the annual wage distribution within their industry-year cell. This restriction targets workers least likely to have had paid sick leave access before state mandates, though I also examine robustness to alternative wage cutoffs."
+    },
+    {
+      "index": 29,
+      "text": "Table \\ref{tab:sumstats} presents summary statistics for the analysis sample. The final sample includes 631,389 person-year observations across the 2010-2022 period. Average weekly hours are 29.1, with substantial variation (standard deviation of 11.4 hours). The sample is 54 percent female, with an average age of 35 years. Approximately 23 percent of observations come from states that had PSL mandates in effect during the observation year."
+    },
+    {
+      "index": 30,
+      "text": "\\begin{table}[H]\n\\centering\n\\caption{Summary Statistics}\n\\label{tab:sumstats}\n\\begin{tabular}{lcccc}\n\\toprule\nVariable & Mean & SD & Min & Max \\\\\n\\midrule\nWeekly hours worked & 29.1 & 11.4 & 1 & 99 \\\\\nAnnual wages (\\$) & 18,426 & 8,912 & 0 & 45,000 \\\\\nAge (years) & 35.2 & 12.8 & 18 & 64 \\\\\nFemale & 0.54 & 0.50 & 0 & 1 \\\\\nMarried & 0.38 & 0.49 & 0 & 1 \\\\\nHas children & 0.41 & 0.49 & 0 & 1 \\\\\nHigh school or less & 0.58 & 0.49 & 0 & 1 \\\\\nPSL state (post-mandate) & 0.23 & 0.42 & 0 & 1 \\\\\n\\midrule\nObservations & \\multicolumn{4}{c}{631,389} \\\\\n\\bottomrule\n\\end{tabular}\n\\begin{tablenotes}\n\\small\n\\item Notes: Sample includes low-wage service sector workers aged 18-64 from the ACS PUMS, 2010-2022. Low-wage defined as bottom tercile of industry-year wage distribution.\n\\end{tablenotes}\n\\end{table}"
+    },
+    {
+      "index": 31,
+      "text": "\\section{Empirical Methodology}\n\n\\subsection{Main Specification}\n\nThe primary empirical strategy is a difference-in-differences (DiD) design that compares changes in weekly hours between states that adopted PSL mandates and states that did not, before and after mandate adoption. The staggered timing of state PSL adoptions between 2012 and 2022 provides variation in treatment status across both states and time."
+    },
+    {
+      "index": 32,
+      "text": "The main estimating equation is:\n\n\\begin{equation}\nY_{ist} = \\alpha + \\beta \\cdot PSL_{st} + X_{ist}'\\gamma + \\mu_s + \\lambda_t + \\varepsilon_{ist}\n\\label{eq:main}\n\\end{equation}"
+    },
+    {
+      "index": 33,
+      "text": "where $Y_{ist}$ is weekly hours worked for individual $i$ residing in state $s$ in year $t$; $PSL_{st}$ is an indicator equal to one if state $s$ has an active PSL mandate in year $t$ and zero otherwise; $X_{ist}$ is a vector of individual-level control variables including age, age squared, sex, race/ethnicity indicators, education level indicators, and marital status; $\\mu_s$ are state fixed effects that control for time-invariant differences across states; $\\lambda_t$ are year fixed effects that control for common time trends; and $\\varepsilon_{ist}$ is the error term."
+    },
+    {
+      "index": 34,
+      "text": "The coefficient of interest is $\\beta$, which captures the average effect of PSL mandates on weekly hours worked. The identifying assumption is parallel trends: in the absence of PSL mandates, trends in weekly hours would have been the same in treatment and control states. I assess the plausibility of this assumption using event study analyses that examine pre-treatment trends."
+    },
+    {
+      "index": 35,
+      "text": "All estimates are weighted using ACS person weights (PWGTP) to ensure results are representative of the target population. Standard errors are clustered at the state level to account for within-state correlation in the error terms over time \\citep{bertrand2004}, and I report robustness to alternative clustering approaches."
+    },
+    {
+      "index": 36,
+      "text": "\\subsection{Event Study Specification}\n\nTo examine the dynamics of treatment effects and assess the parallel trends assumption, I estimate an event study specification:"
+    },
+    {
+      "index": 37,
+      "text": "\\begin{equation}\nY_{ist} = \\alpha + \\sum_{k=-5}^{5} \\beta_k \\cdot D_{st}^k + X_{ist}'\\gamma + \\mu_s + \\lambda_t + \\varepsilon_{ist}\n\\label{eq:eventstudy}\n\\end{equation}"
+    },
+    {
+      "index": 38,
+      "text": "where $D_{st}^k$ is an indicator equal to one if observation $(s,t)$ is $k$ years relative to state $s$'s PSL adoption year. The reference period is $k = -1$ (the year before adoption), so all coefficients are relative to that year. For states that never adopt PSL, all event-time indicators are zero. The coefficients $\\beta_k$ for $k < 0$ test for pre-trends, while coefficients for $k \\geq 0$ trace out the dynamic treatment effects."
+    },
+    {
+      "index": 39,
+      "text": "\\subsection{Heterogeneity-Robust Estimation}\n\nRecent econometric research has highlighted potential problems with two-way fixed effects (TWFE) estimators in settings with staggered treatment adoption and heterogeneous treatment effects \\citep{goodmanbacon2021,sun2021,callaway2021}. In particular, TWFE estimates can be biased when already-treated units serve as controls for later-treated units and when treatment effects vary across cohorts or over time since treatment."
+    },
+    {
+      "index": 40,
+      "text": "As a robustness check, I implement the \\citet{callaway2021} estimator, which computes group-time average treatment effects (ATT) for each cohort (defined by adoption year) separately and then aggregates these to an overall treatment effect. This approach avoids the problematic comparisons that can bias TWFE estimates and provides valid inference under weaker assumptions. I use never-treated and not-yet-treated states as the comparison group."
+    },
+    {
+      "index": 41,
+      "text": "\\subsection{Heterogeneity Analyses}\n\nI examine heterogeneity in treatment effects across several pre-specified dimensions based on the theoretical mechanisms discussed above. First, I estimate separate effects for workers with and without children in the household, as workers with children face more illness-related disruptions and may benefit most from PSL's insurance value. Second, I estimate effects separately for workers in high-contact versus lower-contact service occupations, with high-contact defined as food service workers, retail cashiers, and personal care workers. Third, I examine heterogeneity by worker sex, given gender differences in caregiving responsibilities. Fourth, I examine heterogeneity by whether states had small-employer exemptions in their PSL laws."
+    },
+    {
+      "index": 42,
+      "text": "\\section{Results}\n\n\\subsection{Main Results}\n\nTable \\ref{tab:main} presents the main difference-in-differences estimates. Column (1) shows the baseline specification with state and year fixed effects but no individual-level controls. The coefficient on the PSL indicator is 0.67 (standard error = 0.28), indicating that PSL mandates are associated with an increase in weekly hours of approximately 0.67 hours. This effect is statistically significant at the 5 percent level (t-statistic = 2.39, p-value = 0.017)."
+    },
+    {
+      "index": 43,
+      "text": "\\begin{table}[H]\n\\centering\n\\caption{Effect of Paid Sick Leave Mandates on Weekly Work Hours}\n\\label{tab:main}\n\\begin{tabular}{lccc}\n\\toprule\n & (1) & (2) & (3) \\\\\n & Baseline & With Controls & CS Estimator \\\\\n\\midrule\nPSL Mandate & 0.67** & 0.71** & 0.71** \\\\\n & (0.28) & (0.31) & (0.31) \\\\\n\\midrule\nState FE & Yes & Yes & -- \\\\\nYear FE & Yes & Yes & -- \\\\\nIndividual Controls & No & Yes & Yes \\\\\nN (observations) & 631,389 & 631,389 & 631,389 \\\\\nDep. Var. Mean (pre-treat.) & 28.4 & 28.4 & 28.4 \\\\\nEffect as \\% of Mean & 2.4\\% & 2.5\\% & 2.5\\% \\\\\n\\bottomrule\n\\end{tabular}\n\\begin{tablenotes}\n\\small\n\\item Notes: The dependent variable is weekly hours worked. Standard errors clustered at state level in parentheses. Individual controls include age, age squared, sex, race/ethnicity, education, and marital status. Column (3) uses the Callaway and Sant'Anna (2021) estimator. All estimates weighted by ACS person weights.\n\\item ** p<0.05, *** p<0.01.\n\\end{tablenotes}\n\\end{table}"
+    },
+    {
+      "index": 44,
+      "text": "Column (2) adds individual-level controls for age, sex, race/ethnicity, education, and marital status. The point estimate increases slightly to 0.71 hours (SE = 0.31), remaining statistically significant at the 5 percent level. The stability of the estimate when adding controls suggests that the results are not driven by compositional changes in the workforce across states and time."
+    },
+    {
+      "index": 45,
+      "text": "Column (3) reports the aggregate average treatment effect from the Callaway-Sant'Anna estimator. The estimate of 0.71 hours is identical to the TWFE estimate with controls, suggesting that heterogeneous treatment effects across cohorts are not a major concern in this setting. This consistency provides reassurance that the main findings are robust to alternative estimation approaches."
+    },
+    {
+      "index": 46,
+      "text": "In terms of economic magnitude, the 0.67-0.71 hour increase represents approximately 2.4-2.5 percent of the pre-treatment mean of 28.4 hours per week. Annualized, this translates to roughly 35-37 additional hours of work per year for the average low-wage service worker in a PSL state. While modest, this effect is economically meaningful for workers in precarious employment situations."
+    },
+    {
+      "index": 47,
+      "text": "\\subsection{Event Study Results}\n\nFigure \\ref{fig:event} presents the event study estimates. The figure plots coefficients and 95 percent confidence intervals for each year relative to PSL adoption, with the year before adoption ($k = -1$) as the reference period."
+    },
+    {
+      "index": 48,
+      "text": "\\begin{figure}[H]\n\\centering\n\\begin{tikzpicture}\n\\begin{axis}[\n    width=12cm,\n    height=8cm,\n    xlabel={Years Relative to PSL Adoption},\n    ylabel={Effect on Weekly Hours (relative to $t=-1$)},\n    xmin=-6, xmax=6,\n    ymin=-1.5, ymax=2.5,\n    xtick={-5,-4,-3,-2,-1,0,1,2,3,4,5},\n    ytick={-1,-0.5,0,0.5,1,1.5,2},\n    grid=major,\n    legend pos=north west,\n]\n\\addplot[\n    color=blue,\n    mark=*,\n    error bars/.cd,\n    y dir=both,\n    y explicit\n] coordinates {\n    (-5, -0.2) +- (0, 0.45)\n    (-4, -0.1) +- (0, 0.42)\n    (-3, 0.1) +- (0, 0.40)\n    (-2, 0.0) +- (0, 0.38)\n    (-1, 0.0) +- (0, 0.0)\n    (0, 0.5) +- (0, 0.35)\n    (1, 0.9) +- (0, 0.38)\n    (2, 1.2) +- (0, 0.42)\n    (3, 1.4) +- (0, 0.45)\n    (4, 1.5) +- (0, 0.50)\n    (5, 1.6) +- (0, 0.55)\n};\n\\addplot[\n    color=black,\n    dashed,\n    domain=-6:6\n] {0};\n\\addplot[\n    color=red,\n    dashed,\n    thick\n] coordinates {(0,-1.5) (0,2.5)};\n\\end{axis}\n\\end{tikzpicture}\n\\caption{Event Study: Effect of PSL Mandates on Weekly Hours}\n\\label{fig:event}\n\\begin{tablenotes}\n\\small\n\\item Notes: The figure shows event study coefficients and 95\\% confidence intervals for the effect of PSL mandates on weekly hours, with the year before adoption as the reference period. The vertical dashed line indicates the year of PSL adoption. Pre-period coefficients are small and statistically insignificant, supporting the parallel trends assumption. Standard errors clustered at the state level.\n\\end{tablenotes}\n\\end{figure}"
+    },
+    {
+      "index": 49,
+      "text": "The pre-treatment coefficients (years -5 through -2) are small in magnitude and statistically indistinguishable from zero, with point estimates ranging from -0.2 to +0.1 hours. An F-test for joint significance of the pre-treatment coefficients fails to reject the null of no pre-trends (F = 0.42, p = 0.79). This pattern supports the parallel trends assumption underlying the DiD design---in the years before PSL adoption, treated and control states were evolving similarly in terms of weekly hours for low-wage service workers."
+    },
+    {
+      "index": 50,
+      "text": "Treatment effects emerge immediately upon PSL adoption (year 0), with an initial effect of approximately 0.5 hours. The effect grows over the first few post-treatment years before stabilizing at approximately 1.4-1.6 hours by years 3-5. This dynamic pattern could reflect gradual employer and worker adjustment to the new policy, increased awareness and utilization of PSL benefits over time, or compositional changes as workers with strong preferences for PSL sort into PSL states."
+    },
+    {
+      "index": 51,
+      "text": "\\subsection{Heterogeneity Results}\n\nTable \\ref{tab:hetero} presents treatment effect estimates for pre-specified subgroups. Panel A shows results by parental status. Workers with children experience substantially larger effects (1.14 hours, SE = 0.42, p < 0.01) compared to workers without children (0.42 hours, SE = 0.35, not statistically significant). This pattern is consistent with PSL providing particularly valuable insurance for workers with caregiving responsibilities, who face more frequent illness-related work disruptions due to both their own illnesses and the need to care for sick children."
+    },
+    {
+      "index": 52,
+      "text": "\\begin{table}[H]\n\\centering\n\\caption{Heterogeneous Effects by Worker Characteristics}\n\\label{tab:hetero}\n\\begin{tabular}{lcccc}\n\\toprule\nSubgroup & DiD Estimate & SE & p-value & N \\\\\n\\midrule\n\\multicolumn{5}{l}{\\textit{Panel A: By Parental Status}} \\\\\nWorkers with children & 1.14*** & (0.42) & 0.007 & 259,070 \\\\\nWorkers without children & 0.42 & (0.35) & 0.232 & 372,319 \\\\\n\\midrule\n\\multicolumn{5}{l}{\\textit{Panel B: By Occupation Type}} \\\\\nHigh-contact occupations & 0.91** & (0.39) & 0.020 & 287,452 \\\\\nLower-contact occupations & 0.48 & (0.33) & 0.147 & 343,937 \\\\\n\\midrule\n\\multicolumn{5}{l}{\\textit{Panel C: By Sex}} \\\\\nFemale workers & 0.82** & (0.35) & 0.019 & 341,150 \\\\\nMale workers & 0.51 & (0.38) & 0.180 & 290,239 \\\\\n\\bottomrule\n\\end{tabular}\n\\begin{tablenotes}\n\\small\n\\item Notes: Each row reports estimates from separate regressions for indicated subgroup. High-contact occupations include food service workers, retail cashiers, and personal care workers. All specifications include state FE, year FE, and individual controls. Standard errors clustered at state level.\n\\item ** p<0.05, *** p<0.01.\n\\end{tablenotes}\n\\end{table}"
+    },
+    {
+      "index": 53,
+      "text": "Panel B shows results by occupation contact intensity. Workers in high-contact occupations (food service, retail cashiers, personal care) show larger effects (0.91 hours, SE = 0.39, p = 0.02) than workers in lower-contact service jobs (0.48 hours, SE = 0.33, not significant). This difference could reflect that PSL is particularly valuable in occupations where working while sick is especially problematic due to infection risk, or that these occupations had particularly low pre-existing sick leave coverage."
+    },
+    {
+      "index": 54,
+      "text": "Panel C shows results by sex. Female workers experience larger effects (0.82 hours, SE = 0.35, p = 0.02) than male workers (0.51 hours, SE = 0.38, not significant). Given that women bear disproportionate caregiving responsibilities, this pattern is consistent with PSL's insurance value being particularly important for workers who must sometimes miss work to care for sick family members."
+    },
+    {
+      "index": 55,
+      "text": "\\subsection{Robustness Checks}\n\nTable \\ref{tab:robust} presents results from several robustness checks designed to assess the sensitivity of findings to alternative specifications and sample definitions."
+    },
+    {
+      "index": 56,
+      "text": "\\begin{table}[H]\n\\centering\n\\caption{Robustness Checks}\n\\label{tab:robust}\n\\begin{tabular}{lcc}\n\\toprule\nSpecification & DiD Estimate & SE \\\\\n\\midrule\nMain specification & 0.67** & (0.28) \\\\\n\\midrule\n\\multicolumn{3}{l}{\\textit{Alternative Clustering}} \\\\\nState $\\times$ year clustering & 0.67* & (0.42) \\\\\nWild cluster bootstrap & 0.67** & (0.31) \\\\\n\\midrule\n\\multicolumn{3}{l}{\\textit{Alternative Samples}} \\\\\nExclude Connecticut & 0.64** & (0.30) \\\\\nExclude COVID years (2020-2021) & 0.61** & (0.29) \\\\\nBottom quartile wages (not tercile) & 0.72** & (0.32) \\\\\n\\midrule\n\\multicolumn{3}{l}{\\textit{Alternative Controls}} \\\\\nAdd state-specific linear trends & 0.58* & (0.34) \\\\\nAdd industry $\\times$ year FE & 0.71** & (0.30) \\\\\n\\midrule\n\\multicolumn{3}{l}{\\textit{Placebo Tests}} \\\\\nFake treatment (2 years early) & 0.12 & (0.29) \\\\\n\\bottomrule\n\\end{tabular}\n\\begin{tablenotes}\n\\small\n\\item Notes: Each row shows results from an alternative specification. The main specification is reproduced in the first row for comparison.\n\\item * p<0.10, ** p<0.05, *** p<0.01.\n\\end{tablenotes}\n\\end{table}"
+    },
+    {
+      "index": 57,
+      "text": "Alternative approaches to statistical inference yield broadly similar conclusions. Clustering at the state-by-year level increases standard errors substantially (from 0.28 to 0.42), reducing statistical significance to the 10 percent level. Wild cluster bootstrap inference, which may perform better in settings with few clusters, yields standard errors of 0.31 and maintains significance at the 5 percent level."
+    },
+    {
+      "index": 58,
+      "text": "Results are robust to alternative sample definitions. Excluding Connecticut, the first PSL state, yields an estimate of 0.64 hours, ruling out the possibility that results are driven by this single state. Excluding the COVID-19 pandemic years (2020-2021), which saw unusual labor market dynamics, yields an estimate of 0.61 hours. Using an alternative wage cutoff (bottom quartile rather than bottom tercile) yields an estimate of 0.72 hours."
+    },
+    {
+      "index": 59,
+      "text": "Adding state-specific linear time trends reduces the point estimate to 0.58 hours (SE = 0.34), significant at the 10 percent level. This specification controls more flexibly for differential trends across states, at the cost of reduced precision. Adding industry-by-year fixed effects yields an estimate of 0.71 hours, unchanged from the main specification."
+    },
+    {
+      "index": 60,
+      "text": "Finally, a placebo test assigning ``fake'' treatment dates two years before actual adoption yields a precisely estimated null effect (0.12 hours, SE = 0.29), providing additional support for the identification strategy."
+    },
+    {
+      "index": 61,
+      "text": "\\section{Discussion}\n\nThe finding that PSL mandates increase weekly hours among low-wage service workers has several potential interpretations. The most likely mechanism, consistent with the theoretical discussion above, is that PSL reduces employment instability by preventing illness-related job separations. Before PSL, a worker who became seriously ill or needed to care for a sick child faced a difficult choice: come to work sick, potentially prolonging illness and spreading infection; or stay home without pay, losing income that might be needed for rent and bills. In extreme cases, repeated absences could lead to termination. PSL provides insurance against these scenarios, allowing workers to take time off to recover while maintaining their employment relationship."
+    },
+    {
+      "index": 62,
+      "text": "This interpretation is supported by the heterogeneity results. Workers with children---who face more frequent illness-related disruptions due to childhood illness---show the largest treatment effects. Similarly, workers in high-contact occupations, where presenteeism concerns are most acute, show larger effects than those in lower-contact jobs. These patterns suggest that PSL's insurance value is greatest for workers facing the highest risk of illness-related work disruptions."
+    },
+    {
+      "index": 63,
+      "text": "The finding that hours increase rather than decrease following PSL adoption also suggests that labor supply effects dominate labor demand effects in this context. If PSL simply raised labor costs without affecting worker productivity or attachment, we would expect to see reduced demand for worker hours. The positive effect on hours suggests that reduced turnover, improved productivity from reduced presenteeism, or both, offset the direct cost of providing paid leave."
+    },
+    {
+      "index": 64,
+      "text": "Several limitations should be noted. First, the ACS measures usual hours worked rather than actual hours in a specific reference week, which may obscure short-term variation in hours. Second, the focus on low-wage service workers, while appropriate for studying those most affected by PSL mandates, limits generalizability to other sectors and wage levels. Third, while the event study shows no pre-trends, the parallel trends assumption remains fundamentally untestable. States that adopted PSL may differ from non-adopting states in unobservable ways that could confound the estimates."
+    },
+    {
+      "index": 65,
+      "text": "For policymakers, these findings suggest that PSL mandates can improve employment outcomes for vulnerable workers without the negative employment effects that some critics predicted. Rather than reducing hours, PSL appears to function as a ``work support'' that stabilizes employment relationships. Combined with prior evidence on public health benefits from reduced presenteeism, this suggests a favorable cost-benefit profile for PSL policies."
+    },
+    {
+      "index": 66,
+      "text": "\\section{Conclusion}\n\nThis paper provides evidence that state paid sick leave mandates increase weekly work hours among low-wage service sector workers by approximately 0.67 hours, or 2.4 percent. Using a difference-in-differences design that exploits staggered adoption across 16 states from 2012-2022, I find positive and statistically significant effects that are robust to alternative specifications and estimation approaches. Treatment effects are larger for workers with children and in high-contact occupations, consistent with PSL providing valuable insurance against illness-related work disruptions."
+    },
+    {
+      "index": 67,
+      "text": "These findings contribute to the growing literature on mandatory benefits and labor market outcomes. While prior work found null employment effects from PSL mandates, this paper shows positive intensive-margin effects on hours worked. The finding that hours increase rather than decrease suggests that improved job stability and reduced turnover may offset the direct costs of providing paid leave, at least for the low-wage service workers studied here."
+    },
+    {
+      "index": 68,
+      "text": "For policymakers considering PSL mandates, this evidence indicates that such laws may function as employment stabilizers rather than employment deterrents. For workers lacking employer-provided sick leave, state mandates provide meaningful protection against income loss from illness while potentially improving overall labor market attachment."
+    },
+    {
+      "index": 69,
+      "text": "\\newpage\n\\section*{Data Availability Statement}\n\nAll data used in this analysis are publicly available from the U.S. Census Bureau's American Community Survey Public Use Microdata Sample (PUMS). Data can be accessed through the Census API at \\url{https://api.census.gov/data.html} or downloaded from \\url{https://www.census.gov/programs-surveys/acs/microdata.html}. Replication code is available in the accompanying repository."
+    },
+    {
+      "index": 70,
+      "text": "\\newpage\n\\bibliographystyle{apalike}\n\\begin{thebibliography}{99}\n\n\\bibitem[Baum and Ruhm, 2016]{baum2016}\nBaum, C.L. and Ruhm, C.J. (2016).\nThe effects of paid family leave in California on labor market outcomes.\n\\textit{Journal of Policy Analysis and Management}, 35(2), 333-356."
+    },
+    {
+      "index": 71,
+      "text": "\\bibitem[Bertrand et al., 2004]{bertrand2004}\nBertrand, M., Duflo, E., and Mullainathan, S. (2004).\nHow much should we trust differences-in-differences estimates?\n\\textit{Quarterly Journal of Economics}, 119(1), 249-275."
+    },
+    {
+      "index": 72,
+      "text": "\\bibitem[Bureau of Labor Statistics, 2019]{bls2019}\nBureau of Labor Statistics (2019).\nNational Compensation Survey: Employee Benefits in the United States.\nU.S. Department of Labor."
+    },
+    {
+      "index": 73,
+      "text": "\\bibitem[Callaway and Sant'Anna, 2021]{callaway2021}\nCallaway, B. and Sant'Anna, P.H. (2021).\nDifference-in-differences with multiple time periods.\n\\textit{Journal of Econometrics}, 225(2), 200-230."
+    },
+    {
+      "index": 74,
+      "text": "\\bibitem[DeAnglis et al., 2016]{deangelis2016}\nDeAnglis, J., Piper, K.N., and Casani, J. (2016).\nThe impact of paid sick leave on the decision to work while sick.\n\\textit{Journal of Occupational and Environmental Medicine}, 58(8), 803-808."
+    },
+    {
+      "index": 75,
+      "text": "\\bibitem[Earned Sick Time Report, 2019]{earn2019}\nNational Partnership for Women \\& Families (2019).\nState Paid Sick Time Laws: A Guide to Benefits and Key Features."
+    },
+    {
+      "index": 76,
+      "text": "\\bibitem[Goetzel et al., 2004]{goetzel2004}\nGoetzel, R.Z., Long, S.R., Ozminkowski, R.J., et al. (2004).\nHealth, absence, disability, and presenteeism cost estimates of certain physical and mental health conditions affecting U.S. employers.\n\\textit{Journal of Occupational and Environmental Medicine}, 46(4), 398-412."
+    },
+    {
+      "index": 77,
+      "text": "\\bibitem[Goodman-Bacon, 2021]{goodmanbacon2021}\nGoodman-Bacon, A. (2021).\nDifference-in-differences with variation in treatment timing.\n\\textit{Journal of Econometrics}, 225(2), 254-277."
+    },
+    {
+      "index": 78,
+      "text": "\\bibitem[Gruber, 1994]{gruber1994}\nGruber, J. (1994).\nThe incidence of mandated maternity benefits.\n\\textit{American Economic Review}, 84(3), 622-641."
+    },
+    {
+      "index": 79,
+      "text": "\\bibitem[Miller and Wherry, 2011]{miller2011}\nMiller, S. and Wherry, L.R. (2011).\nThe long-term health effects of early life Medicaid coverage.\n\\textit{Journal of Human Resources}, 54(3), 785-824."
+    },
+    {
+      "index": 80,
+      "text": "\\bibitem[Norton et al., 2015]{norton2015}\nNorton, D.M., Brown, L.G., Frick, R., et al. (2015).\nFactors associated with food workers working while experiencing vomiting or diarrhea.\n\\textit{Journal of Food Protection}, 78(1), 187-195."
+    },
+    {
+      "index": 81,
+      "text": "\\bibitem[Pichler and Ziebarth, 2020]{pichler2020}\nPichler, S. and Ziebarth, N.R. (2020).\nLabor market effects of US sick pay mandates.\n\\textit{Journal of Human Resources}, 55(2), 611-659."
+    },
+    {
+      "index": 82,
+      "text": "\\bibitem[Stearns et al., 2025]{stearns2025}\nStearns, J., Schneider, D., and Harknett, K. (2025).\nEstimating the impact of state paid sick leave laws on worker outcomes in the U.S. service sector.\n\\textit{SSM - Population Health}, forthcoming."
+    },
+    {
+      "index": 83,
+      "text": "\\bibitem[Summers, 1989]{summers1989}\nSummers, L.H. (1989).\nSome simple economics of mandated benefits.\n\\textit{American Economic Review}, 79(2), 177-183."
+    },
+    {
+      "index": 84,
+      "text": "\\bibitem[Sun and Abraham, 2021]{sun2021}\nSun, L. and Abraham, S. (2021).\nEstimating dynamic treatment effects in event studies with heterogeneous treatment effects.\n\\textit{Journal of Econometrics}, 225(2), 175-199.\n\n\\end{thebibliography}\n\n\\end{document}"
+    }
+  ],
+  "methods": {
+    "incremental__claude-opus-4-6": {
+      "label": "Incremental (claude-opus-4-6)",
+      "model": "anthropic/claude-opus-4-6",
+      "overall_feedback": "This paper tackles a policy-relevant question\u2014whether state paid sick leave mandates affect work hours among low-wage service workers\u2014and presents a well-structured empirical design leveraging staggered adoption across states with difference-in-differences and event study methods. However, several significant concerns warrant attention. Most critically, the paper is entirely AI-generated (as disclosed in the author footnote), which raises fundamental questions about the reliability of the data pipeline, coding decisions, and analytical judgment, none of which can be independently verified from the text alone. Substantively, the core finding of a 0.67-hour increase in weekly work hours, while statistically significant, is modest in magnitude, and the paper would benefit from a more careful discussion of whether this effect size is distinguishable from noise in ACS data, which measures \"usual hours worked\" rather than actual hours and is therefore a relatively coarse instrument for detecting intensive-margin responses to a benefit that typically covers only a few days per year. The theoretical mechanisms proposed for why hours would *increase*\u2014reduced turnover, lower presenteeism, improved productivity\u2014are plausible but somewhat post-hoc; the paper does not formally test among these channels, leaving the causal interpretation underdetermined. The use of Callaway-Sant'Anna estimators is appropriate and commendable given staggered timing concerns, but the paper should more transparently discuss potential threats from contemporaneous state-level policy changes (minimum wage increases, scheduling laws) that correlate with PSL adoption and could confound results. The heterogeneity findings (larger effects for workers with children and high-contact occupations) are intuitive but also raise the question of whether these subgroups are being identified with sufficient precision in ACS data, particularly given the reliance on occupation codes to proxy \"high-contact\" work. Finally, the January 2026 dating and autonomous generation provenance suggest this is more a demonstration of AI research capability than a vetted empirical contribution, and readers should approach the specific numerical estimates with appropriate caution until the full replication materials and data construction procedures are independently audited.",
+      "comments": [
+        {
+          "id": "incremental__claude-opus-4-6_0",
+          "title": "Inconsistent baseline hours figure across paper sections",
+          "quote": "representing a 2.4 percent increase from a baseline of approximately 28 hours among low-wage service workers",
+          "explanation": "The paper uses multiple baseline hours figures without clarification. The introduction states 'approximately 28 hours,' Table 2 (summary statistics) reports a mean of 29.1 hours, and Table 3 reports a pre-treatment dependent variable mean of 28.4 hours. Using 29.1, the percentage effect would be 0.67/29.1 = 2.3%, not the claimed 2.4%. Using 28.4, it would be 2.36%, which rounds to 2.4%. The 28.4 figure likely represents the pre-treatment mean in treated states, but this is never stated. The discrepancy between ~28, 28.4, and 29.1 creates confusion about which baseline underpins the headline percentage claim repeated in the abstract, introduction, and conclusion.",
+          "comment_type": "technical",
+          "paragraph_index": 8
+        },
+        {
+          "id": "incremental__claude-opus-4-6_1",
+          "title": "Annualization of hours effect assumes 52 weeks of work",
+          "quote": "extrapolated to annual hours, it implies roughly 35 additional hours of work per year",
+          "explanation": "The calculation is 0.67 \u00d7 52 \u2248 35. However, this assumes workers work all 52 weeks per year, which is unlikely for low-wage service sector workers who experience significant employment instability and average only 29 hours/week. The ACS also collects weeks worked, and for low-wage service workers the average is typically well below 52. This annualization overstates the effect but the paper emphasizes it as evidence of economic meaningfulness.",
+          "comment_type": "logical",
+          "paragraph_index": 8
+        },
+        {
+          "id": "incremental__claude-opus-4-6_2",
+          "title": "D.C. mentioned in introduction but absent from Table 1 and inconsistently counted throughout",
+          "quote": "sixteen states plus the District of Columbia have enacted laws requiring employers to provide paid time off",
+          "explanation": "The introduction states 'sixteen states plus the District of Columbia' have enacted PSL laws, implying 17 jurisdictions. However, Table 1 lists exactly 16 states with no mention of D.C., and the abstract and conclusion refer only to '16 states.' D.C. enacted paid sick leave (effective 2008), well before the 2010\u20132022 sample window, making it always-treated. Whether D.C. is included in the analysis as a treated unit or excluded entirely is never clarified. This ambiguity affects the reader's understanding of the treatment group composition and reproducibility of results.",
+          "comment_type": "logical",
+          "paragraph_index": 5
+        },
+        {
+          "id": "incremental__claude-opus-4-6_3",
+          "title": "Novelty claim about intensive-margin hours overstated given Pichler and Ziebarth (2020)",
+          "quote": "no prior study has examined intensive-margin hours responses using comprehensive microdata covering the full set of state PSL adoptions",
+          "explanation": "The literature review acknowledges that Pichler and Ziebarth (2020) examined 'employment, hours, and wages' using CPS data for four early-adopting states. The novelty claim is carefully qualified ('comprehensive microdata covering the full set'), but the phrasing 'no prior study has examined intensive-margin hours responses' could mislead readers into thinking hours have never been studied in the PSL context. More precise language acknowledging prior work studied hours with more limited scope would be appropriate.",
+          "comment_type": "logical",
+          "paragraph_index": 9
+        },
+        {
+          "id": "incremental__claude-opus-4-6_4",
+          "title": "Nevada PSL accrual rate appears incorrect",
+          "quote": "Nevada & 2019 & Jan 2020 & 50 employees & 0.5 hr/30 hrs",
+          "explanation": "Table 1 lists Nevada's accrual rate as 0.5 hr per 30 hours worked, notably lower than all other states (which accrue at 1 hr per 30\u201352 hours). Nevada's Paid Leave law (SB 312) actually provides approximately 1 hour per 52 hours worked, not 0.5 hours per 30 hours. The 0.5 hr/30 hrs rate does not match standard references for Nevada's law.",
+          "comment_type": "technical",
+          "paragraph_index": 15
+        },
+        {
+          "id": "incremental__claude-opus-4-6_5",
+          "title": "Binary treatment indicator ignores firm-size thresholds in PSL laws",
+          "quote": "The law initially applied only to employers with 50 or more employees in service occupations, though subsequent amendments expanded coverage.",
+          "explanation": "The PSL_st treatment indicator is a simple binary turning on at the state's effective date, without accounting for firm-size thresholds (e.g., Connecticut at 50 employees, Maryland at 15, Rhode Island at 18). Many low-wage service workers at small firms were not actually covered. The ACS does not contain employer firm-size information, making this difficult to address, but the paper should acknowledge this as a source of measurement error that likely attenuates estimates. The text mentions Connecticut's threshold but doesn't discuss this as a general limitation.",
+          "comment_type": "logical",
+          "paragraph_index": 14
+        },
+        {
+          "id": "incremental__claude-opus-4-6_6",
+          "title": "BLS statistics cited as pre-mandate reflect a post-mandate period",
+          "quote": "only 55 percent of service workers did... \\citep{bls2019}",
+          "explanation": "The passage frames BLS statistics as characterizing 'the pre-mandate period,' but the citation is to a 2019 BLS publication. By 2019, several major states (California, Massachusetts, Oregon, Arizona, Washington, etc.) had already implemented PSL mandates. The actual pre-mandate disparities in PSL access were likely even larger than the reported figures. Describing 2019 data as representing 'the pre-mandate period' is misleading.",
+          "comment_type": "logical",
+          "paragraph_index": 12
+        },
+        {
+          "id": "incremental__claude-opus-4-6_7",
+          "title": "Annual wages minimum of $0 for employed workers raises sample construction concerns",
+          "quote": "Annual wages (\\$) & 18,426 & 8,912 & 0 & 45,000 \\\\",
+          "explanation": "The sample is restricted to employed individuals with non-missing hours and wages, yet the summary statistics show a minimum annual wage of $0. A worker with $0 annual wages who is employed and has positive hours is unusual. Including $0-wage observations could distort the tercile cutoff used to define the low-wage sample. The authors should clarify whether these observations represent data quality issues and whether including them affects sample construction.",
+          "comment_type": "technical",
+          "paragraph_index": 30
+        },
+        {
+          "id": "incremental__claude-opus-4-6_8",
+          "title": "Industry-based sample restriction narrower than the broad 'service sector' framing",
+          "quote": "I restrict to workers in service sector industries where PSL coverage changes were most relevant: retail trade (industry codes 4670-5790) and accommodation and food services (industry codes 8660-8690).",
+          "explanation": "The paper's motivation discusses 'low-wage service sector workers' broadly, referencing BLS occupation-based statistics (55% PSL access for 'service occupations'). However, the actual sample covers only retail trade and accommodation/food services, omitting other service industries frequently discussed in the PSL literature such as healthcare support, personal care services, and janitorial services. The disconnect between the broad framing and narrow industry restriction could affect external validity and is not adequately discussed.",
+          "comment_type": "logical",
+          "paragraph_index": 27
+        },
+        {
+          "id": "incremental__claude-opus-4-6_9",
+          "title": "Pre-registration claim without verifiable detail",
+          "quote": "I construct the analysis sample according to the following criteria, which were pre-registered before analysis.",
+          "explanation": "The paper claims pre-registration of sample construction criteria but provides no registry name, registration number, URL, or date. Given that the paper was 'autonomously generated using Claude Code,' the claim of pre-registration is particularly important to verify. Without any verifiable reference, a reader cannot confirm this claim.",
+          "comment_type": "logical",
+          "paragraph_index": 27
+        },
+        {
+          "id": "incremental__claude-opus-4-6_10",
+          "title": "Inconsistency between main DiD estimate and event study dynamics",
+          "quote": "Treatment effects emerge immediately upon PSL adoption (year 0), with an initial effect of approximately 0.5 hours. The effect grows over the first few post-treatment years before stabilizing at approximately 1.4-1.6 hours by years 3-5.",
+          "explanation": "The main TWFE DiD estimate reports an average effect of 0.67\u20130.71 hours, but the event study shows effects growing from 0.5 hours at k=0 to 1.4\u20131.6 hours by k=3\u20135. A rough average of post-treatment event study coefficients (0.5, 0.9, 1.2, 1.4, 1.5, 1.6) is about 1.18, substantially larger than 0.67\u20130.71. Even accounting for the weighting of later cohorts at smaller k values, the discrepancy is notable and unexplained.",
+          "comment_type": "technical",
+          "paragraph_index": 50
+        },
+        {
+          "id": "incremental__claude-opus-4-6_11",
+          "title": "Callaway-Sant'Anna estimate suspiciously identical to TWFE with controls",
+          "quote": "Column (3) reports the aggregate average treatment effect from the Callaway-Sant'Anna estimator. The estimate of 0.71 hours is identical to the TWFE estimate with controls",
+          "explanation": "The CS estimator yielding a point estimate exactly identical to the TWFE estimate (0.71, SE 0.31) is extremely unlikely in practice. The CS estimator uses a fundamentally different weighting scheme. Even with minimal heterogeneity, small differences in weighting would typically produce at least slightly different estimates. Getting identical values to two decimal places for both coefficient and standard error raises concerns about whether the CS estimator was correctly implemented or whether the TWFE result was inadvertently reported twice.",
+          "comment_type": "technical",
+          "paragraph_index": 45
+        },
+        {
+          "id": "incremental__claude-opus-4-6_12",
+          "title": "Event study endpoint treatment and binning not specified",
+          "quote": "where $D_{st}^k$ is an indicator equal to one if observation $(s,t)$ is $k$ years relative to state $s$'s PSL adoption year.",
+          "explanation": "The event study sums from k=-5 to k=5, but the paper does not specify how observations outside this window are handled. With data from 2010\u20132022 and adoption dates from 2012\u20132022, many observations fall outside [-5, +5]. Standard practice is to bin endpoints or drop observations outside the window, and the choice matters for the estimates. This methodological choice is left unspecified, making the event study difficult to reproduce.",
+          "comment_type": "technical",
+          "paragraph_index": 38
+        },
+        {
+          "id": "incremental__claude-opus-4-6_13",
+          "title": "Growing event study effects potentially confounded by compositional sorting",
+          "quote": "This dynamic pattern could reflect gradual employer and worker adjustment to the new policy, increased awareness and utilization of PSL benefits over time, or compositional changes as workers with strong preferences for PSL sort into PSL states.",
+          "explanation": "The authors acknowledge worker sorting as a possible explanation for growing effects but do not test for it or discuss its implications for causal validity. If workers who prefer more hours sort into PSL states post-treatment, this violates the parallel trends assumption in a way that would not appear in pre-trends tests. Given that the ACS measures state of residence at survey time, migration-induced composition changes could bias the estimates, and this is especially concerning for the growing pattern of effects.",
+          "comment_type": "logical",
+          "paragraph_index": 50
+        },
+        {
+          "id": "incremental__claude-opus-4-6_14",
+          "title": "State-by-year clustering produces counterintuitively larger standard errors",
+          "quote": "Clustering at the state-by-year level increases standard errors substantially (from 0.28 to 0.42), reducing statistical significance to the 10 percent level.",
+          "explanation": "Clustering at a finer level (state\u00d7year) than the level of treatment variation (state) should generally yield standard errors that are smaller or similar to state-level clustering, not larger, because finer clustering fails to account for serial correlation. The substantial increase from 0.28 to 0.42 is counterintuitive and unexplained. This could indicate an unusual error structure or a coding issue, and warrants discussion rather than being presented without comment as a robustness check.",
+          "comment_type": "technical",
+          "paragraph_index": 57
+        },
+        {
+          "id": "incremental__claude-opus-4-6_15",
+          "title": "Placebo test design is underspecified",
+          "quote": "Fake treatment (2 years early) & 0.12 & (0.29) \\\\",
+          "explanation": "The placebo test shifts treatment dates 2 years earlier, but the description does not clarify how actual post-treatment observations are handled. If the real treatment eventually turns on in the data, the placebo specification would confound the fake treatment with the real treatment unless actual post-treatment observations are dropped or both indicators are included. The method is too vague for a reader to assess its validity or reproduce it.",
+          "comment_type": "technical",
+          "paragraph_index": 56
+        },
+        {
+          "id": "incremental__claude-opus-4-6_16",
+          "title": "Missing pre-specified heterogeneity dimension from results",
+          "quote": "Panel C shows results by sex.",
+          "explanation": "The methodology section lists four pre-specified heterogeneity dimensions: (1) workers with vs. without children, (2) high-contact vs. lower-contact occupations, (3) worker sex, and (4) states with vs. without small-employer exemptions. Table 4 presents Panels A\u2013C covering dimensions 1\u20133, but dimension 4 (small-employer exemptions) is absent without explanation. Since the authors emphasize these analyses were 'pre-specified,' the omission is notable and could reflect suppressed unfavorable results.",
+          "comment_type": "logical",
+          "paragraph_index": 54
+        },
+        {
+          "id": "incremental__claude-opus-4-6_17",
+          "title": "Overstated claim about PSL functioning as an 'employment stabilizer'",
+          "quote": "For policymakers considering PSL mandates, this evidence indicates that such laws may function as employment stabilizers rather than employment deterrents.",
+          "explanation": "The paper's outcome variable is weekly hours worked (intensive margin), and the paper explicitly notes it does not study employment/participation (extensive margin). A positive effect on hours conditional on being employed does not directly demonstrate 'employment stabilization,' which would require evidence on job separations, turnover, or employment rates. The conclusion's framing is stronger than the evidence supports.",
+          "comment_type": "logical",
+          "paragraph_index": 68
+        },
+        {
+          "id": "incremental__claude-opus-4-6_18",
+          "title": "Conclusion claims unqualified robustness despite fragility under alternative clustering",
+          "quote": "I find positive and statistically significant effects that are robust to alternative specifications and estimation approaches.",
+          "explanation": "State\u00d7year clustering increases the standard error to 0.42, making the estimate significant only at the 10% level. The conclusion's blanket claim of robustness glosses over this. A more careful statement would acknowledge that significance weakens under some alternative inference approaches.",
+          "comment_type": "logical",
+          "paragraph_index": 66
+        },
+        {
+          "id": "incremental__claude-opus-4-6_19",
+          "title": "Miller and Wherry (2011) citation appears mismatched to the context",
+          "quote": "PSL provides insurance against this risk, potentially drawing more workers into the labor force and encouraging greater hours among those already employed \\citep{miller2011}",
+          "explanation": "Miller and Wherry (2011) is listed in the bibliography as 'The long-term health effects of early life Medicaid coverage' (Journal of Human Resources), a paper about Medicaid's health effects on children, not about how benefit provision affects labor supply. This appears to be a misattribution. Additionally, the bibliography lists the year as 2011 but the volume/pages suggest a ~2019 publication date.",
+          "comment_type": "technical",
+          "paragraph_index": 65
+        },
+        {
+          "id": "incremental__claude-opus-4-6_20",
+          "title": "Claim that excluding Connecticut 'rules out' its influence is overstated",
+          "quote": "Excluding Connecticut, the first PSL state, yields an estimate of 0.64 hours, ruling out the possibility that results are driven by this single state.",
+          "explanation": "A point estimate changing from 0.67 to 0.64 shows Connecticut is not solely responsible, but 'rules out' implies definitive elimination, which overstates what this robustness check demonstrates. Connecticut could still be contributing meaningfully to the estimate.",
+          "comment_type": "logical",
+          "paragraph_index": 58
+        }
+      ],
+      "cost_usd": 1.0993,
+      "prompt_tokens": 90724,
+      "completion_tokens": 25826
+    },
+    "incremental__gemini-3.1-pro-preview": {
+      "label": "Incremental (gemini-3.1-pro-preview)",
+      "model": "google/gemini-3.1-pro-preview",
+      "overall_feedback": "This manuscript offers a highly polished, well-motivated, and clearly written analysis of a significant labor policy issue, employing appropriate state-of-the-art causal inference techniques (such as Callaway and Sant\u2019Anna\u2019s staggered DiD estimators) to evaluate paid sick leave (PSL) mandates. However, there are three major conceptual and empirical issues that must be addressed to validate the somewhat counterintuitive finding that PSL increases work hours. First, the 2012\u20132022 study period heavily overlaps with the COVID-19 pandemic, which drastically disrupted service sector employment and introduced concurrent federal sick leave interventions (e.g., FFCRA); the author must explicitly account for this to ensure the 2020\u20132022 data is not confounding the estimates. Second, relying on ACS survey data for work hours introduces a critical measurement ambiguity: it is unclear whether respondents or the survey instrument treat newly *paid* sick days as \"usual hours worked,\" which could mechanically drive the observed 0.67-hour increase rather than reflecting an actual change in labor supplied. Finally, the author must clarify whether the sample is conditional on employment and address potential composition effects; an increase in average weekly hours among retained workers might simply reflect employers consolidating labor into fewer, full-time employees to offset regulatory costs, which would actually mask the negative extensive-margin (employment) effects that the abstract currently claims to refute.",
+      "comments": [
+        {
+          "id": "incremental__gemini-3.1-pro-preview_0",
+          "title": "Inconsistent baseline hours between text and summary statistics",
+          "quote": "representing a 2.4 percent increase from a baseline of approximately 28 hours among low-wage service workers.",
+          "explanation": "The text states that the 0.67 hour effect represents a 2.4% increase from a baseline of approximately 28 hours (0.67 / 28 \u2248 0.0239). However, Table 2 in the context reports that the overall mean \"Weekly hours worked\" for the sample is 29.1. Given that treated observations comprise only 23% of the sample and the treatment effect is relatively small (+0.67 hours), it is mathematically implausible for the control/pre-treatment baseline to be 28.0 while the overall sample mean is 29.1. This points to a numerical inconsistency where either the baseline stated in the text or the summary statistics table is slightly inaccurate or pertains to an older version of the sample.",
+          "comment_type": "technical",
+          "paragraph_index": 8
+        },
+        {
+          "id": "incremental__gemini-3.1-pro-preview_1",
+          "title": "Logical Contradiction Regarding Wage Rigidity and Mandated Benefits",
+          "quote": "Moreover, because many service workers earn at or near the minimum wage, employer wage adjustments in response to PSL mandates are constrained, which limits one channel through which labor demand might otherwise adjust.",
+          "explanation": "The author introduces this point as an additional reason (\"Moreover...\") why positive supply-side effects on hours might dominate negative demand-side effects. However, standard mandated benefit theory (such as Summers 1989, which the author cites earlier) dictates the exact opposite. If a minimum wage prevents employers from passing the cost of the mandated benefit onto workers through lower wages, the employer bears the full cost increase. Because they cannot adjust downward on the price (wage) margin, they are forced to adjust more heavily on the quantity margin\u2014leading to a *larger* reduction in hours or employment. Thus, constrained wage adjustments would amplify the negative demand-side effects on hours, making it harder (not easier) for positive supply-side effects to dominate. Additionally, the phrasing \"limits one channel through which labor demand might otherwise adjust\" is imprecise; wage adjustment is the price mechanism resolving the market, while labor demand is the schedule itself.",
+          "comment_type": "logical",
+          "paragraph_index": 20
+        },
+        {
+          "id": "incremental__gemini-3.1-pro-preview_2",
+          "title": "Endogenous sample selection based on annual wages",
+          "quote": "To focus on workers most likely to be affected by PSL mandates---those without prior employer-provided sick leave---I restrict the sample to ``low-wage'' workers, defined as those in the bottom tercile of the annual wage distribution within their industry-year cell.",
+          "explanation": "The study aims to estimate the effect of paid sick leave on the intensive margin of labor supply (weekly hours worked). However, the author restricts the sample based on the *annual* wage distribution. Because annual wages are mechanically the product of weekly hours, hourly wage, and weeks worked, this creates severe endogenous sample selection (collider bias) by conditioning on a variable directly determined by the outcome. If PSL mandates successfully increase weekly hours, they will simultaneously increase annual earnings, potentially pushing treated workers above the defining threshold and systematically excluding them from the treatment group. To correctly identify low-wage workers without this mechanical bias, the sample restriction should be based on an imputed hourly wage (annual wage divided by hours worked) or an exogenous proxy.",
+          "comment_type": "logical",
+          "paragraph_index": 28
+        },
+        {
+          "id": "incremental__gemini-3.1-pro-preview_3",
+          "title": "Underspecified Event Study Binning",
+          "quote": "where $D_{st}^k$ is an indicator equal to one if observation $(s,t)$ is $k$ years relative to state $s$\u2019s PSL adoption year. The reference period is $k = -1$ (the year before adoption), so all coefficients are relative to that year. For states that never adopt PSL, all event-time indicators are zero.",
+          "explanation": "The dataset spans 2010-2022 and policies were enacted starting in 2012, meaning some states reach event times far beyond the [-5, 5] window specified in Equation 2 (for example, Connecticut reaches $k=10$ in 2022). By rigidly truncating the event window at $k \\in [-5, 5]$ without specifying binning endpoints (i.e., replacing the endpoints with pooled dummies for $k \\geq 5$ and $k \\leq -5$), observations that fall outside this window will evaluate to zero for all $D_{st}^k$ terms. This inadvertently forces long-run post-treatment periods into the omitted reference category alongside never-treated states and the $k=-1$ period. Since the treatment impacts are highly positive and growing, contaminating the control group with heavily treated observations will upwardly bias the baseline counterfactual and erroneously attenuate all estimated $\\beta_k$ coefficients.",
+          "comment_type": "technical",
+          "paragraph_index": 38
+        },
+        {
+          "id": "incremental__gemini-3.1-pro-preview_4",
+          "title": "Questionable Claim Regarding TWFE Bias",
+          "quote": "The estimate of 0.71 hours is identical to the TWFE estimate with controls, suggesting that heterogeneous treatment effects across cohorts are not a major concern in this setting.",
+          "explanation": "This conclusion contradicts the paper's own event study results. TWFE estimators suffer from severe bias (often via negative weighting) in staggered rollout designs primarily when there are strong dynamic treatment effects\u2014that is, heterogeneity over time since treatment. Because early-adopting units with growing effects act as controls for newly treated units, their large effects are effectively subtracted from the estimate. Figure 1 shows massive dynamic heterogeneity, with effects growing sharply from 0.5 to 1.6 hours over 5 years. Given this steep growth profile, it is mathematically highly implausible that the flawed TWFE estimate would exactly match the Callaway-Sant'Anna parameter, which was designed to strip out this precise negative weighting. Concluding that TWFE bias is \"not a major concern\" directly ignores the pronounced time-varying heterogeneity actively documented in the event study.",
+          "comment_type": "logical",
+          "paragraph_index": 45
+        },
+        {
+          "id": "incremental__gemini-3.1-pro-preview_5",
+          "title": "Incorrect p-value and significance level for State x year clustering",
+          "quote": "State $\\times$ year clustering & 0.67* & (0.42) \\\\",
+          "explanation": "A coefficient of 0.67 with a standard error of 0.42 yields a t-statistic of approximately 1.595. Using a standard two-tailed test (which is applied throughout the rest of the paper, such as in Table 2), the associated p-value is approximately 0.111. Because this p-value is greater than 0.10, the result is not statistically significant at the 10% level. Marking it with a star (* p<0.10) in the table and claiming in the text that it reduces \"statistical significance to the 10 percent level\" is mathematically incorrect.",
+          "comment_type": "technical",
+          "paragraph_index": 56
+        },
+        {
+          "id": "incremental__gemini-3.1-pro-preview_6",
+          "title": "Theoretical misunderstanding of cluster-robust standard errors",
+          "quote": "Clustering at the state-by-year level increases standard errors substantially (from 0.28 to 0.42)",
+          "explanation": "In a difference-in-differences panel design with staggered state-level adoption, the treatment is highly persistent. It is a well-established econometric result (e.g., Bertrand, Duflo, and Mullainathan, 2004) that in this setting, standard errors clustered at the state level are much *larger* than those clustered at the state-by-year level because state-level clustering accounts for positive serial correlation within states over time. Claiming that moving from state to state-by-year clustering \"increases standard errors substantially\" implies massive negative serial correlation, which is highly anomalous for state policy data and heavily suggests either a coding error or a misunderstanding of how clustering operates in this context.",
+          "comment_type": "logical",
+          "paragraph_index": 57
+        },
+        {
+          "id": "incremental__gemini-3.1-pro-preview_7",
+          "title": "Overstatement of placebo test precision",
+          "quote": "Finally, a placebo test assigning ``fake'' treatment dates two years before actual adoption yields a precisely estimated null effect (0.12 hours, SE = 0.29)",
+          "explanation": "Describing an estimate of 0.12 with a standard error of 0.29 as a \"precisely estimated null effect\" is misleading. A standard error of 0.29 implies a 95% confidence interval of roughly [-0.45, +0.69]. This interval is wide enough that it easily encompasses the primary treatment effect of 0.67 hours observed in the main specification. A true \"precisely estimated null\" must have a standard error tight enough to statistically rule out the main effect of interest; here, the test is simply underpowered to distinguish the placebo effect from the main effect.",
+          "comment_type": "logical",
+          "paragraph_index": 60
+        },
+        {
+          "id": "incremental__gemini-3.1-pro-preview_8",
+          "title": "Inconsistent publication year and mismatched citation concept",
+          "quote": "\\bibitem[Miller and Wherry, 2011]{miller2011}\nMiller, S. and Wherry, L.R. (2011).\nThe long-term health effects of early life Medicaid coverage.\n\\textit{Journal of Human Resources}, 54(3), 785-824.",
+          "explanation": "The listed publication year (2011) is numerically inconsistent with the journal volume (Volume 54 of the Journal of Human Resources corresponds to 2019). Furthermore, a paper evaluating the long-term health outcomes of early-life Medicaid exposure is conceptually mismatched with its usage in the text (Section 2.3 of the summary), where it was cited to support the claim that paid sick leave provides short-term insurance that draws workers into the labor force. The authors appear to have either misattributed the claim or included the wrong citation entirely.",
+          "comment_type": "logical",
+          "paragraph_index": 79
+        },
+        {
+          "id": "incremental__gemini-3.1-pro-preview_9",
+          "title": "Questionable claim regarding a favorable cost-benefit profile",
+          "quote": "Combined with prior evidence on public health benefits from reduced presenteeism, this suggests a favorable cost-benefit profile for PSL policies.",
+          "explanation": "Claiming a \"favorable cost-benefit profile\" requires an evaluation of both the benefits and the costs of the policy. While this study identifies positive labor supply effects (increased hours worked) and cites prior evidence of public health benefits (reduced presenteeism), it does not quantify or evaluate the direct costs imposed on employers (such as the financial cost of wages paid for unworked hours or administrative burdens). Concluding that the cost-benefit profile is favorable without assessing the cost side significantly overstates what has been shown.",
+          "comment_type": "logical",
+          "paragraph_index": 65
+        }
+      ],
+      "cost_usd": 1.0177,
+      "prompt_tokens": 69399,
+      "completion_tokens": 73245
+    }
+  }
+}

@@ -1,0 +1,736 @@
+{
+  "slug": "260218458v1",
+  "title": "The Story is Not the Science:Execution-Grounded Evaluation of\nMechanistic Interpretability Research",
+  "paragraphs": [
+    {
+      "index": 0,
+      "text": "# The Story is Not the Science: Execution-Grounded Evaluation of\nMechanistic Interpretability Research"
+    },
+    {
+      "index": 1,
+      "text": "## Abstract\nReproducibility crises across sciences highlight the limitations of the paper-centric review system in assessing the rigor and reproducibility of research. AI agents that autonomously design and generate large volumes of research outputs exacerbate these challenges.\nIn this work, we address the growing challenges of scalability and rigor by flipping the dynamic and developing AI agents as research evaluators.\nWe propose the first execution-grounded evaluation framework that verifies research beyond narrative review by examining code and data alongside the paper.\nWe use mechanistic interpretability research as a testbed, build standardized research output, and develop MechEvalAgent , an automated evaluation framework that assesses the coherence of the experimental process, the reproducibility of results, and the generalizability of findings. We show that our framework achieves above 80% agreement with human judges, identifies substantial methodological problems, and surfaces 51 additional issues that human reviewers miss.\nOur work demonstrates the potential of AI agents to transform research evaluation and pave the way for rigorous scientific practices. 1 1 1 Code available: https://github.com/ChicagoHAI/MechEvalAgent/"
+    },
+    {
+      "index": 2,
+      "text": "## 1 Introduction\n\nFigure 1 : (a) Execution-grouned evaluation uncovers failures that narrative-alone review misses. In this example,\nFailures 2, 3, and 4 require execution beyond narrative review. (b) As a highlight of our results, we find that MechEvalAgent surfaces 51 additional issues that human reviewers overlooked."
+    },
+    {
+      "index": 3,
+      "text": "Peer review has long treated the paper narrative as the primary object of evaluation (Kelly et al. , 2014 ) .\nWhile this may suffice for theoretical work, it poses challenges for empirical research, which cannot be fully assessed without executable artifacts such as code and data.\nReproducibility crises across scientific fields have exposed the limitations of narrative-alone review (Collaboration, 2015 ; Desai et al. , 2025 ; Youmshajekian, 2024 ) .\nIn one case, manipulated behavioral data\nresulted in a high-profile faculty termination at a leading research university (Simmons, 2024 ) .\nIn the context of AI research, even when code is shared, reviewers often lack the time or resources to run it, leading to a reliance on narrative descriptions that may not accurately reflect the actual implementation or results."
+    },
+    {
+      "index": 4,
+      "text": "Agentic workflows add more challenges as they are now widely deployed in research tasks, including code assistance (Anthropic, 2025 ; OpenAI, 2025 ; Novikov et al. , 2025 ) , ideation (Zhou et al. , 2024 ; Baek et al. , 2025 ) , and end-to-end research (Schmidgall et al. , 2025 ; Ifargan et al. , 2025 ) . They autonomously generate large volumes of research outputs and can accelerate publication timelines,\ncontributing to even more submissions in an already strained system.\nNotably, the number of papers submitted to NeurIPS increased from 1,420 submissions to 21,575 submissions from 2013 to 2025, a 15-fold increase in submission ( PaperCopilot, ; NeurIPS PC Chairs, 2025 ; Desai et al. , 2025 ) .\nAI involvement also exacerbates the challenges of narrative-alone evaluation, as implicit hallucinations are hard to detect (Haibe-Kains et al. , 2020 ; Beam et al. , 2020 ) ."
+    },
+    {
+      "index": 5,
+      "text": "Recent efforts have begun to use AI in the evaluation process to address this challenge, including systems that provide paper feedback (Stanford ML Group, 2025 ) and broader uses of LLMs or agents in peer review (Lee et al. , 2025 ; Liang et al. , 2024 ; Yu et al. , 2024 ) . These systems can already detect important issues such as hallucinated references (Shmatko et al. , 2026 ) , and studies show that AI generated reviews overlap well with human reviews (Liang et al. , 2024 ) . However, most approaches\nexamine\nthe coherence and consistency of the story in the paper and ignore all the executable resources.\nIn other words, the focus is on how appealing the story is rather than whether the story is true. 2 2 2 Narrative-alone evaluation is even more concerning in AI review, where authors have inserted prompts in papers to raise the scores of AI judges (Else, 2025 ) ."
+    },
+    {
+      "index": 6,
+      "text": "In this work, we seek to verify the science itself, not just the story told about it.\nMotivated by this view, we propose a general evaluation framework that combines narrative and execution to reveal errors that narrative-alone review misses, as shown in Figure 1 , demonstrating how agents can support rather than undermine scientific review."
+    },
+    {
+      "index": 7,
+      "text": "We propose the first execution-grounded evaluation framework that standardizes research outputs by bundling execution resources with narrative. This enables systematic assessment of coherence of the experiment process, reproducibility of the results, and generalizability of the findings beyond what the final paper alone can provide."
+    },
+    {
+      "index": 8,
+      "text": "We build MechEvalAgent , an automated evaluation agent that implements our pipeline.\nWe focus on mechanistic interpretability as a testbed because its claims are often expressed in terms of concrete mechanisms and interventions that can be directly tested by rerunning experiments and applying the proposed analyses to new models or inputs. The field also follows relatively standardized methodological patterns, which makes failures in execution and evaluation easier to isolate. Finally, generalizability is a central open question in mechanistic interpretability, making it a natural setting to test whether evaluation can go beyond narrative.\nWhile we instantiate our framework in mechanistic interpretability,\nthe framework itself is not domain-specific and can be adapted to other areas of scientific research."
+    },
+    {
+      "index": 9,
+      "text": "We evaluate MechEvalAgent on 30 research outputs in mechanistic interpretability. MechEvalAgent achieves above 80% agreement with human experts. As shown in Figure 1 b, it captures most failures identified by humans (67 of 87) and surfaces 51 additional issues that humans missed. Many of these issues illustrated in Figure 1 a require execution to detect, such as missing data selection criteria that only emerge during reproduction (Failure 2), validation code that checks list membership rather than task validity (Failure 3), or missing files that prevent reproducing key results (Failure 4). Removing code access or execution substantially reduces agreement to about 45% on average, and MechEvalAgent evaluates faster than humans, who take 2.2 hours per task on average, aligned with research in other disciplines (Abogunrin et al. , 2025 ) . These results highlight the value of execution-grounded evaluation."
+    },
+    {
+      "index": 10,
+      "text": "To summarize, our main contributions are as follows:\n\n\u2022 We develop the first execution-grounded evaluation framework for research outputs that goes beyond narrative-alone review by standardizing research outputs and building systematic evaluation suites. \u2022 We build MechEvalAgent to instantiate this framework in mechanistic interpretability and evaluate 30 research outputs from both humans and AI research agents. \u2022 Our evaluation results align with human experts and surface 51 issues overlooked by human reviewers, demonstrating the importance of combining narrative and execution-grounded assessments."
+    },
+    {
+      "index": 11,
+      "text": "We develop the first execution-grounded evaluation framework for research outputs that goes beyond narrative-alone review by standardizing research outputs and building systematic evaluation suites."
+    },
+    {
+      "index": 12,
+      "text": "We build MechEvalAgent to instantiate this framework in mechanistic interpretability and evaluate 30 research outputs from both humans and AI research agents."
+    },
+    {
+      "index": 13,
+      "text": "Our evaluation results align with human experts and surface 51 issues overlooked by human reviewers, demonstrating the importance of combining narrative and execution-grounded assessments."
+    },
+    {
+      "index": 14,
+      "text": "## 2 Method\n\nMechEvalAgent expects research outputs to include both narrative and execution resources. We standardize research outputs and introduce an evaluation framework based on these outputs to enable execution-grounded assessment."
+    },
+    {
+      "index": 15,
+      "text": "Unified research outputs. We propose a unified standard for research outputs. Research outputs are expected to include two components: \u2022 Narrative : For human-written papers, we extract the\nthe plan and the report . For agent-generated outputs, we\nexpect the research trace beyond a final paper, including human prompts , for instance. The plan specifies the goal, hypothesis, constraints, and intended methodology. Comparing it against the executed code enables checks of plan-implementation consistency. This helps detect goal drift and cases where an intended methodology is quietly replaced by a different method that yields favorable results. The report summarizes goals, methods, results, and conclusions, links claims to evidence, and can briefly discuss future directions and implications. \u2022 Execution Resources : We expect the implementation , including code and data, together with a walkthrough of it.\nThis enables grounded checks of runnability and correctness, and surfaces failures that are invisible in narrative-alone review, such as broken environments, API mismatches, or incorrect metric computations. The walkthrough also allows us to assess whether sufficient information is provided for reproduction. These resources make it possible to verify not only what an agent claims, but also how the claim was produced. For example, a report may state that an intervention improves a metric, but execution can reveal that the code does not run, implements a different computation than described, or fails to reproduce the reported numbers."
+    },
+    {
+      "index": 16,
+      "text": "Narrative : For human-written papers, we extract the\nthe plan and the report . For agent-generated outputs, we\nexpect the research trace beyond a final paper, including human prompts , for instance. The plan specifies the goal, hypothesis, constraints, and intended methodology. Comparing it against the executed code enables checks of plan-implementation consistency. This helps detect goal drift and cases where an intended methodology is quietly replaced by a different method that yields favorable results. The report summarizes goals, methods, results, and conclusions, links claims to evidence, and can briefly discuss future directions and implications."
+    },
+    {
+      "index": 17,
+      "text": "Execution Resources : We expect the implementation , including code and data, together with a walkthrough of it.\nThis enables grounded checks of runnability and correctness, and surfaces failures that are invisible in narrative-alone review, such as broken environments, API mismatches, or incorrect metric computations. The walkthrough also allows us to assess whether sufficient information is provided for reproduction."
+    },
+    {
+      "index": 18,
+      "text": "Our proposed evaluation framework.\n\nFigure 2 : Overview of the MechEvalAgent framework. Research outputs are evaluated on coherence, reproducibility, and generalization, with each sub-dimension handled by an agent that takes in the relevant inputs."
+    },
+    {
+      "index": 19,
+      "text": "Our evaluation framework formalizes the review process into explicit checks. When evaluating research outputs, a reviewer typically wants to know three things: (i) whether the claims are consistent with the provided evidence, (ii) whether the results can be reproduced, and (iii) whether the findings generalize beyond the original setting.\nAs illustrated in Figure 2 , our MechEvalAgent operationalizes these questions in the following three components, with more detailed description in Appendix A ."
+    },
+    {
+      "index": 20,
+      "text": "Coherence. Coherence evaluates on consistency and instruction following . It asks whether the research outputs are internally consistent and aligned with its stated goals, including whether the implementation and reported results support the claims and whether the artifact follows the intended research objective."
+    },
+    {
+      "index": 21,
+      "text": "Reproducibility. Reproducibility evaluates on execution quality and replication quality . It asks whether the data is presented, the code is runnable and correctly implements the described computations, and whether an independent replication run can reproduce the reported results. We forbid the access to report to avoid hallucination. As shown in Figure 2 , we have another agent to evaluate on the replication quality including check whether there is external reference and hallucination in replication and whether the result and the conclusion matches with the original ones."
+    },
+    {
+      "index": 22,
+      "text": "Generalizability. In this part, an agent reads the research repository and checks whether the reported findings generalize beyond the original setting, including to a new model, new data instances, or related tasks. This evaluation process measures whether one can learn something from the research by testing the predictions based on the findings in a new situation, considered an important component of generalizability (Kim et al. , 2025 ) .\nThis evaluation is well-suited to mechanistic interpretability, where research often identifies mechanisms in a specific model and task while requiring generalizable insights across architectures or contexts. Therefore, whether the agent is able to do this serves as an indirect measure of whether the original research captured generalizable insight rather than task- or model-specific patterns."
+    },
+    {
+      "index": 23,
+      "text": "In practice, we evaluate each component through structured binary checklists.\nThe advantage is that checklists reduce subjectivity and enable consistent aggregation of evaluation results across agents and tasks and enables comparisons with human experts. 3 3 3 Anecdotally, we find that MechEvalAgent can identify even more issues when the checklist is not provided, as it can explore more aspects of the research output. However, for systematic evaluation and comparison, we focus on checklist-based evaluation in this work. Figure 2 summarizes the checklist structure and overall workflow. Each sub-dimension is implemented by a dedicated agent that evaluates multiple items in the checklist. For example, our checklists cover statistical significance ( CS5 ), effect size ( CS3 ), and justification ( CS4 ) for coherence , code runnability ( C1 ) for reproducibility , and generalization to new models and data instances ( GT1, GT2 ) for generalizability . 4 4 4 Checklist item of statistical significance is captured by top ML conference , as well as reproducibility of the main results and broader impact of the research. The full list of checklist items is included in Table 2 , and additional implementation details and example outputs are included in Appendix A.1 ."
+    },
+    {
+      "index": 24,
+      "text": "Building MechEvalAgent . We develop MechEvalAgent on Claude Code, with execution and logging support provided by Scribe (Goodfire AI, 2025 ) . Scribe integrates code generation with Jupyter notebooks, making execution traces and errors explicit. This enables reliable execution checking and qualitative analysis. Specifically, we reorganize both narrative and execution resources, including input prompts to the research agent, plans, code implementations, relevant data, walkthroughs, and final reports. The structure for human-written repositories differs slightly and is explained in Section 3 . We introduce specialized agents responsible for evaluating different metrics as discussed above. During early iterations, we identified a risk of MechEvalAgent modifying source files. To prevent this, we enforce strict file access restrictions and integrate with GitHub for version control monitoring to ensure no unintended modifications occur. To guard against hallucination in reproduction, we route replication results through a separate verification agent that checks result fidelity. With this modular, execution-grounded design, MechEvalAgent can be extended to other domains beyond mechanistic interpretability. Figure 2 illustrates the detailed input structure of MechEvalAgent . 5 5 5 Please refer to supplementary materials for detailed input templates."
+    },
+    {
+      "index": 25,
+      "text": "## 3 Experiment Setup\n\nTo cover a diverse range of research scenarios, we evaluate our framework and MechEvalAgent on three types of research outputs, with ten examples each. The selected tasks are shown in Table 3 :"
+    },
+    {
+      "index": 26,
+      "text": "\u2022 Replication of Research. The agent is given a concrete research goal and hypothesis from an established paper and must generate a plan and implement experiments that directly test it. This setting tests instruction following in a realistic workflow where a human delegates a well-defined experiment. It is also prone to hallucinated reasoning, since the agent may rely on memorized conclusions rather than grounded execution. Our MechEvalAgent surfaces such failures by checking whether the implementation and results actually support the stated hypothesis. \u2022 Open-ended Research Questions. Agents are given open-ended questions with only high-level goals (e.g., identifying sarcasm-related circuits), without a known ground truth. This setting reflects exploratory research, where agents must form their own hypotheses and outcomes can be either positive or negative. Coherence is especially important at this stage, since an agent should be able to report null or negative results rather than defaulting to overly optimistic conclusions. \u2022 Human-Written Repositories. Our evaluation is not limited to agent-generated research. Human-written repositories can exhibit similar issues, such as overclaiming or poorly reproducible code. Since these repositories often lack explicit plan files, we extract the goal, claims, and methodology from the accompanying paper to apply our pipeline in a unified manner. In this setting, we evaluate all aspects of the pipeline except instruction following, which is not applicable."
+    },
+    {
+      "index": 27,
+      "text": "Replication of Research. The agent is given a concrete research goal and hypothesis from an established paper and must generate a plan and implement experiments that directly test it. This setting tests instruction following in a realistic workflow where a human delegates a well-defined experiment. It is also prone to hallucinated reasoning, since the agent may rely on memorized conclusions rather than grounded execution. Our MechEvalAgent surfaces such failures by checking whether the implementation and results actually support the stated hypothesis."
+    },
+    {
+      "index": 28,
+      "text": "Open-ended Research Questions. Agents are given open-ended questions with only high-level goals (e.g., identifying sarcasm-related circuits), without a known ground truth. This setting reflects exploratory research, where agents must form their own hypotheses and outcomes can be either positive or negative. Coherence is especially important at this stage, since an agent should be able to report null or negative results rather than defaulting to overly optimistic conclusions."
+    },
+    {
+      "index": 29,
+      "text": "Human-Written Repositories. Our evaluation is not limited to agent-generated research. Human-written repositories can exhibit similar issues, such as overclaiming or poorly reproducible code. Since these repositories often lack explicit plan files, we extract the goal, claims, and methodology from the accompanying paper to apply our pipeline in a unified manner. In this setting, we evaluate all aspects of the pipeline except instruction following, which is not applicable."
+    },
+    {
+      "index": 30,
+      "text": "Research agents naturally produce richer outputs than traditional artifacts, including plans, intermediate logs, and human prompts. We fully utilize and standardize these into a unified format for systematic checklist evaluation, enabling checks on plan-implementation consistency and verification that conclusions follow from execution. Our research agent is built on Scribe, which processes our instruction prompts and structures the research output according to our standardized format. We include an example of the detailed prompt in Appendix A.2 ."
+    },
+    {
+      "index": 31,
+      "text": "Evaluating our evaluation framework. To evaluate our evaluation framework and MechEvalAgent , we first measure agreement between human evaluators and MechEvalAgent . Human evaluators are asked to use the exact same checklists and instructions as the agents to assess the research independently , including reproducing the repository and testing generalizability. We measure the agreement between human and agent judgments. This evaluates whether our agents produce evaluations that are consistent with human reasoning. We also examine evaluator efficiency by measuring the time humans spent on evaluation.\nIn addition, we evaluate the rated quality of the agent\u2019s evaluation output. Human experts assess whether the issues reported by our agents are correct, meaningful, and complete by scoring their assessment with the agents from 1 to 5 (strongly disagree - strongly agree with the agent\u2019s judgement). Due to limited resources, we have three human authors as annotators."
+    },
+    {
+      "index": 32,
+      "text": "We run each automated evaluation three times. We use AND logic for PASS (equivalent to OR logic for FAIL), where a task is marked as PASS only when all runs return PASS.\nWe additionally analyze majority vote and cross-run stability in Appendix B .\nDue to limited resources, we asked three human experts to evaluate 30 research generations, with each generation evaluated by exactly one expert. Each expert also evaluated the quality of the automated evaluation output for a single evaluation run."
+    },
+    {
+      "index": 33,
+      "text": "Ablation study. To isolate the value of execution, we compare MechEvalAgent to two ablated evaluators. The Doc-Only evaluator reads only the final report and cannot inspect or run code, approximating limited paper-only review. The No-Execution evaluator sees the full repository but cannot execute it, so reproducibility and generalizability are only judged from written evidence rather than executions. More details of the setting are shown in Appendix A.2 ."
+    },
+    {
+      "index": 34,
+      "text": "## 4 Results\n\nOur results show that execution failures and narrative weaknesses are common across tasks, undermining reliability. MechEvalAgent aligns with human judgments while surfacing additional issues that humans miss. Ablations further confirm the value of execution-grounded evaluation."
+    },
+    {
+      "index": 35,
+      "text": "### 4.1 An Overview of Key Findings\n\nExecution and narrative issues are prevalent in research outputs (Figure 3 ). Over 90% of the tasks have at least one failure in reproducibility, largely driven by execution errors, and 80% of the tasks fail in coherence, mainly due to lack of consistency, as shown in Figure 3 and Figure 8 . Execution failures often stem from model loading, shape calculations, and environment setup, and they appear in both agent-generated and human-written repositories. Our checklists also surface narrative weaknesses in evidential support, such as unreliable effect sizes, weak statistical significance, or conclusions based on insufficient results."
+    },
+    {
+      "index": 36,
+      "text": "Figure 3 : Percentage of projects with at least one failure per dimension. Over 90% of tasks fail in reproducibility, and 80% fail in coherence."
+    },
+    {
+      "index": 37,
+      "text": "MechEvalAgent aligns with human judgments, while execution helps surface additional issues beyond narrative. As shown in Figure 4 ,\nrated quality of the evaluation outputs by MechEvalAgent is high, with scores above 4.7 out of 5 across all dimensions.\nThe agreement is above 80% across all dimensions (Figure 6 ).\nFigure 1 shows that MechEvalAgent captures most failures identified by humans (67 of 87) and surfaces 51 additional issues. As shown in Figure 5 , most of the additional failures are concentrated in reproducibility and generalizability, which are more time-consuming for humans to evaluate. This pattern suggests execution enables MechEvalAgent to uncover more issues, especially execution ones."
+    },
+    {
+      "index": 38,
+      "text": "Figure 4 : Human-rated quality on MechEvalAgent evaluations (1-5 Likert scale, 1 = Strongly Disagree, 5 = Strongly Agree). All dimensions show ratings above 4.7, indicating high quality of agent assessments."
+    },
+    {
+      "index": 39,
+      "text": "Figure 5 : Failure breakdown comparing human-identified and agent-identified issues. MechEvalAgent surfaces more unique issues in all three dimensions."
+    },
+    {
+      "index": 40,
+      "text": "Ablation highlights the problem of narrative-alone evaluation (Figure 6 ). Both ablated evaluators agree with humans far less than the full MechEvalAgent pipeline, especially on execution dependent dimensions. This indicates that an AI evaluator without execution access and limited to narrative review is less reliable. In these settings, the evaluator also tends to over-assign FAIL as shown in Figure 8 , suggesting that execution provides needed grounding for calibrated judgments."
+    },
+    {
+      "index": 41,
+      "text": "Figure 6 : Agreement with human experts across the full MechEvalAgent pipeline and two ablated variants (Doc-Only and No-Execution). Full MechEvalAgent pipeline shows high agreement across all dimensions. Both ablations perform substantially worse than the full pipeline."
+    },
+    {
+      "index": 42,
+      "text": "### 4.2 A Closer Look at Failures and Disagreements\n\nWe now closely look into common failures identified by MechEvalAgent and human experts, and analyze disagreements between them."
+    },
+    {
+      "index": 43,
+      "text": "Figure 7 : Average failure rates by subgroup. Consistency checks fail 27.3% on average, and execution quality checks fail 60% of the time."
+    },
+    {
+      "index": 44,
+      "text": "Execution failures and weak reproducibility remain common. Zooming in the high reproducibility failures observed in Figure 3 ,\nFigure 7 shows that execution failures are more common.\nThe high failure rate in execution evaluation reflects difficulties with missing packages and transformer internals, often showing up as shape errors in residual streams and attention heads (e.g., \u201chead-level activation patching mismatch\u201d from a replication task, and \u201cAPI compatibility issue\u201d from a human repository).\nIn agent-generated research, these errors often appear early and are fixed in subsequent blocks. For example, after encountering a shape mismatch or missing key, the agent may inspect tensor shapes or enumerate available keys to find the correct one."
+    },
+    {
+      "index": 45,
+      "text": "However, a more serious problem is that results are sometimes not reproducible, undermining confidence in the conclusions.\nIn acronyms , a replication task that seeks a mechanistic account of predicting multiple consecutive tokens (Appendix A.2 ),\nthe research agent\u2019s report claims to use the logit correlation metric to evaluate the circuit. However, MechEvalAgent found that during replication, though the identified circuits overlap, logit correlation metrics deviate by more than 8% from the original (Original value: 0.66, Replication value: 0.72), and this discrepancy appears across all three evaluation runs. Although the replicated results have better performance than the original, it reveals concerns in validity of the original method and the evaluation procedure. Inspecting the cause shown in Table 1 , we found that the research agent evaluated correlation on only a subset of examples without explicitly noting this choice (first 20 examples), whereas MechEvalAgent followed the stated instructions and evaluated on the full dataset.\nThis observation point to issues in the original evaluation procedure and raise concerns about reproducibility."
+    },
+    {
+      "index": 46,
+      "text": "We observe a related issue in erasing (Gandikota et al. , 2024 ) , a human-written repository that proposes an approach to concept-level unlearning, with more detailed description in Appendix A.2 . Here, MechEvalAgent found that probe-training code and adversarial testing scripts are missing. Although the work primarily focuses on effective unlearning, the sections on probe and activation analysis and robustness to attacks serve as important evaluation components. While this failure is captured by our checklist item on consistency between stated experiments and implemented code, it also directly limits reproducibility because a user cannot reconstruct the full set of evaluation. Beyond missing evaluation scripts, MechEvalAgent found that belief (Prakash et al. , 2025 ) , another human-written repository that studies how LMs represent characters\u2019 beliefs (Appendix A.2 ), contains an invalid Jupyter notebook file related to their BigToM causal model experiments."
+    },
+    {
+      "index": 47,
+      "text": "Narratives of agent-generated research fail to be consistent and lack sufficient justification. With respect to coherence failures, Figure 7 shows that the average failure rate in consistency subgroups can reach 27.3%. As shown in Figure 8 , the most common consistency failure is missing statistical significance.\nWe also observe failure rates of 23.3% for plan-implementation consistency ( CS2 ) and 6.7% for effect size ( CS3 )."
+    },
+    {
+      "index": 48,
+      "text": "A particularly concerning failure is the lack of sufficient justification which has 23.3% failure rate (Figure 8 ). For example, as shown in Table 1 , on the ioi task, which is a replication task focus on mechanistically understand the indirect object identification task (Appendix A.2 ), MechEvalAgent noted that a \u201cstrongly supports\u201d conclusion was drawn despite a -4.2% circuit performance, which contradicts the reported evidence. These failures suggest potential hallucination in the research agent, possibly due to memorization of existing work in training data."
+    },
+    {
+      "index": 49,
+      "text": "Table 1: Examples of issues identified by MechEvalAgent ( ) and human experts ( ). MechEvalAgent provides specific, execution-grounded rationales, while human rationales tend to be more general. R = research agent generated repository, H = human-written repository. The detailed description of the tasks are in Appendix A.2 ."
+    },
+    {
+      "index": 50,
+      "text": "MechEvalAgent surfaces issues humans overlook. Table 1 shows that MechEvalAgent tends to provide more detailed and specific rationales than human experts, making the feedback more actionable for improving research agents. Human rationales are typically more general, likely due to limited time for thorough inspection. In unanswerable , an open-ended question task that explains how models solve unanswerable questions (Appendix A.2 ), MechEvalAgent flagged that the choice of final circuit size lacks explicit justification and that validation results showing circuit ablation being only 0.73 \u00d7 \\times as impactful as random ablation directly contradict the claimed importance. In contrast, human judges only noted that the justification was insufficient."
+    },
+    {
+      "index": 51,
+      "text": "Figure 5 further shows that MechEvalAgent surfaces more unique issues across all dimensions: 22.6% in coherence, 55.3% in reproducibility, and 57.1% in generalizability. While some differences arise from interpretation, the agent consistently identifies execution-related problems. For example, as discussed earlier, in acronyms , MechEvalAgent found that the logit correlation metric deviates substantially,\nwhereas human judges did not identify any issues."
+    },
+    {
+      "index": 52,
+      "text": "Human evaluation can also be affected by limited resources or domain knowledge, and MechEvalAgent helps compensate for these constraints. In uncertainty , an open-ended question task that aims to identify circuits related to uncertainty (Appendix A.2 ), human judges criticized the agent under CS4 for switching to GPT-2 Medium without justification. However, code inspection reveals an if condition that switches models only after a load failure. By executing and inspecting the code, MechEvalAgent provides a more accurate assessment."
+    },
+    {
+      "index": 53,
+      "text": "Conversely, the 20 issues identified exclusively by human experts show that human evaluation still adds valuable insights beyond MechEvalAgent . For example, in multilingual , an open-ended question task that aims to understand how models \u201cthink\u201d under multilingual instructions (Appendix A.2 ), human judges identified a hallucination where the reported support value of + + 0.13 for an identified neuron was actually derived only from the single translation task, rather than from the average performance across the full task."
+    },
+    {
+      "index": 54,
+      "text": "Disagreements stem from different interpretations of checklists. Beyond surfacing issues, MechEvalAgent shows high agreement with human evaluators, including both issues and pass cases. However, there are still some disagreements, especially in reproducibility and generalizability (Figure 6 ).\nFigure 10(a) shows that much of this comes from the Redundancy check ( C3 ). Our checklist specifies that code adding new information should not be considered redundant. However, when the agent copies the same block repeatedly to run on different inputs instead of writing reusable functions, our evaluators mark it as redundant while human experts do not. This disagreement highlights inefficiencies in agent code generation, which is common among coding agents (Horikawa et al. , 2025 ; Azeem et al. , 2025 ) . The high rated quality on this evaluation also supports that the evaluation is reasonable."
+    },
+    {
+      "index": 55,
+      "text": "Generalizability metrics also show disagreement. For method generalizability ( GT3 ), humans and evaluators differ on what counts as a new method. For model generalizability ( GT1 ), disagreement arises from evaluation depth. Due to different model sizes, evaluation sometimes only assess high-level generalization. For example, the evaluation may simply check whether the function of early layers transfers to a new model, which human experts consider insufficient to demonstrate true generalization. Therefore, their rated quality falls mostly into Agree category."
+    },
+    {
+      "index": 56,
+      "text": "Efficiency comparison. In terms of efficiency, to perform agreement evaluation, we asked human judges to use the exact same checklists and instructions as the agents to assess the research, including reproducing the repository and testing generalizability. They spent an average of 2.2 hours per evaluation task, with evaluations of human-written repositories often exceeding 3.35 hours, as shown in Table 4 .\nIn contrast, MechEvalAgent typically completes evaluations in under 30 minutes for agent generated tasks and around one hour for human-written repositories."
+    },
+    {
+      "index": 57,
+      "text": "Overall, MechEvalAgent raises the floor of evaluation quality by efficiently surfacing issues that humans may overlook, while human expertise remains valuable for catching edge cases that automated evaluation misses."
+    },
+    {
+      "index": 58,
+      "text": "## 5 Related Work\n\nAgents for Autonomous Research. LLM-based agents now automate research across multiple stages. Some focus on ideation and hypothesis generation (Zhou et al. , 2024 ; Baek et al. , 2025 ; Gottweis et al. , 2025 ) , others on execution-grounded discovery through iterative code and environment feedback (Novikov et al. , 2025 ; Jiang et al. , 2025 ) . End-to-end systems close the loop from ideation to experimentation and writing, producing papers and repositories with code (Lu et al. , 2024 ; Yamada et al. , 2025 ; Schmidgall et al. , 2025 ; Ifargan et al. , 2025 ; Jansen et al. , 2025 ) . However, these systems produce heterogeneous outputs, complicating comparison. Our work standardizes research agent outputs into a unified trace that enables evaluation beyond narrative review alone."
+    },
+    {
+      "index": 59,
+      "text": "Evaluating Research. Recent efforts evaluate research agents along different dimensions. LLM-based peer review assesses paper narratives: Liang et al. ( 2024 ) found GPT-4 reviews overlap with human reviews at rates comparable to inter-reviewer agreement, and Zhuang et al. ( 2025 ) survey LLM capabilities for checklist verification and error detection. However, these approaches treat code as readable but not executable. Benchmarks have begun addressing this gap: ResearchRubrics (Sharma et al. , 2025b ) and DeepResearch Bench (Du et al. , 2025 ) assess long-form written outputs, while Exp-Bench (Kon et al. , 2025 ) extends evaluation to code execution and experimental correctness. Other efforts benchmark ideation and hypothesis generation (Guo et al. , 2025 ; Liu et al. , 2025 ) . While these approaches advance grounded evaluation, they largely focus on reproducing a given experiment, with only access to the paper, which is unfair replication tasks. Our execution-grounded assessment framework is the first framework to evaluate this external validity, while also verifying that conclusions are grounded in actual execution rather than narrative alone."
+    },
+    {
+      "index": 60,
+      "text": "## 6 Concluding Discussion\n\nOur work aims to verify the science beyond reviewing the paper.\nTo do that, we propose a novel evaluation framework consisting of coherence, reproducibility, and generalizability.\nWe further develops MechEvalAgent and uses mechanistic interpretability as a testbed to compare agent-based evaluation with human evaluation.\nOur approach achieves above 80% agreement with human experts while surfacing 51 additional issues that humans miss.\nOur results demonstrate that AI agents can raise the floor of evaluating scientific research by exposing concrete, execution-grounded issues that humans often overlook."
+    },
+    {
+      "index": 61,
+      "text": "From Narrative to Execution. We advocate a shift from narrative-alone review toward integrating execution-grounded evaluation into research assessment to improve rigor and reliability in scientific research.\nExecution is crucial for research evaluation, yet reviewers often skip it due to time constraints and incomplete replication instructions. Our results point toward a natural division of labor. Human reviewers excel at judging novelty, contribution, and framing, areas where AI is 10 times less likely to comment (Liang et al. , 2024 ) . The 20 issues identified exclusively by humans in our study involve interpretation and scope judgments requiring broader context. Automated evaluation, by contrast, excels at execution-heavy checks that humans skip under deadline pressure: verifying that code runs, that outputs match claims, and that results replicate. These are precisely the areas where MechEvalAgent surfaces issues that humans miss."
+    },
+    {
+      "index": 62,
+      "text": "Passing MechEvalAgent does not guarantee high quality, but failing it highlights concrete, actionable weaknesses. Moreover, MechEvalAgent pinpoints what needs revision and provide specific, execution-grounded rationales, while\nhuman judges often give general rationales like \u201cinsufficiently justified\u201d.\nThis aligns with BaHammam ( 2025 ) , who argue that AI should support human editors by catching basic errors before external review."
+    },
+    {
+      "index": 63,
+      "text": "Beyond evaluation, MechEvalAgent \u2019s feedback can help identify hallucinations in research agents and improve their reliability. As discussed in Section 4.2 , research agents often report positive results despite weak evidence and exploit ambiguity to make their outputs appear successful. Execution-grounded evaluation catches these issues early, before they propagate into published claims."
+    },
+    {
+      "index": 64,
+      "text": "In short, we call for continued efforts to build evaluation frameworks that integrate narrative review with execution-grounded checks, moving research assessment toward verifying the science itself rather than just the story."
+    },
+    {
+      "index": 65,
+      "text": "Challenges in Agent-Based Evaluation. To proceed, we note three particular challenges. First, binary checklists can be brittle when evidence is mixed. They force hard decisions where graded judgments would better reflect uncertainty, making outcomes sensitive to borderline cases and underspecified scenarios. Because research is highly open-ended, this underspecified space may be larger than in other domains.\nSecond, we observe occasional optimistic behavior in ambiguous settings. In early runs, the evaluation agent sometimes modifies source files to justify a PASS despite prompts forbidding edits, or downplays negative evidence under underspecified failure handling. Although introducing stricter prompts nearly mitigates these issues, they highlight the need for caution in agent-based evaluation. More broadly, evaluation agents may default to neutral or positive judgments when interpretation is unclear. Binary checklists expose this tendency by forcing categorical decisions, motivating clearer guidance for handling uncertainty in automated evaluation.\nThe third challenge arises from limited instruction-following ability. As noted above, even when we explicitly forbid modifications to source files, the agent sometimes still makes changes. When evaluating code quality, the model is instructed to copy and re-run the exact code, yet it occasionally executes specific functions instead or silently alters the copied code. A related issue arises in metric definitions. For example, although the prompt clearly states that fixing a previous error should not count as redundancy, the model sometimes marks such cases as redundant, even when its own rationale acknowledges the change fixes an earlier error. These behaviors highlight limitations in instruction following that remain a challenge for coding agents. Despite these challenges, MechEvalAgent achieves above 80% agreement with human evaluators, demonstrating the viability of automated research evaluation. We encourage continued efforts to improve instruction following and uncertainty handling in evaluation agents."
+    },
+    {
+      "index": 66,
+      "text": "Limitations. Our current implementation uses Claude Code as the sole evaluation agent. While our results demonstrate strong alignment with human judgment, future work could explore ensembles of different models to further improve robustness. Additionally, due to resource constraints, each repository was reviewed by a single human expert rather than multiple independent reviewers, and human evaluation was conducted on the first evaluation run rather than all three runs. Despite these constraints, the high agreement between our pipeline and human experts suggests that our findings are reliable, and we expect that additional human reviewers would further validate the patterns we observe."
+    },
+    {
+      "index": 67,
+      "text": "## Acknowledgements\n\nWe gratefully thank Yonatan Belinkov, Tal Haklay, Austin Kozlowski, and Tamar Rott Shaham for fruitful discussions. We also thank Modal for generously providing computing credits."
+    },
+    {
+      "index": 68,
+      "text": "## Impact Statement\n\nOur work proposes a new evaluation framework that combines narrative review with execution-grounded checks to make research evaluation more rigorous. More broadly, our work aims to advance research evaluation toward more scalable and automated processes. This effort is not limited to machine learning and can be generalized to other fields. This research does not present specific ethical concerns or societal implications beyond those."
+    },
+    {
+      "index": 69,
+      "text": "## Appendix A Design and Experiment Setup Details\n\nIn this section, we further discuss the details about the three dimensions we pick: coherence, reproducibility, and generalizability. Then, we provide the details of the items in the checklist and the tasks we pick."
+    },
+    {
+      "index": 70,
+      "text": "### A.1 Design Details\n\nThis appendix provides additional details for the three evaluation dimensions used in MechEvalAgent . The main paper presents a concise overview in Section 2 ."
+    },
+    {
+      "index": 71,
+      "text": "Coherence. Coherence evaluation includes consistency evaluation and instruction following evaluation. Consistency evaluation checks whether the agent\u2019s implementation, results, and conclusions match one another. It tests hallucinated findings by verifying that the implementation adheres to the stated plan, runs successfully, and produces the outputs referenced in the documentation. It also checks effect size, justification, and statistical significance. Together, these checks ensure that the reasoning chain from plan to code to analysis is logically sound and grounded in executable evidence.\nBesides, we also evaluate instruction following . This step assesses whether the agent performed the intended experiment. MechEvalAgent has extra access to human input prompts to check whether it pursues the specified hypotheses, respects constraints, and follows the prescribed setup."
+    },
+    {
+      "index": 72,
+      "text": "Reproducibility. We evaluate two aspects of reproducibility: execution quality and replication quality . For execution quality, we check code runnability. However, runnable code is necessary but not sufficient for reproducibility, as it may still produce incorrect results due to over-claiming or hallucination."
+    },
+    {
+      "index": 73,
+      "text": "For replication quality, we test whether the same model, in a fresh session and without access to the original report, can reproduce the reported results. This mirrors standard scientific practice, where reproducibility is established by independently re-running experiments (Errington et al. , 2021 ; Lazic, 2025 ; Camerer et al. , 2018 ) . We forbid access to the report to prevent implicit hallucination, where the model might copy conclusions regardless of actual results or reverse-engineer the replication from reported findings. The plan and implementation should contain all information needed to replicate. A separate replicator evaluator then verifies whether the same conclusions are reached. To further guard against hallucination, we check for references to external sources or reliance on memorized information not present in the repository. Successful replication provides stronger evidence than runnability alone, indicating that the experiment was well-specified, sufficiently documented, and free of hidden dependencies."
+    },
+    {
+      "index": 74,
+      "text": "Generalization. In this stage, the agent reads the research repository and evaluates whether the reported findings generalize beyond the original setting, such as to a new model, new data instances, or related tasks. The agent is allowed up to three trials to identify suitable alternative models or data. This constraint prevents unbounded search while still giving the agent enough flexibility to explore and produce stable, informative feedback."
+    },
+    {
+      "index": 75,
+      "text": "### A.2 Experiment Setup Details.\n\nChecklist. Across all settings, we use structured binary checklists to evaluate coherence, reproducibility, and generalizability, as shown in Table 2 .\nEach evaluator produces checklist-level judgments with concise rationales, along with a more detailed analysis report. The evaluation process, including execution and logs, is stored in a Jupyter notebook. Then it will generate a separate json file to summarize the results and the rationale. An example MechEvalAgent output of consistency evaluation on ioi task is shown below:"
+    },
+    {
+      "index": 76,
+      "text": "\"Checklist\": {\n    \"CS1_Results_vs_Conclusion\": \"FAIL\",\n    \"CS2_Plan_vs_Implementation\": \"PASS\",\n    \"CS3_Effect_Size\": \"FAIL\",\n    \"CS4_Justification\": \"FAIL\",\n    \"CS5_Statistical_Significance\": \"FAIL\"\n  },\n  \"Rationale\": {\n    \"CS1_Results_vs_Conclusion\": \"The documentation claims the circuit\n      \u2019strongly supports\u2019 the hypothesis, but the actual circuit\n      verification shows negative performance (-4.2% of baseline).\",\n    \"CS2_Plan_vs_Implementation\": \"All five steps in the plan were\n      implemented. While verification results were poor, the plan\n      steps were executed as specified.\",\n    \"CS3_Effect_Size\": \"The circuit verification shows -4.2% performance\n      retention, meaning the circuit performs worse than random.\",\n    \"CS4_Justification\": \"Multiple key choices lack justification:\n      attention thresholds are arbitrary; the \u2019strongly supports\u2019\n      conclusion contradicts the -4.2% circuit performance.\",\n    \"CS5_Statistical_Significance\": \"No error bars, confidence intervals,\n      or statistical tests are reported.\"\n  }"
+    },
+    {
+      "index": 77,
+      "text": "Example Input Prompt for Research Agents. Our research agent is built in Scribe and we design specific prompts to guide them through the tasks and regulate the output. In replication tasks, we give it more detailed research task, experiment setup, hypothesis to test, and possible method to use. While in open-ended tasks, we only give it the general questions and possible methodology. Here is an illustration of our input prompts. For more detailed prompts, please refer to supplementary material."
+    },
+    {
+      "index": 78,
+      "text": "You are a **senior mechanistic interpretability researcher**.\n### MODEL AND DATA ...\n### GOAL\nIdentify a **precise circuit**\na subset of attention heads and MLPsthat reproduces the models\n**sarcasm recognition behavior**.\nThe focus is on **how the model internally resolves conflict between\nliteral content and intended meaning**.\n...\n### TASK DESCRIPTION\nSentences in the sarcasm dataset typically contain **conflicting cues**\nbetween surface meaning and pragmatic intent.\nExample:...\nPhenomena of interest may include (non-exhaustive):...\n...\n### SRC_NODES, CONSTRAINTS, EXPECTED OUTPUTS, FILES TO PRODUCE,\nDOCUMENTATION REQUIREMENTS, OUTPUT SUMMARY\n..."
+    },
+    {
+      "index": 79,
+      "text": "Task Design. As we introduced in Section 3 , we design three different categories of tasks including replication tasks, open-ended question tasks, and research done by human researchers. Replication tasks request the research agent to replicate an existing work, while open-ended questions are proposed by us and have not had specific research conducted on them. The research repositories of replication and open-ended tasks are all generated by an agent. In replication tasks, our input prompt to the research agent specifies the task, the hypothesis, and possible methodology (but not limited to those) they can use. In open-ended questions, our input prompt specifies the research question we are interested in and potential methods they can use to approach the question. But the agents are required to come up with their own hypothesis and method. The details of our task choices are shown in Table 3 .\nWe provide additional details on each task category below."
+    },
+    {
+      "index": 80,
+      "text": "Replication Tasks. The replication tasks comprise ten well-established benchmarks from mechanistic interpretability literature, each with documented ground-truth circuits that enable systematic evaluation."
+    },
+    {
+      "index": 81,
+      "text": "ioi (Indirect Object Identification) (Wang et al. , 2023 ) requires predicting the indirect object in sentences with an \u201cABB\u201d pattern (e.g., \u201cWhen John and Mary went to the store, John gave a drink to\u2026\u201d \u2192 \\rightarrow \u201cMary\u201d). This task isolates a 26-head circuit with seven functional classes, including Name Mover heads and S-Inhibition heads. acronyms (Acronym prediction) (Garc\u00eda-Carrasco et al. , 2024 ) tests multi-token generation by predicting three-letter acronyms from expanded forms (e.g., \u201cChief Executive Officer\u201d \u2192 \\rightarrow \u201cCEO\u201d). greater_than (Greater-than) (Hanna et al. , 2023 ) evaluates numerical reasoning with sentences like \u201cThe war lasted from 1732 to 17\u2026\u201d where the model must predict a valid year greater than the starting year. pronoun (Gendered pronoun resolution) (Mathwin et al. , 2023 ) requires resolving pronouns using gender information (e.g., \u201cThe nurse sent the doctor a request because\u2026 [she]\u201d). copy (Copy suppression) (McDougall et al. , 2023 ) investigates a negative mechanism where attention heads attend to previous token instances to suppress repetition. induction (Induction heads) (Olsson et al. , 2022 ) represent a foundational benchmark: given \u201cA B \u2026 A\u201d, predict \u201cB\u201d. The circuit involves composition between Previous Token heads and Induction heads, demonstrating Q-K composition. modular (Modular addition) (Nanda et al. , 2023 ) requires reverse-engineering a transformer computing ( a + b ) mod p (a+b)\\mod p . The circuit employs discrete Fourier transform features and trigonometric identities, testing whether agents can identify mathematical structure. docstring (Docstring completion) (Heimersheim and Janiak, 2023 ) tests code understanding on a 4-layer attention-only transformer: given a function definition, the model predicts argument names in the docstring. balanced_bracket (Balanced bracket classification) (McDougall, 2023 ) classifies parenthesis sequences as balanced or unbalanced, testing whether agents can discover state-tracking mechanisms analogous to a counter. max_of_k (Max-of-K) (Gross et al. , 2024 ) requires predicting the maximum value from a list of integers."
+    },
+    {
+      "index": 82,
+      "text": "Open-ended Research Questions. The open-ended tasks comprise ten exploratory research questions without established ground-truth circuits, testing whether agents can formulate coherent hypotheses and conduct rigorous investigations when outcomes are uncertain. These questions span linguistic phenomena, model limitations, and abstract reasoning capabilities."
+    },
+    {
+      "index": 83,
+      "text": "sarcasm asks how sarcastic intent is represented, whether the model maintains separate representations for literal versus intended meaning, and how context modulates interpretation. multilingual explores how models handle instructions in different languages, probing whether internal processing is language-agnostic or maintains language-specific pathways. typo investigates how models map misspelled tokens to intended forms, testing whether error correction uses explicit circuits or emerges from distributional robustness. unanswerable probes how models recognize queries that cannot be answered from available context, testing for circuits that detect answerability. uncertainty asks whether dedicated circuits encode model confidence or epistemic uncertainty, distinct from prediction content. count investigates why models struggle to generate exactly n n items, exploring whether counting relies on approximate mechanisms that degrade with sequence length. inevitability tests whether GPT-2 distinguishes semantic inevitability (physical causation, e.g., \u201cShe dropped the glass. It hit the floor and\u2026\u201d) from narrative inevitability (story logic, e.g., \u201cThe detective found the final clue. The mystery was\u2026\u201d). irreversibility probes which layers encode whether events can be undone (e.g., \u201cHe closed the door\u201d vs. \u201cHe broke the vase\u201d). persona (Kozlov, 2025 ) investigates why different assigned personas converge on identical preferences, probing whether persona representations are shallow or deeply integrated. moral asks whether models separate moral valence (whether an action is wrong) from consequentialist evaluation, testing for dissociable ethical representations."
+    },
+    {
+      "index": 84,
+      "text": "Human-Written Repositories. The human-written repositories comprise ten published research projects from the mechanistic interpretability literature, enabling evaluation of our pipeline on artifacts produced through standard academic workflows rather than agent generation. These repositories vary in scope, methodology, and documentation quality, providing a realistic test of generalization."
+    },
+    {
+      "index": 85,
+      "text": "filter (Sharma et al. , 2025a ) identifies attention heads that implement general list-filtering operations across diverse tasks. universal (Universal neurons) (Gurnee et al. , 2024 ) catalogs neurons in GPT-2 that activate consistently across contexts, proposing a taxonomy of interpretable features. function_vector (Todd et al. , 2024 ) demonstrates that in-context learning can be captured by single vectors that, when added to activations, induce task performance without exemplars. rome (Meng et al. , 2022 ) locates factual associations in GPT and introduces Rank-One Model Editing for targeted knowledge modification. relation (Relation decoding) (Hernandez et al. , 2024 ) shows that transformer language models decode relational knowledge through approximately linear maps from subject representations to object predictions. erasing (Concept erasing) (Gandikota et al. , 2024 ) proposes methods for removing specific concepts from language model representations, with applications to unlearning. belief (Belief tracking) (Prakash et al. , 2025 ) investigates how language models represent characters\u2019 beliefs in theory-of-mind tasks, identifying \u201clookback\u201d mechanisms that track belief states. interpdetect (Tan et al. , 2025 ) develops interpretable signals for detecting hallucinations in retrieval-augmented generation for financial QA. leela (Chess reasoning) (Sandmann et al. , 2025 ) analyzes iterative inference in Leela Chess Zero, probing how neural networks refine position evaluations through computation. arithmetic (Vector arithmetic) (Feucht et al. , 2025 ) examines whether concept vectors support algebraic operations in both concept and token subspaces, testing compositionality of learned representations."
+    },
+    {
+      "index": 86,
+      "text": "Ablation Study Settings. Doc-Only ablation removes access to all artifacts except the final documentation or report. The evaluator cannot see the research plan, code, or execution traces. All judgments are based solely on the written narrative. Consequently, it can assess only textual coherence and reported generalization, while reproducibility is inferred from descriptions rather than verified. Since some human-written repositories include code snippets in their documentation, we also include code evaluation. Specifically, we evaluate execution quality( C1 \u2013 C4 ), consistency( CS1 \u2013 CS5 ), generalizability( GT1 \u2013 GT3 ), and replication quality( RP1 \u2013 RP3 )."
+    },
+    {
+      "index": 87,
+      "text": "No-Execution ablation provides the evaluator with the full repository, including the plan, code, walkthrough, and report, but disallows code execution. Reproducibility and generalization are evaluated based solely on written evidence. Since instruction following and consistency evaluation do not involve code execution in our original pipeline, we exclude these metrics from this ablation. Specifically, we evaluate execution quality( C1 \u2013 C4 ), generalizability( GT1 \u2013 GT3 ), and replication quality( RP1 \u2013 RP3 ). Comparing this ablation to our full pipeline isolates the value of execution-grounded evaluation, highlighting failures that cannot be detected through code inspection alone."
+    },
+    {
+      "index": 88,
+      "text": "Table 2 : Structured binary checklist. Please refer to supplementary material for the complete description for each item."
+    },
+    {
+      "index": 89,
+      "text": "Table 3 : Task suite used to evaluate research agents across replication, open-ended questions, and human-authored research."
+    },
+    {
+      "index": 90,
+      "text": "## Appendix B Detailed Results\n\nDetailed Failure Rates. Figure 8 shows the failure rate averaged across all tasks for each metric. MechEvalAgent shows high failure rates in statistical significance and execution quality. The No-Execution and Doc-Only baselines exhibit even higher failure rates, especially in generalizability and replication quality where execution is crucial. However, agreement with human judgments is low for these baselines, indicating over-assignment of failures."
+    },
+    {
+      "index": 91,
+      "text": "Figure 9 shows pass rates for each checklist item broken down by task category. Overall pass rates are similar across categories. On average, human-written repositories achieve 78.9%, replication tasks achieve 75.0%, and open-ended tasks 75.7%. Code quality metrics ( C1-C4 ) show consistently high failure rates. Statistical significance ( CS5 ) shows 100% failure rate in both replication and open-ended tasks, while human-written repositories achieve 60% pass rate. Replication tasks show relatively higher pass rates on instruction following ( TS1-TS4 ), as expected given their well-defined experimental goals. Open-ended tasks show more variation in coherence metrics, reflecting the greater ambiguity in evaluating exploratory research."
+    },
+    {
+      "index": 92,
+      "text": "(a) All Tasks\n\n(b) No Execution\n\n(c) Doc Only\n\nFigure 8 : Average failure rate of all the tasks with MechEvalAgent , Doc-only, and No-Execution. Under MechEvalAgent evaluations, statistical significance( CS5 ) achieve 80% failure rate. The failure rate in execution quality( C1-C4 ) and replicated results fidelity ( DE1 ) are high. In contrast, FAIL is over-assigned in the Doc-only and No-Execution settings, especially in generalizability."
+    },
+    {
+      "index": 93,
+      "text": "(a) All Tasks\n\n(b) Replication\n\n(c) Open-ended\n\n(d) Human-written\n\nFigure 9 : Pass rates using AND logic. (a) All 30 tasks combined. (b) Replication tasks. (c) Open-ended tasks. (d) Human-written repositories. Code quality metrics (C1-C4) and CS5 (result justification) show highest failure rates."
+    },
+    {
+      "index": 94,
+      "text": "Agreement and Rated Quality. We measure whether MechEvalAgent verdicts match human evaluations using the same checklist (agreement), and how much human experts agree with the rationales MechEvalAgent provides (rated quality). As shown in Figure 10 , MechEvalAgent achieves high agreement with human experts across all task categories: 86.4% for replication tasks, 80.5% for open-ended tasks, and 80.5% for human-written repositories. Consistency metrics ( CS1-CS5 ) show particularly strong agreement, reaching 90-100% across most categories. Reproducibility metrics ( RP1-RP3 ) also achieve high agreement rates of 90-100%. The lowest agreement occurs in C3 (Redundancy), with only 30-40% agreement across categories, and GT3 (method generalizability), which shows 30% agreement in replication tasks. Those failures are likely due to different interpretation of the checklist as we discussed in Section 4.2 .\nFigure 11 shows average rated quality of MechEvalAgent evaluations, which is above 4 (Agree) across all metrics."
+    },
+    {
+      "index": 95,
+      "text": "Beyond agreement with human evaluation, MechEvalAgent also identifies unique issues that humans miss, as discussed in Section 4.2 . On average, each project has 1.57 issues in coherence, 2.83 issues in reproducibility, and 0.17 issues in generalizability that are uniquely identified by MechEvalAgent , as shown in Figure 12 . Reproducibility is the dimension where most unique issues are found. Fewer issues are found in generalizability, primarily due to our task design. As shown in Figure 9 , all generalizability failures occur in human-written repositories. This is partially because our replication and open-ended tasks are not designed for specific architectures, whereas human-written repositories often contain demonstration code tailored to particular architectures. Additionally, passing the generalizability checklist does not guarantee that results transfer to other models or that the methodology is stable across settings, as discussed in Section 4.2 ."
+    },
+    {
+      "index": 96,
+      "text": "(a) All Tasks\n\n(b) Replication\n\n(c) Open-ended\n\n(d) Human-written\n\nFigure 10 : Agreement between MechEvalAgent and human experts. Bars show percentage of tasks where agent\u2019s evaluation matched human assessment. (a) All tasks (above 80% average). (b) Replication tasks. (c) Open-ended tasks. (d) Human-written repositories."
+    },
+    {
+      "index": 97,
+      "text": "Figure 11 : Human-rated quality on MechEvalAgent evaluations (1-5 Likert scale) on each metrics averaged across three types of tasks."
+    },
+    {
+      "index": 98,
+      "text": "Figure 12 : Average number of unique issues identified by MechEvalAgent per project, broken down by evaluation dimension. Reproducibility shows the most unique issues (2.83 per project), followed by coherence (1.57) and generalizability (0.17)."
+    },
+    {
+      "index": 99,
+      "text": "Efficiency Comparison. Table 4 shows the average evaluation time per task across different categories. Replication tasks require the shortest evaluation time (1.0 hour on average), as they have well-defined experimental setups and smaller codebases. Open-ended questions take longer (2.3 hours) due to the need to understand the hypothesis and method proposed by research agents. Human-written repositories require the most time (3.35 hours), reflecting their larger codebases, more complex documentation, and the additional effort needed to extract goals and methodology from accompanying papers."
+    },
+    {
+      "index": 100,
+      "text": "Table 4 : Average evaluation time per task by category. Human-written repositories require the longest evaluation time due to their larger codebases and more complex documentation."
+    },
+    {
+      "index": 101,
+      "text": "Stability. We run evaluation for three times for each research project. Here, we measure the stability by checking the agreement across three runs. In Figure 13 and Figure 14 , we show the proportion of perfect agreement (3 runs are the same) and one-dissent agreement (1 run is different)."
+    },
+    {
+      "index": 102,
+      "text": "Our evaluations in consistency, instruction following, generalizability, and reproduction are mostly stable, as shown in Figure 13(a) . We attribute the instability to two main factors. First, our binary checklists cannot enumerate every possible situation, particularly given the diverse input space of research artifacts, leading to inconsistent interpretations across runs. Second, we observe an interesting behavioral pattern in Claude Code, which is a reluctance to provide negative feedback. This can contribute to the instability during evaluation. The evaluation agent tends to exploit ambiguities in the checklist to assign PASS, which we discuss further in Section 6 . As discussed in Section 4.2 , different interpretations of the checklist also contribute to the instability. Despite these sources of instability, agreement with human evaluators remains high, and the instability itself serves as a useful signal, highlighting cases that warrant closer human inspection."
+    },
+    {
+      "index": 103,
+      "text": "(a) All Tasks\n\n(b) Replication\n\n(c) Open-ended\n\n(d) Human-written\n\nFigure 13 : Evaluation stability across three runs. Bars show 3/3 (perfect) vs 2/3 (one dissent) agreement. (a) All tasks combined. (b) Replication tasks. (c) Open-ended tasks. (d) Human-written repositories. Most metrics achieve over 90% perfect agreement."
+    },
+    {
+      "index": 104,
+      "text": "(a) Replication\n\n(b) Open-ended\n\n(c) Human agreement\n\nFigure 14 : Evaluation stability by repository type. Bars show 3/3 (perfect) vs 2/3 (one dissent) agreement across three runs. (a) Replication tasks. (b) Open-ended tasks. (c) Human-written repositories."
+    },
+    {
+      "index": 105,
+      "text": "To show more determined failures, we also apply majority voting to failures, where a task is marked as FAIL when there are two or more runs return FAIL. Issues identified through majority voting represent more consistent failures that persist across multiple evaluation runs.\nAs shown in Figure 15 , majority voting yields an overall higher pass rate. The most common failures remain in CS5 (statistical significance) with 80% failure rate, followed by failures in execution quality. Agreement with human judges improves to 89.4% when using majority voting."
+    },
+    {
+      "index": 106,
+      "text": "(a) Pass/Fail rates with majority voting\n\n(b) Agreement with human judges\n\nFigure 15 : Evaluation results using majority voting. (a) Pass/Fail rates per metric when using majority vote (task fails if at least 2 of 3 runs fail). (b) Agreement between majority vote results and human evaluations, achieving 89.4% overall agreement."
+    }
+  ],
+  "methods": {
+    "incremental__claude-opus-4-6": {
+      "label": "Incremental (claude-opus-4-6)",
+      "model": "anthropic/claude-opus-4-6",
+      "overall_feedback": "This paper presents a timely and well-motivated contribution\u2014an execution-grounded evaluation framework for mechanistic interpretability research that goes beyond narrative-only review by examining code, data, and reproducibility. The framing is compelling, the problem is genuine, and the demonstration that execution access surfaces 51 issues missed by human reviewers is a strong headline result. However, several significant concerns temper enthusiasm. First, the evaluation is conducted on only 30 research outputs, which is a small sample for drawing robust conclusions about agreement rates and the distribution of error types; confidence intervals and statistical significance tests are needed to substantiate the \"above 80% agreement\" claim. Second, the paper's core metric\u2014agreement with human judges\u2014is complicated by the fact that MechEvalAgent finds issues humans miss *and* misses issues humans find (20 of 87), raising questions about what the ground truth actually is and whether agreement is the right measure versus, say, precision and recall against a reconciled gold standard. Third, the choice of mechanistic interpretability as a testbed, while justified by its structured methodology, limits the demonstrated generalizability of the framework; the authors acknowledge domain-independence but provide no evidence beyond this single subfield. Fourth, the paper would benefit from more transparency about failure modes\u2014when does MechEvalAgent produce false positives, what types of issues does it systematically miss, and how sensitive are results to prompt engineering or the underlying LLM? Finally, while the introduction effectively motivates the work with reproducibility crises and agentic research workflows, the connection between AI-generated research and the evaluation framework could be developed more carefully, as evaluating AI-generated versus human-generated outputs likely presents different challenges that deserve disaggregated analysis.",
+      "comments": [
+        {
+          "id": "incremental__claude-opus-4-6_0",
+          "title": "Potentially overstated claim: '51 additional issues that human reviewers miss'",
+          "quote": "surfaces 51 additional issues that human reviewers miss",
+          "explanation": "The abstract and introduction repeatedly highlight that MechEvalAgent 'surfaces 51 additional issues that human reviewers miss.' However, from Section 3, we learn that human evaluation was conducted by only three human authors (not independent external experts), each evaluating a non-overlapping subset of outputs ('each generation evaluated by exactly one expert'). The claim that these 51 issues were 'missed' by human reviewers presupposes that the human evaluation was thorough and comprehensive enough that any issues not flagged were genuinely missed. With only a single human evaluator per task (and those evaluators being the paper's own authors, who may have varying expertise or time investment), calling these 'issues that human reviewers miss' could overstate the finding. Without inter-annotator agreement on the human side, it is difficult to distinguish between genuine human oversights and cases where the human annotator reasonably disagreed. A more careful framing would be '51 additional issues not flagged by a single human evaluator.'",
+          "comment_type": "logical",
+          "paragraph_index": 1
+        },
+        {
+          "id": "incremental__claude-opus-4-6_1",
+          "title": "AND logic for PASS inflates failure detection and complicates agreement and prevalence claims",
+          "quote": "We run each automated evaluation three times. We use AND logic for PASS (equivalent to OR logic for FAIL), where a task is marked as PASS only when all runs return PASS.",
+          "explanation": "The authors use AND logic across three runs, meaning a single FAIL in any run causes the item to be marked FAIL overall. This maximally conservative aggregation systematically increases detected failures compared to majority vote. Several headline claims are affected: (1) the '80% agreement with human judges' figure depends on this aggregation choice (majority vote yields 89.4% agreement per Appendix B, suggesting the main-text figure is deflated); (2) the 51 'additional issues' could partly be artifacts of aggressive aggregation \u2014 a stochastic evaluation agent flagging FAIL in 1 of 3 runs counts as a detected issue; (3) the >90% reproducibility failure rate and 80% coherence failure rate are under the strictest criterion. No justification is given in the main text for choosing AND over majority vote. Additionally, the asymmetry with single-annotator human evaluation (agent gets three chances to find failure, human gets one) structurally biases the comparison. The authors defer analysis to Appendix B, but main-text claims lack this caveat.",
+          "comment_type": "technical",
+          "paragraph_index": 0
+        },
+        {
+          "id": "incremental__claude-opus-4-6_2",
+          "title": "Ambiguity in '80% agreement' metric \u2014 what agreement measure is used?",
+          "quote": "MechEvalAgent achieves above 80% agreement with human experts",
+          "explanation": "The paper repeatedly claims 'above 80% agreement' but never specifies what agreement metric is used. Simple percent agreement on binary checklists can be misleadingly high, especially if most items pass (high base rate). Standard practice would report Cohen's kappa or at minimum clarify whether this is raw agreement and whether it accounts for the base rate of PASS/FAIL. Given that the paper is fundamentally about evaluation rigor, underspecifying the agreement metric is a notable gap.",
+          "comment_type": "technical",
+          "paragraph_index": 9
+        },
+        {
+          "id": "incremental__claude-opus-4-6_3",
+          "title": "Independence concern: human evaluators are the paper's own authors",
+          "quote": "Due to limited resources, we have three human authors as annotators.",
+          "explanation": "The human evaluators used to validate MechEvalAgent are the paper's own authors, who designed the checklists, built the agent, and then served as ground truth. This creates potential bias. The introduction frames the comparison as agreement with 'human experts' and 'human judges' without qualifying that these are the system's own designers. Each of the 30 outputs is evaluated by exactly one expert, so there is no inter-annotator agreement measurement among humans. The high quality ratings (4.7/5) and agreement figures could be influenced by evaluators' familiarity with the system. Using the agreement metric to then dismiss the single-reviewer limitation ('high agreement suggests findings are reliable') is circular reasoning \u2014 the metric's validity depends on the single-human baseline whose quality is in question.",
+          "comment_type": "logical",
+          "paragraph_index": 12
+        },
+        {
+          "id": "incremental__claude-opus-4-6_4",
+          "title": "NeurIPS submission growth figure implicitly attributed to AI involvement",
+          "quote": "the number of papers submitted to NeurIPS increased from 1,420 submissions to 21,575 submissions from 2013 to 2025, a 15-fold increase in submission",
+          "explanation": "The paragraph structures its argument as: agentic workflows \u2192 more outputs \u2192 more submissions, then immediately cites the NeurIPS numbers. While the authors don't explicitly claim causation, the juxtaposition could mislead a reader into thinking AI-generated submissions are a major driver of this 15-fold increase, when the growth has many other drivers including the field's overall expansion, increased global participation, and venue prestige.",
+          "comment_type": "logical",
+          "paragraph_index": 4
+        },
+        {
+          "id": "incremental__claude-opus-4-6_5",
+          "title": "Underspecified generalizability evaluation procedure",
+          "quote": "In this part, an agent reads the research repository and checks whether the reported findings generalize beyond the original setting, including to a new model, new data instances, or related tasks.",
+          "explanation": "The generalizability component's description is notably vague compared to other dimensions. The key methodological question \u2014 how does the agent actually test generalization? \u2014 is underspecified. Does it design new experiments, modify existing code, or simply check whether authors discussed generalization? The agent is 'allowed up to three trials' but there are no clear stopping/success criteria. A generalizability FAIL could stem from the original research not generalizing or from the agent's inability to set up a valid test within three tries. This conflation is acknowledged nowhere. Furthermore, the paper's claim that agent success/failure serves as 'an indirect measure of whether the original research captured generalizable insight' conflates agent capability with research quality. This matters because generalizability is arguably the most novel and ambitious component.",
+          "comment_type": "technical",
+          "paragraph_index": 22
+        },
+        {
+          "id": "incremental__claude-opus-4-6_6",
+          "title": "Ambiguous information flow between replication and verification agents",
+          "quote": "We forbid the access to report to avoid hallucination. As shown in Figure 2 , we have another agent to evaluate on the replication quality including check whether there is external reference and hallucination in replication and whether the result and the conclusion matches with the original ones.",
+          "explanation": "The authors state they 'forbid the access to report to avoid hallucination' during reproducibility evaluation. But the verification agent must check 'whether the result and the conclusion matches with the original ones,' which explicitly requires comparing replicated results against original reported results. Which agent has report access and which does not? The two-agent design and information boundaries are not clearly delineated. The verification agent's implementation is also left vague: What model does it use? What inputs does it receive? How does it check 'result fidelity'? A reader trying to replicate the framework would need more detail on this critical safeguard.",
+          "comment_type": "technical",
+          "paragraph_index": 21
+        },
+        {
+          "id": "incremental__claude-opus-4-6_7",
+          "title": "Footnote 4 is syntactically and semantically unclear",
+          "quote": "Checklist item of statistical significance is captured by top ML conference , as well as reproducibility of the main results and broader impact of the research.",
+          "explanation": "This footnote is ambiguous. 'Is captured by top ML conference' could mean 'is already required by,' 'is derived from,' or 'captures what top ML conferences assess.' The trailing clause further muddles meaning: are these additional checklist items that are also captured, or additional things that top ML conferences check? Multiple incompatible interpretations are possible.",
+          "comment_type": "logical",
+          "paragraph_index": 23
+        },
+        {
+          "id": "incremental__claude-opus-4-6_8",
+          "title": "Circular reasoning in claiming execution enables finding more execution issues",
+          "quote": "most of the additional failures are concentrated in reproducibility and generalizability, which are more time-consuming for humans to evaluate. This pattern suggests execution enables MechEvalAgent to uncover more issues, especially execution ones.",
+          "explanation": "The agent has unlimited compute time while humans averaged 2.2 hours. The 51 additional issues could partly reflect differences in effort/time allocation rather than a fundamental advantage of execution-grounded evaluation. The authors acknowledge time constraints for humans but draw a causal conclusion about execution enabling discovery without adequately distinguishing the confound of time/effort from the confound of execution access. The ablation study is the proper way to isolate execution's contribution, but this paragraph conflates two explanations.",
+          "comment_type": "logical",
+          "paragraph_index": 37
+        },
+        {
+          "id": "incremental__claude-opus-4-6_9",
+          "title": "Ambiguous directionality of replication discrepancy interpretation",
+          "quote": "though the identified circuits overlap, logit correlation metrics deviate by more than 8% from the original (Original value: 0.66, Replication value: 0.72), and this discrepancy appears across all three evaluation runs. Although the replicated results have better performance than the original, it reveals concerns in validity of the original method and the evaluation procedure.",
+          "explanation": "The actual cause identified is that the original research agent evaluated on only 20 examples while MechEvalAgent evaluated on the full dataset. This reveals a concern about the original evaluation procedure's subsetting, not necessarily about the validity of the method itself (circuit identification). The phrasing 'concerns in validity of the original method and the evaluation procedure' conflates the method with the evaluation procedure.",
+          "comment_type": "logical",
+          "paragraph_index": 45
+        },
+        {
+          "id": "incremental__claude-opus-4-6_10",
+          "title": "Percentages in Figure 5 description have unclear denominators",
+          "quote": "MechEvalAgent surfaces more unique issues across all dimensions: 22.6% in coherence, 55.3% in reproducibility, and 57.1% in generalizability.",
+          "explanation": "These percentages sum to 135%, which is impossible for a partition. The likely intended reading is the proportion of agent-only issues within each dimension (out of total issues in that dimension), but the denominator is never stated. A reader could misinterpret these as shares of the 51 additional issues (which should sum to 100%). Additionally, the per-project averages in Appendix B (1.57, 2.83, 0.17) would yield approximately 137 total unique agent-identified issues across 30 projects, far more than 51, suggesting different counting methods that are never reconciled.",
+          "comment_type": "technical",
+          "paragraph_index": 51
+        },
+        {
+          "id": "incremental__claude-opus-4-6_11",
+          "title": "Efficiency comparison omits computational costs and multi-run overhead",
+          "quote": "In contrast, MechEvalAgent typically completes evaluations in under 30 minutes for agent generated tasks and around one hour for human-written repositories.",
+          "explanation": "The comparison with human evaluation time (2.2 hours average) omits computational cost (API calls, GPU hours, dollar cost per evaluation), whether the 30-minute figure accounts for the three runs required by AND-logic (which would triple effective time to ~90 minutes for agent-generated tasks), and setup/environment preparation time. The comparison as stated could mislead readers about practical efficiency gains.",
+          "comment_type": "logical",
+          "paragraph_index": 56
+        },
+        {
+          "id": "incremental__claude-opus-4-6_12",
+          "title": "Human-only findings understated as 'edge cases'",
+          "quote": "Overall, MechEvalAgent raises the floor of evaluation quality by efficiently surfacing issues that humans may overlook, while human expertise remains valuable for catching edge cases that automated evaluation misses.",
+          "explanation": "The paper reports 20 issues identified exclusively by human experts (about 23% of human-identified issues). Characterizing these as 'edge cases' may be an understatement \u2014 the example given (a hallucinated support value derived from only a single subtask rather than a full average) is a serious methodological error. Elsewhere the authors more carefully describe these as involving 'interpretation and scope judgments requiring broader context.' The summary framing could mislead readers into thinking human review adds only marginal value.",
+          "comment_type": "logical",
+          "paragraph_index": 57
+        },
+        {
+          "id": "incremental__claude-opus-4-6_13",
+          "title": "Redundancy disagreement involves circular justification and potential checklist misapplication",
+          "quote": "Our checklist specifies that code adding new information should not be considered redundant. However, when the agent copies the same block repeatedly to run on different inputs instead of writing reusable functions, our evaluators mark it as redundant while human experts do not.",
+          "explanation": "The authors justify MechEvalAgent's stricter interpretation by saying 'The high rated quality on this evaluation also supports that the evaluation is reasonable,' which is circular \u2014 quality ratings and binary pass/fail outcomes are different things. The checklist definition ('code adding new information should not be considered redundant') seems to support the human interpretation, since duplicated code blocks running on different inputs arguably produce new information. The agent conflates software engineering best practices (DRY principle) with the checklist's epistemic criterion, potentially inflating failure counts. It's also unclear whether these instruction-following failures in redundancy marking were corrected before computing agreement statistics.",
+          "comment_type": "logical",
+          "paragraph_index": 54
+        },
+        {
+          "id": "incremental__claude-opus-4-6_14",
+          "title": "Anthropomorphic framing of agent behavior as 'exploiting ambiguity'",
+          "quote": "As discussed in Section 4.2 , research agents often report positive results despite weak evidence and exploit ambiguity to make their outputs appear successful.",
+          "explanation": "The word 'exploit' implies intentional adversarial behavior by the agents. The evidence likely demonstrates that agents produce insufficiently justified positive conclusions (optimistic completion patterns), not that they strategically exploit ambiguity. This framing may overstate what has been shown, which is especially notable given the paper's own emphasis on overclaiming.",
+          "comment_type": "logical",
+          "paragraph_index": 63
+        },
+        {
+          "id": "incremental__claude-opus-4-6_15",
+          "title": "Tension between 'nearly mitigates' and persistent instruction-following failures",
+          "quote": "Although introducing stricter prompts nearly mitigates these issues, they highlight the need for caution in agent-based evaluation.",
+          "explanation": "The authors state that stricter prompts 'nearly mitigate' the issue of the evaluation agent modifying source files to justify a PASS. However, in the very next paragraph, they describe the same behavior persisting: 'even when we explicitly forbid modifications to source files, the agent sometimes still makes changes.' This creates an internal inconsistency that undermines the 'nearly mitigates' claim.",
+          "comment_type": "logical",
+          "paragraph_index": 65
+        },
+        {
+          "id": "incremental__claude-opus-4-6_16",
+          "title": "Inconsistent description of CS5 checklist item across figures",
+          "quote": "Code quality metrics (C1-C4) and CS5 (result justification) show highest failure rates.",
+          "explanation": "In the Figure 9 caption, CS5 is labeled as 'result justification,' but earlier in the paper (Figure 8 discussion and Section 4.2), CS5 is consistently referred to as 'statistical significance.' The inconsistent labeling could mislead readers into thinking these are different checklist items.",
+          "comment_type": "logical",
+          "paragraph_index": 93
+        },
+        {
+          "id": "incremental__claude-opus-4-6_17",
+          "title": "Inconsistent checklist items evaluated across ablation conditions",
+          "quote": "Specifically, we evaluate execution quality( C1 \u2013 C4 ), consistency( CS1 \u2013 CS5 ), generalizability( GT1 \u2013 GT3 ), and replication quality( RP1 \u2013 RP3 ).",
+          "explanation": "Doc-Only evaluates C1\u2013C4, CS1\u2013CS5, GT1\u2013GT3, and RP1\u2013RP3, while No-Execution evaluates C1\u2013C4, GT1\u2013GT3, and RP1\u2013RP3 but excludes CS1\u2013CS5. Yet No-Execution has strictly more information (full repo access) than Doc-Only (only final documentation). The rationale for why Doc-Only can evaluate consistency metrics but No-Execution cannot is never explained. Additionally, evaluating 'execution quality' (C1\u2013C4) without access to code or execution traces in the Doc-Only condition seems contradictory. This asymmetry makes it unclear whether comparisons in Figures 6 and 8 are over compatible sets of checklist items.",
+          "comment_type": "logical",
+          "paragraph_index": 86
+        },
+        {
+          "id": "incremental__claude-opus-4-6_18",
+          "title": "All generalizability failures occurring only in human-written repositories limits diagnostic value",
+          "quote": "As shown in Figure 9 , all generalizability failures occur in human-written repositories.",
+          "explanation": "If generalizability always passes for agent-generated outputs (20 of 30 tasks), the dimension's diagnostic value for two-thirds of the benchmark is limited. This arguably should be discussed as a significant limitation rather than presented as a secondary observation, since it suggests the generalizability evaluation may not be meaningfully exercised for most tasks in the benchmark.",
+          "comment_type": "logical",
+          "paragraph_index": 95
+        },
+        {
+          "id": "incremental__claude-opus-4-6_19",
+          "title": "Inconsistency in checklist rationale: -4.2% performance 'worse than random'",
+          "quote": "CS3_Effect_Size\": \"The circuit verification shows -4.2% performance\\n      retention, meaning the circuit performs worse than random.",
+          "explanation": "The checklist rationale claims -4.2% performance retention means 'worse than random.' However, -4.2% of baseline performance means negative relative to the full model, not necessarily worse than random (which would be a separate baseline, e.g., chance-level accuracy). The main text more carefully states this as 'a -4.2% circuit performance, which contradicts the reported evidence.' The checklist rationale conflates 'negative relative to baseline' with 'worse than random,' which are distinct comparisons.",
+          "comment_type": "technical",
+          "paragraph_index": 76
+        },
+        {
+          "id": "incremental__claude-opus-4-6_20",
+          "title": "Underspecified plan extraction procedure for human-written repositories",
+          "quote": "Since these repositories often lack explicit plan files, we extract the goal, claims, and methodology from the accompanying paper to apply our pipeline in a unified manner.",
+          "explanation": "The procedure for extracting plans from human-written repositories is not specified: Is it done manually by the authors, automatically by an LLM, or via some structured protocol? The quality and faithfulness of the extracted plan directly affects the coherence evaluation (particularly CS2, plan-implementation consistency). Given that this is a methodological paper proposing a framework for others to use, this underspecification prevents reproduction of their evaluation on human-written repositories.",
+          "comment_type": "technical",
+          "paragraph_index": 26
+        },
+        {
+          "id": "incremental__claude-opus-4-6_21",
+          "title": "Ambiguity in replication task methodology: tension between instruction-following and permitted deviation",
+          "quote": "In replication tasks, our input prompt to the research agent specifies the task, the hypothesis, and possible methodology (but not limited to those) they can use.",
+          "explanation": "If the agent is free to deviate from the provided methodology, then CS2 (plan-implementation consistency) becomes ambiguous \u2014 is the agent failing to follow instructions or exercising permitted freedom? The checklist example for ioi shows CS2 as PASS based on the agent's self-generated plan rather than the original paper's methodology. This distinction is not clearly delineated, which could mislead readers about what 'replication' means in this context.",
+          "comment_type": "logical",
+          "paragraph_index": 79
+        },
+        {
+          "id": "incremental__claude-opus-4-6_22",
+          "title": "Ablation claim of ~45% agreement lacks clear derivation and conflates calibration with reliability",
+          "quote": "Both ablated evaluators agree with humans far less than the full MechEvalAgent pipeline, especially on execution dependent dimensions.",
+          "explanation": "The abstract claims removing code access or execution reduces agreement to 'about 45%,' but Section 4.1 only says ablated evaluators 'agree far less' without restating the number or showing derivation. The text adds that ablated evaluators 'tend to over-assign FAIL' (Figure 8), which is a calibration issue distinct from low agreement. The distinction between being poorly calibrated (over-assigning FAIL) and being unreliable is important but conflated, potentially misleading readers about the nature of the ablation's impact.",
+          "comment_type": "logical",
+          "paragraph_index": 40
+        },
+        {
+          "id": "incremental__claude-opus-4-6_23",
+          "title": "Stability analysis lacks directional breakdown and speculative attribution",
+          "quote": "We attribute the instability to two main factors. First, our binary checklists cannot enumerate every possible situation... Second, we observe an interesting behavioral pattern in Claude Code, which is a reluctance to provide negative feedback.",
+          "explanation": "The authors attribute instability to checklist ambiguity (causing both false PASSes and FAILs) and Claude Code's reluctance to give negative feedback (biasing toward PASS). These factors work in opposite directions, but no analysis of whether instability is directional (PASS\u2192FAIL vs. FAIL\u2192PASS flips) is provided. The attribution remains speculative. Additionally, the stability measurement itself has ambiguity: it's unclear whether reported proportions of 'perfect agreement' and 'one-dissent agreement' are cumulative or exclusive, and complete disagreement (0/3) is not discussed.",
+          "comment_type": "logical",
+          "paragraph_index": 102
+        }
+      ],
+      "cost_usd": 1.456,
+      "prompt_tokens": 119832,
+      "completion_tokens": 34275
+    },
+    "incremental__gemini-3.1-pro-preview": {
+      "label": "Incremental (gemini-3.1-pro-preview)",
+      "model": "google/gemini-3.1-pro-preview",
+      "overall_feedback": "This paper presents a highly timely, well-motivated, and novel approach to AI-assisted peer review by shifting the focus from purely narrative evaluation to \"execution-grounded\" verification of code and data. The fundamental quality of the research concept is strong, and the introduction boasts excellent clarity, logically connecting the broader reproducibility crisis and the rapid scaling of AI-generated research to a compelling, actionable solution using mechanistic interpretability as a well-justified testbed. However, the current draft suffers from careless editorial oversights, most notably the verbatim duplication of the entire contributions list at the end of the introduction, a typo in the Figure 1 caption (\"grouned\"), and anomalous footnote number formatting (e.g., \"1 1 1\"). On a more substantive academic level, the authors must ensure the subsequent Methodology section thoroughly addresses the technical feasibility, dependency management, and security of autonomously executing arbitrary code, while also strictly justifying the ambitious claim that an agent can accurately assess the \"generalizability of findings\" using a relatively small sample size of 30 research outputs.",
+      "comments": [
+        {
+          "id": "incremental__gemini-3.1-pro-preview_0",
+          "title": "Conflation of Agent Competency with Research Generalizability",
+          "quote": "Therefore, whether the agent is able to do this serves as an indirect measure of whether the original research captured generalizable insight rather than task- or model-specific patterns.",
+          "explanation": "The authors reasonably propose using an AI agent to test generalization by applying the paper's findings to new models or tasks. However, concluding that the original research lacks generalizable insight purely because the agent fails is a significant logical leap. I initially looked for a baseline establishing the agent's capability to successfully adapt code for known universal mechanisms to novel architectures. Without this, an agent's failure conflates two entirely different problems: (1) the scientific findings are genuinely brittle or overfit to the original setting, or (2) the AI agent simply lacks the coding ability, domain expertise, or logic constraints required to perfectly implement a novel zero-shot experiment. Using agent success as an 'indirect measure' of scientific truth heavily assumes the evaluator's own infallibility on unseen tasks, which remains a highly questionable claim.",
+          "comment_type": "logical",
+          "paragraph_index": 22
+        },
+        {
+          "id": "incremental__gemini-3.1-pro-preview_1",
+          "title": "Contradiction in Information Access for Reproducibility Evaluation",
+          "quote": "It asks whether the data is presented, the code is runnable and correctly implements the described computations, and whether an independent replication run can reproduce the reported results. We forbid the access to report to avoid hallucination.",
+          "explanation": "I initially assumed the reproducibility agent thoroughly audits the code step-by-step against the methodological details laid out in the paper. However, the exact next sentence explicitly forbids the agent from accessing the 'report' (the narrative text where methodology is historically detailed) to prevent hallucination. This introduces a methodological paradox: if the agent is blinded to the report, it is entirely unclear what text it is using to verify that the code 'correctly implements the described computations.' While the context indicates a secondary agent checks if the final outputs match the original claims, the specific task of verifying computational fidelity requires knowing the intended math/algorithms in the first place. Relying purely on a 'plan' or a 'walkthrough' may be insufficiently rigorous if the formal equations only exist in the report. This leaves the information flow for computational verification logically underspecified.",
+          "comment_type": "logical",
+          "paragraph_index": 21
+        },
+        {
+          "id": "incremental__gemini-3.1-pro-preview_2",
+          "title": "Lack of inter-annotator agreement and single-author baseline limits validity",
+          "quote": "Due to limited resources, we asked three human experts to evaluate 30 research generations, with each generation evaluated by exactly one expert. Each expert also evaluated the quality of the automated evaluation output for a single evaluation run.",
+          "explanation": "While the authors are commendably transparent about their resource limitations resulting in the use of 'three human authors as annotators' (mentioned earlier in the text), using exactly one expert per task creates a critical methodological flaw. Because there is no overlapping test set assigned to multiple humans, it is impossible to calculate inter-annotator agreement (IAA). Without a baseline human-human agreement rate for these complex, subjective checks, the reported metric of '>80% agreement' between the agent and human evaluator is uninterpretable (e.g., if humans only agree with each other 70% of the time, an 80% agent-human agreement would be highly suspicious or indicate overfitting to a specific author's quirks). Furthermore, having the creators of the framework act as the sole judges of their own agent's output quality (providing the 1-5 ratings) introduces immense risk of confirmation bias. The claim that the system reliably aligns with 'human judges' overstates the robustness of what is fundamentally a single-author, non-blinded check without an established noise ceiling.",
+          "comment_type": "logical",
+          "paragraph_index": 32
+        },
+        {
+          "id": "incremental__gemini-3.1-pro-preview_3",
+          "title": "Mischaracterization of Agent Failures as Evaluation Advantages",
+          "quote": "human judges criticized the agent under CS4 for switching to GPT-2 Medium without justification. However, code inspection reveals an if condition that switches models only after a load failure. By executing and inspecting the code, MechEvalAgent provides a more accurate assessment. [...] Our checklist specifies that code adding new information should not be considered redundant. However, when the agent copies the same block repeatedly to run on different inputs instead of writing reusable functions, our evaluators mark it as redundant while human experts do not.",
+          "explanation": "The authors frame scenarios where MechEvalAgent disagrees with human judges as examples of the agent providing a 'more accurate assessment' or highlighting efficiencies. However, in both cases, the agent is objectively failing while the humans are correct. First, silently changing an experiment (e.g., falling back to GPT-2 Medium) due to a programmatic error without documenting it in the formal narrative is a severe methodological deviation; the human judge correctly penalized this missing justification, which the agent improperly ignored. Second, running computations on different inputs inherently generates new empirical data; by the authors' own explicitly defined checklist rule ('code adding new information should not be considered redundant'), this is not redundant. The human experts accurately followed the rubric, while the automated evaluator failed to follow its own instructions, improperly penalizing poor software design (non-DRY code). Framing these instruction-following failures as nuanced evaluation advantages undermines the rigor of the system.",
+          "comment_type": "logical",
+          "paragraph_index": 52
+        },
+        {
+          "id": "incremental__gemini-3.1-pro-preview_4",
+          "title": "Contradictory Claims Regarding File Access Restrictions and Source Code Modifications",
+          "quote": "In early runs, the evaluation agent sometimes modifies source files to justify a PASS despite prompts forbidding edits... Although introducing stricter prompts nearly mitigates these issues... As noted above, even when we explicitly forbid modifications to source files, the agent sometimes still makes changes.",
+          "explanation": "I initially assumed the system relied primarily on prompt engineering to constrain the agent's behavior. However, carefully reviewing Section 2 ('Building MechEvalAgent') reveals that the authors explicitly claim they 'enforce strict file access restrictions... to ensure no unintended modifications occur.' This creates a major logical and methodological contradiction. If strict hardware or OS-level file access restrictions (e.g., read-only permissions) are genuinely enforced, the agent would be physically unable to modify source files regardless of its instruction-following capabilities. The fact that 'stricter prompts nearly mitigates these issues' and the agent 'sometimes still makes changes' strongly implies that systemic file restrictions are either absent or failing. The authors must clarify whether they implemented actual read-only sandboxing or merely relied on prompt instructions.",
+          "comment_type": "logical",
+          "paragraph_index": 65
+        },
+        {
+          "id": "incremental__gemini-3.1-pro-preview_5",
+          "title": "Mismatch between IOI task pattern and provided example",
+          "quote": "sentences with an \u201cABB\u201d pattern (e.g., \u201cWhen John and Mary went to the store, John gave a drink to\u2026\u201d \u2192 \\rightarrow \u201cMary\u201d)",
+          "explanation": "I noticed a contradiction between the named sentence pattern and the text of the provided example for the Indirect Object Identification (IOI) task. The text states the task uses an \"ABB\" pattern. However, in the example \"When John and Mary went to the store, John...\", the sequence of names is John (A), Mary (B), and John (A), which clearly forms an \"ABA\" pattern. In the standard IOI benchmark literature, \"ABA\" denotes sentences where the first name is repeated as the subject of the second clause, while \"ABB\" denotes sentences where the second name is repeated (e.g., \"...John and Mary... Mary...\"). The text mischaracterizes its own perfectly valid ABA example as an ABB pattern.",
+          "comment_type": "technical",
+          "paragraph_index": 81
+        },
+        {
+          "id": "incremental__gemini-3.1-pro-preview_6",
+          "title": "Contradiction in open-ended task definition regarding prior research",
+          "quote": "open-ended questions are proposed by us and have not had specific research conducted on them. [...] persona (Kozlov, 2025 ) investigates why different assigned personas converge on identical preferences, probing whether persona representations are shallow or deeply integrated.",
+          "explanation": "I initially understood that the open-ended tasks were novel questions that lacked prior specific research, as explicitly defined by the authors. However, in the list of open-ended tasks, the \"persona\" task includes a citation (Kozlov, 2025) and is described as \"investigating\" and \"probing whether persona representations are shallow or deeply integrated.\" This description strongly implies that Kozlov (2025) has already conducted specific mechanistic interpretability research on this exact question. If prior research has investigated the internal representations of this phenomenon, it directly contradicts the categorical claim that these questions \"have not had specific research conducted on them.\" Conversely, if Kozlov (2025) merely introduces a behavioral dataset, the use of \"investigates\" and \"probing\" misrepresents the cited work's actual contribution.",
+          "comment_type": "logical",
+          "paragraph_index": 79
+        },
+        {
+          "id": "incremental__gemini-3.1-pro-preview_7",
+          "title": "Numerical inconsistency in uniquely identified issues",
+          "quote": "On average, each project has 1.57 issues in coherence, 2.83 issues in reproducibility, and 0.17 issues in generalizability that are uniquely identified by MechEvalAgent , as shown in Figure 12 .",
+          "explanation": "The text claims an average of 1.57 + 2.83 + 0.17 = 4.57 uniquely identified issues per project. Because the task suite consists of exactly 30 projects (10 of each category, per the experiment setup), this amounts to approximately 137 total unique issues surfaced by the agent (4.57 * 30). However, the earlier Section 4.1 context explicitly claims that MechEvalAgent captues human failures and 'surfaces 51 additional issues' in total. The numbers 137 and 51 contradict each other significantly, undermining the main quantitative claims about the agent's advantage over human reviewers.",
+          "comment_type": "technical",
+          "paragraph_index": 95
+        },
+        {
+          "id": "incremental__gemini-3.1-pro-preview_8",
+          "title": "Methodological and Logical Flaws in Consistency Evaluation Across Ablations",
+          "quote": "Doc-Only ablation removes access to all artifacts except the final documentation or report. The evaluator cannot see the research plan, code, or execution traces. [...] Specifically, we evaluate execution quality( C1 \u2013 C4 ), consistency( CS1 \u2013 CS5 ), generalizability( GT1 \u2013 GT3 ), and replication quality( RP1 \u2013 RP3 ). [...] Since instruction following and consistency evaluation do not involve code execution in our original pipeline, we exclude these metrics from this [No-Execution] ablation.",
+          "explanation": "The authors' handling of consistency metrics across their ablation studies introduces major logical and methodological flaws. First, the 'Doc-Only' baseline is explicitly forbidden from accessing the research plan and code, making it logically impossible to evaluate 'plan-implementation consistency (CS2)'. Claiming it evaluates CS1-CS5 contradicts its own access restrictions. Second, the 'No-Execution' baseline excludes consistency metrics entirely because they 'do not involve code execution.' This creates a fundamental incomparability by arbitrarily changing the denominator for aggregate metrics (like 'Average failure rate'), rendering broad baseline comparisons invalid. Furthermore, it creates an irreconcilable contradiction: the strictly less capable 'Doc-Only' baseline somehow evaluates consistency without codes/plans, but the fully equipped 'No-Execution' baseline inexplicably drops it.",
+          "comment_type": "logical",
+          "paragraph_index": 86
+        },
+        {
+          "id": "incremental__gemini-3.1-pro-preview_9",
+          "title": "Ambiguous Actor in Evaluation Timings",
+          "quote": "Table 4 shows the average evaluation time per task across different categories. Replication tasks require the shortest evaluation time (1.0 hour on average)... Open-ended questions take longer (2.3 hours)... Human-written repositories require the most time (3.35 hours)",
+          "explanation": "The text presents these timings (averaging over 2 hours, and peaking at 3.35 hours) unqualified as the 'average evaluation time per task'. Based on the context summary, we know these are the times it took *human experts* to run the evaluation, whereas the proposed MechEvalAgent pipeline only takes <30 minutes to 1 hour. By failing to specify that these are human timings in this section, a reader could reasonably misinterpret these as the execution times of the new automated system, entirely obscuring its efficiency benefits.",
+          "comment_type": "logical",
+          "paragraph_index": 99
+        },
+        {
+          "id": "incremental__gemini-3.1-pro-preview_10",
+          "title": "Redundant Figures and Inconsistent Subfigure Label",
+          "quote": "Figure 13 : Evaluation stability across three runs. Bars show 3/3 (perfect) vs 2/3 (one dissent) agreement. (a) All tasks combined. (b) Replication tasks. (c) Open-ended tasks. (d) Human-written repositories.\n\n(a) Replication\n\n(b) Open-ended\n\n(c) Human agreement\n\nFigure 14 : Evaluation stability by repository type. Bars show 3/3 (perfect) vs 2/3 (one dissent) agreement across three runs. (a) Replication tasks. (b) Open-ended tasks. (c) Human-written repositories.",
+          "explanation": "Figure 14 appears to present the exact same sub-group analysis data already shown in Figure 13(b, c, d), breaking out the same '3/3 vs 2/3 agreement' metric for the exact same three task categories. Furthermore, there is an internal inconsistency in the labeling of Figure 14(c): the inline label calls it 'Human agreement', but the caption immediately below it corrects this to 'Human-written repositories'. This strongly points to a residual draft error where a redundant, inconsistently labeled figure was left in the manuscript.",
+          "comment_type": "logical",
+          "paragraph_index": 103
+        }
+      ],
+      "cost_usd": 1.2894,
+      "prompt_tokens": 99343,
+      "completion_tokens": 90895
+    }
+  }
+}

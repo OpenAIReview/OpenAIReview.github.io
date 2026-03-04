@@ -1,0 +1,340 @@
+{
+  "slug": "smoothing-shifts-pdf",
+  "title": "1 Smooth shifts of the $\\Phi_3^4$ measure on $\\mathbb{T}^3$",
+  "paragraphs": [
+    {
+      "index": 0,
+      "text": "# 1 Smooth shifts of the $\\Phi_3^4$ measure on $\\mathbb{T}^3$\n\n## Problem\n\nLet  $\\mathbb{T}^3$  be the three dimensional unit size torus and let  $\\mu$  be the  $\\Phi_3^4$  measure on the space of distributions  $\\mathcal{D}'(\\mathbb{T}^3)$ . Let  $\\psi: \\mathbb{T}^3 \\to \\mathbb{R}$  be a smooth function that is not identically zero and let  $T_{\\psi}: \\mathcal{D}'(\\mathbb{T}^3) \\to \\mathcal{D}'(\\mathbb{T}^3)$  be the shift map given by  $T_{\\psi}(u) = u + \\psi$  (with the usual identification of smooth functions as distributions). Are the measures  $\\mu$  and  $T_{\\psi}^*\\mu$  equivalent? Here, equivalence of measures is in the sense of having the same null sets and  $T_{\\psi}^*$  denotes the pushforward under  $T_{\\psi}$ ."
+    },
+    {
+      "index": 1,
+      "text": "#### Solution\n\nWe separate the Gaussian case  $\\lambda = 0$  from the interacting case  $\\lambda \\neq 0$ . We use the notation  $T_{\\psi}^*\\mu$  for the image (push\u2013forward) of a measure by the shift, that is  $(T_{\\psi}^*\\mu)(A) = \\mu(T_{\\psi}^{-1}A)$  for Borel sets  $A \\subset \\mathcal{D}'(\\mathbb{T}^3)$ . Throughout, equivalence means having the same null sets and  $\\mu \\perp \\nu$  denotes mutual singularity."
+    },
+    {
+      "index": 2,
+      "text": "#### 1. Gaussian case $\\lambda = 0$\n\nWhen  $\\lambda = 0$ ,  $\\mu = \\mu_0$  is the (massive) Gaussian free field (GFF) on  $\\mathbb{T}^3$  with covariance  $(m^2 - \\Delta)^{-1}$ . In the massless case m = 0, one typically works with the pinned/mean-zero GFF on the closed subspace  $\\{u : \\langle u, 1 \\rangle = 0\\}$ ."
+    },
+    {
+      "index": 3,
+      "text": "By the Cameron\u2013Martin theorem,  $T_{\\psi}^*\\mu_0$  is equivalent to  $\\mu_0$  if and only if  $\\psi$  lies in the Cameron\u2013Martin space:  $\\psi \\in H^1(\\mathbb{T}^3)$  in the massive case, and  $\\psi \\in H^1(\\mathbb{T}^3)$  with  $\\int_{\\mathbb{T}^3} \\psi = 0$  in the pinned massless case. In particular, for m > 0 every  $\\psi \\in C^{\\infty}(\\mathbb{T}^3)$  yields equivalence. If  $\\psi$  lies outside the Cameron\u2013Martin space, then  $\\mu_0$  and  $T_{\\psi}^*\\mu_0$  are mutually singular."
+    },
+    {
+      "index": 4,
+      "text": "## 2. Interacting case $\\lambda \\neq 0$ : singularity under every nonzero smooth shift\n\nAssume henceforth  $\\lambda \\neq 0$  and fix  $\\psi \\in C^{\\infty}(\\mathbb{T}^3)$ ,  $\\psi \\not\\equiv 0$ . We implicitly restrict to the physical/stable range of couplings for which the Euclidean  $\\Phi_3^4$  measure is known to exist (with the usual stochastic\u2013quantisation sign convention this is  $\\lambda > 0$ ); the argument itself only uses the non\u2013vanishing of the logarithmic coefficient  $b_{\\lambda}$ ."
+    },
+    {
+      "index": 5,
+      "text": "**Pinned/mean-zero variants.** If one works with a pinned/mean-zero version of  $\\mu$  supported on  $\\{u: \\langle u, 1 \\rangle = 0\\}$  and  $\\int_{\\mathbb{T}^3} \\psi \\neq 0$ , then  $\\mu$  and  $T_{\\psi}^* \\mu$  are supported on disjoint affine subspaces, hence are singular. In the remainder we either work in the massive case, or (in the pinned case) assume  $\\int_{\\mathbb{T}^3} \\psi = 0$ ."
+    },
+    {
+      "index": 6,
+      "text": "The key point in d=3 is that the logarithmic (\"setting-sun\") mass renormalisation produces a large deterministic linear term at small scales; this term is what ultimately separates  $\\mu$  from its smooth shifts. The argument below uses only mollified fields at super-exponentially small scales, together with standard renormalised model convergence results from regularity structures (or paracontrolled calculus) for the dynamical  $\\Phi_3^4$  model. Crucially, we do not assume that there exists a time-zero \"renormalised cube\" as a random distribution under  $\\mu$  (in fact, this is precisely what fails in d=3; see [2] for an \"infinitesimal\" manifestation)."
+    },
+    {
+      "index": 7,
+      "text": "## 2.1. Mollifiers and super-exponential scales\n\nFix  $\\varrho \\in C_c^{\\infty}(\\mathbb{R}^3)$ ,  $\\varrho \\geq 0$ ,  $\\int_{\\mathbb{R}^3} \\varrho = 1$ , and extend it periodically to  $\\mathbb{T}^3$ . For  $\\varepsilon \\in (0,1)$  define  $\\varrho_{\\varepsilon}(x) := \\varepsilon^{-3}\\varrho(x/\\varepsilon)$  and, for  $w \\in \\mathcal{D}'(\\mathbb{T}^3)$ ,"
+    },
+    {
+      "index": 8,
+      "text": "$$w_{\\varepsilon} := w * \\varrho_{\\varepsilon} \\in C^{\\infty}(\\mathbb{T}^3).$$\n\nLet\n\n$$\\varepsilon_n := \\exp(-e^n), \\quad n \\ge 1, \\quad \\text{and write} \\quad w_n := w_{\\varepsilon_n}.$$"
+    },
+    {
+      "index": 9,
+      "text": "Then  $\\varepsilon_n^{-1} = e^{e^n}$  and  $\\log(\\varepsilon_n^{-1}) = e^n$ .\n\n## **2.2.** The renormalisation constants a and $b_{\\lambda}$"
+    },
+    {
+      "index": 10,
+      "text": "In dimension 3, renormalisation for the dynamical  $\\Phi_3^4$  equation involves two divergent counterterms:"
+    },
+    {
+      "index": 11,
+      "text": "- a Wick (tadpole) constant  $C_1(\\varepsilon) \\sim c_1 \\varepsilon^{-1}$ ,\n- a logarithmic (setting-sun) mass constant  $C_2(\\varepsilon) \\sim c_2 \\log(\\varepsilon^{-1})$ ."
+    },
+    {
+      "index": 12,
+      "text": "For the usual stochastic-quantisation normalisation at coupling  $\\lambda$ , the logarithmic counterterm enters the drift with a factor proportional to  $\\lambda^2$ , hence is nonzero for  $\\lambda \\neq 0$  (see e.g. [6, \u00a710] and the BPHZ description [4])."
+    },
+    {
+      "index": 13,
+      "text": "For our purposes we fix deterministic constants a > 0 and  $b_{\\lambda} \\neq 0$  such that, as  $\\varepsilon \\downarrow 0$ ,"
+    },
+    {
+      "index": 14,
+      "text": "$$C_1(\\varepsilon) = a \\varepsilon^{-1} + O(1), \\qquad \\lambda^2 C_2(\\varepsilon) = b_\\lambda \\log(\\varepsilon^{-1}) + O(1),$$"
+    },
+    {
+      "index": 15,
+      "text": "where  $b_{\\lambda} \\neq 0$  for  $\\lambda \\neq 0$ .\n\n## 2.3. A $(\\log)^{-\\beta}$ -normalised cubic observable"
+    },
+    {
+      "index": 16,
+      "text": "Fix any exponent\n\n$$\\beta \\in \\left(\\frac{1}{2}, 1\\right)$$\n (e.g.  $\\beta = \\frac{3}{4}$ ).\n\nFor  $w \\in \\mathcal{D}'(\\mathbb{T}^3)$  define the real random variables (measurable functions of w)"
+    },
+    {
+      "index": 17,
+      "text": "<span id=\"page-1-0\"></span>\n$$Y_n(w) := e^{-\\beta n} \\langle w_n^3 - 3a e^{e^n} w_n - 9b_{\\lambda} e^n w, \\psi \\rangle.$$\n (1)"
+    },
+    {
+      "index": 18,
+      "text": "(Here  $\\langle \\cdot, \\cdot \\rangle$  denotes the distributional pairing, extending the  $L^2$  inner product.)"
+    },
+    {
+      "index": 19,
+      "text": "The next proposition is the precise substitute for the \"renormalised cube exists at time zero\" claim: one does not get a convergent cubic random distribution, but one does get enough control to deduce that  $Y_n(u) \\to 0$  in probability for  $u \\sim \\mu$  when  $\\beta > \\frac{1}{2}$ ."
+    },
+    {
+      "index": 20,
+      "text": "<span id=\"page-1-1\"></span>**Proposition 1.1** (Renormalised cubic at fixed time). Let  $\\mu$  be the  $\\Phi_3^4$  measure on  $\\mathbb{T}^3$  with  $\\lambda \\neq 0$ , realised as the time-marginal of a stationary solution to the renormalised stochastic quantisation equation (see [6, 7, 5, 1]). Let  $u \\sim \\mu$  and define  $u_n = u * \\varrho_{\\varepsilon_n}$  as above. Then there exist random distributions  $\\Theta_n \\in \\mathcal{D}'(\\mathbb{T}^3)$  and a random distribution  $R \\in \\mathcal{D}'(\\mathbb{T}^3)$  such that:"
+    },
+    {
+      "index": 21,
+      "text": "(i) (Convergent remainder) One has\n\n$$u_n^3 - 3a e^{e^n} u_n - 9b_\\lambda e^n u - \\Theta_n \\longrightarrow R$$\n in probability in  $\\mathcal{C}^{-3/2-\\kappa}(\\mathbb{T}^3)$"
+    },
+    {
+      "index": 22,
+      "text": "for every  $\\kappa > 0$ .\n\n(ii) (Variance blowup is only logarithmic) For every  $f \\in C^{\\infty}(\\mathbb{T}^3)$  there exists  $C_f < \\infty$  such that"
+    },
+    {
+      "index": 23,
+      "text": "$$\\mathbb{E}\\Big[\\left|\\langle\\Theta_n, f\\rangle\\right|^2\\Big] \\leq C_f e^n \\quad \\text{for all } n \\geq 1.$$"
+    },
+    {
+      "index": 24,
+      "text": "*Proof.* This statement is not a new estimate. It is a convenient repackaging of standard fixed\u2014time estimates for the dynamical  $\\Phi_3^4$  model which are scattered in the literature. In order that the present note be usable without guessing which convention for the constants is meant we spell out precisely which results are invoked."
+    },
+    {
+      "index": 25,
+      "text": "We use the following three inputs.\n\n(a) Let X denote the stationary solution of the linear equation  $(\\partial_t + m^2 - \\Delta)X = \\xi$  on  $\\mathbb{R} \\times \\mathbb{T}^3$ . The Wick powers of X and the additional stochastic diagrams entering the Da\u2013Prato\u2013Debussche/regularity\u2013structure expansion of  $\\Phi_3^4$  were constructed with sharp moment bounds, for arbitrary mollifiers, in Mourrat\u2013Weber\u2013Xu [8, Sec. 3]. In particular the covariance estimates in that section give the following covariance bound for the only diagram of homogeneity -3/2 (the \"setting\u2013sun\" diagram). If  $\\widetilde{\\Theta}_{\\varepsilon}$  denotes this diagram mollified at scale  $\\varepsilon$ , then for every smooth f"
+    },
+    {
+      "index": 26,
+      "text": "<span id=\"page-2-0\"></span> $\\mathbb{E} \\left| \\langle \\widetilde{\\Theta}_{\\varepsilon}, f \\rangle \\right|^2 \\le C_f \\left( 1 + \\log \\varepsilon^{-1} \\right). \\tag{2}$"
+    },
+    {
+      "index": 27,
+      "text": "For the reader who wants to see the elementary estimate behind (2) we recall it at the end of the proof."
+    },
+    {
+      "index": 28,
+      "text": "(b) The identification of the nonlinear solution with a finite sum of these stochastic diagrams plus a regular remainder, uniformly for stationary initial data, is proved for the dynamical  $\\Phi_3^4$  equation in either of the two equivalent frameworks: see Hairer [6, Sec. 10] and the paracontrolled solution theory / decomposition of the dynamic  $\\Phi_3^4$  model (Mourrat\u2013Weber [7, Secs. 2\u20133]), or, in a form stated directly for the invariant measure, Gubinelli\u2013Hofmanov\u00e1 [5, Sec. 4]. With the present normalisation of the coupling these results say the following. There is a random distribution  $\\Theta_{\\varepsilon}$  which differs from the diagram  $\\Theta_{\\varepsilon}$  of (a) by a uniformly  $L^2$ \u2013bounded linear combination of more regular diagrams, and there is a random distribution R such that, for every  $\\kappa > 0$ ,"
+    },
+    {
+      "index": 29,
+      "text": "<span id=\"page-2-1\"></span>\n$$u_{\\varepsilon}^{3} - 3C_{1}(\\varepsilon)u_{\\varepsilon} - 9\\lambda^{2}C_{2}(\\varepsilon)u_{\\varepsilon} - \\Theta_{\\varepsilon} \\longrightarrow R \\quad \\text{in probability in } \\mathcal{C}^{-3/2-\\kappa}.$$\n (3)"
+    },
+    {
+      "index": 30,
+      "text": "(The factor 9 is the usual combinatorial coefficient of the setting\u2013sun subdiagram for the stochastic\u2013quantisation convention in which the drift is  $\\lambda u^3$ .)"
+    },
+    {
+      "index": 31,
+      "text": "(c) Finally the invariant measures constructed in Albeverio\u2013Kusuoka [1, Thm. 1.1 and Sec. 4] and in Gubinelli\u2013Hofmanov\u00e1 [5, Sec. 4.3] are precisely the laws of the stationary solutions to which (b) applies. In particular all moment estimates in (a)\u2013(b) hold with constants independent of the time at which the solution is observed."
+    },
+    {
+      "index": 32,
+      "text": "We now explain how (i)\u2013(ii) follow from these references. Put  $\\varepsilon = \\varepsilon_n$ . Since  $C_1(\\varepsilon) = a\\varepsilon^{-1} + O(1)$  and  $\\lambda^2 C_2(\\varepsilon) = b_\\lambda \\log \\varepsilon^{-1} + O(1)$ , and the finite parts hidden in the O(1) have deterministic limits for a fixed mollifier (as is clear from the explicit integral formulae in the cited references), replacing the counterterms in (3) by the leading terms changes the left\u2013hand side by a deterministic multiple of  $u_{\\varepsilon_n}$  plus a remainder tending to 0 in  $C^{-1/2-\\kappa}$ . Since  $u_{\\varepsilon_n}ou$  in the weaker spaces considered below, this contribution converges in probability to a fixed multiple of u and can simply be incorporated into the limiting random distribution R (or, equivalently, into the definition of R in (i)). The cited expansions are written with the factor  $u_{\\varepsilon}$  in the linear setting\u2013sun term whereas in (1) and in (i) we have put the limiting field u. This replacement is harmless in the topology of  $C^{-3/2-\\kappa}$ . Indeed stationary solutions of  $\\Phi_3^4$  belong almost surely to  $C^{-1/2-\\eta}$  for every  $\\eta > 0$  (one of the basic a priori estimates in the cited works), and the standard smoothing estimate for Besov/H\u00f6lder spaces on the torus gives, for  $0 < \\eta < 1/2$ ,"
+    },
+    {
+      "index": 33,
+      "text": "$$||u_{\\varepsilon} - u||_{\\mathcal{C}^{-3/2-\\kappa}} \\le C(u, \\eta, \\kappa) \\varepsilon^{1-\\eta}.$$"
+    },
+    {
+      "index": 34,
+      "text": "With our choice  $\\varepsilon = \\varepsilon_n = \\exp(-e^n)$  the factor  $e^n = \\log \\varepsilon_n^{-1}$  multiplying this difference in the setting\u2014sun term is negligible. (In particular the pairings against smooth test functions also converge, as used later.) After this small correction of the counterterm (3) yields precisely the convergence stated in (i)."
+    },
+    {
+      "index": 35,
+      "text": "It remains only to record the quantitative bound (ii). The covariance estimate (2) for  $\\widetilde{\\Theta}_{\\varepsilon}$ , together with the fact that  $\\Theta_{\\varepsilon} - \\widetilde{\\Theta}_{\\varepsilon}$  is a finite sum of more regular diagrams with uniformly bounded second moments when tested against a smooth function (again part of (a)\u2013(b)), yields"
+    },
+    {
+      "index": 36,
+      "text": "$$\\mathbb{E}\\left[|\\langle \\Theta_n, f \\rangle|^2\\right] \\le C_f \\left(1 + \\log \\varepsilon_n^{-1}\\right) \\le C_f' e^n.$$"
+    },
+    {
+      "index": 37,
+      "text": "For completeness we spell out exactly which estimate from the stochastic diagram literature is used in the preceding line. Uniform covariance estimates for all diagrams of the dynamical  $\\Phi_3^4$  model (and for arbitrary smooth mollifiers) are proved in Mourrat\u2013Weber\u2013Xu [8, Sec. 3]. Applying their power\u2013counting result to the diagram of homogeneity -3/2 yields precisely the logarithmic bound (2) when the diagram is tested against a fixed smooth function. We refer to their dyadic summation for the short analytic proof. This completes the proof of (ii) and of the proposition."
+    },
+    {
+      "index": 38,
+      "text": "<span id=\"page-3-0\"></span>**Lemma 1.2** (Convergence of the normalised observable under  $\\mu$ ). Let  $u \\sim \\mu$ . Then  $Y_n(u) \\to 0$  in probability as  $n \\to \\infty$ ."
+    },
+    {
+      "index": 39,
+      "text": "*Proof.* Write  $f = \\psi$  and decompose, using Proposition 1.1,\n\n$$Y_n(u) = e^{-\\beta n} \\langle R_n, \\psi \\rangle + e^{-\\beta n} \\langle \\Theta_n, \\psi \\rangle, \\qquad R_n := u_n^3 - 3ae^{e^n} u_n - 9b_\\lambda e^n u - \\Theta_n.$$"
+    },
+    {
+      "index": 40,
+      "text": "By Proposition 1.1(i),  $\\langle R_n, \\psi \\rangle$  converges in probability to  $\\langle R, \\psi \\rangle$ , hence is tight; multiplying by  $e^{-\\beta n} \\to 0$  gives  $e^{-\\beta n} \\langle R_n, \\psi \\rangle \\to 0$  in probability. By Proposition 1.1(ii) with  $f = \\psi$ ,"
+    },
+    {
+      "index": 41,
+      "text": "$$\\mathbb{E}\\left[|e^{-\\beta n}\\langle\\Theta_n,\\psi\\rangle|^2\\right] \\leq C_{\\psi} e^{(1-2\\beta)n} \\xrightarrow[n\\to\\infty]{} 0 \\quad \\text{since } \\beta > \\frac{1}{2},$$"
+    },
+    {
+      "index": 42,
+      "text": "hence  $e^{-\\beta n}\\langle\\Theta_n,\\psi\\rangle\\to 0$  in  $L^2$  and therefore in probability. Combining these two terms yields  $Y_n(u)\\to 0$  in probability."
+    },
+    {
+      "index": 43,
+      "text": "## 2.4. An almost sure separating set\n\nFrom Lemma 1.2, we can extract a deterministic subsequence along which  $Y_n(u) \\to 0$  almost surely. Indeed, choose  $n_k \\uparrow \\infty$  such that"
+    },
+    {
+      "index": 44,
+      "text": "$$\\mathbb{P}_{\\mu}(|Y_{n_k}(u)| > 2^{-k}) \\le 2^{-k}$$\n\nand apply Borel-Cantelli to obtain  $Y_{n_k}(u) \\to 0$   $\\mu$ -a.s. Define the measurable set"
+    },
+    {
+      "index": 45,
+      "text": "$$A := \\left\\{ w \\in \\mathcal{D}'(\\mathbb{T}^3) : \\lim_{k \\to \\infty} Y_{n_k}(w) = 0 \\right\\}.$$\n\nThen  $\\mu(A) = 1$ ."
+    },
+    {
+      "index": 46,
+      "text": "We shall allow ourselves in the next paragraph to pass, if necessary, to a further subsequence of  $(n_k)$  and to redefine A by the same formula for that refined subsequence (we keep the notation  $n_k$  and A). This causes no difficulty: every subsequence of a full\u2013measure convergence subsequence still gives a set of  $\\mu$ \u2013measure one. The refinement will be chosen so that, in addition to  $Y_{n_k}(u) \\to 0$ , the auxiliary error terms appearing in (4) below also converge to zero almost surely."
+    },
+    {
+      "index": 47,
+      "text": "## 2.5. Effect of shifting by $\\psi$\n\nLet  $v = T_{\\psi}(u) = u + \\psi$ . Then  $v_n = u_n + \\psi_n$  and"
+    },
+    {
+      "index": 48,
+      "text": "<span id=\"page-3-1\"></span>\n$$v_n^3 - 3ae^{e^n}v_n - 9b_{\\lambda}e^nv = (u_n^3 - 3ae^{e^n}u_n - 9b_{\\lambda}e^nu) + 3\\psi_n(u_n^2 - ae^{e^n}) + 3\\psi_n^2u_n + \\psi_n^3 - 9b_{\\lambda}e^n\\psi.$$"
+    },
+    {
+      "index": 49,
+      "text": "Pair with  $\\psi$  and multiply by  $e^{-\\beta n}$ :\n\n$$Y_n(v) = Y_n(u) + e^{-\\beta n} \\left\\langle 3\\psi_n \\left( u_n^2 - ae^{e^n} \\right), \\psi \\right\\rangle + e^{-\\beta n} \\left\\langle 3\\psi_n^2 u_n + \\psi_n^3, \\psi \\right\\rangle - 9b_\\lambda e^{(1-\\beta)n} \\langle \\psi, \\psi \\rangle. \\tag{4}$$"
+    },
+    {
+      "index": 50,
+      "text": "Now:\n\n- Along the subsequence  $n = n_k$  we have  $Y_{n_k}(u) \\to 0$   $\\mu$ -a.s. on A by definition.\n- The random distributions  $u_n^2 ae^{e^n}$  (the renormalised square) are tight when tested against smooth functions (this is a standard output of the  $\\Phi_3^4$  construction; see [6, 7, 5, 1]). Since  $\\psi_n \\to \\psi$  in  $C^{\\infty}$ , the scalar random variables  $\\langle 3\\psi_n(u_n^2 ae^{e^n}), \\psi \\rangle$  are tight; multiplying by  $e^{-\\beta n} \\to 0$  forces the second term in (4) to converge to 0 in probability (hence, along a further subsequence if desired,  $\\mu$ -a.s.).\n- Since  $u_n \\to u$  in  $\\mathcal{D}'$  and  $\\psi_n \\to \\psi$  in  $C^{\\infty}$ , the bracket  $\\langle 3\\psi_n^2 u_n + \\psi_n^3, \\psi \\rangle$  is tight (indeed convergent in probability), so the third term in (4) also tends to 0 in probability after multiplying by  $e^{-\\beta n}$ .\n- The last term is deterministic and diverges because  $b_{\\lambda} \\neq 0$ ,  $\\beta < 1$ , and  $\\langle \\psi, \\psi \\rangle = \\int_{\\mathbb{T}^3} \\psi(x)^2 dx > 0$ :"
+    },
+    {
+      "index": 51,
+      "text": "$$-9b_{\\lambda}e^{(1-\\beta)n}\\langle\\psi,\\psi\\rangle \\longrightarrow \\pm\\infty \\qquad (n\\to\\infty).$$"
+    },
+    {
+      "index": 52,
+      "text": "We now implement the refinement of the subsequence announced in \u00a72.4 in a completely explicit way. Since the second and the third terms in (4) converge to 0 in probability, a diagonal selection and another application of the Borel-Cantelli lemma allow us (after passing to a subsequence of the one chosen there and redefining A, without changing the notation) to find a measurable set E with  $\\mu(E) = 1$  such that, for every  $u \\in E$ , all three random terms in (4) other than the deterministic last one tend to 0 along  $n = n_k$ . For such a u the divergent deterministic contribution displayed in the last item forces  $|Y_{n_k}(u + \\psi)| \\to \\infty$  (with a sign depending on  $b_{\\lambda}$ ). In particular  $u + \\psi \\notin A$  because membership in A is defined by the condition  $Y_{n_k}(w) \\to 0$ . Thus"
+    },
+    {
+      "index": 53,
+      "text": "$$(T_{\\psi}^*\\mu)(A) = \\mu(\\{u: u + \\psi \\in A\\}) = 0,$$\n\nwhereas  $\\mu(A) = 1$ . We conclude that  $\\mu \\perp T_{ab}^* \\mu$ ."
+    },
+    {
+      "index": 54,
+      "text": "**Theorem 1.3** (Failure of quasi-invariance under smooth shifts). Let  $\\mu$  be a well-defined  $\\Phi_3^4$  measure on  $\\mathbb{T}^3$  at a non-zero coupling  $\\lambda$  (in the usual physical convention,  $\\lambda > 0$ ). Then for every nonzero  $\\psi \\in C^{\\infty}(\\mathbb{T}^3)$  one has"
+    },
+    {
+      "index": 55,
+      "text": "$$\\mu \\perp T_{\\psi}^* \\mu$$\n.\n\n(In the pinned/mean-zero setup, if  $\\int \\psi \\neq 0$  the measures are trivially singular by disjoint support; if  $\\int \\psi = 0$  the conclusion still holds.)"
+    },
+    {
+      "index": 56,
+      "text": "*Proof.* The construction of the separating set in paragraphs 2.4\u20132.5 gives the claim: the set A has full  $\\mu$ -measure whereas the shifted measure assigns it zero mass,  $(T_{ab}^*\\mu)(A) = 0$ ."
+    },
+    {
+      "index": 57,
+      "text": "Remark 1.4. For comparison we mention that the mutual singularity of the  $\\Phi_3^4$  measure with the (unshifted) Gaussian free field was proved by a different method in Barashkov\u2013Gubinelli [3]. The small\u2013scale observable used above is in the same spirit, but the present proof of non\u2013quasi\u2013invariance under smooth deterministic translations is self\u2013contained once the standard stochastic estimates quoted in Proposition 1.1 are granted."
+    },
+    {
+      "index": 58,
+      "text": "## References\n\n- <span id=\"page-4-1\"></span>[1] S. Albeverio and S. Kusuoka, The invariant measure and the flow associated to the  $\\Phi_3^4$ -quantum field model, Ann. Sc. Norm. Sup. Pisa Cl. Sci. (5) **20** (2020), no. 4, 1359\u20131427. arXiv:1711.07108.\n- <span id=\"page-4-0\"></span>[2] S. Albeverio, S. Liang, and B. Zegarlinski, Remark on the integration by parts formula for the  $\\varphi_3^4$ -quantum field model, Infin. Dimens. Anal. Quantum Probab. Relat. Top. **9** (2006), no. 1, 149\u2013154. doi:10.1142/S0219025706002275."
+    },
+    {
+      "index": 59,
+      "text": "- <span id=\"page-5-5\"></span>[3] N. Barashkov and M. Gubinelli, *The* !<sup>4</sup> <sup>3</sup> *measure via Girsanov's theorem*, Electron. J. Probab. 26 (2021), paper no. 81, 1\u201329. doi:10.1214/21-EJP635.\n- <span id=\"page-5-1\"></span>[4] Y. Bruned, M. Hairer, and L. Zambotti, *Algebraic renormalisation of regularity structures*, Invent. Math. 215 (2019), no. 3, 1039\u20131156. arXiv:1610.08468.\n- <span id=\"page-5-3\"></span>[5] M. Gubinelli and M. Hofmanov\u00e1, *A PDE construction of the Euclidean* !<sup>4</sup> <sup>3</sup> *quantum field theory*, Comm. Math. Phys. 384 (2021), no. 1, 1\u201375. doi:10.1007/s00220-021-04022-0.\n- <span id=\"page-5-0\"></span>[6] M. Hairer, *A theory of regularity structures*, Invent. Math. 198 (2014), no. 2, 269\u2013504. arXiv:1303.5113.\n- <span id=\"page-5-2\"></span>[7] J.-C. Mourrat and H. Weber, *The dynamic* !<sup>4</sup> <sup>3</sup> *model comes down from infinity*, Comm. Math. Phys. 356 (2017), no. 3, 673\u2013753. arXiv:1601.01234.\n- <span id=\"page-5-4\"></span>[8] J.-C. Mourrat, H. Weber, and W. Xu, *Construction of* !<sup>4</sup> <sup>3</sup> *diagrams for pedestrians*, preprint (2016). arXiv:1610.08897."
+    }
+  ],
+  "methods": {
+    "incremental__claude-opus-4-6": {
+      "label": "Incremental (claude-opus-4-6)",
+      "model": "anthropic/claude-opus-4-6",
+      "overall_feedback": "This paper addresses an interesting question about the mutual singularity of the $\\Phi_3^4$ measure and its smooth shifts on $\\mathbb{T}^3$, presenting what appears to be a clean argument leveraging the logarithmic mass renormalization specific to three dimensions. The exposition is generally well-structured, with a clear separation of the Gaussian ($\\lambda=0$) and interacting ($\\lambda\\neq0$) cases, and the key idea\u2014that the divergent logarithmic counterterm produces a deterministic linear signal that distinguishes $\\mu$ from $T_\\psi^*\\mu$\u2014is compelling and well-motivated. However, several concerns arise. First, the paper is presented in a \"Problem/Solution\" format rather than as a standard research article, which raises questions about its intended venue and makes it harder to assess the contribution's novelty; the authors themselves acknowledge that Proposition 1.1 is \"not a new estimate\" but rather a \"repackaging\" of known results, so the precise novelty should be articulated more sharply. Second, while the choice of the $(\\log)^{-\\beta}$-normalized observable $Y_n$ in equation (1) is clever, the paper (at least in the portion shown) does not yet complete the argument showing that $Y_n$ behaves differently under $\\mu$ versus $T_\\psi^*\\mu$\u2014presumably the deterministic shift $\\psi$ contributes a term proportional to $b_\\lambda e^{(1-\\beta)n}\\langle\\psi,\\psi\\rangle$ that diverges, but this critical step and the resulting singularity conclusion via, e.g., the Kakutani-type dichotomy, need to be made fully rigorous. Third, the restriction to $\\lambda>0$ and the remark that \"the argument only uses $b_\\lambda\\neq 0$\" deserves further discussion regarding whether the result extends to the full non-perturbative regime or depends on specific constructions of the measure. Finally, the relationship to prior work on singularity of $\\Phi^4$ measures under translations\u2014particularly in lower dimensions where equivalence holds by Cameron-Martin-type arguments adapted to the interacting theory\u2014should be discussed more",
+      "comments": [
+        {
+          "id": "incremental__claude-opus-4-6_0",
+          "title": "Typo: $T_{ab}^*\\mu$ instead of $T_\\psi^*\\mu$ in multiple locations",
+          "quote": "We conclude that $\\mu \\perp T_{ab}^* \\mu$.",
+          "explanation": "The notation $T_{ab}^*\\mu$ appears in the concluding line of \u00a72.5 and again in the proof of Theorem 1.3 ('$(T_{ab}^*\\mu)(A) = 0$'), but the shift map has been consistently denoted $T_\\psi$ throughout the paper. There is no map $T_{ab}$ defined anywhere. This is clearly a typo for $T_\\psi^*\\mu$, occurring at the critical concluding steps of the argument.",
+          "comment_type": "technical",
+          "paragraph_index": 53
+        },
+        {
+          "id": "incremental__claude-opus-4-6_1",
+          "title": "Notation clash between $\\Theta_\\varepsilon$ and $\\widetilde{\\Theta}_\\varepsilon$ in point (b)",
+          "quote": "There is a random distribution  $\\Theta_{\\varepsilon}$  which differs from the diagram  $\\Theta_{\\varepsilon}$  of (a) by a uniformly  $L^2$\u2013bounded linear combination of more regular diagrams",
+          "explanation": "In point (a), the setting-sun diagram is denoted $\\widetilde{\\Theta}_\\varepsilon$. Point (b) then introduces a new random distribution also called $\\Theta_\\varepsilon$, making the sentence read as if $\\Theta_\\varepsilon$ differs from itself. The second occurrence should read $\\widetilde{\\Theta}_\\varepsilon$. A careful reader can figure out the intent, but as written the sentence is confusing and technically incorrect.",
+          "comment_type": "technical",
+          "paragraph_index": 28
+        },
+        {
+          "id": "incremental__claude-opus-4-6_2",
+          "title": "Typo '$u_{\\varepsilon_n}ou$' \u2014 likely intended '$u_{\\varepsilon_n} \\to u$'",
+          "quote": "Since  $u_{\\varepsilon_n}ou$  in the weaker spaces considered below",
+          "explanation": "This is clearly meant to say '$u_{\\varepsilon_n} \\to u$' (convergence in some distributional topology). While obviously a typo rather than a mathematical error, it renders the sentence unparseable.",
+          "comment_type": "technical",
+          "paragraph_index": 32
+        },
+        {
+          "id": "incremental__claude-opus-4-6_3",
+          "title": "Promise to recall the elementary estimate behind (2) is not fulfilled",
+          "quote": "For the reader who wants to see the elementary estimate behind (2) we recall it at the end of the proof.",
+          "explanation": "The authors promise to recall the elementary estimate behind inequality (2) 'at the end of the proof,' but the proof of Proposition 1.1 as presented ends with 'This completes the proof of (ii) and of the proposition' without providing the promised elementary derivation. The final paragraph references Mourrat\u2013Weber\u2013Xu [8, Sec. 3] but does not actually reproduce the estimate.",
+          "comment_type": "logical",
+          "paragraph_index": 27
+        },
+        {
+          "id": "incremental__claude-opus-4-6_4",
+          "title": "Relationship between sets $A$ and $E$ in the separating argument could be clearer",
+          "quote": "to find a measurable set E with  $\\mu(E) = 1$  such that, for every  $u \\in E$ , all three random terms in (4) other than the deterministic last one tend to 0 along  $n = n_k$.",
+          "explanation": "The divergence $|Y_{n_k}(u+\\psi)| \\to \\infty$ is established only for $u \\in E$. The conclusion $(T_\\psi^*\\mu)(A) = 0$ requires noting that $\\{u : u+\\psi \\in A\\} \\subset E^c$ and $\\mu(E^c) = 0$. This decomposition is valid but skipped entirely; one additional sentence would close the minor gap.",
+          "comment_type": "logical",
+          "paragraph_index": 52
+        },
+        {
+          "id": "incremental__claude-opus-4-6_5",
+          "title": "Tightness claim uses $ae^{e^n}$ rather than the full Wick constant $C_1(\\varepsilon_n)$",
+          "quote": "The random distributions  $u_n^2 ae^{e^n}$  (the renormalised square) are tight when tested against smooth functions",
+          "explanation": "The authors identify $u_n^2 - a e^{e^n}$ as the 'renormalised square,' but the standard Wick square from the literature uses the full constant $C_1(\\varepsilon_n)$, not just its leading term $a\\varepsilon_n^{-1}$. The difference $C_1(\\varepsilon_n) - a\\varepsilon_n^{-1} = O(1)$ is bounded, so tightness still follows, but the identification is slightly imprecise.",
+          "comment_type": "technical",
+          "paragraph_index": 50
+        }
+      ],
+      "cost_usd": 0.707,
+      "prompt_tokens": 60393,
+      "completion_tokens": 16200
+    },
+    "incremental__gemini-3.1-pro-preview": {
+      "label": "Incremental (gemini-3.1-pro-preview)",
+      "model": "google/gemini-3.1-pro-preview",
+      "overall_feedback": "This manuscript provides an elegant and mathematically rigorous resolution to a subtle problem in singular stochastic PDEs and constructive quantum field theory, cleanly proving that the interacting $\\Phi_3^4$ measure on $\\mathbb{T}^3$ is mutually singular with respect to all of its nonzero smooth shifts. The exposition is highly commendable for its clarity; by bypassing the ill-posedness of the time-zero renormalized cube and instead leveraging specific super-exponential mollification scales alongside a $(\\log)^{-\\beta}$-normalized dynamical observable, the author masterfully distills heavy machinery from regularity structures and paracontrolled calculus into a tractable, readable argument. However, to elevate the paper further, the introduction would greatly benefit from a broader discussion contextualizing *why* this singularity is conceptually significant\u2014for instance, detailing its implications for infinite-dimensional optimal transport, Cameron-Martin-type functional inequalities, or the geometric properties of the QFT vacuum. Additionally, there are a few minor precision issues to address: the notation inconsistently mixes the generic distribution $w$ in Equation (1) with the field configuration $u$ in Proposition 1.1, and the explicit mathematical definition of the \"setting-sun\" distribution $\\Theta_n$ should be rigorously formalized within the statement of Proposition 1.1 rather than colloquially deferred to the proof.",
+      "comments": [
+        {
+          "id": "incremental__gemini-3.1-pro-preview_0",
+          "title": "Missing minus sign in renormalized square expression",
+          "quote": "- The random distributions  $u_n^2 ae^{e^n}$  (the renormalised square) are tight when tested against smooth functions... Since  $\\psi_n \\to \\psi$  in  $C^{\\infty}$ , the scalar random variables  $\\langle 3\\psi_n(u_n^2 ae^{e^n}), \\psi \\rangle$  are tight;",
+          "explanation": "The text incorrectly writes the renormalised square as a product $u_n^2 ae^{e^n}$ instead of the difference $u_n^2 - ae^{e^n}$. While Equation (4) right above this correctly includes the minus sign, dropping it in the bulleted list and inline mathematics transforms a well-defined regularised difference into a divergent product, which compromises the mathematical validity of the sentence and may confuse readers trying to parse the term.",
+          "comment_type": "technical",
+          "paragraph_index": 26
+        },
+        {
+          "id": "incremental__gemini-3.1-pro-preview_1",
+          "title": "Incorrect subscript in shift operator notation",
+          "quote": "We conclude that  $\\mu \\perp T_{ab}^* \\mu$ .\n\n**Theorem 1.3** [...]\n\n*Proof.* The construction of the separating set in paragraphs 2.4\u20132.5 gives the claim: the set A has full  $\\mu$ -measure whereas the shifted measure assigns it zero mass,  $(T_{ab}^*\\mu)(A) = 0$ .",
+          "explanation": "Throughout the text, the smooth shift operator is defined and utilized as $T_\\psi$ for a shifting function $\\psi$. However, at the very end of Section 2.5 and in the proof of Theorem 1.3, the notation unexpectedly changes to $T_{ab}^* \\mu$. There are no parameters $a,b$ defining the shift in this context (the only $a,b$ are the renormalisation constants $a$ and $b_\\lambda$). This breaks notation consistency and contradicts the preceding statement of Theorem 1.3, which correctly uses $T_\\psi^* \\mu$.",
+          "comment_type": "technical",
+          "paragraph_index": 30
+        },
+        {
+          "id": "incremental__gemini-3.1-pro-preview_2",
+          "title": "Typographical error obscuring convergence statement",
+          "quote": "Since  $u_{\\varepsilon_n}ou$  in the weaker spaces considered below, this contribution converges in probability to a fixed multiple of u and can simply be incorporated into the limiting random distribution R",
+          "explanation": "The block '$u_{\\varepsilon_n}ou$' appears to be a typographic error for '$u_{\\varepsilon_n} \\to u$' (likely due to a lost `\\` in `\\to`, turning it into 'to', eventually mangled into 'ou'). From context, the passage correctly explains that replacing counterterms with their leading components shifts the left-hand side by $O(1)u_{\\varepsilon_n}$, which smoothly converges to a multiple of $u$ because $u_{\\varepsilon_n}$ converges to $u$. Written as 'ou', it misleadingly looks like an undefined binary operation or product, momentarily stalling the mathematical reading.",
+          "comment_type": "technical",
+          "paragraph_index": 32
+        }
+      ],
+      "cost_usd": 0.6139,
+      "prompt_tokens": 43503,
+      "completion_tokens": 43907
+    }
+  }
+}

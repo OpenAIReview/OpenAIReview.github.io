@@ -1,0 +1,51 @@
+{
+  "papers": [
+    {
+      "slug": "260218458v1",
+      "title": "The Story is Not the Science: Execution-Grounded Evaluation of Mechanistic Interpretability Research"
+    },
+    {
+      "slug": "apep-0001-tex",
+      "title": "Do State Paid Sick Leave Mandates Increase Work Hours? [TEX]"
+    },
+    {
+      "slug": "apep-0001-pdf",
+      "title": "Do State Paid Sick Leave Mandates Increase Work Hours? [PDF]"
+    },
+    {
+      "slug": "smoothing-shifts-pdf",
+      "title": "Smooth shifts of the \u03a6\u00b3\u2074 measure on \ud835\udd4b\u00b3"
+    },
+    {
+      "slug": "inference-molecular",
+      "title": "Inference in molecular population genetics",
+      "field": "Statistical Genetics",
+      "num_gt_comments": 15
+    },
+    {
+      "slug": "coset-codes",
+      "title": "Coset Codes-Part I: Introduction and Geometrical Classification",
+      "field": "Information Theory",
+      "num_gt_comments": 19
+    },
+    {
+      "slug": "targeting-interventions-networks",
+      "title": "Targeting Interventions in Networks",
+      "field": "Economic Theory",
+      "num_gt_comments": 6
+    },
+    {
+      "slug": "chaotic-balanced-state",
+      "title": "Chaotic Balanced State in a Model of Cortical Circuits",
+      "field": "Neuroscience",
+      "num_gt_comments": 12
+    }
+  ],
+  "method_order": [
+    "ground_truth",
+    "zero_shot",
+    "local",
+    "incremental",
+    "incremental_full"
+  ]
+}

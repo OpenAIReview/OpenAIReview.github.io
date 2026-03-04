@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OpenAIReview — AI-Powered Academic Paper Reviewer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #fafafa;
+  --surface: #ffffff;
+  --border: #e5e7eb;
+  --text: #1a1a2e;
+  --text-secondary: #6b7280;
+  --text-muted: #9ca3af;
+  --accent: #6366f1;
+  --accent-light: #eef2ff;
+  --accent-hover: #4f46e5;
+  --green: #10b981;
+  --green-light: #ecfdf5;
+  --orange: #f59e0b;
+  --orange-light: #fffbeb;
+  --radius: 12px;
+  --radius-sm: 8px;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+  --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -2px rgba(0,0,0,0.05);
+  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.08), 0 4px 6px -4px rgba(0,0,0,0.04);
+  --shadow-focus: 0 0 0 3px rgba(99,102,241,0.15);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { color: var(--accent-hover); }
+
+/* ── Header ── */
+.header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 0 32px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.header .logo {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: -0.3px;
+}
+.header-links {
+  margin-left: auto;
+  display: flex;
+  gap: 20px;
+  font-size: 14px;
+  font-weight: 500;
+}
+.header-links a {
+  color: var(--text-secondary);
+  transition: color 0.15s;
+}
+.header-links a:hover { color: var(--text); }
+
+/* ── Hero ── */
+.hero {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 80px 32px 64px;
+  text-align: center;
+}
+.hero h1 {
+  font-size: 40px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+.hero h1 span { color: var(--accent); }
+.hero .subtitle {
+  font-size: 18px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  max-width: 600px;
+  margin: 0 auto 40px;
+}
+
+/* Install block */
+.install-block {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--text);
+  color: #e5e7eb;
+  padding: 14px 24px;
+  border-radius: var(--radius);
+  font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+  font-size: 15px;
+  margin-bottom: 48px;
+  cursor: pointer;
+  transition: background 0.15s;
+  position: relative;
+}
+.install-block:hover { background: #111; }
+.install-block .prompt { color: var(--accent); user-select: none; }
+.install-block .copy-hint {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  color: var(--text-muted);
+  position: absolute;
+  right: -90px;
+  white-space: nowrap;
+}
+.install-block.copied .copy-hint { color: var(--green); }
+
+/* Quick start */
+.quick-start {
+  display: flex;
+  gap: 32px;
+  text-align: left;
+  max-width: 700px;
+  margin: 0 auto;
+}
+.step {
+  flex: 1;
+}
+.step-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background: var(--accent-light);
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 700;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+.step h3 {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.step code {
+  display: block;
+  background: #f3f4f6;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  color: var(--text);
+  word-break: break-all;
+}
+
+/* ── Features Strip ── */
+.features-section {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 48px 32px;
+}
+.features-grid {
+  max-width: 900px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+}
+.feature-card {
+  text-align: center;
+}
+.feature-icon {
+  width: 48px;
+  height: 48px;
+  background: var(--accent-light);
+  border-radius: var(--radius);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+  font-size: 22px;
+}
+.feature-card h3 {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.feature-card p {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* ── Examples Section ── */
+.examples-section {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 64px 32px;
+}
+.section-title {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  margin-bottom: 8px;
+}
+.section-desc {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 32px;
+}
+.examples-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+.example-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  transition: box-shadow 0.15s, border-color 0.15s, transform 0.1s;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+}
+.example-card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: #d1d5db;
+  transform: translateY(-1px);
+  color: inherit;
+}
+.example-card .card-field {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+.example-card .card-title {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.4;
+  margin-bottom: 12px;
+  flex: 1;
+}
+.example-card .card-meta {
+  font-size: 12px;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.card-meta .gt-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--orange-light);
+  color: #92400e;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 11px;
+}
+
+/* Featured examples placeholder */
+.featured-section {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 32px 64px;
+}
+.placeholder-card {
+  background: var(--surface);
+  border: 2px dashed var(--border);
+  border-radius: var(--radius);
+  padding: 48px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+/* ── Footer ── */
+.footer {
+  border-top: 1px solid var(--border);
+  padding: 32px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-secondary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .hero h1 { font-size: 28px; }
+  .hero .subtitle { font-size: 16px; }
+  .quick-start { flex-direction: column; gap: 20px; }
+  .features-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .examples-grid { grid-template-columns: 1fr; }
+  .install-block .copy-hint { display: none; }
+}
+@media (max-width: 480px) {
+  .features-grid { grid-template-columns: 1fr; }
+  .header { padding: 0 16px; }
+  .hero { padding: 48px 16px 40px; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <span class="logo">OpenAIReview</span>
+  <div class="header-links">
+    <a href="https://github.com/ChicagoHAI/OpenAIReview" target="_blank">GitHub</a>
+    <a href="https://github.com/ChicagoHAI/OpenAIReview#readme" target="_blank">Documentation</a>
+  </div>
+</div>
+
+<!-- Hero -->
+<div class="hero">
+  <h1>AI-powered <span>academic paper</span> reviewer</h1>
+  <p class="subtitle">
+    Detect technical and logical errors in research papers using LLMs.
+    Supports multiple review strategies, interactive visualization, and cost tracking.
+  </p>
+
+  <div class="install-block" id="install-block" onclick="copyInstall()">
+    <span class="prompt">$</span> pip install openaireview
+    <span class="copy-hint" id="copy-hint">click to copy</span>
+  </div>
+
+  <div class="quick-start">
+    <div class="step">
+      <div class="step-number">1</div>
+      <h3>Set your API key</h3>
+      <code>echo "OPENROUTER_API_KEY=sk-..." > .env</code>
+    </div>
+    <div class="step">
+      <div class="step-number">2</div>
+      <h3>Review a paper</h3>
+      <code>openaireview review paper.pdf</code>
+    </div>
+    <div class="step">
+      <div class="step-number">3</div>
+      <h3>Visualize results</h3>
+      <code>openaireview serve</code>
+    </div>
+  </div>
+</div>
+
+<!-- Features -->
+<div class="features-section">
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">&#128196;</div>
+      <h3>Multiple Formats</h3>
+      <p>PDF, DOCX, LaTeX, Markdown, and direct arXiv URL support.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">&#128270;</div>
+      <h3>Review Methods</h3>
+      <p>Zero-shot, local deep-check, and incremental strategies for thorough analysis.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">&#129302;</div>
+      <h3>Model Flexibility</h3>
+      <p>Works with any OpenRouter model. Built-in cost and token tracking.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">&#128202;</div>
+      <h3>Interactive Viz</h3>
+      <p>Browse comments alongside the paper with paragraph-level highlighting.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Featured Examples -->
+<div class="examples-section">
+  <h2 class="section-title">Featured Reviews</h2>
+  <p class="section-desc">Full paper reviews generated by OpenAIReview with multiple models.</p>
+  <div class="examples-grid">
+    <a class="example-card" href="viz/index.html?paper=260218458v1">
+      <div class="card-field">AI / Interpretability</div>
+      <div class="card-title">The Story is Not the Science: Execution-Grounded Evaluation of Mechanistic Interpretability Research</div>
+      <div class="card-meta"><span>Claude + Gemini</span> <span>View review &rarr;</span></div>
+    </a>
+    <a class="example-card" href="viz/index.html?paper=apep-0001-tex">
+      <div class="card-field">Labor Economics</div>
+      <div class="card-title">Do State Paid Sick Leave Mandates Increase Work Hours? [TEX]</div>
+      <div class="card-meta"><span>Claude + Gemini</span> <span>View review &rarr;</span></div>
+    </a>
+    <a class="example-card" href="viz/index.html?paper=apep-0001-pdf">
+      <div class="card-field">Labor Economics</div>
+      <div class="card-title">Do State Paid Sick Leave Mandates Increase Work Hours? [PDF]</div>
+      <div class="card-meta"><span>Claude + Gemini</span> <span>View review &rarr;</span></div>
+    </a>
+    <a class="example-card" href="viz/index.html?paper=smoothing-shifts-pdf">
+      <div class="card-field">Mathematics</div>
+      <div class="card-title">Smooth shifts of the &#934;&#8323;&#8308; measure on &#120139;&#179;</div>
+      <div class="card-meta"><span>Claude + Gemini</span> <span>View review &rarr;</span></div>
+    </a>
+  </div>
+</div>
+
+<!-- Refine Examples -->
+<div class="examples-section">
+  <h2 class="section-title">Benchmark Examples</h2>
+  <p class="section-desc">
+    Papers from the <a href="https://refine.ink" target="_blank">Refine</a> benchmark with expert ground-truth annotations.
+    Compare AI-generated reviews against human expert feedback.
+  </p>
+  <div class="examples-grid" id="examples-grid"></div>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  <div>Built by <a href="https://chicagohai.github.io/" target="_blank">Chicago Human+AI Lab (ChicagoHAI)</a></div>
+  <div><a href="https://github.com/ChicagoHAI/OpenAIReview" target="_blank">GitHub</a></div>
+</div>
+
+<script>
+const PAPERS = [
+  {
+    slug: "inference-molecular",
+    title: "Inference in molecular population genetics",
+    field: "Statistical Genetics",
+    gt: 15
+  },
+  {
+    slug: "coset-codes",
+    title: "Coset Codes \u2014 Part I: Introduction and Geometrical Classification",
+    field: "Information Theory",
+    gt: 19
+  },
+  {
+    slug: "targeting-interventions-networks",
+    title: "Targeting Interventions in Networks",
+    field: "Economic Theory",
+    gt: 6
+  },
+  {
+    slug: "chaotic-balanced-state",
+    title: "Chaotic Balanced State in a Model of Cortical Circuits",
+    field: "Neuroscience",
+    gt: 12
+  }
+];
+
+function renderExamples() {
+  const grid = document.getElementById('examples-grid');
+  grid.innerHTML = PAPERS.map(p => `
+    <a class="example-card" href="viz/index.html?paper=${p.slug}">
+      <div class="card-field">${p.field}</div>
+      <div class="card-title">${p.title}</div>
+      <div class="card-meta">
+        <span class="gt-badge">${p.gt} expert comments</span>
+        <span>View review &rarr;</span>
+      </div>
+    </a>
+  `).join('');
+}
+
+function copyInstall() {
+  navigator.clipboard.writeText('pip install openaireview').then(() => {
+    const block = document.getElementById('install-block');
+    const hint = document.getElementById('copy-hint');
+    block.classList.add('copied');
+    hint.textContent = 'copied!';
+    setTimeout(() => {
+      block.classList.remove('copied');
+      hint.textContent = 'click to copy';
+    }, 2000);
+  });
+}
+
+document.addEventListener('DOMContentLoaded', renderExamples);
+</script>
+</body>
+</html>
