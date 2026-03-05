@@ -335,12 +335,14 @@ a:hover { color: var(--accent-hover); }
     </p>
 
     <div class="install-block" id="install-block" onclick="copyInstall()">
-      <span class="prompt">$</span> uv pip install openaireview
+      <span class="prompt">$</span> pip install openaireview
       <span class="copy-hint" id="copy-hint">click to copy</span>
     </div>
 
     <p class="hero-link">
       <a href="https://github.com/ChicagoHAI/OpenAIReview" target="_blank">Learn more at GitHub &rarr;</a>
+      <span style="color: var(--text-muted); margin: 0 6px;">·</span>
+      we recommend using <a href="https://github.com/astral-sh/uv" target="_blank">uv</a>, and there are additional guidelines for best results with PDF inputs
     </p>
   </div>
 </div>
@@ -465,7 +467,7 @@ function renderExamples() {
 }
 
 function copyInstall() {
-  navigator.clipboard.writeText('uv pip install openaireview').then(() => {
+  navigator.clipboard.writeText('pip install openaireview').then(() => {
     const block = document.getElementById('install-block');
     const hint = document.getElementById('copy-hint');
     block.classList.add('copied');

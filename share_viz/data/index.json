@@ -1,0 +1,19 @@
+{
+  "papers": [
+    {
+      "slug": "260215293v1",
+      "title": "The Information Geometry of Softmax: Probing and Steering"
+    },
+    {
+      "slug": "contextual-communication-pdf",
+      "title": "Email in the Era of LLMs"
+    }
+  ],
+  "method_order": [
+    "ground_truth",
+    "zero_shot",
+    "local",
+    "incremental",
+    "incremental_full"
+  ]
+}
