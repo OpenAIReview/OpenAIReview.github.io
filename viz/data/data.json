@@ -1984,7 +1984,7 @@
               "id": "local_15",
               "title": "Inconsistency in recursive weight formula (para 277) referenced by final weight",
               "quote": "$w_{-t}=\\frac{p_{\\theta}\\left(H_{-(t-1)} \\mid H_{-t}\\right) \\ldots p_{\\theta}\\left(H_{0} \\mid H_{-1}\\right)}{q_{0}\\left(H_{-t} \\mid H_{-(t-1)}\\right) \\ldots q_{0}\\left(H_{-1} \\mid H_{0}\\right)} \\equiv w_{-(t-1)} \\frac{p_{\\theta}\\left(H_{-(t-1)} \\mid H_{-1}\\right)}{q_{0}\\left(H_{-t} \\mid H_{-(t-1)}\\right)}$",
-              "explanation": "In the recursive decomposition on the right-hand side, the numerator of the incremental ratio should be $p_{\\theta}(H_{-(t-1)} \\mid H_{-t})$ (the transition from $H_{-t}$ to $H_{-(t-1)}$), but it is written as $p_{\\theta}(H_{-(t-1)} \\mid H_{-1})$, which is inconsistent with the left-hand side product and is almost certainly a typo.",
+              "explanation": "In the recursive decomposition on the right-hand side, the numerator of the progressive ratio should be $p_{\\theta}(H_{-(t-1)} \\mid H_{-t})$ (the transition from $H_{-t}$ to $H_{-(t-1)}$), but it is written as $p_{\\theta}(H_{-(t-1)} \\mid H_{-1})$, which is inconsistent with the left-hand side product and is almost certainly a typo.",
               "comment_type": "technical",
               "paragraph_index": 285
             },
@@ -2216,7 +2216,7 @@
               "id": "rag_retrieved_cot_5",
               "title": "Typo in recursive weight formula: $H_{-1}$ should be $H_{-t}$",
               "quote": "w_{-(t-1)} \\frac{p_{\\theta}\\left(H_{-(t-1)} \\mid H_{-1}\\right)}{q_{0}\\left(H_{-t} \\mid H_{-(t-1)}\\right)}",
-              "explanation": "In the recursive decomposition, the incremental forward probability should be $p_{\\theta}(H_{-(t-1)} \\mid H_{-t})$, not $p_{\\theta}(H_{-(t-1)} \\mid H_{-1})$. The subscript $-1$ appears to be a typo for $-t$. This is clear from the fact that $w_{-t} / w_{-(t-1)}$ should equal $p_{\\theta}(H_{-(t-1)} \\mid H_{-t}) / q_0(H_{-t} \\mid H_{-(t-1)})$.",
+              "explanation": "In the recursive decomposition, the progressive forward probability should be $p_{\\theta}(H_{-(t-1)} \\mid H_{-t})$, not $p_{\\theta}(H_{-(t-1)} \\mid H_{-1})$. The subscript $-1$ appears to be a typo for $-t$. This is clear from the fact that $w_{-t} / w_{-(t-1)}$ should equal $p_{\\theta}(H_{-(t-1)} \\mid H_{-t}) / q_0(H_{-t} \\mid H_{-(t-1)})$.",
               "comment_type": "technical",
               "paragraph_index": 285
             },
