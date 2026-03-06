@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI-assisted Reviewing is Necessary and Should be Open — OpenAIReview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #fafafa;
+  --surface: #ffffff;
+  --border: #e5e7eb;
+  --text: #1a1a2e;
+  --text-secondary: #6b7280;
+  --text-muted: #9ca3af;
+  --accent: #800000;
+  --accent-light: #fdf2f2;
+  --accent-hover: #600000;
+  --radius: 12px;
+  --radius-sm: 8px;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -2px rgba(0,0,0,0.05);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { color: var(--accent-hover); }
+
+/* Header */
+.header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 0 32px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.header .logo {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: -0.3px;
+}
+.header-links {
+  margin-left: auto;
+  display: flex;
+  gap: 20px;
+  font-size: 14px;
+  font-weight: 500;
+}
+.header-links a { color: var(--text-secondary); transition: color 0.15s; }
+.header-links a:hover { color: var(--text); }
+
+/* Blog layout */
+.blog-hero {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 56px 32px 48px;
+  text-align: center;
+}
+.blog-hero h1 {
+  font-family: 'Lora', Georgia, serif;
+  font-size: 34px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  line-height: 1.25;
+  max-width: 680px;
+  margin: 0 auto 20px;
+}
+.blog-hero .byline {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.blog-body {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 48px 32px 80px;
+}
+
+/* Prose */
+.blog-body p {
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--text);
+  margin-bottom: 20px;
+}
+.blog-body h2 {
+  font-family: 'Lora', Georgia, serif;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+  margin: 48px 0 16px;
+  color: var(--text);
+}
+.blog-body strong { font-weight: 600; }
+.blog-body ul, .blog-body ol {
+  padding-left: 24px;
+  margin-bottom: 20px;
+}
+.blog-body li {
+  font-size: 16px;
+  line-height: 1.75;
+  margin-bottom: 8px;
+}
+.blog-body img {
+  width: 100%;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  margin: 24px 0;
+}
+
+/* Table */
+.blog-body table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  margin: 24px 0;
+}
+.blog-body th {
+  text-align: left;
+  padding: 10px 14px;
+  border-bottom: 2px solid var(--border);
+  font-weight: 600;
+  color: var(--text-secondary);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+.blog-body td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+}
+.blog-body tr:last-child td { border-bottom: none; }
+.blog-body tr:hover td { background: var(--accent-light); }
+
+/* Example cards (shared with index.html) */
+.examples-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin: 24px 0;
+}
+.example-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  transition: box-shadow 0.2s, border-color 0.2s, transform 0.15s;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+}
+.example-card:hover {
+  box-shadow: var(--shadow-md), inset 3px 0 0 var(--accent);
+  border-color: #d1d5db;
+  transform: translateY(-1px);
+  color: inherit;
+}
+.example-card .card-field {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+.example-card .card-title {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.45;
+  margin-bottom: 16px;
+  flex: 1;
+}
+.example-card .card-meta {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+.count-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 14px;
+  font-size: 11.5px;
+  font-weight: 500;
+}
+.count-row .cr-label { color: var(--text-secondary); }
+.count-row .cr-num { font-weight: 700; font-variant-numeric: tabular-nums; }
+.count-row .cr-num.refine-num { color: #92400e; }
+.count-row .cr-num.ai-num { color: var(--accent); }
+.count-row .cr-sep { color: var(--text-muted); font-size: 14px; margin: 0 2px; }
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border);
+  padding: 32px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+@media (max-width: 768px) {
+  .blog-hero h1 { font-size: 26px; }
+  .examples-grid { grid-template-columns: 1fr; }
+  .blog-body { padding: 32px 20px 60px; }
+  .header { padding: 0 16px; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <a class="logo" href="index.html">OpenAIReview</a>
+  <div class="header-links">
+    <a href="blog.html">Blog</a>
+    <a href="https://github.com/ChicagoHAI/OpenAIReview" target="_blank">GitHub</a>
+  </div>
+</div>
+
+<div class="blog-hero">
+  <h1>AI-assisted Reviewing is Necessary and Should be Open</h1>
+  <p class="byline">March 2026 &nbsp;&middot;&nbsp; Chenhao Tan</p>
+</div>
+
+<div class="blog-body">
+
+<p>Academic peer review is at an inflection point. AI tools are transforming the production process, and <a href="https://cichicago.substack.com/p/the-mirage-of-autonomous-ai-scientists">our scientific community needs to shift focus towards selection and evaluation</a>. I believe that the right response is not to resist AI in review, but to embrace it deliberately and openly.</p>
+
+<p>In this post, I lay out why AI-assisted reviewing is necessary, why it should be open, and what we are doing about it with <a href="https://openaireview.github.io">OpenAIReview</a>.</p>
+
+<h2>AI-assisted reviewing is necessary</h2>
+
+<p>The peer review process is not sustainable. <a href="https://arxiv.org/abs/2507.10734">Bergstrom and Gross</a> described a positive feedback cycle: when submissions overwhelm the reviewer pool, review accuracy degrades. Lower accuracy makes acceptance more random, which improves the odds for weak papers. This incentivizes even more submissions, pushing the system further toward collapse. We refer to this phenomenon as the <strong>review death spiral</strong> (kudos to Jon Kleinberg for this name).</p>
+
+<img src="assets/review_death_spiral.png" alt="The review death spiral and the impact of AI tools">
+
+<p>We recently extended this work to incorporate the impact of AI. As shown above, AI production tools speed up the spiral by making it cheaper to submit. The collapse is not gradual: once costs fall below a critical threshold, the system jumps suddenly to a state where nearly all authors submit regardless of quality.</p>
+
+<p>The only intervention that can stabilize or recover the system is improving <strong>review precision</strong>: the ability to discriminate high-quality from low-quality papers. Human reviewer precision degrades under load, and the reviewer pool cannot scale fast enough to keep pace. AI-assisted reviewing is necessary precisely because it is the only scalable path to the precision improvements needed to counteract AI production tools.</p>
+
+<h2>AI-assisted reviewing should be open</h2>
+
+<p>My next proposition is that AI-assisted reviewing should be open for the following reasons.</p>
+
+<p><strong>Openness enables equity.</strong> Closed, proprietary review tools are accessible only to researchers at well-resourced institutions. Open tools give researchers at under-resourced institutions and in underrepresented communities the same access to high-quality feedback.</p>
+
+<p><strong>Openness enables customization.</strong> Different fields have different norms, different methodological standards, and different definitions of what makes a paper strong. An open system lets the community adapt reviewing tools to their specific needs, rather than accepting a one-size-fits-all product. Researchers can inspect the prompts, audit the outputs, and modify the behavior.</p>
+
+<p><strong>Openness enables repeated feedback.</strong> An expensive closed tool cannot provide frequent feedback, but iterative feedback is how papers actually improve. An open tool can be used throughout the writing process, by authors themselves, by advisors, by collaborators, at any stage.</p>
+
+<p><strong>Openness enables continual improvement.</strong> A closed tool improves only when its developers choose to update it. An open tool improves whenever anyone in the community identifies a problem, proposes a better prompt, or contributes a new evaluation. The tool gets better faster, and the community builds shared ownership over a resource they all depend on.</p>
+
+<p><strong>Openness keeps the stakes honest.</strong> AI-assisted reviewing will shape what gets published and what does not. That is too consequential to leave to closed, proprietary systems with no public accountability. The scientific community should be able to see, question, and improve the tools that influence its own knowledge production.</p>
+
+<p>We are releasing <a href="https://openaireview.github.io">OpenAIReview</a> for this purpose. If you would like to customize this package, a lot of key information is in <a href="https://github.com/ChicagoHAI/OpenAIReview/blob/main/src/reviewer/prompts.py">prompts.py</a>. We will also explore whether it is possible to achieve similar quality with just a Claude skill for users that already have Claude Code. Any feedback is welcome!</p>
+
+<img src="assets/example.png" alt="An example OpenAIReview output">
+
+<h2>Two types of reviewing</h2>
+
+<p>It is useful to distinguish between two different goals that reviewing serves.</p>
+
+<p><strong>Reviewing for quality</strong> is the feedback that authors seek to improve the quality of their papers as much as possible. It asks: how can this paper be stronger? What is unclear? What experiments are missing? What related work should be cited? This is formative feedback aimed at improving the work. The author decides what to do with it.</p>
+
+<p>This is what <a href="https://www.refine.ink/">Refine</a> does and is the inspiration of OpenAIReview. This type of reviewing benefits most from being open and accessible. Authors know their own work best, and they are in the best position to judge whether feedback is useful. An open tool that provides this kind of feedback early and often can raise the quality of submissions across the board.</p>
+
+<p><strong>Reviewing for gatekeeping</strong> is the review that determines whether a paper is accepted or rejected. Gatekeeping is by nature subjective: no paper is without limitations, and pointing them out alone does not justify rejection. It would not have been ideal if we only accept the most robust but boring results (see <a href="https://jessicahullman.substack.com/p/living-the-metascience-dream-or-nightmare">here</a> for more discussion from Jessica Hullman). The most profound ideas are the ones that change how people think, and their impact may not be immediately obvious from the experiments in the paper.</p>
+
+<p>Current review processes often confound these two goals, and thorough review of every detail is impossible given the time constraints human reviewers face. AI-generated reviews can surface issues and inform editors and area chairs, but the final acceptance decision requires weighing factors that resist automation. This is the part of AI-assisted reviewing that will change quickly, and where the most care is needed. We are cautious about fully automating gatekeeping decisions, and believe human oversight is essential.</p>
+
+<h2>Performance Comparison with Refine</h2>
+
+<p><a href="https://www.refine.ink/">Refine</a> is the key inspiration for this work. So we did a comparison with Refine while developing our first version of reviews. To benchmark, we used four papers from Refine's examples, each with comments from Refine identifying specific errors &mdash; 52 Refine comments total across genetics, information theory, economics, and neuroscience. Since this dataset is very small, it is best that you directly look at the examples on these pages.</p>
+
+<div class="examples-grid" id="blog-examples-grid"></div>
+
+<p>For readers who are interested in numerical comparisons, our primary metric is LLM-judge recall and position recall: a judge model determines whether a predicted comment and a Refine comment refer to the same issue, within a location window.</p>
+
+<p>We tested three approaches, all using Claude Opus 4.5:</p>
+<ul>
+  <li><strong>Zero-shot</strong>: the full paper in a single prompt. Cheapest, but misses almost everything (0% LLM recall).</li>
+  <li><strong>Local</strong>: splits the paper into paragraphs, filters candidates, then deep-checks each with local context. Reaches 15% LLM recall at ~$0.91/paper.</li>
+  <li><strong>Progressive</strong>: processes the paper sequentially while maintaining a running summary of definitions, equations, and key claims. After a post-hoc consolidation step, it reaches <strong>25% LLM recall</strong> (44% pre-consolidation) at ~$4/paper, with 83% location coverage.</li>
+</ul>
+
+<table>
+  <thead>
+    <tr><th>Method</th><th>Comments</th><th>LLM Recall</th><th>Location Recall</th><th>Cost/paper</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Zero-shot</td><td>23</td><td>0%</td><td>23.1%</td><td>~$0.3</td></tr>
+    <tr><td>Local</td><td>211</td><td>15.4%</td><td>50.0%</td><td>~$1</td></tr>
+    <tr><td>Progressive</td><td>68</td><td>25.0%</td><td>69.2%</td><td>~$4</td></tr>
+    <tr><td>Progressive (Full)</td><td>247</td><td>44.2%</td><td>86.5%</td><td>~$4</td></tr>
+  </tbody>
+</table>
+
+<div id="blog-chart" style="margin:24px 0;"></div>
+
+<p>The key finding is that maintaining a running summary dramatically improves recall: the model can catch inconsistencies that span many pages, rather than treating each section in isolation. With the progressive approach, we can generate many more comments than Refine (68 vs. 52, or 247 vs. 52 if one prefers the full version) with strong recall &mdash; 87% location recall means the model finds something at nearly every location Refine flagged. The remaining gap between location recall and LLM recall reflects cases where the model looks in the right place but identifies a different issue.</p>
+
+<p>In short, you can now get a high-quality review for the price of a coffee or less.</p>
+
+<h2>Our next steps</h2>
+
+<p><strong>Evaluation.</strong> A significant problem in this space is that we do not have good evaluation for AI-generated reviews. How do we know whether a review is helpful? This is hard to measure and existing human reviews are by no means the ground truth. That is also part of why we start from reviewing for quality: the authors themselves can decide whether the feedback is useful. Building good evaluation for review quality is a priority. We welcome ideas and will start to work on this.</p>
+
+<p><strong>Execution-grounded reviewing.</strong> Current AI review tools read papers as text. But many claims in papers can be verified directly: code can be executed, statistical results can be checked, figures can be validated against reported numbers. Execution-grounded reviewing shifts the process from trusting author claims to verifying them. This is something AI can do that human reviewers typically cannot, and it is a meaningful expansion of what review can catch. We have done some early work in the context of mechanistic interpretability, and will work on this integration.</p>
+
+<p><strong>Exploring ways to make it helpful for gatekeeping-style reviewing.</strong> We are interested in how AI-assisted reviewing can be useful for editors, area chairs, and peer reviewers in the acceptance process, while being careful about the risks. If you are a conference organizer, journal editor, or book editor, we would love to chat with you to see if this tool can be helpful for you.</p>
+
+<p><strong>Improving usability.</strong> We are also interested in making this available as an online tool, so that it is accessible without any setup. Making the workflow smooth enough that researchers actually use it throughout the writing process, not just as a one-time check, is a goal we are actively working toward. Please drop a note if you would like to help test the tools. If you are interested in using this tool but cannot for any reason, you can fill out this form and we will try our best to accommodate in the meantime.</p>
+
+<p>Let us build the future of AI-assisted reviewing together!</p>
+
+</div><!-- .blog-body -->
+
+<div class="footer">
+  <span>&copy; 2026 OpenAIReview &nbsp;&middot;&nbsp; <a href="https://github.com/ChicagoHAI/OpenAIReview" target="_blank">GitHub</a></span>
+</div>
+
+<script>
+// Example cards with animated counts
+(function() {
+  const PAPERS = [
+    { slug: "inference-molecular", title: "Inference in molecular population genetics", field: "Statistical Genetics", gt: 15, ai: 21 },
+    { slug: "coset-codes", title: "Coset Codes \u2014 Part I: Introduction and Geometrical Classification", field: "Information Theory", gt: 19, ai: 16 },
+    { slug: "targeting-interventions-networks", title: "Targeting Interventions in Networks", field: "Economic Theory", gt: 6, ai: 10 },
+    { slug: "chaotic-balanced-state", title: "Chaotic Balanced State in a Model of Cortical Circuits", field: "Neuroscience", gt: 12, ai: 21 }
+  ];
+  function animateCount(el, target, duration) {
+    const start = performance.now();
+    (function step(now) {
+      const progress = Math.min((now - start) / duration, 1);
+      const ease = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.round(ease * target);
+      if (progress < 1) requestAnimationFrame(step);
+    })(start);
+  }
+  const grid = document.getElementById('blog-examples-grid');
+  grid.innerHTML = PAPERS.map(p => `
+    <a class="example-card" href="viz/index.html?paper=${p.slug}">
+      <div class="card-field">${p.field}</div>
+      <div class="card-title">${p.title}</div>
+      <div class="count-row">
+        <span class="cr-label">Refine:</span>
+        <span class="cr-num refine-num" data-target="${p.gt}">0</span>
+        <span class="cr-sep">&middot;</span>
+        <span class="cr-label">OpenAIReview:</span>
+        <span class="cr-num ai-num" data-target="${p.ai}">0</span>
+      </div>
+      <div class="card-meta">View review &rarr;</div>
+    </a>
+  `).join('');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.querySelectorAll('.cr-num').forEach(el => animateCount(el, parseInt(el.dataset.target), 900));
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.25 });
+  grid.querySelectorAll('.example-card').forEach(card => observer.observe(card));
+})();
+
+// Bar chart
+(function() {
+  const papers = [
+    { label: "Inference\nMolecular", gt: 15, prog: 21, full: 78 },
+    { label: "Coset\nCodes",        gt: 19, prog: 16, full: 84 },
+    { label: "Targeting\nNetworks", gt: 6,  prog: 10, full: 29 },
+    { label: "Chaotic\nBalanced",   gt: 12, prog: 21, full: 56 }
+  ];
+  const series = [
+    { key: "gt",   label: "Refine",            color: "#92400e" },
+    { key: "prog", label: "Progressive",        color: "#800000" },
+    { key: "full", label: "Progressive (Full)", color: "#f87171" }
+  ];
+  const W = 600, H = 280, ML = 40, MR = 20, MT = 20, MB = 60;
+  const chartW = W - ML - MR, chartH = H - MT - MB;
+  const maxVal = Math.max(...papers.flatMap(p => series.map(s => p[s.key])));
+  const yMax = Math.ceil(maxVal / 20) * 20;
+  const groupW = chartW / papers.length;
+  const barW = groupW / (series.length + 1);
+  function x(pi, si) { return ML + pi * groupW + (si + 0.5) * barW; }
+  function y(v) { return MT + chartH - (v / yMax) * chartH; }
+
+  let svg = `<svg viewBox="0 0 ${W} ${H}" style="width:100%;max-width:${W}px;font-family:Inter,sans-serif;display:block;margin:0 auto;">`;
+  for (let v = 0; v <= yMax; v += 20) {
+    const yy = y(v);
+    svg += `<line x1="${ML}" y1="${yy}" x2="${W - MR}" y2="${yy}" stroke="#e5e7eb" stroke-width="1"/>`;
+    svg += `<text x="${ML - 6}" y="${yy + 4}" text-anchor="end" font-size="10" fill="#9ca3af">${v}</text>`;
+  }
+  papers.forEach((p, pi) => {
+    series.forEach((s, si) => {
+      const bx = x(pi, si), by = y(p[s.key]), bh = (p[s.key] / yMax) * chartH;
+      svg += `<rect x="${bx - barW/2}" y="${by}" width="${barW - 2}" height="${bh}" fill="${s.color}" rx="2"/>`;
+      svg += `<text x="${bx}" y="${by - 4}" text-anchor="middle" font-size="9.5" fill="${s.color}" font-weight="600">${p[s.key]}</text>`;
+    });
+    const lx = ML + pi * groupW + groupW / 2;
+    p.label.split('\n').forEach((ln, li) => {
+      svg += `<text x="${lx}" y="${MT + chartH + 16 + li * 13}" text-anchor="middle" font-size="11" fill="#6b7280">${ln}</text>`;
+    });
+  });
+  series.forEach((s, i) => {
+    const lx = ML + i * 160;
+    svg += `<rect x="${lx}" y="${H - 14}" width="10" height="10" fill="${s.color}" rx="2"/>`;
+    svg += `<text x="${lx + 14}" y="${H - 5}" font-size="11" fill="#374151">${s.label}</text>`;
+  });
+  svg += '</svg>';
+  document.getElementById('blog-chart').innerHTML = svg;
+})();
+</script>
+
+</body>
+</html>
