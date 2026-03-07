@@ -720,7 +720,10 @@ function renderPaperContent() {
   const paper = getCurrentPaper();
   let html = '<div class="paper-panel-inner">';
   paper.paragraphs.forEach(p => {
-    const cleanText = p.text.replace(/You can't use 'macro parameter character #' in math mode\s*/g, '');
+    const cleanText = p.text
+      .replace(/\[([^\]]*)\]\(#page-[^)]+\)/g, '$1')
+      .replace(/\\\(/g, '(')
+      .replace(/\\\)/g, ')');
     const rendered = renderMarkdownWithMath(cleanText);
     html += `<div class="para" id="para-${p.index}" data-idx="${p.index}">
       <span class="para-idx">${p.index}</span>
