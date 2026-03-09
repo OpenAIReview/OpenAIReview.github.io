@@ -4,6 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>OpenAIReview</title>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-P2VZL2X4NX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-P2VZL2X4NX');
+</script>
 <script>
 MathJax = {
   tex: {
@@ -562,6 +570,7 @@ function buildPaperSelect() {
     currentPaperSlug = sel.value;
     activeCommentId = null;
     renderedPaperSlug = null;
+    history.replaceState(null, '', '?paper=' + currentPaperSlug);
     await loadPaper(currentPaperSlug);
     buildMethodTabs();
     render();
@@ -722,7 +731,11 @@ function renderPaperContent() {
   const paper = getCurrentPaper();
   let html = '<div class="paper-panel-inner">';
   paper.paragraphs.forEach(p => {
-    const rendered = renderMarkdownWithMath(p.text);
+    const cleanText = p.text
+      .replace(/\[([^\]]*)\]\(#page-[^)]+\)/g, '$1')
+      .replace(/\\\(/g, '(')
+      .replace(/\\\)/g, ')');
+    const rendered = renderMarkdownWithMath(cleanText);
     html += `<div class="para" id="para-${p.index}" data-idx="${p.index}">
       <span class="para-idx">${p.index}</span>
       ${rendered}
