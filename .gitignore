@@ -7,3 +7,4 @@ backend/run_backend.sh
 !package.json
 !package-lock.json
 deploy_cloud.sh
+*.md

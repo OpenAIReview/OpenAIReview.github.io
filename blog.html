@@ -4,6 +4,24 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AI-assisted Reviewing is Necessary and Should be Open — OpenAIReview</title>
+<meta name="description" content="Peer review is facing a death spiral. AI production tools are speeding it up. AI-assisted reviewing is necessary and should be open.">
+<meta property="og:title" content="AI-assisted Reviewing is Necessary and Should be Open">
+<meta property="og:description" content="Peer review is facing a death spiral. AI production tools are speeding it up. AI-assisted reviewing is necessary and should be open.">
+<meta property="og:image" content="https://openaireview.github.io/assets/review_death_spiral.png">
+<meta property="og:url" content="https://openaireview.github.io/blog.html">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AI-assisted Reviewing is Necessary and Should be Open">
+<meta name="twitter:description" content="Peer review is facing a death spiral. AI production tools are speeding it up. AI-assisted reviewing is necessary and should be open.">
+<meta name="twitter:image" content="https://openaireview.github.io/assets/review_death_spiral.png">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-P2VZL2X4NX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-P2VZL2X4NX');
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
@@ -255,7 +273,7 @@ a:hover { color: var(--accent-hover); }
 
 <img src="assets/review_death_spiral.png" alt="The review death spiral and the impact of AI tools">
 
-<p>We recently extended this work to incorporate the impact of AI. As shown above, AI production tools speed up the spiral by making it cheaper to submit. The collapse is not gradual: once costs fall below a critical threshold, the system jumps suddenly to a state where nearly all authors submit regardless of quality.</p>
+<p>We recently extended this work to incorporate the impact of AI (see this <a href="assets/review-death-spiral.pdf">paper</a>). As shown above, AI production tools speed up the spiral by making it cheaper to submit. The collapse is not gradual: once costs fall below a critical threshold, the system jumps suddenly to a state where nearly all authors submit regardless of quality.</p>
 
 <p>The only intervention that can stabilize or recover the system is improving <strong>review precision</strong>: the ability to discriminate high-quality from low-quality papers. Human reviewer precision degrades under load, and the reviewer pool cannot scale fast enough to keep pace. AI-assisted reviewing is necessary precisely because it is the only scalable path to the precision improvements needed to counteract AI production tools.</p>
 
@@ -320,7 +338,7 @@ a:hover { color: var(--accent-hover); }
 
 <p>The key finding is that maintaining a running summary dramatically improves recall: the model can catch inconsistencies that span many pages, rather than treating each section in isolation. With the progressive approach, we can generate many more comments than Refine (68 vs. 52, or 247 vs. 52 if one prefers the full version) with strong recall &mdash; 87% location recall means the model finds something at nearly every location Refine flagged. The remaining gap between location recall and LLM recall reflects cases where the model looks in the right place but identifies a different issue.</p>
 
-<p>In short, you can now get a high-quality review for the price of a coffee or less.</p>
+<p>In short, you can now get a high-quality review for the price of a coffee or less. Thanks to <a href="https://chaochunhsu.github.io/">Chao-Chun Hsu</a>, it is also a Claude skill that you can use directly if you have access to Claude Code, which makes it free.</p>
 
 <h2>Our next steps</h2>
 
