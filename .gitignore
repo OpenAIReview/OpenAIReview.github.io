@@ -1,9 +1,2 @@
-__pycache__/
-*.egg-info/
-*.db
-backend/run_backend.sh
-*.json
-!package.json
-!package-lock.json
-deploy_cloud.sh
 *.md
+.claude/
