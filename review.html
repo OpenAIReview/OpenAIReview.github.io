@@ -324,7 +324,7 @@ a:hover { color: var(--accent-hover); }
       <div class="upload-card">
         <div id="upload-form">
         <div class="drop-zone" id="drop-zone">
-          <input type="file" id="pdf-input" accept=".pdf,.tex,.md" />
+          <input type="file" id="pdf-input" accept=".pdf,.tex,.md,.txt" />
           <div class="drop-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
               <path d="M12 16V4m0 0L8 8m4-4 4 4"/>
@@ -332,7 +332,7 @@ a:hover { color: var(--accent-hover); }
             </svg>
           </div>
           <div class="drop-label" id="drop-label">Drop PDF here or click to browse</div>
-          <div class="drop-hint">PDF, TeX, Markdown &middot; max 10 MB &middot; 3 reviews/email/day</div>
+          <div class="drop-hint">PDF, TeX, Markdown, TXT &middot; max 10 MB &middot; 3 reviews/email/day</div>
         </div>
         <input type="email" id="email-input" placeholder="your@email.com — we'll notify you when done" required
           style="width:100%;padding:10px 14px;font-size:14px;font-family:inherit;border:1px solid var(--border);border-radius:var(--radius-sm);outline:none;margin-bottom:12px;transition:border-color 0.15s,box-shadow 0.15s;color:var(--text);"
@@ -406,12 +406,12 @@ function initUpload() {
     if (f) selectFile(f);
   });
 
-  const ALLOWED_EXTS = ['.pdf', '.tex', '.md'];
+  const ALLOWED_EXTS = ['.pdf', '.tex', '.md', '.txt'];
 
   function selectFile(f) {
     const ext = f.name.slice(f.name.lastIndexOf('.')).toLowerCase();
     if (!ALLOWED_EXTS.includes(ext)) {
-      showStatus('Unsupported file type. Please upload a PDF, .tex, or .md file.', true);
+      showStatus('Unsupported file type. Please upload a PDF, .tex, .md, or .txt file.', true);
       return;
     }
     if (f.size > 10 * 1024 * 1024) {
