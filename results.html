@@ -266,11 +266,11 @@ body {
 
 /* ── Comment Panel ── */
 .comment-panel {
-  flex: 0 0 480px;
-  min-width: 280px;
+  flex: 0 0 640px;
+  min-width: 320px;
   max-width: 60vw;
   overflow-y: auto;
-  padding: 20px;
+  padding: 0;
   background: var(--bg);
 }
 .overall-feedback {
@@ -316,6 +316,195 @@ body {
 .comment-card .explanation { font-size: 14px; line-height: 1.6; margin-top: 8px; }
 .comment-card .para-link { font-size: 11px; font-weight: 500; color: var(--accent); margin-top: 8px; display: inline-block; }
 .comment-card .para-link.unlocated { color: var(--text-muted); }
+
+.comment-card.resolved {
+  opacity: 0.6;
+  padding: 10px 20px;
+}
+.comment-card.resolved .card-title {
+  text-decoration: line-through;
+  color: var(--text-muted);
+}
+.comment-card.resolved .quote,
+.comment-card.resolved .explanation,
+.comment-card.resolved .para-link {
+  display: none;
+}
+.comment-card.resolved .card-header {
+  margin-bottom: 0;
+}
+.comment-card.resolved .comment-footer { display: none; }
+
+/* ── Per-comment vote buttons ── */
+.comment-footer {
+  display: flex; align-items: center; gap: 6px;
+  margin-top: 10px; padding-top: 8px;
+  border-top: 1px solid var(--border-light);
+}
+.vote-btn {
+  height: 24px; padding: 0 8px;
+  border-radius: var(--radius-sm);
+  border: 1px solid #c5c9d0;
+  background: var(--surface);
+  font-size: 12px; font-family: inherit;
+  color: var(--text-secondary); cursor: pointer;
+  display: inline-flex; align-items: center; gap: 3px;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+  flex-shrink: 0;
+}
+.vote-btn:hover { border-color: #9ca3af; color: var(--text); background: var(--bg); }
+.vote-btn.active-up   { border-color: var(--green); color: var(--green); background: var(--green-light); }
+.vote-btn.active-down { border-color: var(--red);   color: var(--red);   background: var(--red-light);  }
+
+/* ── Header actions (Rate review + tooltip) ── */
+.header-actions {
+  display: flex; align-items: center; gap: 8px;
+  margin-left: auto; flex-shrink: 0;
+}
+.rate-review-wrap { display: flex; align-items: center; gap: 6px; }
+.rate-review-tooltip { position: relative; display: flex; align-items: center; }
+.rate-review-tooltip svg { color: var(--text-muted); cursor: default; flex-shrink: 0; width: 16px; height: 16px; }
+.tooltip-bubble {
+  display: none;
+  position: absolute; top: calc(100% + 8px); right: 0;
+  width: 280px; background: #1a1a2e; color: #fff;
+  font-size: 13px; line-height: 1.5; font-weight: 400;
+  padding: 8px 12px; border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  pointer-events: none; z-index: 200;
+  white-space: normal;
+}
+.tooltip-bubble::before {
+  content: ''; position: absolute; bottom: 100%; right: 10px;
+  border: 5px solid transparent;
+  border-bottom-color: #1a1a2e;
+}
+.rate-review-tooltip:hover .tooltip-bubble { display: block; }
+
+/* ── Overall feedback button ── */
+.overall-feedback-btn {
+  padding: 6px 14px; font-size: 13px; font-weight: 500; font-family: inherit;
+  border: 1px solid var(--border); border-radius: var(--radius-sm);
+  background: var(--surface); color: var(--text-secondary); cursor: pointer;
+  display: flex; align-items: center; gap: 6px;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+  white-space: nowrap;
+}
+.overall-feedback-btn:hover { border-color: #d1d5db; color: var(--text); }
+
+/* ── Feedback modal ── */
+.fb-modal-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(15,15,25,0.45); backdrop-filter: blur(3px);
+  z-index: 2000; align-items: center; justify-content: center;
+}
+.fb-modal-overlay.open { display: flex; }
+.fb-modal {
+  background: var(--surface); border-radius: var(--radius);
+  box-shadow: 0 24px 64px rgba(0,0,0,0.22), 0 4px 16px rgba(0,0,0,0.08);
+  padding: 32px 32px 28px; width: 420px; max-width: calc(100vw - 32px);
+  position: relative;
+}
+.fb-modal-close {
+  position: absolute; top: 14px; right: 14px;
+  width: 28px; height: 28px; padding: 0;
+  border: none; background: none; cursor: pointer;
+  color: var(--text-muted); border-radius: var(--radius-sm);
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.15s, color 0.15s;
+}
+.fb-modal-close:hover { background: var(--bg); color: var(--text); }
+.fb-modal-title { font-size: 17px; font-weight: 700; margin-bottom: 4px; color: var(--text); }
+.fb-modal-subtitle { font-size: 13px; color: var(--text-secondary); margin-bottom: 22px; line-height: 1.5; }
+.fb-modal-vote-row { display: flex; gap: 10px; margin-bottom: 20px; }
+.fb-modal-vote-btn {
+  flex: 1; padding: 16px 0; gap: 10px;
+  display: flex; flex-direction: column; align-items: center;
+  border: 1.5px solid var(--border); border-radius: var(--radius);
+  background: var(--surface); cursor: pointer; font-family: inherit;
+  color: var(--text-secondary); font-size: 13px; font-weight: 500;
+  transition: border-color 0.15s, background 0.15s, color 0.15s, box-shadow 0.15s;
+}
+.fb-modal-vote-btn:hover { border-color: #d1d5db; background: var(--bg); color: var(--text); }
+.fb-modal-vote-btn.active-up   { border-color: var(--green); background: var(--green-light); color: var(--green); box-shadow: 0 0 0 3px rgba(16,185,129,0.12); }
+.fb-modal-vote-btn.active-down { border-color: var(--red);   background: var(--red-light);   color: var(--red);   box-shadow: 0 0 0 3px rgba(239,68,68,0.12); }
+.fb-modal-vote-btn svg { flex-shrink: 0; }
+.fb-modal-textarea {
+  width: 100%; min-height: 130px; resize: vertical;
+  border: 1px solid var(--border); border-radius: var(--radius-sm);
+  padding: 10px 14px; font-size: 13px; font-family: inherit;
+  color: var(--text); background: var(--bg); outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  margin-bottom: 14px; line-height: 1.6;
+}
+.fb-modal-textarea:focus { border-color: var(--accent); box-shadow: var(--shadow-focus); }
+.fb-modal-submit {
+  width: 100%; padding: 9px 0;
+  font-size: 13px; font-weight: 600; font-family: inherit;
+  background: var(--accent); color: #fff; border: none;
+  border-radius: var(--radius-sm); cursor: pointer;
+  transition: background 0.15s;
+}
+.fb-modal-submit:hover { background: var(--accent-hover); }
+.fb-modal-submit:disabled { opacity: 0.5; cursor: default; }
+
+/* ── Toast ── */
+.feedback-toast {
+  position: fixed; bottom: 24px; left: 50%;
+  transform: translateX(-50%) translateY(8px);
+  background: #1a1a2e; color: #fff;
+  padding: 10px 20px; border-radius: 20px;
+  font-size: 13px; font-weight: 500;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.2s, transform 0.2s;
+  z-index: 9999;
+}
+.feedback-toast.visible { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+.resolve-btn {
+  flex-shrink: 0;
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  border: 1.5px solid #c5c9d0;
+  background: var(--surface);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center; justify-content: center;
+  color: var(--text-secondary);
+  font-size: 13px; font-weight: 700; line-height: 1;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+  padding: 0; vertical-align: middle;
+}
+.resolve-btn:hover { border-color: var(--green); color: var(--green); background: var(--green-light); }
+.resolve-btn.is-resolved { border-color: var(--green); background: var(--green-light); color: var(--green); }
+
+.comment-filter-bar {
+  display: flex; align-items: center; gap: 10px;
+  padding: 0 20px;
+  height: 52px;
+  border-bottom: 1px solid var(--border-light);
+  background: var(--bg);
+  position: sticky; top: 0; z-index: 10;
+  font-size: 13px; color: var(--text-secondary);
+}
+.comment-panel-content { padding: 20px; }
+.comment-filter-bar .filter-label { margin-right: 2px; }
+.filter-toggle {
+  display: flex;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+.filter-toggle button {
+  padding: 5px 13px; font-size: 12px; font-weight: 500;
+  font-family: inherit; border: none;
+  background: var(--surface); color: var(--text-secondary);
+  cursor: pointer; transition: background 0.15s, color 0.15s;
+}
+.filter-toggle button + button { border-left: 1px solid var(--border); }
+.filter-toggle button.active { background: var(--accent); color: #fff; }
+.filter-resolved-count { font-size: 12px; color: var(--text-muted); }
+
 .section-label {
   font-size: 11px;
   font-weight: 600;
@@ -398,7 +587,17 @@ body {
   <span class="separator"></span>
 
   <div class="paper-title" id="paper-title">Loading review...</div>
-  <div class="legend" id="legend"></div>
+  <div class="header-actions">
+    <div class="rate-review-wrap" id="rate-review-wrap" style="display:none">
+      <button class="overall-feedback-btn" id="overall-fb-btn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> Rate review
+      </button>
+      <div class="rate-review-tooltip" id="rate-review-tooltip">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <span class="tooltip-bubble">By giving feedback you agree to share your response to help improve open reviewing.</span>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- Tabs + metrics only shown when review is ready -->
@@ -428,6 +627,31 @@ body {
   <div class="comment-panel" id="comment-panel"></div>
 </div>
 
+<!-- Feedback modal (static, opened from filter bar) -->
+<div class="fb-modal-overlay" id="fb-modal-overlay">
+  <div class="fb-modal" role="dialog" aria-modal="true" aria-labelledby="fb-modal-title">
+    <button class="fb-modal-close" id="fb-modal-close" aria-label="Close">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <h2 class="fb-modal-title" id="fb-modal-title">Rate this review</h2>
+    <p class="fb-modal-subtitle">Did you find the AI feedback useful?</p>
+    <div class="fb-modal-vote-row">
+      <button class="fb-modal-vote-btn" data-vote="up" id="fb-modal-vote-up">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 10v12"/><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z"/></svg>
+        <span>Yes, helpful</span>
+      </button>
+      <button class="fb-modal-vote-btn" data-vote="down" id="fb-modal-vote-down">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17 14V2"/><path d="M9 18.12 10 14H4.17a2 2 0 0 1-1.92-2.56l2.33-8A2 2 0 0 1 6.5 2H20a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.76a2 2 0 0 0-1.79 1.11L12 22a3.13 3.13 0 0 1-3-3.88Z"/></svg>
+        <span>Not really</span>
+      </button>
+    </div>
+    <textarea class="fb-modal-textarea" id="fb-modal-text" placeholder="Any other thoughts on the review quality? (optional)" maxlength="1000"></textarea>
+    <button class="fb-modal-submit" id="fb-modal-submit">Submit Feedback</button>
+  </div>
+</div>
+
+<div class="feedback-toast" id="feedback-toast"></div>
+
 <script>
 
 const BACKEND_URL = 'https://openaireview-backend-947059889174.us-central1.run.app';
@@ -435,9 +659,143 @@ const BACKEND_URL = 'https://openaireview-backend-947059889174.us-central1.run.a
 let paper = null;
 let currentMethod = null;
 let activeCommentId = null;
+let resolvedIds = new Set();
+let showOnlyOpen = false;
 let renderedPaper = false;
 let typesetQueue = Promise.resolve();
 let pollTimer = null;
+let commentVotes = {};
+let overallVote = null;
+
+function getToken() {
+  return new URLSearchParams(window.location.search).get('token') || 'unknown';
+}
+
+function resolvedStorageKey(commentId) {
+  return `oar_resolved:${getToken()}:${currentMethod}:${commentId}`;
+}
+
+function voteStorageKey(commentId) {
+  return `oar_vote:${getToken()}:${currentMethod}:${commentId}`;
+}
+
+function loadVoteState() {
+  commentVotes = {};
+  if (!paper || !currentMethod) return;
+  paper.methods[currentMethod]?.comments.forEach(c => {
+    const v = localStorage.getItem(voteStorageKey(c.id));
+    if (v) commentVotes[c.id] = v;
+  });
+}
+
+function showToast(msg) {
+  const el = document.getElementById('feedback-toast');
+  el.textContent = msg;
+  el.classList.add('visible');
+  setTimeout(() => el.classList.remove('visible'), 2500);
+}
+
+async function syncResolved(commentId, resolved) {
+  try {
+    await fetch(`${BACKEND_URL}/resolved`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ token: getToken(), comment_id: commentId, resolved }),
+    });
+  } catch { /* best-effort */ }
+}
+
+async function fetchVoteState() {
+  const token = getToken();
+  if (!paper || token === 'unknown') return;
+  try {
+    const resp = await fetch(`${BACKEND_URL}/feedback/${token}`);
+    if (!resp.ok) return;
+    const dbVotes = await resp.json(); // {comment_id: "up"|"down"|null}
+    for (const [methodKey, methodData] of Object.entries(paper.methods)) {
+      for (const c of methodData.comments) {
+        if (!(c.id in dbVotes)) continue;
+        const lsKey = `oar_vote:${token}:${methodKey}:${c.id}`;
+        const vote = dbVotes[c.id];
+        if (vote) {
+          localStorage.setItem(lsKey, vote);
+        } else {
+          localStorage.removeItem(lsKey);
+        }
+      }
+    }
+    loadVoteState();
+    renderComments();
+  } catch { /* best-effort */ }
+}
+
+async function fetchResolvedState() {
+  const token = getToken();
+  if (!paper || token === 'unknown') return;
+  try {
+    const resp = await fetch(`${BACKEND_URL}/resolved/${token}`);
+    if (!resp.ok) return;
+    const dbState = await resp.json(); // { comment_id: true|false }
+    for (const [methodKey, methodData] of Object.entries(paper.methods)) {
+      for (const c of methodData.comments) {
+        if (!(c.id in dbState)) continue;
+        const lsKey = `oar_resolved:${token}:${methodKey}:${c.id}`;
+        if (dbState[c.id]) {
+          localStorage.setItem(lsKey, '1');
+        } else {
+          localStorage.removeItem(lsKey);
+        }
+      }
+    }
+    loadResolvedState();
+    renderComments();
+  } catch { /* best-effort */ }
+}
+
+async function submitFeedback(payload) {
+  try {
+    await fetch(`${BACKEND_URL}/feedback`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+  } catch { /* best-effort */ }
+}
+
+const SVG_THUMB_UP = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 10v12"/><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z"/></svg>`;
+const SVG_THUMB_DOWN = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M17 14V2"/><path d="M9 18.12 10 14H4.17a2 2 0 0 1-1.92-2.56l2.33-8A2 2 0 0 1 6.5 2H20a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.76a2 2 0 0 0-1.79 1.11L12 22a3.13 3.13 0 0 1-3-3.88Z"/></svg>`;
+
+function openFbModal() {
+  ['up', 'down'].forEach(v => {
+    const btn = document.getElementById(`fb-modal-vote-${v}`);
+    if (btn) {
+      btn.classList.toggle('active-up',   v === 'up'   && overallVote === 'up');
+      btn.classList.toggle('active-down', v === 'down' && overallVote === 'down');
+    }
+  });
+  document.getElementById('fb-modal-overlay')?.classList.add('open');
+  setTimeout(() => document.getElementById('fb-modal-text')?.focus(), 50);
+}
+
+function closeFbModal() {
+  document.getElementById('fb-modal-overlay')?.classList.remove('open');
+}
+function loadResolvedState() {
+  resolvedIds = new Set();
+  if (!paper || !currentMethod) return;
+  const method = paper.methods[currentMethod];
+  if (!method) return;
+  method.comments.forEach(c => {
+    if (localStorage.getItem(resolvedStorageKey(c.id)) === '1') resolvedIds.add(c.id);
+  });
+}
+function getResolvedCount(comments) {
+  return comments.filter(c => resolvedIds.has(c.id)).length;
+}
+function getVisibleComments(comments) {
+  if (!showOnlyOpen) return comments;
+  return comments.filter(c => !resolvedIds.has(c.id));
+}
 
 const METHOD_ORDER = ['ground_truth', 'zero_shot', 'local', 'progressive', 'progressive_full'];
 
@@ -525,11 +883,6 @@ function renderMetrics() {
   bar.innerHTML = parts.join('');
 }
 
-function renderLegend() {
-  document.getElementById('legend').innerHTML = `
-    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-light);border-left:3px solid var(--accent)"></span>Comment</span>
-  `;
-}
 
 function renderPaperContent() {
   const panel = document.getElementById('paper-panel');
@@ -580,33 +933,61 @@ function renderComments() {
   const method = paper.methods[currentMethod];
   if (!method) { panel.innerHTML = '<div class="empty-state">No data for this method.</div>'; return; }
 
-  let html = '';
+  const allComments = method.comments;
+  const resolvedCount = getResolvedCount(allComments);
+  const visibleComments = getVisibleComments(allComments);
+
+  let html = `<div class="comment-filter-bar">
+    <span class="filter-label">Show:</span>
+    <div class="filter-toggle">
+      <button class="${!showOnlyOpen ? 'active' : ''}" data-filter="all">All</button>
+      <button class="${showOnlyOpen ? 'active' : ''}" data-filter="open">Open</button>
+    </div>
+    ${resolvedCount > 0 ? `<span class="filter-resolved-count">${resolvedCount} resolved</span>` : ''}
+  </div>`;
+
+  html += '<div class="comment-panel-content">';
+
   if (method.overall_feedback) {
     html += `<div class="overall-feedback"><h3>Overall Feedback</h3>${renderMarkdownWithMath(method.overall_feedback)}</div>`;
   }
 
-  const located = method.comments.filter(c => c.paragraph_index != null);
-  const unlocated = method.comments.filter(c => c.paragraph_index == null);
+  const located = visibleComments.filter(c => c.paragraph_index != null);
+  const unlocated = visibleComments.filter(c => c.paragraph_index == null);
   located.sort((a, b) => a.paragraph_index - b.paragraph_index);
 
-  if (located.length > 0) {
-    html += `<div class="section-label">Comments (${located.length})</div>`;
-    located.forEach(c => { html += renderCommentCard(c); });
-  }
-  if (unlocated.length > 0) {
-    html += `<div class="section-label">Unlocated (${unlocated.length})</div>`;
-    unlocated.forEach(c => { html += renderCommentCard(c); });
-  }
-  if (method.comments.length === 0) {
+  if (showOnlyOpen && resolvedCount === allComments.length) {
+    html += '<div class="empty-state">All issues resolved.</div>';
+  } else if (allComments.length === 0) {
     html += '<div class="empty-state">No comments from this method.</div>';
+  } else {
+    if (located.length > 0) {
+      html += `<div class="section-label">Comments (${located.length})</div>`;
+      located.forEach(c => { html += renderCommentCard(c); });
+    }
+    if (unlocated.length > 0) {
+      html += `<div class="section-label">Unlocated (${unlocated.length})</div>`;
+      unlocated.forEach(c => { html += renderCommentCard(c); });
+    }
   }
 
+  html += '</div>';
   panel.innerHTML = html;
   typesetElement(panel);
 
+  panel.querySelectorAll('.filter-toggle button').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      showOnlyOpen = btn.dataset.filter === 'open';
+      renderComments();
+    });
+  });
+
   panel.querySelectorAll('.comment-card').forEach(card => {
     card.classList.toggle('active', card.dataset.id === activeCommentId);
-    card.onclick = () => {
+    card.onclick = (e) => {
+      if (e.target.closest('.resolve-btn')) return;
+      if (e.target.closest('.vote-btn')) return;
       const id = card.dataset.id;
       const comment = method.comments.find(c => c.id === id);
       activeCommentId = id;
@@ -618,6 +999,49 @@ function renderComments() {
       document.getElementById('card-' + id)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
     };
   });
+
+  panel.querySelectorAll('.resolve-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const id = btn.dataset.id;
+      if (resolvedIds.has(id)) {
+        resolvedIds.delete(id);
+        localStorage.removeItem(resolvedStorageKey(id));
+        syncResolved(id, false);
+      } else {
+        resolvedIds.add(id);
+        localStorage.setItem(resolvedStorageKey(id), '1');
+        syncResolved(id, true);
+      }
+      renderComments();
+    });
+  });
+
+  panel.querySelectorAll('.vote-btn').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      const id = btn.dataset.id;
+      const vote = btn.dataset.vote;
+      const prev = commentVotes[id];
+      if (prev === vote) {
+        delete commentVotes[id];
+        localStorage.removeItem(voteStorageKey(id));
+        submitFeedback({ token: getToken(), type: 'comment_vote', method: currentMethod, comment_id: id, vote: null });
+      } else {
+        commentVotes[id] = vote;
+        localStorage.setItem(voteStorageKey(id), vote);
+        const comment = paper.methods[currentMethod]?.comments.find(c => c.id === id);
+        submitFeedback({ token: getToken(), type: 'comment_vote', method: currentMethod,
+                         comment_id: id, comment_title: comment?.title || null, vote });
+      }
+      const card = document.getElementById('card-' + id);
+      card?.querySelectorAll('.vote-btn').forEach(b => {
+        b.classList.toggle('active-up',   b.dataset.vote === 'up'   && commentVotes[id] === 'up');
+        b.classList.toggle('active-down', b.dataset.vote === 'down' && commentVotes[id] === 'down');
+      });
+    });
+  });
+
 }
 
 function renderCommentCard(c) {
@@ -626,11 +1050,20 @@ function renderCommentCard(c) {
     : '<span class="para-link unlocated">unlocated</span>';
   const quoteText = c.quote || '';
   const explanationText = c.explanation || c.message || '';
-  return `<div class="comment-card" id="card-${c.id}" data-id="${c.id}">
-    <div class="card-header"><span class="card-title">${escapeHtml(c.title)}</span></div>
+  const isResolved = resolvedIds.has(c.id);
+  const vote = commentVotes[c.id] || null;
+  return `<div class="comment-card${isResolved ? ' resolved' : ''}" id="card-${c.id}" data-id="${c.id}">
+    <div class="card-header">
+      <span class="card-title">${escapeHtml(c.title)}</span>
+      <button class="resolve-btn${isResolved ? ' is-resolved' : ''}" data-id="${c.id}" title="${isResolved ? 'Unresolve' : 'Resolve'}">✓</button>
+    </div>
     ${quoteText ? `<div class="quote">${renderMarkdownWithMath(wrapBareLaTeX(quoteText))}</div>` : ''}
     ${explanationText ? `<div class="explanation">${renderMarkdownWithMath(explanationText)}</div>` : ''}
     ${paraLink}
+    <div class="comment-footer">
+      <button class="vote-btn${vote === 'up' ? ' active-up' : ''}" data-id="${c.id}" data-vote="up" title="Helpful">${SVG_THUMB_UP} Helpful</button>
+      <button class="vote-btn${vote === 'down' ? ' active-down' : ''}" data-id="${c.id}" data-vote="down" title="Not helpful">${SVG_THUMB_DOWN} Not helpful</button>
+    </div>
   </div>`;
 }
 
@@ -652,7 +1085,8 @@ function escapeHtml(s) {
 function render() {
   buildMethodTabs();
   renderMetrics();
-  renderLegend();
+  loadResolvedState();
+  loadVoteState();
   if (!renderedPaper) {
     renderPaperContent();
     renderedPaper = true;
@@ -667,6 +1101,8 @@ function showViz() {
   document.getElementById('viz-chrome').classList.add('visible');
   document.getElementById('viz-main').classList.add('visible');
   document.getElementById('paper-title').textContent = paper.title || 'Review';
+  document.getElementById('rate-review-wrap').style.display = 'flex';
+  document.getElementById('comment-panel').style.flex = '';
 }
 
 function showStatus(title, msg, isError, hint) {
@@ -729,6 +1165,8 @@ async function pollStatus(token) {
     paper = await dataResp.json();
     showViz();
     render();
+    fetchResolvedState();
+    fetchVoteState();
   }
 }
 
@@ -772,6 +1210,38 @@ function copyToken() {
 
 document.addEventListener('DOMContentLoaded', () => {
   init();
+
+  // ── Rate review button ──
+  document.getElementById('overall-fb-btn')?.addEventListener('click', openFbModal);
+
+  // ── Feedback modal handlers ──
+  document.getElementById('fb-modal-close')?.addEventListener('click', closeFbModal);
+  document.getElementById('fb-modal-overlay')?.addEventListener('click', e => {
+    if (e.target === document.getElementById('fb-modal-overlay')) closeFbModal();
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeFbModal();
+  });
+
+  document.querySelectorAll('.fb-modal-vote-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      overallVote = overallVote === btn.dataset.vote ? null : btn.dataset.vote;
+      document.querySelectorAll('.fb-modal-vote-btn').forEach(b => {
+        b.classList.toggle('active-up',   b.dataset.vote === 'up'   && overallVote === 'up');
+        b.classList.toggle('active-down', b.dataset.vote === 'down' && overallVote === 'down');
+      });
+    });
+  });
+
+  document.getElementById('fb-modal-submit')?.addEventListener('click', async () => {
+    const submitBtn = document.getElementById('fb-modal-submit');
+    const text = document.getElementById('fb-modal-text')?.value.trim() || '';
+    submitBtn.disabled = true;
+    await submitFeedback({ token: getToken(), type: 'overall', vote: overallVote, text });
+    closeFbModal();
+    submitBtn.disabled = false;
+    showToast('Feedback sent — thank you!');
+  });
 
   const handle = document.getElementById('resize-handle');
   const commentPanel = document.getElementById('comment-panel');

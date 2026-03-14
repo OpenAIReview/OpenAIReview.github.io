@@ -316,14 +316,31 @@ a:hover { color: var(--accent-hover); }
   <div class="hero">
     <h1>Upload your paper</h1>
     <p class="subtitle">
-      Get feedback from our most effective method
+      Get feedback from our AI reviewer
     </p>
 
     <!-- Upload Section -->
     <div class="upload-section">
       <div class="upload-card">
         <div id="upload-form">
-        <div class="drop-zone" id="drop-zone">
+        <!-- Tab toggle -->
+        <div style="display:flex;gap:0;margin-bottom:16px;border:1px solid var(--border);border-radius:var(--radius-sm);overflow:hidden;">
+          <button id="tab-file" onclick="switchTab('file')"
+            style="flex:1;padding:9px 16px;font-size:13px;font-weight:600;font-family:inherit;border:none;cursor:pointer;background:var(--accent-light);color:var(--accent);transition:background 0.15s,color 0.15s;">
+            Upload file
+          </button>
+          <button id="tab-url" onclick="switchTab('url')"
+            style="flex:1;padding:9px 16px;font-size:13px;font-weight:600;font-family:inherit;border:none;cursor:pointer;background:var(--surface);color:var(--text-secondary);transition:background 0.15s,color 0.15s;">
+            Paste link
+          </button>
+        </div>
+
+        <!-- Pane container — fixed height keeps card size uniform across tabs -->
+        <div style="position:relative;margin-bottom:20px;">
+
+        <!-- File drop zone -->
+        <div id="pane-file" style="width:100%;">
+        <div class="drop-zone" id="drop-zone" style="margin-bottom:0;box-sizing:border-box;width:100%;">
           <input type="file" id="pdf-input" accept=".pdf,.tex,.md,.txt" />
           <div class="drop-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -331,9 +348,22 @@ a:hover { color: var(--accent-hover); }
               <path d="M20 16v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-2"/>
             </svg>
           </div>
-          <div class="drop-label" id="drop-label">Drop PDF here or click to browse</div>
+          <div class="drop-label" id="drop-label">Drop file here or click to browse</div>
           <div class="drop-hint">PDF, TeX, Markdown, TXT &middot; max 10 MB &middot; 3 reviews/email/day</div>
         </div>
+        </div><!-- end pane-file -->
+
+        <!-- URL input pane — same height as drop zone via padding -->
+        <div id="pane-url" style="display:none;width:100%;padding:36px 0;flex-direction:column;justify-content:center;gap:8px;box-sizing:border-box;">
+          <input type="url" id="url-input" placeholder="https://arxiv.org/abs/..."
+            style="width:100%;padding:10px 14px;font-size:14px;font-family:inherit;border:1px solid var(--border);border-radius:var(--radius-sm);outline:none;transition:border-color 0.15s,box-shadow 0.15s;color:var(--text);"
+            onfocus="this.style.borderColor='var(--accent)';this.style.boxShadow='var(--shadow-focus)'"
+            onblur="this.style.borderColor='var(--border)';this.style.boxShadow='none'" />
+          <div style="font-size:12px;color:var(--text-muted);">arXiv HTML or any paper URL &middot; max 10 MB &middot; 3 reviews/email/day</div>
+        </div><!-- end pane-url -->
+
+        </div><!-- end pane container -->
+
         <input type="email" id="email-input" placeholder="your@email.com — we'll notify you when done" required
           style="width:100%;padding:10px 14px;font-size:14px;font-family:inherit;border:1px solid var(--border);border-radius:var(--radius-sm);outline:none;margin-bottom:12px;transition:border-color 0.15s,box-shadow 0.15s;color:var(--text);"
           onfocus="this.style.borderColor='var(--accent)';this.style.boxShadow='var(--shadow-focus)'"
@@ -377,6 +407,19 @@ document.addEventListener('DOMContentLoaded', () => {
   initUpload();
 });
 
+let activeTab = 'file';
+
+function switchTab(tab) {
+  activeTab = tab;
+  const isFile = tab === 'file';
+  document.getElementById('pane-file').style.display = isFile ? '' : 'none';
+  document.getElementById('pane-url').style.display = isFile ? 'none' : 'flex';
+  document.getElementById('tab-file').style.background = isFile ? 'var(--accent-light)' : 'var(--surface)';
+  document.getElementById('tab-file').style.color = isFile ? 'var(--accent)' : 'var(--text-secondary)';
+  document.getElementById('tab-url').style.background = isFile ? 'var(--surface)' : 'var(--accent-light)';
+  document.getElementById('tab-url').style.color = isFile ? 'var(--text-secondary)' : 'var(--accent)';
+}
+
 function initUpload() {
   const dropZone = document.getElementById('drop-zone');
   const fileInput = document.getElementById('pdf-input');
@@ -386,9 +429,9 @@ function initUpload() {
   const tokenBox = document.getElementById('token-box');
   const tokenValue = document.getElementById('token-value');
   const viewBtn = document.getElementById('view-btn');
+  const emailInput = document.getElementById('email-input');
 
   let selectedFile = null;
-  const emailInput = document.getElementById('email-input');
 
   fileInput.addEventListener('change', () => {
     if (fileInput.files[0]) selectFile(fileInput.files[0]);
@@ -425,39 +468,57 @@ function initUpload() {
   }
 
   submitBtn.addEventListener('click', async () => {
-    if (!selectedFile) {
-      showStatus('Please select a file to review.', true);
-      return;
-    }
     const email = emailInput.value.trim();
     if (!email || !email.includes('@')) {
       showStatus('Please enter a valid email address to receive your results.', true);
       return;
     }
-    submitBtn.disabled = true;
-    tokenBox.classList.remove('visible');
-    showStatus('Uploading and queuing review...', false);
 
     const form = new FormData();
-    form.append('file', selectedFile);
     form.append('email', email);
+
+    if (activeTab === 'file') {
+      if (!selectedFile) {
+        showStatus('Please select a file to review.', true);
+        return;
+      }
+      form.append('file', selectedFile);
+    } else {
+      const urlVal = document.getElementById('url-input').value.trim();
+      if (!urlVal) {
+        showStatus('Please enter a URL to review.', true);
+        return;
+      }
+      if (!urlVal.startsWith('http')) {
+        showStatus('URL must start with http or https.', true);
+        return;
+      }
+      form.append('url', urlVal);
+    }
+
+    submitBtn.disabled = true;
+    tokenBox.classList.remove('visible');
+    showStatus(activeTab === 'file' ? 'Uploading and queuing review...' : 'Fetching URL and queuing review...', false);
 
     let token;
     try {
       const resp = await fetch(`${BACKEND_URL}/review`, { method: 'POST', body: form });
       if (resp.status === 429) {
         showStatus('Rate limit reached: 3 reviews per email per day. Try again tomorrow.', true);
+        submitBtn.disabled = false;
         return;
       }
       if (!resp.ok) {
         const err = await resp.json().catch(() => ({}));
-        showStatus(err.detail || `Upload failed (${resp.status}).`, true);
+        showStatus(err.detail || `Submission failed (${resp.status}).`, true);
+        submitBtn.disabled = false;
         return;
       }
       const data = await resp.json();
       token = data.token;
     } catch (e) {
       showStatus('Could not reach the review server. It may be starting up (cold start ~30s) — try again.', true);
+      submitBtn.disabled = false;
       return;
     }
 
