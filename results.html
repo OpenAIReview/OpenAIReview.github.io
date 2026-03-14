@@ -564,6 +564,26 @@ body {
 }
 .status-hint { font-size: 12px; color: var(--text-muted); }
 .status-error { color: #dc2626; }
+.status-token-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  max-width: 480px;
+  width: 100%;
+}
+.copy-token-btn {
+  flex-shrink: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 8px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  color: var(--text-secondary);
+  transition: border-color 0.15s, color 0.15s;
+}
 
 /* ── Viz chrome hidden until ready ── */
 .viz-chrome { display: none; }
@@ -578,6 +598,126 @@ body {
 .comment-panel::-webkit-scrollbar-track { background: transparent; }
 .paper-panel::-webkit-scrollbar-thumb,
 .comment-panel::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 3px; }
+.paper-panel::-webkit-scrollbar-thumb:hover,
+.comment-panel::-webkit-scrollbar-thumb:hover { background: #9ca3af; }
+
+/* ── Mobile bottom nav ── */
+.mobile-bottom-nav {
+  display: none;
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  height: 56px;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  z-index: 200;
+  box-shadow: 0 -2px 8px rgba(0,0,0,0.06);
+}
+.mobile-bottom-nav-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  font-size: 11px;
+  font-weight: 500;
+  font-family: inherit;
+  color: var(--text-secondary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.15s;
+  position: relative;
+}
+.mobile-bottom-nav-btn.active { color: var(--accent); }
+.mobile-bottom-nav-btn svg { width: 22px; height: 22px; }
+.mobile-nav-badge {
+  position: absolute;
+  top: 5px;
+  right: calc(50% - 22px);
+  font-size: 9px;
+  font-weight: 700;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 10px;
+  min-width: 16px;
+  height: 16px;
+  line-height: 16px;
+  text-align: center;
+  padding: 0 4px;
+}
+
+/* ── Mobile responsive ── */
+@media (max-width: 768px) {
+  .status-screen { padding: 32px 16px; }
+  .status-token-row { flex-direction: column; align-items: stretch; }
+  .status-token-row .token-display,
+  .status-token-row .copy-token-btn {
+    width: 100%;
+    max-width: none;
+  }
+
+  body.viz-ready {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+  }
+
+  body.viz-ready .header {
+    flex-wrap: wrap;
+    height: auto;
+    min-height: var(--header-h);
+    padding: 8px 16px;
+    gap: 8px;
+    align-content: center;
+    flex-shrink: 0;
+  }
+  body.viz-ready .header .separator,
+  body.viz-ready .legend { display: none; }
+  body.viz-ready .paper-title { order: 3; width: 100%; }
+  body.viz-ready .viz-chrome { flex-shrink: 0; }
+  body.viz-ready .tabs-bar { flex-shrink: 0; padding: 0 12px; }
+  body.viz-ready .metrics-bar { flex-shrink: 0; padding: 0 12px; font-size: 11px; gap: 10px; }
+  body.viz-ready .viz-main.visible {
+    flex: 1;
+    min-height: 0;
+    height: auto;
+    overflow: hidden;
+    position: relative;
+  }
+  body.viz-ready .paper-panel {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    padding: 20px 16px 72px;
+    border-right: none;
+    overflow-y: auto;
+  }
+  body.viz-ready .paper-panel.mobile-hidden { display: none; }
+  body.viz-ready .paper-panel-inner { max-width: 100%; }
+  body.viz-ready .para { padding: 6px 10px; margin: 0 -10px 2px; }
+  body.viz-ready .para .para-idx { display: none; }
+  body.viz-ready .resize-handle { display: none; }
+  body.viz-ready .comment-panel {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    flex: none;
+    width: 100%;
+    min-width: 0;
+    max-width: none;
+    display: none;
+    overflow-y: auto;
+    padding: 20px 16px 72px;
+  }
+  body.viz-ready .comment-panel.mobile-active { display: block; }
+  body.viz-ready .mobile-bottom-nav { display: flex; }
+}
+
+@media (max-width: 480px) {
+  .status-title { font-size: 18px; }
+  body.viz-ready .metrics-bar { font-size: 10px; gap: 8px; }
+}
 </style>
 </head>
 <body>
@@ -613,9 +753,9 @@ body {
   <div class="status-msg" id="status-msg">
     This usually takes 2–5 minutes. You'll receive an email when your review is ready.
   </div>
-  <div style="display:flex;align-items:center;gap:8px;max-width:480px;width:100%;">
+  <div class="status-token-row">
     <div class="token-display" id="status-token" style="flex:1;margin-bottom:0;"></div>
-    <button id="copy-token-btn" onclick="copyToken()" style="flex-shrink:0;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:8px 14px;font-size:12px;font-weight:600;font-family:inherit;cursor:pointer;color:var(--text-secondary);transition:border-color 0.15s,color 0.15s;">Copy</button>
+    <button id="copy-token-btn" class="copy-token-btn" onclick="copyToken()">Copy</button>
   </div>
   <div class="status-hint" id="status-hint">Checking again in 30 seconds...</div>
 </div>
@@ -651,7 +791,17 @@ body {
 </div>
 
 <div class="feedback-toast" id="feedback-toast"></div>
-
+<div class="mobile-bottom-nav" id="mobile-bottom-nav">
+  <button class="mobile-bottom-nav-btn active" id="mobile-btn-paper" onclick="switchMobilePanel('paper')">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" /></svg>
+    Paper
+  </button>
+  <button class="mobile-bottom-nav-btn" id="mobile-btn-comments" onclick="switchMobilePanel('comments')">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.625 9.75a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H15.75M21 12c0 4.97-4.03 9-9 9a9.97 9.97 0 0 1-4.95-1.308l-3.65 1.043 1.073-3.576A8.96 8.96 0 0 1 3 12c0-4.97 4.03-9 9-9s9 4.03 9 9Z" /></svg>
+    Comments
+    <span class="mobile-nav-badge" id="mobile-nav-badge" style="display:none"></span>
+  </button>
+</div>
 <script>
 
 const BACKEND_URL = 'https://openaireview-backend-947059889174.us-central1.run.app';
@@ -666,6 +816,7 @@ let typesetQueue = Promise.resolve();
 let pollTimer = null;
 let commentVotes = {};
 let overallVote = null;
+let mobilePanelActive = 'paper';
 
 function getToken() {
   return new URLSearchParams(window.location.search).get('token') || 'unknown';
@@ -799,6 +950,34 @@ function getVisibleComments(comments) {
 
 const METHOD_ORDER = ['ground_truth', 'zero_shot', 'local', 'progressive', 'progressive_full'];
 
+function isMobile() { return window.innerWidth <= 768; }
+
+function switchMobilePanel(panel) {
+  mobilePanelActive = panel;
+  const paperPanel = document.getElementById('paper-panel');
+  const commentPanel = document.getElementById('comment-panel');
+  const btnPaper = document.getElementById('mobile-btn-paper');
+  const btnComments = document.getElementById('mobile-btn-comments');
+  if (panel === 'paper') {
+    paperPanel.classList.remove('mobile-hidden');
+    commentPanel.classList.remove('mobile-active');
+    btnPaper?.classList.add('active');
+    btnComments?.classList.remove('active');
+  } else {
+    paperPanel.classList.add('mobile-hidden');
+    commentPanel.classList.add('mobile-active');
+    btnPaper?.classList.remove('active');
+    btnComments?.classList.add('active');
+  }
+}
+
+function updateMobileNavBadge(count) {
+  const badge = document.getElementById('mobile-nav-badge');
+  if (!badge) return;
+  badge.style.display = count > 0 ? '' : 'none';
+  badge.textContent = count > 99 ? '99+' : count;
+}
+
 function typesetElement(el) {
   if (!window.MathJax || typeof MathJax.typesetPromise !== 'function') return;
   typesetQueue = typesetQueue.then(() => {
@@ -921,6 +1100,7 @@ function updatePaperHighlights() {
       if (comment) {
         activeCommentId = comment.id;
         render();
+        if (isMobile()) switchMobilePanel('comments');
         const card = document.getElementById('card-' + comment.id);
         if (card) card.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
@@ -993,6 +1173,7 @@ function renderComments() {
       activeCommentId = id;
       render();
       if (comment && comment.paragraph_index != null) {
+        if (isMobile()) switchMobilePanel('paper');
         const paraEl = document.getElementById('para-' + comment.paragraph_index);
         if (paraEl) paraEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
@@ -1094,15 +1275,18 @@ function render() {
   }
   updatePaperHighlights();
   renderComments();
+  updateMobileNavBadge(paper.methods[currentMethod]?.comments.length || 0);
 }
 
 function showViz() {
+  document.body.classList.add('viz-ready');
   document.getElementById('status-screen').classList.add('hidden');
   document.getElementById('viz-chrome').classList.add('visible');
   document.getElementById('viz-main').classList.add('visible');
   document.getElementById('paper-title').textContent = paper.title || 'Review';
   document.getElementById('rate-review-wrap').style.display = 'flex';
   document.getElementById('comment-panel').style.flex = '';
+  if (isMobile()) switchMobilePanel(mobilePanelActive);
 }
 
 function showStatus(title, msg, isError, hint) {
@@ -1176,7 +1360,7 @@ async function init() {
 
   if (!token) {
     document.getElementById('status-spinner').style.display = 'none';
-    document.getElementById('status-token').style.display = 'none';
+    document.querySelector('.status-token-row').style.display = 'none';
     showStatus(
       'No token provided',
       'Visit the home page to upload a paper and get a review token.',

@@ -451,6 +451,117 @@ body {
 .comment-panel::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 3px; }
 .paper-panel::-webkit-scrollbar-thumb:hover,
 .comment-panel::-webkit-scrollbar-thumb:hover { background: #9ca3af; }
+
+/* ── Mobile bottom nav ── */
+.mobile-bottom-nav {
+  display: none;
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  height: 56px;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  z-index: 200;
+  box-shadow: 0 -2px 8px rgba(0,0,0,0.06);
+}
+.mobile-bottom-nav-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  font-size: 11px;
+  font-weight: 500;
+  font-family: inherit;
+  color: var(--text-secondary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.15s;
+  position: relative;
+}
+.mobile-bottom-nav-btn.active { color: var(--accent); }
+.mobile-bottom-nav-btn svg { width: 22px; height: 22px; }
+.mobile-nav-badge {
+  position: absolute;
+  top: 5px;
+  right: calc(50% - 22px);
+  font-size: 9px;
+  font-weight: 700;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 10px;
+  min-width: 16px;
+  height: 16px;
+  line-height: 16px;
+  text-align: center;
+  padding: 0 4px;
+}
+
+/* ── Mobile responsive ── */
+@media (max-width: 768px) {
+  body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+  }
+
+  .header {
+    flex-wrap: wrap;
+    height: auto;
+    min-height: var(--header-h);
+    padding: 8px 16px;
+    gap: 8px;
+    align-content: center;
+    flex-shrink: 0;
+  }
+  .header .separator { display: none; }
+  .legend { display: none; }
+  .paper-select-wrapper { order: 4; max-width: 100%; width: 100%; }
+
+  .tabs-bar { flex-shrink: 0; padding: 0 12px; }
+  .metrics-bar { flex-shrink: 0; padding: 0 12px; font-size: 11px; gap: 10px; }
+
+  .main {
+    flex: 1;
+    min-height: 0;
+    height: auto;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .paper-panel {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    padding: 20px 16px 72px;
+    border-right: none;
+    overflow-y: auto;
+  }
+  .paper-panel.mobile-hidden { display: none; }
+  .paper-panel-inner { max-width: 100%; }
+
+  .para { padding: 6px 10px; margin: 0 -10px 2px; }
+  .para .para-idx { display: none; }
+
+  .comment-panel {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    flex: none;
+    width: 100%;
+    display: none;
+    overflow-y: auto;
+    padding: 20px 16px 72px;
+  }
+  .comment-panel.mobile-active { display: block; }
+
+  .mobile-bottom-nav { display: flex; }
+}
+
+@media (max-width: 480px) {
+  .metrics-bar { font-size: 10px; gap: 8px; }
+}
 </style>
 </head>
 <body>
@@ -470,6 +581,18 @@ body {
   <div class="comment-panel" id="comment-panel"></div>
 </div>
 
+<div class="mobile-bottom-nav" id="mobile-bottom-nav">
+  <button class="mobile-bottom-nav-btn active" id="mobile-btn-paper" onclick="switchMobilePanel('paper')">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" /></svg>
+    Paper
+  </button>
+  <button class="mobile-bottom-nav-btn" id="mobile-btn-comments" onclick="switchMobilePanel('comments')">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.625 9.75a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H15.75M21 12c0 4.97-4.03 9-9 9a9.97 9.97 0 0 1-4.95-1.308l-3.65 1.043 1.073-3.576A8.96 8.96 0 0 1 3 12c0-4.97 4.03-9 9-9s9 4.03 9 9Z" /></svg>
+    Comments
+    <span class="mobile-nav-badge" id="mobile-nav-badge" style="display:none"></span>
+  </button>
+</div>
+
 <script>
 let INDEX = null;
 let paperCache = {};
@@ -479,6 +602,35 @@ const METHOD_ORDER = ['ground_truth','zero_shot','local','progressive','progress
 let activeCommentId = null;
 let renderedPaperSlug = null;
 let typesetQueue = Promise.resolve();
+let mobilePanelActive = 'paper';
+
+function isMobile() { return window.innerWidth <= 768; }
+
+function switchMobilePanel(panel) {
+  mobilePanelActive = panel;
+  const paperPanel = document.getElementById('paper-panel');
+  const commentPanel = document.getElementById('comment-panel');
+  const btnPaper = document.getElementById('mobile-btn-paper');
+  const btnComments = document.getElementById('mobile-btn-comments');
+  if (panel === 'paper') {
+    paperPanel.classList.remove('mobile-hidden');
+    commentPanel.classList.remove('mobile-active');
+    btnPaper?.classList.add('active');
+    btnComments?.classList.remove('active');
+  } else {
+    paperPanel.classList.add('mobile-hidden');
+    commentPanel.classList.add('mobile-active');
+    btnPaper?.classList.remove('active');
+    btnComments?.classList.add('active');
+  }
+}
+
+function updateMobileNavBadge(count) {
+  const badge = document.getElementById('mobile-nav-badge');
+  if (!badge) return;
+  badge.style.display = count > 0 ? '' : 'none';
+  badge.textContent = count > 99 ? '99+' : count;
+}
 
 function typesetElement(el) {
   if (!window.MathJax || typeof MathJax.typesetPromise !== 'function') return;
@@ -569,6 +721,7 @@ function buildPaperSelect() {
     activeCommentId = null;
     renderedPaperSlug = null;
     history.replaceState(null, '', '?paper=' + currentPaperSlug);
+    if (isMobile()) switchMobilePanel('paper');
     await loadPaper(currentPaperSlug);
     buildMethodTabs();
     render();
@@ -630,6 +783,7 @@ function render() {
 
   updatePaperHighlights();
   renderComments();
+  updateMobileNavBadge(paper.methods[currentMethod]?.comments.length || 0);
 }
 
 function renderLegend() {
@@ -774,6 +928,7 @@ function updatePaperHighlights() {
       if (comment) {
         activeCommentId = comment.id;
         render();
+        if (isMobile()) switchMobilePanel('comments');
         const card = document.getElementById('card-' + comment.id);
         if (card) card.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
@@ -823,6 +978,7 @@ function renderComments() {
       activeCommentId = id;
       render();
       if (comment && comment.paragraph_index != null) {
+        if (isMobile()) switchMobilePanel('paper');
         const paraEl = document.getElementById('para-' + comment.paragraph_index);
         if (paraEl) paraEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
