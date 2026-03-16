@@ -393,7 +393,7 @@ a:hover { color: var(--accent-hover); }
 
         </div><!-- end pane container -->
 
-        <div style="font-size:12px;color:var(--text-muted);margin-bottom:8px;">Papers are capped at 20 pages and 20k tokens.</div>
+        <div style="font-size:12px;color:var(--text-muted);margin-bottom:8px;">Papers are capped at 20 pages and 20k tokens. We only use your submission for reviewing purposes. If you choose to give feedback in the result page, your feedback (and submission) will potentially be used for an open benchmark for improving AI reviewing.</div>
 
         <input type="email" id="email-input" placeholder="your@email.com — we'll notify you when done" required
           style="width:100%;padding:10px 14px;font-size:14px;font-family:inherit;border:1px solid var(--border);border-radius:var(--radius-sm);outline:none;margin-bottom:12px;transition:border-color 0.15s,box-shadow 0.15s;color:var(--text);"
@@ -535,13 +535,16 @@ function initUpload() {
     try {
       const resp = await fetch(`${BACKEND_URL}/review`, { method: 'POST', body: form });
       if (resp.status === 429) {
-        showStatus('Rate limit reached: 3 reviews per email per day. Try again tomorrow.', true);
+        const err = await resp.json().catch(() => ({}));
+        const rawDetail = err.detail ? err.detail.trimEnd() : '';
+        const detail = rawDetail ? ' ' + escapeHtml(rawDetail.endsWith('.') ? rawDetail : rawDetail + '.') : '';
+        showStatus('Rate limit reached today:' + detail + ' Try again tomorrow on the web or check out our <a href="https://github.com/ChicagoHAI/OpenAIReview" target="_blank">tool</a> online.', true);
         submitBtn.disabled = false;
         return;
       }
       if (!resp.ok) {
         const err = await resp.json().catch(() => ({}));
-        showStatus(err.detail || `Submission failed (${resp.status}).`, true);
+        showStatus(escapeHtml(err.detail || `Submission failed (${resp.status}).`), true);
         submitBtn.disabled = false;
         return;
       }
@@ -581,8 +584,11 @@ function initUpload() {
     }
   }
 
+  function escapeHtml(s) {
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
   function showStatus(msg, isError) {
-    statusEl.textContent = msg;
+    statusEl.innerHTML = msg;
     statusEl.className = 'upload-status visible' + (isError ? ' error' : '');
   }
   function hideStatus() {
