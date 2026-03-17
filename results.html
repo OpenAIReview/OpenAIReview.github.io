@@ -751,7 +751,7 @@ body {
   <div class="spinner" id="status-spinner"></div>
   <div class="status-title" id="status-title">Processing your review...</div>
   <div class="status-msg" id="status-msg">
-    This usually takes 2–5 minutes. You'll receive an email when your review is ready.
+    This usually takes 15–20 minutes. You'll receive an email when your review is ready.
   </div>
   <div class="status-token-row">
     <div class="token-display" id="status-token" style="flex:1;margin-bottom:0;"></div>
@@ -1328,7 +1328,7 @@ async function pollStatus(token) {
   const { status } = body;
 
   if (status === 'pending') {
-    showStatus('Processing your review...', 'This usually takes 2–5 minutes. You\'ll receive an email when it\'s ready.', false, 'Checking again in 30 seconds...');
+    showStatus('Processing your review...', 'This usually takes 15–20 minutes. You\'ll receive an email when it\'s ready.', false, 'Checking again in 30 seconds...');
     pollTimer = setTimeout(() => pollStatus(token), 30000);
     return;
   }
