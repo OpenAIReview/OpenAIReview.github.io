@@ -406,6 +406,18 @@ a:hover { color: var(--accent-hover); }
           We only use your submission for reviewing purposes. If you give feedback on the result page, your feedback (and submission) may be used in an open benchmark for improving AI reviewing.
         </div>
 
+        <!-- BYO OpenRouter key -->
+        <div id="byok-section" style="border:1.5px solid #f9c0c0;border-radius:var(--radius-sm);background:var(--accent-light);margin-top:50px;margin-bottom:14px;padding:16px;box-shadow:var(--shadow-sm);">
+          <div style="font-size:14px;font-weight:700;color:var(--accent);margin-bottom:8px;letter-spacing:-0.1px;">Have an OpenRouter key?</div>
+          <div style="font-size:13px;color:var(--text);line-height:1.55;margin-bottom:12px;">
+            The system has a daily budget shared across all users. If you have an OpenRouter key, please use it so there is more budget left for less well-resourced users. Your key is used only for this single review and is never stored or logged. Get one at <a href="https://openrouter.ai/keys" target="_blank">openrouter.ai/keys</a>.
+          </div>
+          <input type="password" id="byok-input" placeholder="sk-or-v1-..." autocomplete="off" spellcheck="false"
+            style="width:100%;padding:10px 14px;font-size:13px;font-family:'SF Mono','Fira Code',monospace;border:1px solid #f9c0c0;border-radius:var(--radius-sm);outline:none;background:#fff;transition:border-color 0.15s,box-shadow 0.15s;color:var(--text);"
+            onfocus="this.style.borderColor='var(--accent)';this.style.boxShadow='var(--shadow-focus)'"
+            onblur="this.style.borderColor='#f9c0c0';this.style.boxShadow='none'" />
+        </div>
+
         <input type="email" id="email-input" placeholder="your@email.com — we'll notify you when done" required
           style="width:100%;padding:10px 14px;font-size:14px;font-family:inherit;border:1px solid var(--border);border-radius:var(--radius-sm);outline:none;margin-bottom:12px;transition:border-color 0.15s,box-shadow 0.15s;color:var(--text);"
           onfocus="this.style.borderColor='var(--accent)';this.style.boxShadow='var(--shadow-focus)'"
@@ -434,7 +446,9 @@ a:hover { color: var(--accent-hover); }
 </div>
 
 <script>
-const BACKEND_URL = 'https://openaireview-backend-947059889174.us-central1.run.app';
+const BACKEND_URL = (location.hostname === 'localhost' || location.hostname === '127.0.0.1')
+  ? `http://${location.hostname}:8080`
+  : 'https://openaireview-backend-947059889174.us-central1.run.app';
 
 function lookupToken() {
   const token = document.getElementById('lookup-input').value.trim();
@@ -518,6 +532,12 @@ function initUpload() {
 
     const form = new FormData();
     form.append('email', email);
+
+    const byokInput = document.getElementById('byok-input');
+    const byokKey = byokInput ? byokInput.value.trim() : '';
+    if (byokKey) {
+      form.append('openrouter_api_key', byokKey);
+    }
 
     if (activeTab === 'file') {
       if (!selectedFile) {
