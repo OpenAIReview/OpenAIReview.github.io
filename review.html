@@ -406,6 +406,34 @@ a:hover { color: var(--accent-hover); }
           We only use your submission for reviewing purposes. If you give feedback on the result page, your feedback (and submission) may be used in an open benchmark for improving AI reviewing.
         </div>
 
+        <!-- BYO OpenRouter key -->
+        <div id="byok-section" style="border:1.5px solid #f9c0c0;border-radius:var(--radius-sm);background:var(--accent-light);margin-top:50px;margin-bottom:14px;padding:16px;box-shadow:var(--shadow-sm);">
+          <div style="font-size:14px;font-weight:700;color:var(--accent);margin-bottom:8px;letter-spacing:-0.1px;">Use your own key to review full papers</div>
+          <div style="font-size:13px;color:var(--text);line-height:1.55;margin-bottom:12px;">
+            We encourage you to provide an OpenRouter API key so you can review the full paper without the default 20-page / 20k-token submission cap. These limits exist to make a free service possible (<a href="mailto:chenhao@uchicago.edu?subject=Sponsoring%20OpenAIReview">reach out</a> if you are interested in sponsoring our research). Using your own key also helps reserve our free service budget for less well-resourced users. Your key is used only for this single review and is never stored or logged. Get one at <a href="https://openrouter.ai/keys" target="_blank">openrouter.ai/keys</a>.
+          </div>
+          <input type="password" id="byok-input" placeholder="sk-or-v1-..." autocomplete="off" spellcheck="false"
+            style="width:100%;padding:10px 14px;font-size:13px;font-family:'SF Mono','Fira Code',monospace;border:1px solid #f9c0c0;border-radius:var(--radius-sm);outline:none;background:#fff;transition:border-color 0.15s,box-shadow 0.15s;color:var(--text);"
+            onfocus="this.style.borderColor='var(--accent)';this.style.boxShadow='var(--shadow-focus)'"
+            onblur="this.style.borderColor='#f9c0c0';this.style.boxShadow='none'" />
+          <div style="margin-top:10px;">
+            <label for="byok-model" style="display:block;font-size:12px;color:var(--text-secondary);margin-bottom:6px;">Model <span style="color:var(--text-muted);">(optional, defaults to Claude Opus 4.6)</span></label>
+            <input type="text" id="byok-model" placeholder="anthropic/claude-opus-4-6" autocomplete="off" spellcheck="false"
+              style="width:100%;padding:8px 12px;font-size:13px;font-family:'SF Mono','Fira Code',monospace;border:1px solid #f9c0c0;border-radius:var(--radius-sm);background:#fff;color:var(--text);outline:none;transition:border-color 0.15s,box-shadow 0.15s;"
+              onfocus="this.style.borderColor='var(--accent)';this.style.boxShadow='var(--shadow-focus)'"
+              onblur="this.style.borderColor='#f9c0c0';this.style.boxShadow='none'" />
+            <div style="font-size:11px;color:var(--text-muted);margin-top:6px;">Any OpenRouter slug as <code>&lt;provider&gt;/&lt;model&gt;</code>. Browse at <a href="https://openrouter.ai/models" target="_blank">openrouter.ai/models</a>.</div>
+          </div>
+          <div style="margin-top:10px;">
+            <label for="byok-tier" style="display:block;font-size:12px;color:var(--text-secondary);margin-bottom:6px;">Length</label>
+            <select id="byok-tier"
+              style="width:100%;padding:8px 12px;font-size:13px;font-family:inherit;border:1px solid #f9c0c0;border-radius:var(--radius-sm);background:#fff;color:var(--text);outline:none;cursor:pointer;">
+              <option value="default">20k tokens (~20 pages) &mdash; default</option>
+              <option value="full">Full paper (up to 100 pages)</option>
+            </select>
+          </div>
+        </div>
+
         <input type="email" id="email-input" placeholder="your@email.com — we'll notify you when done" required
           style="width:100%;padding:10px 14px;font-size:14px;font-family:inherit;border:1px solid var(--border);border-radius:var(--radius-sm);outline:none;margin-bottom:12px;transition:border-color 0.15s,box-shadow 0.15s;color:var(--text);"
           onfocus="this.style.borderColor='var(--accent)';this.style.boxShadow='var(--shadow-focus)'"
@@ -434,7 +462,9 @@ a:hover { color: var(--accent-hover); }
 </div>
 
 <script>
-const BACKEND_URL = 'https://openaireview-backend-947059889174.us-central1.run.app';
+const BACKEND_URL = (location.hostname === 'localhost' || location.hostname === '127.0.0.1')
+  ? `http://${location.hostname}:8080`
+  : 'https://openaireview-backend-947059889174.us-central1.run.app';
 
 function lookupToken() {
   const token = document.getElementById('lookup-input').value.trim();
@@ -518,6 +548,25 @@ function initUpload() {
 
     const form = new FormData();
     form.append('email', email);
+
+    const byokInput = document.getElementById('byok-input');
+    const byokKey = byokInput ? byokInput.value.trim() : '';
+    if (byokKey) {
+      form.append('openrouter_api_key', byokKey);
+      const modelInput = document.getElementById('byok-model');
+      const modelVal = modelInput ? modelInput.value.trim() : '';
+      if (modelVal) {
+        if (!/^[a-zA-Z0-9._\-]+\/[a-zA-Z0-9._\-]+$/.test(modelVal)) {
+          showStatus('Model must look like &lt;provider&gt;/&lt;model&gt;, e.g. anthropic/claude-opus-4-6.', true);
+          submitBtn.disabled = false;
+          return;
+        }
+        form.append('model', modelVal);
+      }
+      const tierSel = document.getElementById('byok-tier');
+      const tierVal = tierSel ? tierSel.value : '';
+      if (tierVal) form.append('tier', tierVal);
+    }
 
     if (activeTab === 'file') {
       if (!selectedFile) {
