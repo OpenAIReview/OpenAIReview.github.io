@@ -566,7 +566,7 @@ function initUpload() {
       form.append('openrouter_api_key', byokKey);
       const modelInput = document.getElementById('byok-model');
       const modelVal = (modelInput ? modelInput.value.trim() : '') || 'anthropic/claude-opus-4-8';
-      if (!/^[a-zA-Z0-9._\-]+\/[a-zA-Z0-9._\-]+$/.test(modelVal)) {
+      if (!/^~?[a-zA-Z0-9._\-]+\/[a-zA-Z0-9._\-]+(:[a-zA-Z0-9._\-]+)?$/.test(modelVal)) {
         showStatus('Model must look like &lt;provider&gt;/&lt;model&gt;, e.g. anthropic/claude-opus-4-8.', true);
         submitBtn.disabled = false;
         return;
