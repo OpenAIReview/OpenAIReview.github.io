@@ -1,0 +1,194 @@
+{
+ "id": "The-Campana-Peternell-conjecture-in-dimension-six-September-25-2026",
+ "title": "The Campana–Peternell conjecture in dimension six",
+ "abstract": "We prove that every smooth connected complex projective Fano sixfold with nef tangent bundle is rational homogeneous, resolving the Campana–Peternell conjecture in complex dimension six. As a consequence, a connected compact Kähler manifold <i>X</i> with nef holomorphic tangent bundle and <span class=\"math\">\\dim_{\\mathbb C}X-\\widetilde q(X)\\leq6</span> has ordinary universal cover <span class=\"math\">F\\times\\mathbb C^{\\widetilde q(X)}</span>, where <i>F</i> is a rational homogeneous manifold and <span class=\"math\">\\widetilde q(X)</span> is the maximal irregularity of a connected finite étale cover.",
+ "result_id": "067",
+ "result_title": "The Campana–Peternell conjecture in dimension six",
+ "subject": "Algebraic and complex geometry",
+ "source_pdf": "preprints/The-Campana-Peternell-conjecture-in-dimension-six-September-25-2026/main.pdf",
+ "pdf": "pdf/The-Campana-Peternell-conjecture-in-dimension-six-September-25-2026.pdf",
+ "page_sizes": [
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ]
+ ],
+ "macros": "",
+ "review": {
+  "method": "claude CLI agent, claude-opus-5-5",
+  "effort": "xhigh",
+  "date": "2026-10-07"
+ },
+ "overall_assessment": "I found no step that is demonstrably false, but the main theorem is not fully established by what I could check: it is conditional on two inputs I could not verify. (1) Lemma 5.1 (the quadratic $32-20u+3u^2=0$) rests entirely on machine linear algebra — ranks of $A$, $K$, $P$, $N$, the finite-field dimensions $60/163/6$, and the exact membership of three sparse columns in $\\mathcal K_3$. I had no way to execute the program. (2) The pseudoindex-four case rests on the quoted form of Kanemitsu's Theorem 3.3 and Proposition 4.1 in arbitrary dimension (\"$X$ is rational homogeneous or the evaluation map factors\"), which I could not confirm from the source. Everything else I recomputed by hand and it holds: the splitting $T_e|_C = \\mathcal O(-1)^{d-2}$, the $\\mathbb P^1$-fibration involution calculus, the whole intersection-theoretic exclusion in pseudoindex four (which I also tested against $OG(2,7)$, where the same method gives the correct integer $\\lambda=3$ and degree $56$), the descent of $r,s,t$, the constant-Hodge/GRR vanishings, the formulas for $D_i$, Todd classes and the row families, the product factorisation, the logic of the cubic relaxation, the nondegeneracy lemma, the sectional-genus argument and the scroll classification. For Lemma 5.1 I confirmed that verify.py implements exactly the matrices defined in the text, that the column count $581$ and $|C_1|,|C_2|,|C_3| = 129, 1140, 6820$ are right, that the product columns are the true characteristic numbers of $\\mathrm{Gr}(2,5)$ and of $\\mathbb P^4$-bundles over surfaces with $c_1=0$, that the minor $-16/5$ is right, and that the three sparse columns are mutually consistent. This makes the computation credible but does not replace running it. The two corollaries follow from the main theorem by standard results.",
+ "num_findings": 2,
+ "comments": [
+  {
+   "title": "Lemma 5.1, on which the whole pseudoindex-five case rests, is supported only by machine rank computations that I could not reproduce.",
+   "severity": "major",
+   "location": "Section 5.2–5.3 (proof of Lemma 5.1) and Appendix A",
+   "quote": "rank is $6814$, so its rational rank is at least $6814$. Thus",
+   "explanation": "This is an unresolved verification gap, not a demonstrated error. The implication $N(\\xi_i\\eta_j)=0\\Rightarrow 32-20\\eta_1+3\\eta_1^2=0$ is derived from: rank $516$ of the $1785\\times581$ matrix $A$, rank $60$ of $P$, the finite-field dimensions $60,163,6$ of $\\mathcal K_1,\\mathcal K_2,\\mathcal K_3$, and exact annihilation by $N$ of three sparse columns on all $120$ double slices. None of this is checkable from the text. I confirmed that the code matches the definitions, that $581$, $129$, $1140$, $6820$ are correct, that the product columns are the true invariants of $\\operatorname{Gr}(2,5)$ and of $\\mathbb P^4$-bundles, and that the relaxation logic is sound. The bound $\\dim\\mathcal K_3\\le 6$ and the sparse columns remain unverified.",
+   "consequence": "If $\\dim\\mathcal K_3$ were larger than $6$, or a sparse column were not in $\\mathcal K_3$, the quadratic for $u$ would not follow. Proposition 6.2, and with it the pseudoindex-five case of Theorem 1.1 and both corollaries in dimension six, would be unproved.",
+   "status": "unverified",
+   "source": {
+    "file": "sections/05-arithmetic.tex",
+    "lines": [
+     137,
+     137
+    ]
+   },
+   "boxes": [
+    {
+     "page": 17,
+     "x": 77.760124,
+     "y": 424.951877,
+     "w": 457.996094,
+     "h": 12.0452075
+    },
+    {
+     "page": 17,
+     "x": 77.760124,
+     "y": 438.50109699999996,
+     "w": 456.479706,
+     "h": 9.3937325
+    }
+   ]
+  },
+  {
+   "title": "The pseudoindex-four case depends on a dichotomy attributed to Kanemitsu in arbitrary dimension that the paper does not prove and that I could not confirm.",
+   "severity": "major",
+   "location": "Proof of Proposition 3.1, first paragraph",
+   "quote": "They show that either $X$ is rational homogeneous, or there is a diagram",
+   "explanation": "This is also an unresolved dependency rather than a demonstrated error. The paper's own intersection argument only excludes the factorisation $e=g\\circ f$. The complementary case, in particular when $e$ is a $\\mathbb P^2$-bundle (which does occur for $LG(3,6)$), is delegated entirely to Kanemitsu's Theorem 3.3 and Proposition 4.1, cited from a paper on fivefolds. The paper asserts these hold in every dimension and conclude rational homogeneity whenever no factorisation exists. I could not check that the cited statements say this for sixfolds. Everything after this sentence in Section 3 I verified.",
+   "consequence": "If the cited results give only a structural trichotomy for $e$, or homogeneity only in dimension five, then pseudoindex-four sixfolds whose evaluation map does not factor are not covered, and Theorem 1.1 has a gap in that case.",
+   "status": "unverified",
+   "source": {
+    "file": "sections/03-pseudoindex-four.tex",
+    "lines": [
+     30,
+     30
+    ]
+   },
+   "boxes": [
+    {
+     "page": 8,
+     "x": 77.760124,
+     "y": 130.818012,
+     "w": 456.479706,
+     "h": 12.0452075
+    },
+    {
+     "page": 8,
+     "x": 77.760124,
+     "y": 144.367206,
+     "w": 456.479706,
+     "h": 12.0452075
+    }
+   ]
+  }
+ ]
+}

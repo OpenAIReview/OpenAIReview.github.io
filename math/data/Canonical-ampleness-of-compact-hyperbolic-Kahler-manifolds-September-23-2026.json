@@ -1,0 +1,224 @@
+{
+ "id": "Canonical-ampleness-of-compact-hyperbolic-Kahler-manifolds-September-23-2026",
+ "title": "Canonical ampleness of compact hyperbolic Kähler manifolds",
+ "abstract": "We prove that every compact connected Kähler manifold of positive complex dimension containing no nonconstant entire curve has ample canonical bundle and is projective. This resolves positively Kobayashi's canonical-ampleness conjecture in the smooth compact Kähler category.",
+ "result_id": "051",
+ "result_title": "Kobayashi’s canonical-ampleness conjecture",
+ "subject": "Algebraic and complex geometry",
+ "source_pdf": "preprints/Canonical-ampleness-of-compact-hyperbolic-Kahler-manifolds-September-23-2026/canonical-ampleness.pdf",
+ "pdf": "pdf/Canonical-ampleness-of-compact-hyperbolic-Kahler-manifolds-September-23-2026.pdf",
+ "page_sizes": [
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ]
+ ],
+ "macros": "\\newcommand{\\C}{\\mathbb C}\n\\newcommand{\\R}{\\mathbb R}\n\\newcommand{\\Z}{\\mathbb Z}\n\\newcommand{\\D}{\\mathbb D}\n\\newcommand{\\PP}{\\mathbb P}\n\\newcommand{\\dd}{\\mathrm d}\n\\newcommand{\\ddc}{i\\partial\\bar\\partial}\n\\newcommand{\\eps}{\\varepsilon}\n\\newcommand{\\cL}{\\mathcal L}\n\\newcommand{\\cO}{\\mathcal O}\n\\newcommand{\\Ric}{\\operatorname{Ric}}\n\\newcommand{\\tr}{\\operatorname{tr}}\n\\newcommand{\\osc}{\\operatorname{osc}}",
+ "review": {
+  "method": "claude CLI agent, claude-opus-5-5",
+  "effort": "xhigh",
+  "date": "2026-10-07"
+ },
+ "overall_assessment": "I did not find a gap in the chain leading to Theorem 1.1, so I cannot refute the main result; given the size of the claim, that is a statement about what I checked, not a certification. The proof rests on four new steps: (i) existence of a maximizer of $d + P_q - \\delta A_h$ (Prop 3.2), which uses only Brody normality and Fatou; (ii) boundary regularity from comparison with dilations (Lemma 3.3, Prop 3.4); (iii) a boundary-unitary holomorphic frame and center-fixed holomorphic variations with derivative $z\\cdot b_j$ (Props 4.2, 4.3); (iv) the Hessian trace identities (Prop 5.2), in particular $L A_h = n - A_{R_h}(f)$. I recomputed (i), (ii) and (iv) line by line. I tested the Hessian and determinant identities on explicit curved examples (Poincaré disc with $f(z)=az$, $\\mathbb P^1$ with Fubini–Study, flat $\\mathbb C^n$), and tested the maximizing inequality on the rotationally symmetric critical discs of a compact hyperbolic Riemann surface; all agreed. I also checked that the argument fails where it should: on tori and on $E\\times\\mathbb C$ the supremum is $+\\infty$, and on incomplete domains the maximizer touches the boundary. In dimension one and for $K_X$ ample the conclusion of Prop 7.1 is consistent with Yau's Schwarz lemma. The downstream steps (Aubin–Yau, cohomological limit, Morse inequalities, Moishezon projectivity, log cone theorem) are standard and correctly applied. What I could not verify to full rigor: the Banach-analytic details of Prop 4.3 (holomorphy of the substitution operators, the uniform Sobolev dependence of the fibre inverse, the exact form of the cited implicit function theorem), and the exact statements of the cited Cauchy-transform estimates and of the Poletsky–Rosay theorem; I checked their logic and they are of standard type, but an independent expert check of Sections 4–5 is warranted. The argument would also give a short proof that compact Kähler manifolds with $\\mathrm{Ric}\\ge 0$ are not hyperbolic, which is a further reason for caution. The only defects I can defend are outside the main chain: Corollaries 9.1 and 9.2 are conditional on unrefereed companion preprints, one of which asserts Fujita's freeness conjecture in all dimensions.",
+ "num_findings": 2,
+ "comments": [
+  {
+   "title": "Corollary 10.1 is proved only by invoking Fujita's freeness conjecture in all dimensions, which is not an established theorem.",
+   "severity": "major",
+   "location": "Section 10 (Two consequences), Corollary 10.1 (label cor:pluricanonical-freeness), proof",
+   "quote": "Apply Fujita freeness in its all-powers form\n\\cite[Corollary~6.3]{OpenAIFujita2026} with $L=K_X$ and exponent\n$m-1\\ge n+1$",
+   "explanation": "The only input beyond Theorem 1.1 is the statement that $K_X+mL$ is globally generated for every ample $L$ and every $m\\ge n+1$ on a smooth projective $n$-fold. This is Fujita's freeness conjecture. In the refereed literature I know it is proved only in low dimensions, and the best general bounds (Angehrn–Siu type) are quadratic in $n$. The paper cites it from an unrefereed companion preprint and treats it as established. Nothing in the present paper (ampleness of $K_X$, absence of rational curves) yields the bound $m\\ge n+2$ independently.",
+   "consequence": "Corollary 10.1 is conditional on an open conjecture. It is not used in the proof of Theorem 1.1, so the main theorem is unaffected.",
+   "status": "unverified",
+   "source": {
+    "file": "sections/consequences.tex",
+    "lines": [
+     16,
+     18
+    ]
+   },
+   "boxes": [
+    {
+     "page": 26,
+     "x": 66.545433,
+     "y": 541.739627,
+     "w": 473.454559,
+     "h": 12.0452075
+    },
+    {
+     "page": 26,
+     "x": 71.999985,
+     "y": 554.621933,
+     "w": 468.403625,
+     "h": 13.63634125
+    },
+    {
+     "page": 26,
+     "x": 71.999985,
+     "y": 566.4165459999999,
+     "w": 468.0,
+     "h": 16.52376625
+    }
+   ]
+  },
+  {
+   "title": "Corollary 10.2 rests on an unverified external classification of semialgebraic universal covers.",
+   "severity": "minor",
+   "location": "Section 10 (Two consequences), Corollary 10.2 (label cor:semialgebraic-product), proof",
+   "quote": "The semialgebraic-cover\nclassification \\cite[Theorem~1.1]{OpenAISemialgebraicCovers2026} gives\n$\\widetilde X\\simeq D\\times\\C^m\\times F$",
+   "explanation": "The decomposition $\\widetilde X\\simeq D\\times\\mathbb C^m\\times F$ with $D$ a bounded symmetric domain and $F$ simply connected, normal and projective carries the whole corollary. It is quoted from an unrefereed companion preprint, and its hypotheses and conclusion cannot be checked from this paper. The rest of the argument (constancy of $F\\to D$, finiteness of $\\mathrm{Aut}(F)$, passage to the kernel $\\Gamma_0$) is correct given that decomposition.",
+   "consequence": "Corollary 10.2 is conditional on the cited classification. It is not used in the proof of Theorem 1.1.",
+   "status": "unverified",
+   "source": {
+    "file": "sections/consequences.tex",
+    "lines": [
+     37,
+     39
+    ]
+   },
+   "boxes": [
+    {
+     "page": 27,
+     "x": 66.545433,
+     "y": 74.777084,
+     "w": 473.454559,
+     "h": 13.63634125
+    },
+    {
+     "page": 27,
+     "x": 66.545433,
+     "y": 75.443904,
+     "w": 39.6362,
+     "h": 12.0452075
+    },
+    {
+     "page": 27,
+     "x": 71.999985,
+     "y": 86.147766,
+     "w": 468.294556,
+     "h": 15.60187375
+    }
+   ]
+  }
+ ]
+}

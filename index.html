@@ -4,7 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="canonical" href="https://openaireview.org/" />
-<title>OpenAIReview — AI-Powered Academic Paper Reviewer</title>
+<title>OpenAIReview — Potential issues in the OpenAI math collection</title>
+<meta name="description" content="AI review of the AI-written manuscripts in the openai/math collection, with each issue linked to its place in the paper.">
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-P2VZL2X4NX"></script>
 <script>
@@ -13,6 +14,13 @@
   gtag('js', new Date());
   gtag('config', 'G-P2VZL2X4NX');
 </script>
+<script>
+MathJax = {
+  tex: { inlineMath: [['\\(', '\\)']], processEscapes: true },
+  startup: { typeset: false }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:wght@600;700&display=swap" rel="stylesheet">
@@ -27,17 +35,15 @@
   --accent: #800000;
   --accent-light: #fdf2f2;
   --accent-hover: #600000;
-  --green: #10b981;
-  --green-light: #ecfdf5;
-  --orange: #f59e0b;
   --orange-light: #fffbeb;
+  --orange-border: #fde68a;
+  --red-light: #fef2f2;
+  --red-border: #fecaca;
   --radius: 12px;
   --radius-sm: 8px;
   --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
-  --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
   --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -2px rgba(0,0,0,0.05);
-  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.08), 0 4px 6px -4px rgba(0,0,0,0.04);
-  --shadow-focus: 0 0 0 3px rgba(128,0,0,0.15);
+  --shadow-lg: 0 14px 28px -8px rgba(60,0,0,0.22), 0 6px 10px -6px rgba(0,0,0,0.08);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -66,440 +72,211 @@ a:hover { color: var(--accent-hover); }
   top: 0;
   z-index: 100;
 }
-.header .logo {
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--accent);
-  letter-spacing: -0.3px;
-}
-.header-links {
-  margin-left: auto;
-  display: flex;
-  gap: 20px;
-  font-size: 14px;
-  font-weight: 500;
-}
-.header-links a {
-  color: var(--text-secondary);
-  transition: color 0.15s;
-}
+.header .logo { font-size: 16px; font-weight: 700; color: var(--accent); letter-spacing: -0.3px; }
+.header-links { margin-left: auto; display: flex; gap: 20px; font-size: 14px; font-weight: 500; }
+.header-links a { color: var(--text-secondary); transition: color 0.15s; }
 .header-links a:hover { color: var(--text); }
+.header-links a.current { color: var(--text); font-weight: 600; }
 
-/* ── Hero wrapper with dot pattern ── */
+/* ── Hero ── */
 .hero-wrapper {
-  position: relative;
-  overflow: hidden;
   background-color: var(--bg);
   background-image: radial-gradient(circle, rgba(128,0,0,0.07) 1px, transparent 1px);
   background-size: 26px 26px;
 }
-.hero-wrapper::after {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 140px;
-  background: linear-gradient(to bottom, transparent, var(--bg));
-  pointer-events: none;
-}
-
-/* ── Hero ── */
-.hero {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 52px 32px 44px;
-  text-align: center;
-  position: relative;
-  z-index: 1;
-}
+.hero { max-width: 1240px; margin: 0 auto; padding: 64px 32px 40px; text-align: center; }
 .hero h1 {
   font-family: 'Lora', Georgia, 'Times New Roman', serif;
-  font-size: 34px;
-  font-weight: 700;
-  letter-spacing: -0.3px;
-  line-height: 1.2;
-  margin-bottom: 20px;
-  color: var(--text);
+  font-size: clamp(24px, 3.5vw, 44px);
   white-space: nowrap;
-}
-.hero .subtitle {
-  font-size: 17px;
-  color: var(--text-secondary);
-  line-height: 1.65;
-  max-width: 560px;
-  margin: 0 auto 44px;
-}
-
-/* Install block */
-.install-block {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  background: var(--text);
-  color: #e5e7eb;
-  padding: 14px 24px;
-  border-radius: var(--radius);
-  font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
-  font-size: 15px;
-  margin-bottom: 28px;
-  cursor: pointer;
-  transition: background 0.15s, box-shadow 0.2s;
-  position: relative;
-  box-shadow: 0 0 0 0 rgba(128,0,0,0);
-}
-.install-block:hover {
-  background: #111;
-  box-shadow: 0 0 0 3px rgba(128,0,0,0.25), 0 4px 12px rgba(0,0,0,0.15);
-}
-.install-block .prompt { color: var(--accent); user-select: none; }
-.install-block .copy-hint {
-  font-family: 'Inter', sans-serif;
-  font-size: 11px;
-  color: var(--text-muted);
-  position: absolute;
-  right: -90px;
-  white-space: nowrap;
-}
-.install-block.copied .copy-hint { color: var(--green); }
-
-.hero-link {
-  font-size: 14px;
-  color: var(--text-secondary);
-}
-
-/* ── Features Strip ── */
-.features-section {
-  background: var(--surface);
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  padding: 32px 32px;
-}
-.features-grid {
-  max-width: 900px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 32px;
-}
-.feature-card {
-  text-align: center;
-}
-.feature-icon {
-  width: 48px;
-  height: 48px;
-  background: var(--accent-light);
-  border-radius: var(--radius);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 14px;
-  color: var(--accent);
-}
-.feature-icon svg {
-  width: 22px;
-  height: 22px;
-  stroke: currentColor;
-}
-.feature-card h3 {
-  font-size: 14px;
-  font-weight: 600;
-  margin-bottom: 6px;
-}
-.feature-card p {
-  font-size: 13px;
-  color: var(--text-secondary);
-  line-height: 1.55;
-}
-
-/* ── Examples Section ── */
-.examples-section {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 40px 32px;
-}
-.section-title {
-  font-size: 24px;
   font-weight: 700;
   letter-spacing: -0.5px;
-  margin-bottom: 8px;
+  line-height: 1.15;
 }
-.section-desc {
-  font-size: 14px;
+
+/* ── Paper grid ── */
+.grid-section { max-width: 1240px; margin: 0 auto; padding: 8px 32px 48px; }
+.filters { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; margin-bottom: 20px; }
+.chips { display: flex; gap: 6px; }
+.chips button, .filters select {
+  font: inherit;
+  font-size: 13.5px;
+  font-weight: 500;
   color: var(--text-secondary);
-  margin-bottom: 32px;
-}
-.examples-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
-}
-.example-card {
   background: var(--surface);
   border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 7px 14px;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+}
+.chips button:hover, .filters select:hover { border-color: #d1d5db; color: var(--text); }
+.chips button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+.filters select {
+  -webkit-appearance: none;
+  appearance: none;
+  padding-right: 34px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 13px center;
+}
+.filters select:focus { outline: none; border-color: var(--accent); }
+.filter-count { margin-left: auto; font-size: 13px; color: var(--text-secondary); }
+.empty { grid-column: 1 / -1; text-align: center; padding: 48px 16px; color: var(--text-secondary); font-size: 14px; border: 1px dashed var(--border); border-radius: var(--radius); }
+.issue-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.issue-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-top: 4px solid var(--accent);
   border-radius: var(--radius);
-  padding: 24px;
-  transition: box-shadow 0.2s, border-color 0.2s, transform 0.15s;
-  box-shadow: var(--shadow-sm);
+  padding: 22px 24px 20px;
   display: flex;
   flex-direction: column;
-  text-decoration: none;
   color: inherit;
+  box-shadow: var(--shadow-md);
+  transition: transform 0.18s, box-shadow 0.18s;
 }
-.example-card:hover {
-  box-shadow: var(--shadow-md), inset 3px 0 0 var(--accent);
-  border-color: #d1d5db;
-  transform: translateY(-1px);
-  color: inherit;
-}
-.example-card .card-field {
-  font-size: 11px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: var(--accent);
-  margin-bottom: 8px;
-}
-.example-card .card-title {
-  font-size: 15px;
-  font-weight: 600;
-  line-height: 1.45;
-  margin-bottom: 16px;
-  flex: 1;
-}
-.example-card .card-meta {
-  font-size: 12px;
-  color: var(--text-secondary);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
+.issue-card.minor { border-top-color: #d97706; }
+.issue-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); color: inherit; }
+.issue-card .paper-field { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.6px; color: var(--accent); margin-bottom: 8px; }
+.issue-card .paper-title { font-family: 'Lora', Georgia, serif; font-size: 20px; font-weight: 700; line-height: 1.3; margin-bottom: 16px; }
+.issue-card .issue { background: var(--bg); border-radius: var(--radius-sm); padding: 14px 16px; flex: 1; }
+.issue-card .issue .badge { display: inline-block; margin-bottom: 8px; }
+.issue-card .issue-title { font-size: 14.5px; line-height: 1.55; color: var(--text); }
+.issue-card .card-meta { margin-top: 16px; display: flex; justify-content: space-between; align-items: center; font-size: 12.5px; color: var(--text-secondary); }
+.issue-card .go { font-weight: 600; color: var(--accent); }
 
-/* Count row (Refine · OpenAIReview) */
-.count-row {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  margin-bottom: 14px;
-  font-size: 11.5px;
-  font-weight: 500;
-}
-.count-row .cr-label {
-  color: var(--text-secondary);
-}
-.count-row .cr-num {
+
+.badge {
+  font-size: 10px;
   font-weight: 700;
-  font-variant-numeric: tabular-nums;
+  padding: 3px 9px;
+  border-radius: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  white-space: nowrap;
 }
-.count-row .cr-num.refine-num { color: #92400e; }
-.count-row .cr-num.ai-num     { color: var(--accent); }
-.count-row .cr-sep {
-  color: var(--text-muted);
-  font-size: 14px;
-  line-height: 1;
-  margin: 0 2px;
-}
+.badge.critical, .badge.major { background: var(--red-light); color: #b91c1c; border: 1px solid var(--red-border); }
+.badge.minor { background: var(--orange-light); color: #92400e; border: 1px solid var(--orange-border); }
 
-/* ── Footer ── */
-.footer {
-  border-top: 1px solid var(--border);
-  padding: 32px;
-  text-align: center;
-  font-size: 13px;
-  color: var(--text-secondary);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-}
+.footer { max-width: 1240px; margin: 0 auto; padding: 16px 32px 48px; font-size: 12px; color: var(--text-muted); line-height: 1.6; }
 
-/* ── Responsive ── */
-@media (max-width: 768px) {
-  .hero h1 { font-size: 22px; white-space: normal; }
-  .hero .subtitle { font-size: 15px; }
-  .features-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
-  .examples-grid { grid-template-columns: 1fr; }
-  .install-block .copy-hint { display: none; }
-}
-@media (max-width: 480px) {
-  .features-grid { grid-template-columns: 1fr; }
-  .header { padding: 0 16px; }
-  .hero { padding: 56px 16px 48px; }
+@media (max-width: 1000px) { .issue-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 660px) {
+  .header { padding: 0 16px; gap: 12px; }
+  .header-links { gap: 14px; font-size: 13px; }
+  .hero { padding: 40px 16px 28px; }
+  .hero h1 { white-space: normal; }
+  .grid-section, .footer { padding-left: 16px; padding-right: 16px; }
+  .issue-grid { grid-template-columns: 1fr; }
 }
 </style>
 </head>
 <body>
 
 <div class="header">
-  <span class="logo">OpenAIReview</span>
+  <a class="logo" href="index.html">OpenAIReview</a>
   <div class="header-links">
+    <a href="index.html" class="current">Math collection</a>
+    <a href="reviewer.html">Paper reviewer</a>
     <a href="blog.html">Blog</a>
     <a href="https://github.com/ChicagoHAI/OpenAIReview" target="_blank">GitHub</a>
   </div>
 </div>
 
-<!-- Hero -->
 <div class="hero-wrapper">
   <div class="hero">
-    <h1>AI-powered academic paper reviewer</h1>
-    <p class="subtitle">
-      Rigorous AI review to help you publish your best work.
-    </p>
-
-    <div class="install-block" id="install-block" onclick="copyInstall()">
-      <span class="prompt">$</span> pip install openaireview
-      <span class="copy-hint" id="copy-hint">click to copy</span>
-    </div>
-
-    <p class="hero-link">
-      <a href="https://github.com/ChicagoHAI/OpenAIReview" target="_blank">Learn more at GitHub &rarr;</a>
-    </p>
-    <p class="hero-link">
-      we recommend using <a href="https://github.com/astral-sh/uv" target="_blank">uv</a>, and there are additional guidelines for best results with PDF inputs
-    </p>
-    <p class="hero-link" style="margin-top: 12px;">
-      <a href="blog.html">Read our blog post: AI-assisted reviewing is necessary and should be open &rarr;</a>
-    </p>
-    <p class="hero-link">
-      <a href="https://sai.science/blog/how-much-science-is-verifiable" target="_blank">New blog on replicating ICML papers &rarr;</a>
-    </p>
-    <p style="margin-top: 16px;">
-      <a href="review.html" style="display:inline-block;padding:10px 28px;background:var(--accent);color:#fff;border-radius:6px;font-weight:600;text-decoration:none;font-size:15px;">Try it on the web!</a>
-    </p>
+    <h1>Potential issues in the OpenAI math collection</h1>
   </div>
 </div>
 
-
-<!-- Featured Examples -->
-<div class="examples-section">
-  <h2 class="section-title">Featured Reviews</h2>
-  <p class="section-desc">Full paper reviews generated by OpenAIReview with multiple models.</p>
-  <div class="examples-grid">
-    <a class="example-card" href="viz/index.html?paper=260218458v1">
-      <div class="card-field">AI / Interpretability</div>
-      <div class="card-title">The Story is Not the Science: Execution-Grounded Evaluation of Mechanistic Interpretability Research</div>
-      <div class="card-meta"><span>Claude + Gemini</span> <span>View review &rarr;</span></div>
-    </a>
-    <a class="example-card" href="viz/index.html?paper=apep-0001-tex">
-      <div class="card-field">Economics</div>
-      <div class="card-title">Do State Paid Sick Leave Mandates Increase Work Hours? [TEX]</div>
-      <div class="card-meta"><span>Claude + Gemini</span> <span>View review &rarr;</span></div>
-    </a>
-    <a class="example-card" href="viz/index.html?paper=apep-0001-pdf">
-      <div class="card-field">Economics</div>
-      <div class="card-title">Do State Paid Sick Leave Mandates Increase Work Hours? [PDF]</div>
-      <div class="card-meta"><span>Claude + Gemini</span> <span>View review &rarr;</span></div>
-    </a>
-    <a class="example-card" href="viz/index.html?paper=smoothing-shifts-pdf">
-      <div class="card-field">Mathematics</div>
-      <div class="card-title">Smooth shifts of the &#934;&#8323;&#8308; measure on &#120139;&#179;</div>
-      <div class="card-meta"><span>Claude + Gemini</span> <span>View review &rarr;</span></div>
-    </a>
+<div class="grid-section">
+  <div class="filters">
+    <div class="chips" id="severity-chips" role="group" aria-label="Severity"></div>
+    <select id="subject-filter" aria-label="Domain"></select>
+    <span class="filter-count" id="filter-count"></span>
   </div>
+  <div class="issue-grid" id="issue-grid"></div>
 </div>
 
-<!-- Refine Examples -->
-<div class="examples-section" style="padding-top: 0;">
-  <h2 class="section-title">Comparison with Refine</h2>
-  <p class="section-desc">
-    Papers from the <a href="https://refine.ink" target="_blank">Refine</a> benchmark.
-    Compare AI-generated reviews against human annotations.
-  </p>
-  <div class="examples-grid" id="examples-grid"></div>
-</div>
-
-<!-- Footer -->
 <div class="footer">
-  <div>Built by <a href="https://chicagohai.github.io/" target="_blank">Chicago Human+AI Lab (ChicagoHAI)</a></div>
+  Papers are from <a href="https://github.com/openai/math" target="_blank">openai/math</a> (Apache 2.0).
+  This is an independent project with no affiliation with OpenAI.
 </div>
 
 <script>
-const PAPERS = [
-  {
-    slug: "inference-molecular",
-    title: "Inference in molecular population genetics",
-    field: "Statistical Genetics",
-    gt: 15,
-    ai: 21
-  },
-  {
-    slug: "coset-codes",
-    title: "Coset Codes \u2014 Part I: Introduction and Geometrical Classification",
-    field: "Information Theory",
-    gt: 19,
-    ai: 16
-  },
-  {
-    slug: "targeting-interventions-networks",
-    title: "Targeting Interventions in Networks",
-    field: "Economic Theory",
-    gt: 6,
-    ai: 10
-  },
-  {
-    slug: "chaotic-balanced-state",
-    title: "Chaotic Balanced State in a Model of Cortical Circuits",
-    field: "Neuroscience",
-    gt: 12,
-    ai: 21
+const SEVERITY_RANK = { critical: 0, major: 1, minor: 2 };
+
+// Catalog text marks math as <span class="math">tex</span>.
+function withMath(html) {
+  return html.replace(/<span class="math">(.*?)<\/span>/gs, '\\($1\\)');
+}
+
+function escapeHtml(text) {
+  return text.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+}
+
+async function main() {
+  const index = await fetch('math/data/index.json').then(r => r.json());
+  const papers = await Promise.all(index.papers.map(p =>
+    fetch(`math/data/${encodeURIComponent(p.id)}.json`).then(r => r.json())));
+
+  // Comments are stored most severe first, so the first one is the paper's most serious issue.
+  papers.sort((a, b) => SEVERITY_RANK[a.comments[0].severity] - SEVERITY_RANK[b.comments[0].severity]);
+  const filter = { severity: '', subject: '' };
+
+  function renderGrid() {
+    const shown = papers.filter(paper =>
+      (!filter.severity || paper.comments[0].severity === filter.severity) &&
+      (!filter.subject || paper.subject === filter.subject));
+    document.getElementById('issue-grid').innerHTML = shown.map(paper => {
+      const top = paper.comments[0];
+      const count = paper.num_findings;
+      return `
+      <a class="issue-card ${top.severity}" href="math/paper.html?paper=${encodeURIComponent(paper.id)}">
+        <div class="paper-field">${escapeHtml(paper.subject)}</div>
+        <div class="paper-title">${withMath(paper.title)}</div>
+        <div class="issue">
+          <span class="badge ${top.severity}">${top.severity}</span>
+          <div class="issue-title">${escapeHtml(top.title).replace(/\$([^$]+)\$/g, '\\($1\\)')}</div>
+        </div>
+        <div class="card-meta"><span>${count} ${count === 1 ? 'issue' : 'issues'}</span><span class="go">Read in the paper &rarr;</span></div>
+      </a>`;
+    }).join('') || '<div class="empty">No papers match these filters.</div>';
+    document.getElementById('filter-count').textContent = `${shown.length} ${shown.length === 1 ? 'paper' : 'papers'}`;
+    for (const chip of document.querySelectorAll('#severity-chips button')) {
+      chip.setAttribute('aria-pressed', chip.dataset.severity === filter.severity);
+    }
+    typeset();
   }
-];
 
-function animateCount(el, target, duration) {
-  const start = performance.now();
-  function step(now) {
-    const elapsed = now - start;
-    const progress = Math.min(elapsed / duration, 1);
-    const ease = 1 - Math.pow(1 - progress, 3);
-    el.textContent = Math.round(ease * target);
-    if (progress < 1) requestAnimationFrame(step);
-  }
-  requestAnimationFrame(step);
+  // Severity filters use each paper's most serious issue, the one the card shows.
+  const severities = Object.keys(SEVERITY_RANK).filter(sev => papers.some(p => p.comments[0].severity === sev));
+  document.getElementById('severity-chips').innerHTML =
+    [['', 'All severities'], ...severities.map(sev => [sev, sev[0].toUpperCase() + sev.slice(1)])]
+      .map(([value, label]) => `<button data-severity="${value}">${label}</button>`).join('');
+  document.getElementById('severity-chips').onclick = e => {
+    const chip = e.target.closest('button');
+    if (!chip) return;
+    filter.severity = chip.dataset.severity;
+    renderGrid();
+  };
+  const subjects = [...new Set(papers.map(p => p.subject))].sort();
+  document.getElementById('subject-filter').innerHTML = '<option value="">All domains</option>' +
+    subjects.map(sub => `<option>${escapeHtml(sub)}</option>`).join('');
+  document.getElementById('subject-filter').onchange = e => {
+    filter.subject = e.target.value;
+    renderGrid();
+  };
+
+  renderGrid();
 }
 
-function renderExamples() {
-  const grid = document.getElementById('examples-grid');
-  grid.innerHTML = PAPERS.map(p => `
-    <a class="example-card" href="viz/index.html?paper=${p.slug}">
-      <div class="card-field">${p.field}</div>
-      <div class="card-title">${p.title}</div>
-      <div class="count-row">
-        <span class="cr-label">Refine:</span>
-        <span class="cr-num refine-num" data-target="${p.gt}">0</span>
-        <span class="cr-sep">&middot;</span>
-        <span class="cr-label">OpenAIReview:</span>
-        <span class="cr-num ai-num" data-target="${p.ai}">0</span>
-      </div>
-      <div class="card-meta"><span>View review &rarr;</span></div>
-    </a>
-  `).join('');
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.querySelectorAll('.cr-num').forEach(el => {
-          animateCount(el, parseInt(el.dataset.target), 900);
-        });
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.25 });
-
-  grid.querySelectorAll('.example-card').forEach(card => observer.observe(card));
+function typeset() {
+  if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise();
+  else setTimeout(typeset, 200);
 }
-
-function copyInstall() {
-  navigator.clipboard.writeText('pip install openaireview').then(() => {
-    const block = document.getElementById('install-block');
-    const hint = document.getElementById('copy-hint');
-    block.classList.add('copied');
-    hint.textContent = 'copied!';
-    setTimeout(() => {
-      block.classList.remove('copied');
-      hint.textContent = 'click to copy';
-    }, 2000);
-  });
-}
-
-document.addEventListener('DOMContentLoaded', renderExamples);
+main();
 </script>
 </body>
 </html>

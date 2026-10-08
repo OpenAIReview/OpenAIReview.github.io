@@ -1,0 +1,150 @@
+{
+ "id": "The-p-adic-section-conjecture-September-24-2026",
+ "title": "The p-adic section conjecture",
+ "abstract": "We prove the local <i>p</i>-adic section conjecture for smooth proper geometrically connected curves of genus at least two, over every finite extension of ℚ<sub><i>p</i></sub>. Combined with established finite-descent theorems, this also yields the global section conjecture for smooth proper geometrically connected curves of genus at least two over number fields when their finite-cover descent locus equals their rational points; this includes <span class=\"math\">X_0(N)</span> and <span class=\"math\">X_1(N)</span> of genus at least two over ℚ.",
+ "result_id": "019",
+ "result_title": "The local <i>p</i>-adic section conjecture and global consequences",
+ "subject": "Number theory",
+ "source_pdf": "preprints/The-p-adic-section-conjecture-September-24-2026/main.pdf",
+ "pdf": "pdf/The-p-adic-section-conjecture-September-24-2026.pdf",
+ "page_sizes": [
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ]
+ ],
+ "macros": "\\newcommand{\\Gal}{\\operatorname{Gal}}",
+ "review": {
+  "method": "claude CLI agent, claude-opus-5-5",
+  "effort": "xhigh",
+  "date": "2026-10-07"
+ },
+ "overall_assessment": "I could not find a break in the chain of either main theorem. After reading all eight sections and recomputing each estimate and case analysis, the local theorem (Theorem 1.1) and the completion theorem (Theorem 1.2) follow from the stated lemmas, provided the cited external results hold in the form quoted. I could not consult those sources, so they are the unverified part: Mochizuki–Tsujimura resolution of nonsingularities in the model-domination form (an unrefereed RIMS preprint as cited, and the only genuinely $p$-adic input), the ABBR lifting theorem, Baker–Rabinoff's Abel–Jacobi compatibility, Pop–Stix valuative localization, and Koenigsmann's birational theorem. The global results (Proposition 8.1, Theorem 8.2, Corollaries 8.3 and 8.5) are then formal consequences of Harari–Stix, Stix and Stoll as quoted. The one step I consider not established is Corollary 8.4, which rests on an unrefereed companion preprint. The steps where new ideas enter all checked out: the patching and point-transfer mechanism (Prop 3.2, Lemma 3.3), the reduction of $\\ell$-th roots on collars to node annuli of an RNS cover (Lemmas 4.2–4.3), and the parallel-edge Jacobian construction giving $m$-th roots including $p$-power $m$ (Lemma 5.1, Prop 5.2). In particular the bound $|h_j| \\le \\max(|T|,|\\alpha/T|)$ and the 'entire inverse image' claims are correct. The method also fails exactly where the statement is false (genus 1, residue characteristic 0, pro-$p$ quotients), each time at the RNS/$\\ell\\ne p$ step. Given the size of the claim, the precise statements of [MT, Thm A/Prop 2.4(iv)], [ABBR, Thm 7.7] and [Pop–Stix, Thm 26] should be confirmed by a specialist before the result is accepted.",
+ "num_findings": 1,
+ "comments": [
+  {
+   "title": "Corollary 8.4 is not proved here: it rests entirely on an unrefereed companion claim that Selmer corank zero at a single prime gives finiteness of all of Sha.",
+   "severity": "minor",
+   "location": "Corollary 8.4 (A Selmer-corank-zero elliptic target), proof",
+   "quote": "The corank-zero case of the companion Selmer converse\n\\cite[Theorem~1.1]{OpenAISelmerConverse2026} gives\n$\\operatorname{rank}_{\\mathbb Z}E(\\mathbb Q)=0$ and finiteness of the\nentire group $\\operatorname{Sha}(E/\\mathbb Q)$.",
+   "explanation": "From $s_p(E)=0$ one gets directly only $\\operatorname{rank}E(\\mathbb Q)=0$ and finiteness of $\\operatorname{Sha}(E/\\mathbb Q)[p^\\infty]$. Corollary 8.3(i) needs $\\operatorname{Sha}(E/\\mathbb Q)_{\\mathrm{div}}=0$, i.e. no divisible part at any prime $q$. Passing from one prime to all primes requires the rank-zero $p$-converse ($\\operatorname{Sel}_{p^\\infty}$ finite $\\Rightarrow L(E,1)\\neq 0$) for an arbitrary prime $p$ and arbitrary $E/\\mathbb Q$, followed by Kolyvagin. In the published literature this converse is known only under hypotheses on $p$ and on the reduction and residual representation of $E$. The paper supplies no argument and cites only a companion preprint by the same author.",
+   "consequence": "Corollary 8.4 is conditional on the companion preprint. Nothing else depends on it: Theorems 1.1, 1.2, 8.2 and Corollaries 8.3 and 8.5 are unaffected.",
+   "status": "unverified",
+   "source": {
+    "file": "sections/08-global-sections.tex",
+    "lines": [
+     203,
+     206
+    ]
+   },
+   "boxes": [
+    {
+     "page": 21,
+     "x": 66.545433,
+     "y": 195.922821,
+     "w": 456.730164,
+     "h": 13.63634125
+    },
+    {
+     "page": 21,
+     "x": 71.999985,
+     "y": 209.472015,
+     "w": 451.275604,
+     "h": 13.63634125
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,159 @@
+{
+ "id": "Interior-regularity-of-planar-Mumford-Shah-minimizers-September-24-2026",
+ "title": "Interior regularity of planar Mumford–Shah minimizers",
+ "abstract": "We prove the interior regularity assertion of the planar Mumford–Shah conjecture for reduced absolute minimizers with bounded fidelity data. Every interior point of the closed discontinuity set has a neighborhood consisting of a <span class=\"math\">C^{1,\\alpha}</span> arc, an arc ending at that point, or three such arcs meeting at 120 degrees. Only finitely many global connected components meet any relatively compact open set.",
+ "result_id": "366",
+ "result_title": "The planar Mumford–Shah regularity conjecture and local weak-<i>L</i><sup>4</sup> gradient bounds",
+ "subject": "Partial differential equations",
+ "source_pdf": "preprints/Interior-regularity-of-planar-Mumford-Shah-minimizers-September-24-2026/Interior-regularity-of-planar-Mumford-Shah-minimizers-September-24-2026.pdf",
+ "pdf": "pdf/Interior-regularity-of-planar-Mumford-Shah-minimizers-September-24-2026.pdf",
+ "page_sizes": [
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ]
+ ],
+ "macros": "",
+ "review": {
+  "method": "claude CLI agent, claude-opus-5-5",
+  "effort": "xhigh",
+  "date": "2026-10-07"
+ },
+ "overall_assessment": "I found no fatal error. The new argument (Sections 4–5) is correct as far as I can check, so Theorem 1.1 and Corollary 6.3 follow provided the results quoted from De Lellis–Focardi in Proposition 3.1 hold as stated. I could not check those quotations against the source. The decisive new step is the compact-piece exclusion: split $v=f+F$ with $F$ carrying the jump on $A$, translate $F$ rigidly, and use that the interaction $I_p(t)$ is harmonic in $t$. I recomputed it three ways (the paper's distributional computation; the boundary formula $I_p(t)=\\mp\\int_A [F]\\,\\partial_n f(\\cdot+t)\\,d\\mathcal H^1$; and $\\Delta_t I_p=-\\langle \\operatorname{curl}G,\\operatorname{curl}p_t\\rangle$ with disjoint supports $B$ and $A_t$). All agree. The cutoff errors, the absolute convergence, inequality (5.3), the minimum principle, the removal of the projected potential (5.7), the jump-flux identity (5.8), the implication \"one directional derivative constant on a disk $\\Rightarrow$ affine\" in 2D, and the final contradiction all check. I also tested the argument on cases where it should not give a contradiction (a Griffith crack in a uniform field; $f=x_1x_2$ with a straight crack; the cylinder, where affine $f$ has linear energy growth); it behaves correctly in each. The reduction in Section 2, the topology in Lemma 4.1, the assembly in Section 6 and the component count are also correct. What I could not verify is bibliographic: the exact content of the cited De Lellis–Focardi statements, namely Corollary 4.4.3 (\"at most one unbounded component\"), Theorem 1.4.6, Theorem 2.2.3 (in particular the claimed $L^2$-integrability of $v$ up to $H$), the endpoint/junction epsilon-regularity Theorem 1.3.3, and the weak-$L^4$ equivalence Theorem 1.5.4. Two of these are listed below as unresolved doubts; in both cases I believe the mathematics survives (the first by a short blow-down argument, the second because the hypothesis is not actually needed). Given how short the new argument is relative to the age of the problem, an expert with the monograph in hand should confirm those quotations before the result is accepted.",
+ "num_findings": 2,
+ "comments": [
+  {
+   "title": "The step from 'no bounded component' to 'connected' rests only on a quoted statement (at most one unbounded component) that is not proved in the paper and that I could not confirm.",
+   "severity": "minor",
+   "location": "Proposition 3.1(4), first sentence; used in the proof of Corollary 6.1",
+   "quote": "A global generalized minimizer has at most one unbounded connected component",
+   "explanation": "This is not one of the classical named results (Bonnet: connected $K$; David–Léger: disconnected complement; Bonnet–David: cracktip), and the paper gives only a theorem number ('Corollary 4.4.3 bounds the number of unbounded components'). It is the only place where several unbounded components are excluded, so the classification depends on it. I believe the statement is true. Sketch: if $K_1\\neq K_2$ are unbounded components, take proper arcs $\\sigma_i\\subset K_i$ leaving a ball $B_{r_0}$; together with a segment in $B_{r_0}$ they form a properly embedded line in $K\\cup\\overline{B_{r_0}}$. Blow down along $R_j\\to\\infty$. At a regular point $y$ of the limit $K_\\infty$ on $\\lim\\sigma_1/R_j$, epsilon-regularity makes $K/R_j$ a single arc near $y$, contained in $\\sigma_1/R_j$, whose two sides are separated in $\\mathbb R^2\\setminus(K\\cup\\overline{B_{r_0}})/R_j$. Since $0\\in K_\\infty$, the two sides stay separated in $\\mathbb R^2\\setminus K_\\infty$. David–Léger then makes $K_\\infty$ a line or triod, and epsilon-regularity at scale $R_j$ makes $K\\cap B_{R_j}$ connected, a contradiction. This argument, or a verified citation, should be in the paper.",
+   "consequence": "If the quotation is accurate, there is no issue. If it is not, Corollary 6.1 and hence Theorem 1.1 are unproved as written until an argument like the one above is supplied; I expect the main results to survive.",
+   "status": "unverified",
+   "source": {
+    "file": "sections/blowup.tex",
+    "lines": [
+     81,
+     81
+    ]
+   },
+   "boxes": [
+    {
+     "page": 9,
+     "x": 90.657303,
+     "y": 336.767734,
+     "w": 443.58255,
+     "h": 12.0452075
+    }
+   ]
+  },
+  {
+   "title": "The hypothesis $v\\in W^{1,2}(B_R\\setminus H)$ (square integrability of $v$ up to $H$) is attributed to the compactness theorem without justification.",
+   "severity": "minor",
+   "location": "Section 3, paragraph 'For (1) ...' after Proposition 3.1; used as a hypothesis in Proposition 5.1 and Lemmas 5.2–5.3",
+   "quote": "stronger conclusion is part of the compactness theorem, not a consequence",
+   "explanation": "Standard compactness statements for blow-ups give convergence in $W^{1,2}_{loc}$ on each component of $\\mathbb R^2\\setminus H$ and $\\nabla v\\in L^2_{loc}(\\mathbb R^2)$, not $v\\in L^2$ up to $H$. The paper itself notes that this does not follow from componentwise convergence and simply asserts it is in the cited theorem; I could not confirm that. The property is plausible (local boundedness of $v$ for global minimizers), but more to the point it is not needed: $e=\\nabla(\\chi v)=\\chi\\nabla v+v\\nabla\\chi\\in L^2$ already, because $\\operatorname{supp}\\nabla\\chi$ is a compact subset of $\\mathbb R^2\\setminus H$ where $v$ is continuous. The construction of $\\phi,p,F,f$, the competitor $V_R$ and all estimates then use only $\\nabla v\\in L^2_{loc}$ and $W^{1,2}_{loc}$ regularity off the singular set.",
+   "consequence": "No effect on the main theorems once Proposition 5.1 and Lemmas 5.2–5.3 are stated with $W^{1,2}_{loc}$ off the singular set and $\\nabla v\\in L^2_{loc}$, or once local boundedness of $v$ is justified separately.",
+   "status": "unverified",
+   "source": {
+    "file": "sections/blowup.tex",
+    "lines": [
+     126,
+     126
+    ]
+   },
+   "boxes": [
+    {
+     "page": 10,
+     "x": 77.760124,
+     "y": 81.204036,
+     "w": 456.774261,
+     "h": 12.0452075
+    },
+    {
+     "page": 10,
+     "x": 77.760124,
+     "y": 94.753238,
+     "w": 456.774261,
+     "h": 12.0452075
+    }
+   ]
+  }
+ ]
+}

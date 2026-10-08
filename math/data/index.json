@@ -1,0 +1,78 @@
+{
+ "source": {
+  "repo": "openai/math",
+  "commit": "adc7f1241b42e322a6451854ab7e4b4c146bf78a"
+ },
+ "reviewed": 20,
+ "papers": [
+  {
+   "id": "Canonical-ampleness-of-compact-hyperbolic-Kahler-manifolds-September-23-2026",
+   "title": "Canonical ampleness of compact hyperbolic Kähler manifolds",
+   "result_id": "051",
+   "result_title": "Kobayashi’s canonical-ampleness conjecture",
+   "subject": "Algebraic and complex geometry",
+   "num_findings": 2,
+   "severities": [
+    "major",
+    "minor"
+   ],
+   "pages": 31,
+   "summary": "Every compact connected Kähler manifold of positive complex dimension with no nonconstant entire curve has ample canonical bundle and is therefore projective. This proves Kobayashi's canonical-ampleness conjecture in the smooth compact Kähler setting."
+  },
+  {
+   "id": "The-Campana-Peternell-conjecture-in-dimension-six-September-25-2026",
+   "title": "The Campana–Peternell conjecture in dimension six",
+   "result_id": "067",
+   "result_title": "The Campana–Peternell conjecture in dimension six",
+   "subject": "Algebraic and complex geometry",
+   "num_findings": 2,
+   "severities": [
+    "major",
+    "major"
+   ],
+   "pages": 27,
+   "summary": "Proves the Campana–Peternell conjecture in complex dimension six: every smooth connected complex projective Fano sixfold with nef tangent bundle is rational homogeneous."
+  },
+  {
+   "id": "A-counterexample-to-the-nearby-Lagrangian-conjecture-September-23-2026",
+   "title": "A counterexample to the nearby Lagrangian conjecture",
+   "result_id": "340",
+   "result_title": "A counterexample to the nearby Lagrangian conjecture",
+   "subject": "Differential geometry",
+   "num_findings": 2,
+   "severities": [
+    "major",
+    "major"
+   ],
+   "pages": 28,
+   "summary": "Disproves the unrestricted nearby Lagrangian conjecture. For some sufficiently large even <i>N</i>, constructs a closed exact embedded Lagrangian in <span class=\"math\">T^*(S^9\\times S^{N-1})</span> that is diffeomorphic to the base but not Hamiltonian isotopic to its zero section."
+  },
+  {
+   "id": "The-p-adic-section-conjecture-September-24-2026",
+   "title": "The p-adic section conjecture",
+   "result_id": "019",
+   "result_title": "The local <i>p</i>-adic section conjecture and global consequences",
+   "subject": "Number theory",
+   "num_findings": 1,
+   "severities": [
+    "minor"
+   ],
+   "pages": 24,
+   "summary": "Proves that rational points on every smooth proper geometrically connected curve of genus at least two over a finite extension of ℚ<sub><i>p</i></sub> correspond bijectively to conjugacy classes of sections of its full arithmetic étale fundamental group. It also proves Grothendieck's section conjecture over ℚ for the modular curves <span class=\"math\">X_0(N)</span> and <span class=\"math\">X_1(N)</span> of genus at least two."
+  },
+  {
+   "id": "Interior-regularity-of-planar-Mumford-Shah-minimizers-September-24-2026",
+   "title": "Interior regularity of planar Mumford–Shah minimizers",
+   "result_id": "366",
+   "result_title": "The planar Mumford–Shah regularity conjecture and local weak-<i>L</i><sup>4</sup> gradient bounds",
+   "subject": "Partial differential equations",
+   "num_findings": 2,
+   "severities": [
+    "minor",
+    "minor"
+   ],
+   "pages": 20,
+   "summary": "Resolves the interior regularity conjecture for reduced absolute planar Mumford–Shah minimizers with bounded fidelity data. Locally, the closed discontinuity set is a <span class=\"math\">C^{1,\\alpha}</span> arc, a regular crack tip, or three arcs meeting at <span class=\"math\">120^\\circ</span>; only finitely many global connected components meet any compact interior region."
+  }
+ ]
+}

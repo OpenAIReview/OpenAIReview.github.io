@@ -1,0 +1,191 @@
+{
+ "id": "A-counterexample-to-the-nearby-Lagrangian-conjecture-September-23-2026",
+ "title": "A counterexample to the nearby Lagrangian conjecture",
+ "abstract": "We disprove the unrestricted nearby Lagrangian conjecture. For some sufficiently large even integer <i>N</i>, we construct a closed exact smoothly embedded Lagrangian in <span class=\"math\">T^*(S^9\\times S^{N-1})</span> that is diffeomorphic to the base but is not Hamiltonian isotopic to the zero section.",
+ "result_id": "340",
+ "result_title": "A counterexample to the nearby Lagrangian conjecture",
+ "subject": "Differential geometry",
+ "source_pdf": "preprints/A-counterexample-to-the-nearby-Lagrangian-conjecture-September-23-2026/paper.pdf",
+ "pdf": "pdf/A-counterexample-to-the-nearby-Lagrangian-conjecture-September-23-2026.pdf",
+ "page_sizes": [
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ]
+ ],
+ "macros": "\\newcommand{\\bibsection}{\\section*{\\refname}\\addcontentsline{toc}{section}{\\refname}}\n\\newcommand{\\R}{\\mathbb R}\n\\newcommand{\\Z}{\\mathbb Z}\n\\newcommand{\\T}{\\mathbf T}\n\\newcommand{\\Hs}{H^s}\n\\newcommand{\\Wh}{\\operatorname{Wh}}\n\\newcommand{\\Crit}{\\operatorname{Crit}}\n\\newcommand{\\Diff}{\\operatorname{Diff}}\n\\newcommand{\\id}{\\operatorname{id}}\n\\newcommand{\\norm}[1]{\\lVert#1\\rVert}\n\\newcommand{\\abs}[1]{\\lvert#1\\rvert}\n\\newcommand{\\im}{\\operatorname{im}}\n\\newcommand{\\supp}{\\operatorname{supp}}\n\\newcommand{\\Int}{\\operatorname{int}}",
+ "review": {
+  "method": "claude CLI agent, claude-opus-5-5",
+  "effort": "high",
+  "date": "2026-10-07"
+ },
+ "overall_assessment": "I did not find a step that I can show to be false, so I cannot confirm an error; equally, I cannot certify the theorem, because it rests on external inputs I could not check. I read the full source and recomputed every step of the chain: existence of the class $a$ (Section 2), the one-critical-point obstruction (Sections 3-4), the embedded realization (Section 5) and the Hamiltonian transport (Section 6). The internal computations all check: the embedding and momentum-separation argument, the generating-family composition formulas, the smoothing estimates, the Morse/handle argument, the flow arguments giving the product complement, and the dimension counts. I also tested the two new ideas. For the zero-level cobordism argument, the $\\pi_0$ (Whitehead torsion) analogue is consistent with the sum formula, and families obtained from slow paths in the tube space produce exactly $\\ker(\\partial)$, as the proposition predicts. For the embedding, the construction is multiplication of a Legendrian generating family by $e^{K\\theta}$, and the collision estimate is correct. What I could not verify is the external input: (i) Waldhausen's tube fibration $\\mathcal H^s(*)\\to\\mathbf T\\to BG$ for this specific function-space model with diagonal stabilization, together with the identification of $\\gamma$ and Rognes's value of $\\pi_{10}\\mathrm{Wh}^{\\mathrm{Diff}}(*)$; (ii) the quoted connectivity statements (Igusa stability in the Courte-Porcelli form, and connectivity of stable extension) and their compatibility with the geometric composite of $\\sigma$ and $e_!$ used in Proposition 4.5. If either input fails as quoted or as applied, the main theorem is not established. Given the extraordinary nature of the claim, these inputs need expert verification against the sources before the result can be accepted.",
+ "num_findings": 2,
+ "comments": [
+  {
+   "title": "The existence of the class a rests on a tube fibration quoted for a specific function-space model, which is not proved and which I could not confirm applies as stated.",
+   "severity": "major",
+   "location": "Theorem 2.1 and Proposition 2.2 (Section 2.2)",
+   "quote": "Waldhausen's tube theorem identifies the fiber of $\\gamma$ with\n$\\Hs(*)$.",
+   "explanation": "This is an unresolved dependency, not a demonstrated mistake. The paper defines $\\mathbf T$ as the diagonal telescope of path components of $C^1$ functions on $S^{2m-1}$ with regular zero, and defines $\\gamma$ by the negative-domain spherical fibration. It then asserts a fibre sequence $\\mathcal H^s(*)\\to\\mathbf T\\to BG$ with $\\gamma\\circ\\iota\\simeq BJ$, by reference to Waldhausen, AIS and AACK, saying only that the comparison of models 'is a stable equivalence'. No argument is given that this exact model, with this stabilization system and this map $\\gamma$, is the one for which the cited theorem holds. Nor is it shown that the connecting map $\\partial:\\pi_{10}BG\\to\\pi_9\\mathcal H^s(*)$ is the one whose image is bounded by $|\\pi_9^S|$. The order count ($|\\mathrm{im}\\,\\partial|\\le 4<32$) is correct if both the fibration and Rognes's value $\\pi_{10}\\mathrm{Wh}^{\\mathrm{diff}}(*)_{(2)}\\cong\\mathbb Z/8\\oplus(\\mathbb Z/2)^2$ are as quoted. I could not check either against the sources.",
+   "consequence": "If the fibre sequence or the identification of $\\gamma$ fails for this model, there is no class $0\\ne a\\in\\ker\\gamma_*$, and both the construction of $L$ and the final contradiction lose their input.",
+   "status": "unverified",
+   "source": {
+    "file": "sections/tubes.tex",
+    "lines": [
+     125,
+     126
+    ]
+   },
+   "boxes": [
+    {
+     "page": 5,
+     "x": 71.999985,
+     "y": 501.44734600000004,
+     "w": 468.0,
+     "h": 14.2226925
+    }
+   ]
+  },
+  {
+   "title": "The vanishing of the cobordism class depends on quoted connectivity theorems and on their compatibility with the geometric stabilization and extension maps, which is asserted but not checked.",
+   "severity": "major",
+   "location": "Section 4.3, Proposition 4.5 (hcob-injectivity)",
+   "quote": "Compatibility of extension and stabilization identifies the composite of\nthese two isomorphisms with \\eqref{eq:hcob-injectivity-map}.",
+   "explanation": "This is an unresolved dependency, not a demonstrated mistake. Deducing $c_B=0\\in[B,H(\\Sigma)]$ from $[W]=0\\in[B,H(Y)]$ needs injectivity on $\\pi_9$ of $H(\\Sigma)\\xrightarrow{\\sigma}H(\\Sigma\\times J)\\xrightarrow{e_!}H(Y)\\to\\mathcal H^s(Y)$. The paper obtains it from (a) Igusa stability in the form $\\dim X\\ge\\max(2r+8,3r+5)$, (b) the statement that an $(r+1)$-connected map induces an $r$-connected map on $\\mathcal H^s$, and (c) the claim that the paper's $\\sigma$ and $e_!$ (with the face conventions of its equation for the stabilization faces) are the maps to which (a) and (b) apply. Points (a) and (b) are cited from CP2025 and (c) is asserted in one sentence. The numerics are consistent ($\\dim\\Sigma\\ge 38\\ge 35$, $d-1\\ge 18$) and a $\\pi_0$ Whitehead-torsion analogue checks out, but I could not confirm the quoted statements or the convention matching against the sources.",
+   "consequence": "Proposition 3.1 (one critical point implies null tube class) depends entirely on this injectivity. Without it, the product structure on $C_b$ over all of $S^9$ is not obtained and the contradiction in the proof of Theorem 1.1 does not follow.",
+   "status": "unverified",
+   "source": {
+    "file": "sections/obstruction.tex",
+    "lines": [
+     253,
+     254
+    ]
+   },
+   "boxes": [
+    {
+     "page": 16,
+     "x": 71.999985,
+     "y": 389.3392,
+     "w": 468.0,
+     "h": 13.772625000000001
+    },
+    {
+     "page": 16,
+     "x": 71.999985,
+     "y": 402.937557,
+     "w": 468.0,
+     "h": 13.71117125
+    }
+   ]
+  }
+ ]
+}
