@@ -82,7 +82,7 @@ a:hover { color: var(--accent-hover); }
 .header-links a { color: var(--text-secondary); transition: color 0.15s; }
 .header-links a:hover { color: var(--text); }
 .header-links a { white-space: nowrap; }
-@media (max-width: 480px) { div.header-links { gap: 12px; font-size: 12px; } }
+@media (max-width: 480px) { div.header-links { gap: 12px; font-size: 12px; } div.header-links a.home-link { display: none; } }
 .header-links a.current { color: var(--text); font-weight: 600; }
 
 /* Blog layout */
@@ -248,6 +248,7 @@ a:hover { color: var(--accent-hover); }
 <div class="header">
   <a class="logo" href="index.html">OpenAIReview</a>
   <div class="header-links">
+    <a href="index.html" class="home-link">OpenVerification</a>
     <a href="reviewer.html">Review your paper</a>
     <a href="blogs.html" class="current">Blogs</a>
     <a href="https://github.com/ChicagoHAI/OpenAIReview" target="_blank">GitHub</a>
@@ -257,7 +258,7 @@ a:hover { color: var(--accent-hover); }
 <div class="blog-hero">
   <p class="byline" style="margin-bottom:18px;"><a href="blogs.html">&larr; All blogs</a></p>
   <h1>AI Review Systems Can Catch Real Errors in Research Papers</h1>
-  <p class="byline">September 2026 &nbsp;&middot;&nbsp; The OpenAIReview team</p>
+  <p class="byline">September 2026 &nbsp;&middot;&nbsp; Dang Nguyen</p>
 </div>
 
 <div class="blog-body">

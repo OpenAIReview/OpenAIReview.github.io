@@ -78,7 +78,7 @@ a:hover { color: var(--accent-hover); }
 .header-links a { color: var(--text-secondary); transition: color 0.15s; }
 .header-links a:hover { color: var(--text); }
 .header-links a { white-space: nowrap; }
-@media (max-width: 480px) { div.header-links { gap: 12px; font-size: 12px; } }
+@media (max-width: 480px) { div.header-links { gap: 12px; font-size: 12px; } div.header-links a.home-link { display: none; } }
 .header-links a.current { color: var(--text); font-weight: 600; }
 
 /* ── Hero ── */
@@ -198,6 +198,7 @@ a:hover { color: var(--accent-hover); }
 <div class="header">
   <a class="logo" href="index.html">OpenAIReview</a>
   <div class="header-links">
+    <a href="index.html" class="home-link">OpenVerification</a>
     <a href="reviewer.html">Review your paper</a>
     <a href="blogs.html" class="current">Blogs</a>
     <a href="https://github.com/ChicagoHAI/OpenAIReview" target="_blank">GitHub</a>
@@ -218,7 +219,7 @@ const POSTS = [
   {
     title: 'AI-accelerated Science Needs Open-sourced Verification',
     date: 'October 2026',
-    author: 'The OpenAIReview team',
+    author: 'Dang Nguyen',
     summary: 'AI now produces mathematics faster than anyone can check it. We are launching OpenVerification, an open effort to find and confirm the errors in AI-generated papers, starting with the OpenAI math collection.',
     url: 'openverification.html',
   },
@@ -226,7 +227,7 @@ const POSTS = [
   // {
   //   title: 'AI Review Systems Can Catch Real Errors in Research Papers',
   //   date: 'September 2026',
-  //   author: 'The OpenAIReview team',
+  //   author: 'Dang Nguyen',
   //   summary: 'We benchmark four AI review systems on real papers. The best one separates weak from strong papers 83% of the time, is right in 91% of its comments, and catches 72% of the errors we plant.',
   //   url: 'benchmark.html',
   // },

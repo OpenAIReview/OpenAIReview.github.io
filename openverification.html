@@ -81,7 +81,7 @@ a:hover { color: var(--accent-hover); }
 .header-links a { color: var(--text-secondary); transition: color 0.15s; }
 .header-links a:hover { color: var(--text); }
 .header-links a { white-space: nowrap; }
-@media (max-width: 480px) { div.header-links { gap: 12px; font-size: 12px; } }
+@media (max-width: 480px) { div.header-links { gap: 12px; font-size: 12px; } div.header-links a.home-link { display: none; } }
 .header-links a.current { color: var(--text); font-weight: 600; }
 
 /* Blog layout */
@@ -247,6 +247,7 @@ a:hover { color: var(--accent-hover); }
 <div class="header">
   <a class="logo" href="index.html">OpenAIReview</a>
   <div class="header-links">
+    <a href="index.html" class="home-link">OpenVerification</a>
     <a href="reviewer.html">Review your paper</a>
     <a href="blogs.html" class="current">Blogs</a>
     <a href="https://github.com/ChicagoHAI/OpenAIReview" target="_blank">GitHub</a>
@@ -256,65 +257,69 @@ a:hover { color: var(--accent-hover); }
 <div class="blog-hero">
   <p class="byline" style="margin-bottom:18px;"><a href="blogs.html">&larr; All blogs</a></p>
   <h1>AI-accelerated Science Needs Open-sourced Verification</h1>
-  <p class="byline">October 2026 &nbsp;&middot;&nbsp; The OpenAIReview team</p>
+  <p class="byline">October 2026 &nbsp;&middot;&nbsp; Dang Nguyen</p>
 </div>
 
 <div class="blog-body">
 
 <div style="background:var(--accent-light);border-left:3px solid var(--accent);border-radius:var(--radius-sm);padding:16px 20px;margin-bottom:28px;">
   <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.6px;color:var(--accent);">TL;DR</span>
-  <p style="margin:6px 0 0;font-size:15px;line-height:1.6;">AI now produces mathematics faster than anyone can check it. We are launching <a href="index.html">OpenVerification</a>: we review the OpenAI math papers with our open tool, show important potential issues in public, and ask mathematicians to verify them.</p>
+  <p style="margin:6px 0 0;font-size:15px;line-height:1.6;">AI now produces scientific results faster than researchers can verify their correctness. We are launching <a href="index.html">OpenVerification</a>, a public platform that uses our open review tool to flag potential issues in AI-generated papers and invites researchers to verify them, starting with the OpenAI math papers.</p>
 </div>
 
 <p>In early October 2026, OpenAI released <a href="https://github.com/openai/math">a collection of 722 mathematical manuscripts</a> written by an unreleased internal model. The manuscripts are grouped into 372 families of results, and many of them claim solutions to well-known open problems. According to the release notes, the model was posed about 4,000 problems, and each result used about three hours of compute on average.</p>
 
-<p>One month earlier, OpenAI announced an analytical proof for the Navier-Stokes problem, with a formalization in Lean, showing that a smooth fluid at rest can develop a singularity in finite time under the three-dimensional Navier&ndash;Stokes equations with a smooth external force.</p>
+<p>A month earlier, OpenAI announced a proof for the Navier-Stokes problem, with a Lean certificate, showing that a smooth fluid at rest can develop a singularity in finite time under the three-dimensional Navier&ndash;Stokes equations with a smooth external force.</p>
 
-<p>These releases show the potential of AI to accelerate science. But a result only counts when it meets the standard of the field, which only comes with careful validation. Without it, a large volume of research output will <a href="blog.html">degrade the quality of science</a>.</p>
+<p>These releases show the potential of AI to accelerate science. But a result only counts if we can be certain of its correctness, Without careful validation, a large volume of research output will <a href="blog.html">degrade the quality of science</a>.</p>
 
 <h2>The first cracks are visible</h2>
 
-<p><strong>The collection has already been corrected.</strong> One day after the release, OpenAI <a href="https://github.com/openai/math/blob/main/history.md">withdrew three manuscripts</a>. A sign error in one paper on Weil classes invalidated a cancellation argument, and two more papers on the Hodge conjecture depended on its construction. In the same update, OpenAI revised 14 other manuscripts with proof repairs and corrected statements. The collection now has 719 manuscripts.</p>
+<p><strong>The collection has already been corrected.</strong> One day after the release, OpenAI <a href="https://github.com/openai/math/blob/main/history.md">withdrew three manuscripts</a>. A sign error in one paper on Weil classes invalidated a cancellation argument. Two other papers on the Hodge conjecture depended on its construction. OpenAI revised 14 other manuscripts with proof repairs and corrected statements. The collection now has 719 manuscripts.</p>
 
-<p><strong>Formal proofs do not settle the question either.</strong> About 42% of the main results in the collection come with a Lean formalization. For the Navier&ndash;Stokes result, <a href="https://arxiv.org/abs/2610.08144">Bastounis, Circelli, and Hansen</a> argue that the Lean proof does not correspond to the proof written in natural language. A formal proof is only as good as the translation that produced its statement, and they show that a faithful translation is a very hard problem in general. A checked Lean file can therefore give no confidence in the written argument next to it.</p>
+<p><strong>Formal proofs do not settle the question either.</strong> About 42% of the main results in the collection come with a Lean formalization. For the Navier&ndash;Stokes result, <a href="https://arxiv.org/abs/2610.08144">Bastounis, Circelli, and Hansen</a> found that the Lean proof does not correspond to the proof written in natural language. A Lean certificate therefore does not guarantee a solution's correctness.</p>
 
 
 <h2>Verification is now the bottleneck</h2>
 
-<p>For most of the history of science, producing a result was more difficult and time-consuming than checking its correctness. That is no longer the case. A model can write a 30-page proof in a few hours. A specialist may need weeks to check it, and for many of these papers only a few specialists in the world can.</p>
+<p>For most of the history of science, producing a result was more difficult and time-consuming than checking its correctness. But this is no longer the case. A model can produce a proof in a few hours, yet specialists may need weeks to check it, and for many of these papers only a few specialists in the world can.</p>
 
-<p>The volume makes this worse: more than 700 difficult manuscripts across 17 areas of mathematics arrived in one day. No single group has the expertise to check all of them, and no journal can referee them at this speed. If results arrive faster than trust in them can be built, the benefit of faster science is lost, because nobody can safely build on what has not been checked.</p>
+<p>The volume makes the problem worse. With more than 700 difficult manuscripts across 17 areas of mathematics, checking them needs experts from every one of those areas, and a journal often takes months to referee a single paper. Until that work is done, other researchers cannot safely build on these results, and much of the benefit of faster science is lost.</p>
 
-<p>We believe that the verification of this body of work should be a collective effort with communication being as transparent and fast as possible.</p>
+<!-- <p>We believe that the verification of this body of work should be a collective effort with communication being as transparent and fast as possible.</p> -->
 
 <h2>What we are launching</h2>
 
-<p>For this purpose, we are launching <a href="index.html">OpenVerification</a>, a platform to identify errors in important AI-generated papers.</p>
+<p>To address this problem, we are launching <a href="index.html">OpenVerification</a>, a platform to identify errors in important AI-generated papers.</p>
 
-<p><strong>AI review as the first pass.</strong> We use <a href="https://github.com/ChicagoHAI/OpenAIReview">OpenAIReview</a>, our open-source review tool, to read each paper and report potential issues. Each issue quotes the passage in question, explains the concern, and shows a severity label.</p>
+<p>We use <a href="https://github.com/ChicagoHAI/OpenAIReview">OpenAIReview</a>, our open-source review tool, to read each paper and report potential issues. Every issue is shown on <a href="index.html">our website</a> next to the paper and linked to its location in the PDF.</p>
 
-<p><strong>Potential issues are flagged.</strong> Every issue is shown on <a href="index.html">our website</a> next to the paper, with a link to the exact location in the PDF. So far we have reviewed 25 papers. The tool reported 121 potential issues in 22 of them, and it labeled 19 of those as major. Most of them are steps that rest on a cited result or on another paper in the collection that the paper does not prove. A few claim that a step is wrong.</p>
+<p>So far we have reviewed 25 papers. The tool reported 121 potential issues in 22 of them, and labeled 19 issues as major. Most of them are steps that rest on a cited result or on another paper in the collection that the paper does not prove. A few claim that a step is wrong. We will continue to review more papers, and we invite the community to <a href="contribute.html">contribute reviews</a>.</p>
 
-<p><strong>The community decides what is real.</strong> An AI review system can be wrong, and the issues have not been confirmed by human mathematicians. This is where we need help.</p>
+<!-- <p>An AI review system can be wrong, and the issues have not been confirmed by human mathematicians. This is where we need help.</p> -->
 
 <h2>How you can help</h2>
 
-<p><strong>If you are a mathematician, tell us whether the comments are correct.</strong> Open a paper in your area, read the issues, and mark each one as correct or incorrect. You can add a short note to let us know more detail. We will highlight the most important errors that the community confirms.</p>
+<p><strong>If you are a mathematician, help us verify the comments.</strong> Open a paper in your area, read the issues, and mark each one as correct or incorrect. You can add a short note to let us know more detail. We will highlight the most important errors that the community confirms.</p>
 
-<p><strong>If you build tools, help us improve the reviewer.</strong> OpenAIReview was built for papers in general, and mathematics has its own needs: long chains of dependencies, heavy use of cited theorems, and computer calculations. The prompts and the code are open. If you see a kind of error that the tool misses, or a kind of comment that it should stop making, please contribute to the <a href="https://github.com/ChicagoHAI/OpenAIReview">GitHub repository</a>.</p>
+<p><strong>Contribute a review.</strong> Many papers in the collection have no review yet. Our <a href="contribute.html">contribution guide</a> gives you a skill file to copy into a coding agent such as Claude Code or Codex. The agent reviews a paper of your choice, and you upload the result to our website.</p>
+
+<p><strong>Help us improve the reviewer.</strong> OpenAIReview was built for papers in general, and mathematics has its own needs. If you see a kind of error that the tool misses, or a kind of comment that it should stop making, please contribute to the <a href="https://github.com/ChicagoHAI/OpenAIReview">GitHub repository</a>.</p>
+
+<p>To ask questions and to talk with other contributors, join our <a href="https://discord.gg/5sPZbzYru">Discord server</a>.</p>
 
 <h2>What comes next</h2>
 
-<p>The OpenAI collection is the first release of this size, and more will follow, in mathematics and in other fields. Each one will raise the same question: which of these results can we build on?</p>
+<p>The OpenAI math collection is one of the first cases of science accelerated by AI, and more will follow, in mathematics and in other fields. Each one will raise the same question: which of these results can we build on?</p>
 
-<p>Unchecked work cannot be a solid foundation on which to build our science, and a wrong result can cost years of work to the people who trusted it. Careful, public checking is what turns a fast stream of claims into knowledge that others can use.</p>
+<p>Unchecked work cannot be a solid foundation on which to build our science, and a wrong result can cost years of work. Careful verification is what turns a fast stream of claims into reliable knowledge.</p>
 
-<p>We start with these papers and the tool we have. Both will improve with every judgment and every contribution from the community. If you can check one comment in one paper this week, <a href="index.html">start here</a>.</p>
+<p>We start with these papers and the tool we have. Both will improve with every judgment and every contribution from the community. Let us verify the future of science together!</p>
 
 <h2>Cite this post</h2>
 <pre style="background:#f4f4f5;border:1px solid var(--border);border-radius:var(--radius-sm);padding:20px 24px;font-size:13px;line-height:1.7;overflow-x:auto;color:#374151;font-family:'Courier New',Courier,monospace;">@misc{openverification2026,
   title     = {AI-accelerated Science Needs Open-sourced Verification},
-  author    = {The OpenAIReview team},
+  author    = {Nguyen, Dang},
   year      = {2026},
   month     = {October},
   howpublished = {\url{https://openaireview.org/openverification.html}},

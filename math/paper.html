@@ -226,6 +226,7 @@ a:hover { color: var(--accent-hover); }
 .note-toggle:hover { color: var(--accent-hover); }
 .note-box { margin-top: 10px; display: flex; flex-direction: column; gap: 8px; align-items: flex-end; }
 .note-box[hidden] { display: none; }
+.no-feedback .comment-footer, .no-feedback .note-box { display: none; }
 .note-box textarea {
   width: 100%; min-height: 84px; resize: vertical;
   font: inherit; font-size: 14px; line-height: 1.5;
@@ -598,7 +599,8 @@ function renderHeader(index) {
     `Result <strong>${paper.result_id}</strong>`,
     escapeHtml(paper.subject),
     `Reviewer <strong>${escapeHtml(model)}</strong>`,
-    paper.review.date ? `Reviewed <strong>${paper.review.date}</strong>` : 'Review started by a visitor',
+    paper.review.contributor ? `Contributed by <strong>${escapeHtml(paper.review.contributor)}</strong> on ${escapeHtml(paper.review.date)}`
+      : paper.review.date ? `Reviewed <strong>${paper.review.date}</strong>` : 'Review started by a visitor',
     `<a href="${GITHUB}${paper.source_pdf.split('/').map(encodeURIComponent).join('/')}" target="_blank" rel="noopener">Original PDF on GitHub &rarr;</a>`,
   ];
   $('metrics-bar').innerHTML = metrics.map(m => `<span class="metric">${m}</span>`).join('<span class="metric-divider"></span>');
@@ -948,27 +950,42 @@ function setupResize() {
   });
 }
 
-// ── Reviews that visitors started ──
-// The review server returns the comments with no position in the PDF. The page
-// shows the collection's own PDF and finds each quoted passage in its text.
-const RAW = 'https://raw.githubusercontent.com/openai/math/main/';
+// ── Reviews from the review server ──
+// A review that a visitor started (?review=<token>) or that a contributor uploaded
+// (?contributed=1) comes with no position in the PDF. The page shows the collection's
+// own PDF and finds each quoted passage in its text.
+const RAW = 'https://raw.githubusercontent.com/openai/math/';
+
+// Order the comments of a server review by severity, and build the paper record from the catalog.
+function serverReview(entry, commit, comments, review) {
+  const ranked = comments
+    .map((c, i) => ({ ...c, severity: Object.hasOwn(SEVERITY_RANK, c.severity) ? c.severity : null, order: i, boxes: [] }))
+    .sort((a, b) => (SEVERITY_RANK[a.severity] ?? 9) - (SEVERITY_RANK[b.severity] ?? 9) || a.order - b.order);
+  return { ...entry, source_pdf: entry.pdf, pdf: `${RAW}${commit}/${entry.pdf}`, macros: '', comments: ranked, review };
+}
+
+async function loadContributedReview(id, commit) {
+  const [catalog, result] = await Promise.all([
+    fetch('data/catalog.json').then(r => r.json()),
+    fetch(`${BACKEND_URL}/contributed-reviews/${FEEDBACK_COLLECTION}/${encodeURIComponent(id)}`).then(r => r.ok ? r.json() : Promise.reject()),
+  ]);
+  return serverReview(catalog.find(p => p.id === id), commit, result.issues, {
+    method: `${result.agent}, ${result.model}`, date: (result.created_at || '').slice(0, 10),
+    contributor: result.contributor || 'a contributor',
+  });
+}
 
 // TODO before the visitor review feature is enabled: store the review token with each vote.
 // Votes are stored per paper, issue number, and visitor. Two reviews of one paper (two visitor
 // reviews, or a visitor review and a later review of ours) number their issues the same way,
 // so a vote on issue 1 of one review overwrites the vote on issue 1 of the other.
-async function loadVisitorReview(id, token) {
+async function loadVisitorReview(id, token, commit) {
   const [catalog, result] = await Promise.all([
     fetch('data/catalog.json').then(r => r.json()),
     fetch(`${BACKEND_URL}/results/${encodeURIComponent(token)}`).then(r => r.ok ? r.json() : Promise.reject()),
   ]);
-  const entry = catalog.find(p => p.id === id);
   const method = Object.values(result.methods)[0];
-  const comments = method.comments
-    .map((c, i) => ({ ...c, severity: SEVERITY_RANK[c.severity] === undefined ? null : c.severity, order: i, boxes: [] }))
-    .sort((a, b) => (SEVERITY_RANK[a.severity] ?? 9) - (SEVERITY_RANK[b.severity] ?? 9) || a.order - b.order);
-  return { ...entry, source_pdf: entry.pdf, pdf: RAW + entry.pdf, macros: '', comments,
-           review: { method: method.label || 'OpenAIReview' } };
+  return serverReview(catalog.find(p => p.id === id), commit, method.comments, { method: method.label || 'OpenAIReview' });
 }
 
 // The plain-text pieces of a LaTeX passage, longest first, with all spaces removed.
@@ -1007,8 +1024,13 @@ async function main() {
   const index = await fetch('data/index.json').then(r => r.json());
   const id = params.get('paper') || index.papers[0].id;
   const token = params.get('review');
+  const contributed = params.has('contributed');
+  const fromServer = Boolean(token) || contributed;
+  // Feedback on an uploaded review opens when the review moves to the front page.
+  document.body.classList.toggle('no-feedback', contributed);
   try {
-    paper = token ? await loadVisitorReview(id, token)
+    paper = token ? await loadVisitorReview(id, token, index.source.commit)
+          : contributed ? await loadContributedReview(id, index.source.commit)
                   : await fetch(`data/${encodeURIComponent(id)}.json`).then(r => r.json());
   } catch (err) {
     $('pdf-status').textContent = 'The review could not be loaded.';
@@ -1017,9 +1039,9 @@ async function main() {
   renderHeader(index);
   if (paper.macros) await defineMacros(paper.macros);
   try {
-    const url = token ? paper.pdf : paper.pdf.split('/').map(encodeURIComponent).join('/');
+    const url = fromServer ? paper.pdf : paper.pdf.split('/').map(encodeURIComponent).join('/');
     pdfDoc = await pdfjsLib.getDocument(url).promise;
-    if (token) {
+    if (fromServer) {
       const pages = await loadPageTexts();
       paper.page_sizes = pages.map(pg => [pg.width, pg.height]);
       for (const c of paper.comments) c.boxes = locateInPdf(c.quote || '', pages);

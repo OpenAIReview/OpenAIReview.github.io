@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="canonical" href="https://openaireview.org/contribute.html" />
+<title>Contribute a review — OpenVerification</title>
+<meta name="description" content="Review a paper of the OpenAI math collection with your own coding agent and upload the result to OpenVerification.">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-P2VZL2X4NX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-P2VZL2X4NX');
+</script>
+<script>
+MathJax = {
+  tex: { inlineMath: [['\\(', '\\)']], processEscapes: true },
+  startup: { typeset: false }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #fafafa;
+  --surface: #ffffff;
+  --border: #e5e7eb;
+  --text: #1a1a2e;
+  --text-secondary: #6b7280;
+  --text-muted: #9ca3af;
+  --accent: #800000;
+  --accent-light: #fdf2f2;
+  --accent-hover: #600000;
+  --orange-light: #fffbeb;
+  --orange-border: #fde68a;
+  --red-light: #fef2f2;
+  --red-border: #fecaca;
+  --radius: 12px;
+  --radius-sm: 8px;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -2px rgba(0,0,0,0.05);
+  --shadow-lg: 0 14px 28px -8px rgba(60,0,0,0.22), 0 6px 10px -6px rgba(0,0,0,0.08);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg);
+  position: relative;
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { color: var(--accent-hover); }
+
+/* ── Header ── */
+.header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 0 32px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.header .logo { font-size: 16px; font-weight: 700; color: var(--accent); letter-spacing: -0.3px; }
+.header-links { margin-left: auto; display: flex; gap: 20px; font-size: 14px; font-weight: 500; }
+.header-links a { color: var(--text-secondary); transition: color 0.15s; }
+.header-links a:hover { color: var(--text); }
+.header-links a { white-space: nowrap; }
+@media (max-width: 480px) { div.header-links { gap: 12px; font-size: 12px; } div.header-links a.home-link { display: none; } }
+.header-links a.current { color: var(--text); font-weight: 600; }
+
+/* ── Page ── */
+.hero { max-width: 860px; margin: 0 auto; padding: 56px 32px 24px; text-align: center; }
+.hero h1 { font-family: 'Lora', Georgia, 'Times New Roman', serif; font-size: clamp(26px, 3.5vw, 40px); font-weight: 700; letter-spacing: -0.5px; line-height: 1.15; }
+.hero p { margin-top: 14px; font-size: 16px; line-height: 1.6; color: var(--text-secondary); }
+.guide { max-width: 860px; margin: 0 auto; padding: 8px 32px 56px; }
+.step { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow-sm); padding: 24px 28px; margin-bottom: 20px; }
+.step h2 { font-size: 18px; font-weight: 600; margin-bottom: 10px; }
+.step h2 .num { display: inline-block; width: 26px; height: 26px; line-height: 26px; margin-right: 8px; text-align: center; font-size: 13px; color: #fff; background: var(--accent); border-radius: 50%; }
+.step p, .step li { font-size: 15px; line-height: 1.65; color: var(--text); }
+.step p { margin-bottom: 10px; }
+.step ul { margin: 0 0 10px 22px; }
+.step .hint { font-size: 13px; color: var(--text-secondary); }
+.step code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 13px; background: #f3f4f6; border-radius: 4px; padding: 1px 5px; overflow-wrap: anywhere; }
+.step input[type="search"], .step input[type="text"], .step input[type="email"] {
+  width: 100%; font: inherit; font-size: 14px; padding: 9px 12px; color: var(--text);
+  border: 1px solid var(--border); border-radius: var(--radius-sm); background: #fff;
+}
+.step input:focus-visible, .step button:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.btn { font: inherit; font-size: 13.5px; font-weight: 600; white-space: nowrap; cursor: pointer; color: #fff; background: var(--accent); border: 1px solid var(--accent); border-radius: 999px; padding: 7px 16px; }
+.btn.light { color: var(--accent); background: var(--surface); border-color: var(--border); }
+.btn:disabled { opacity: 0.5; cursor: default; }
+.paper-list { margin-top: 12px; border: 1px solid var(--border); border-radius: var(--radius-sm); max-height: 330px; overflow-y: auto; }
+.paper-row { display: flex; align-items: center; gap: 14px; padding: 10px 14px; border-top: 1px solid var(--border); }
+.paper-row:first-child { border-top: 0; }
+.paper-row .info { flex: 1; min-width: 0; }
+.paper-row .title { font-size: 14.5px; font-weight: 600; line-height: 1.4; }
+.paper-row .meta { font-size: 12.5px; color: var(--text-secondary); margin-top: 2px; overflow-wrap: anywhere; }
+.paper-row.chosen { background: var(--accent-light); }
+.empty { padding: 20px; text-align: center; font-size: 14px; color: var(--text-secondary); }
+.chosen-paper { margin-top: 12px; font-size: 14px; line-height: 1.6; }
+.skill-actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 12px 0; }
+pre.box { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12.5px; line-height: 1.55; background: #f9fafb; border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px 14px; overflow: auto; white-space: pre-wrap; overflow-wrap: anywhere; }
+pre.skill { max-height: 260px; }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 16px; margin: 12px 0; }
+.form-grid label { display: block; font-size: 12.5px; font-weight: 600; color: var(--text-secondary); margin-bottom: 5px; }
+.status { margin-top: 12px; font-size: 14px; line-height: 1.6; }
+.status.error { color: #b91c1c; }
+.status.ok { color: #166534; }
+.footer { max-width: 860px; margin: 0 auto; padding: 0 32px 48px; font-size: 12px; color: var(--text-muted); line-height: 1.6; }
+@media (max-width: 660px) {
+  .header { padding: 0 16px; gap: 12px; }
+  .hero { padding: 36px 16px 16px; }
+  .guide, .footer { padding-left: 16px; padding-right: 16px; }
+  .step { padding: 18px 16px; }
+  .form-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <a class="logo" href="index.html">OpenAIReview</a>
+  <div class="header-links">
+    <a href="index.html" class="home-link">OpenVerification</a>
+    <a href="reviewer.html">Review your paper</a>
+    <a href="blogs.html">Blogs</a>
+    <a href="https://github.com/ChicagoHAI/OpenAIReview" target="_blank">GitHub</a>
+  </div>
+</div>
+
+<div class="hero">
+  <h1>Contribute a review</h1>
+  <p>Most papers in the OpenAI math collection have no review yet. Run a review with your own coding agent and upload the result. Questions are welcome on our <a href="https://discord.gg/5sPZbzYru" target="_blank" rel="noopener">Discord server</a>.</p>
+</div>
+
+<div class="guide">
+  <div class="step">
+    <h2><span class="num">1</span>Choose a paper</h2>
+    <p>The list shows the papers that have no review yet. For now each paper accepts one review.</p>
+    <input type="search" id="search" placeholder="Search by title or area" aria-label="Search papers">
+    <div class="paper-list" id="paper-list"><div class="empty">Loading papers…</div></div>
+    <div class="chosen-paper" id="chosen-paper" hidden></div>
+  </div>
+
+  <div class="step">
+    <h2><span class="num">2</span>Run the review with your coding agent</h2>
+    <p>The file below is a skill: a set of instructions that a coding agent such as Claude Code or Codex follows. It tells the agent to download the LaTeX source of the paper, check every proof step with several sub-agents, and write the review as one JSON file.</p>
+    <div class="skill-actions">
+      <button class="btn" id="copy-skill">Copy the skill</button>
+      <a class="btn light" href="skill.md" download="SKILL.md">Download SKILL.md</a>
+    </div>
+    <pre class="box skill" id="skill-text">Loading…</pre>
+    <p style="margin-top:14px">Either paste the text into your agent together with the paper id, or install it as a skill. For Claude Code:</p>
+    <pre class="box">mkdir -p ~/.claude/skills/openverification-review
+curl -o ~/.claude/skills/openverification-review/SKILL.md https://openaireview.org/skill.md</pre>
+    <p style="margin-top:10px">For Codex:</p>
+    <pre class="box">mkdir -p ~/.agents/skills/openverification-review
+curl -o ~/.agents/skills/openverification-review/SKILL.md https://openaireview.org/skill.md</pre>
+    <p style="margin-top:10px">Then start the agent in an empty folder and type this line. In Codex, start the line with <code>$</code> in place of <code>/</code>.</p>
+    <pre class="box" id="run-command">/openverification-review &lt;paper id&gt;</pre>
+    <p class="hint" style="margin-top:10px">A review takes 15 to 60 minutes. Use the strongest model that you have. The cost is on your own account with the model provider.</p>
+  </div>
+
+  <div class="step">
+    <h2><span class="num">3</span>Upload the review</h2>
+    <p>The agent writes <code>openverification_review/openverification_review.json</code>. Upload that file here.</p>
+    <div class="form-grid">
+      <div><label for="file">Review file (JSON)</label><input type="file" id="file" accept=".json,application/json"></div>
+      <div></div>
+      <div><label for="contributor">Your name (optional, shown with the review)</label><input type="text" id="contributor" maxlength="100" autocomplete="name"></div>
+      <div><label for="email">Email (optional, never shown)</label><input type="email" id="email" maxlength="200" autocomplete="email"></div>
+    </div>
+    <button class="btn" id="upload" disabled>Upload</button>
+    <div class="status" id="status" role="status"></div>
+  </div>
+
+  <div class="step">
+    <h2>Guidelines</h2>
+    <ul>
+      <li>Upload the file as the agent wrote it. Please do not add, remove, or reword issues by hand. If you disagree with an issue, mark it as incorrect on the paper page after the review is public.</li>
+      <li>State the agent and the model truthfully. The skill asks the agent to do this.</li>
+      <li>Each paper accepts one review for now.</li>
+      <li>Your review becomes public. You can open it at its own link at once, and we add it to the front page after we check that the file is a real review.</li>
+      <li>An AI review system can be wrong. Mathematicians confirm or reject each issue on the paper page.</li>
+    </ul>
+    <p>To improve the review tool itself, please contribute to the <a href="https://github.com/ChicagoHAI/OpenAIReview" target="_blank" rel="noopener">GitHub repository</a>. To talk to us and to other contributors, join the <a href="https://discord.gg/5sPZbzYru" target="_blank" rel="noopener">Discord server</a>.</p>
+  </div>
+</div>
+
+<div class="footer">
+  Papers are from <a href="https://github.com/openai/math" target="_blank">openai/math</a> (Apache 2.0).
+  This is an independent project with no affiliation with OpenAI.
+</div>
+
+<script>
+// For testing, ?backendPort=<port> sends requests to a backend on the machine that serves this page.
+// The live site ignores it.
+const LOCAL_BACKEND_PORT = !/(^|\.)openaireview\.(org|github\.io)$/.test(location.hostname)
+  && new URLSearchParams(location.search).get('backendPort');
+const BACKEND_URL = LOCAL_BACKEND_PORT
+  ? `http://${location.hostname}:${LOCAL_BACKEND_PORT}`
+  : 'https://openaireview-backend-947059889174.us-central1.run.app';
+const COLLECTION = 'openai-math';
+const SEVERITIES = ['major', 'moderate', 'minor'];
+const $ = id => document.getElementById(id);
+
+function escapeHtml(text) {
+  return String(text ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+}
+function withMath(html) {
+  return html.replace(/<span class="math">(.*?)<\/span>/gs, '\\($1\\)');
+}
+function typeset(el) {
+  if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([el]).catch(() => {});
+  else setTimeout(() => typeset(el), 200);
+}
+
+let papers = [];        // papers with no review
+let catalogIds = new Set();
+let takenIds = new Set(); // papers with a review of ours or an uploaded review
+let review = null;      // the parsed review file
+
+function renderList() {
+  const words = $('search').value.toLowerCase().split(/\s+/).filter(Boolean);
+  const matches = papers.filter(p => !takenIds.has(p.id) && words.every(w => p.search.includes(w)));
+  $('paper-list').innerHTML = matches.slice(0, 60).map(p => `
+    <div class="paper-row">
+      <div class="info">
+        <div class="title">${withMath(p.title)}</div>
+        <div class="meta">${escapeHtml(p.subject)} &middot; ${p.pages} pages</div>
+      </div>
+      <button class="btn light" data-id="${escapeHtml(p.id)}">Choose</button>
+    </div>`).join('') || '<div class="empty">No papers match.</div>';
+  if (matches.length > 60) $('paper-list').insertAdjacentHTML('beforeend', `<div class="empty">${matches.length - 60} more. Search to narrow the list.</div>`);
+  typeset($('paper-list'));
+}
+
+function choosePaper(id) {
+  const paper = papers.find(p => p.id === id);
+  $('chosen-paper').hidden = false;
+  $('chosen-paper').innerHTML = `Paper id: <code>${escapeHtml(id)}</code> <button class="btn light" id="copy-id">Copy</button>
+    &nbsp;<a href="https://github.com/openai/math/blob/main/${paper.pdf.split('/').map(encodeURIComponent).join('/')}" target="_blank" rel="noopener">Read the PDF &rarr;</a>`;
+  $('copy-id').onclick = () => copyText(id, $('copy-id'));
+  $('run-command').textContent = `/openverification-review ${id}`;
+}
+
+async function copyText(text, button) {
+  const label = button.textContent;
+  try {
+    await navigator.clipboard.writeText(text);
+    button.textContent = 'Copied';
+  } catch {
+    // Browsers offer the clipboard only on https pages. This older method works on plain http too.
+    const area = document.createElement('textarea');
+    area.value = text;
+    area.style.position = 'fixed';
+    area.style.opacity = '0';
+    document.body.append(area);
+    area.select();
+    button.textContent = document.execCommand('copy') ? 'Copied' : 'Copy failed';
+    area.remove();
+  }
+  setTimeout(() => { button.textContent = label; }, 1500);
+}
+
+function setStatus(kind, html) {
+  $('status').className = `status ${kind}`;
+  $('status').innerHTML = html;
+}
+
+// Check a review file in the browser, so that the contributor sees a clear message before the upload.
+// Returns an error message, or null if the file is valid.
+function reviewProblem(data) {
+  if (!data || typeof data !== 'object' || Array.isArray(data)) return 'The file must hold one JSON object.';
+  if (data.collection !== COLLECTION) return `The field "collection" must be "${COLLECTION}".`;
+  if (typeof data.paper_id !== 'string' || !catalogIds.has(data.paper_id)) return 'The field "paper_id" is not a paper of the collection.';
+  if (takenIds.has(data.paper_id)) return 'This paper already has a review. Each paper accepts one review for now.';
+  for (const field of ['agent', 'model']) if (typeof data[field] !== 'string' || !data[field].trim()) return `The field "${field}" is missing.`;
+  if (!Array.isArray(data.issues)) return 'The field "issues" must be a list.';
+  if (data.issues.length > 60) return 'A review can have at most 60 issues.';
+  for (const [i, issue] of data.issues.entries()) {
+    const where = `Issue ${i + 1}`;
+    if (!issue || typeof issue !== 'object') return `${where} is not an object.`;
+    for (const field of ['title', 'quote', 'explanation']) if (typeof issue[field] !== 'string') return `${where}: the field "${field}" is missing.`;
+    if (!issue.title.trim() || !issue.explanation.trim()) return `${where}: the title and the explanation must have text.`;
+    if (!SEVERITIES.includes(issue.severity)) return `${where}: the severity must be major, moderate, or minor.`;
+    if (issue.title.length > 300 || issue.quote.length > 3000 || issue.explanation.length > 6000) return `${where}: a field is too long.`;
+  }
+  return null;
+}
+
+async function readFile() {
+  review = null;
+  $('upload').disabled = true;
+  const file = $('file').files[0];
+  if (!file) return setStatus('', '');
+  if (file.size > 250000) return setStatus('error', 'The file is too large (the limit is 250 KB).');
+  let data;
+  try { data = JSON.parse(await file.text()); }
+  catch { return setStatus('error', 'The file is not valid JSON.'); }
+  const problem = reviewProblem(data);
+  if (problem) return setStatus('error', escapeHtml(problem));
+  review = data;
+  const counts = SEVERITIES.map(s => `${data.issues.filter(i => i.severity === s).length} ${s}`).join(', ');
+  const paper = papers.find(p => p.id === data.paper_id);
+  setStatus('', `Ready to upload: <strong>${withMath(paper.title)}</strong>, ${data.issues.length} issues (${counts}), by ${escapeHtml(data.agent)} with ${escapeHtml(data.model)}.`);
+  typeset($('status'));
+  $('upload').disabled = false;
+}
+
+async function upload() {
+  $('upload').disabled = true;
+  setStatus('', 'Uploading…');
+  const body = {
+    collection: review.collection, paper_id: review.paper_id, agent: review.agent, model: review.model,
+    contributor: $('contributor').value.trim() || null, email: $('email').value.trim() || null,
+    issues: review.issues.map(({ title, quote, explanation, comment_type, severity }) => ({ title, quote, explanation, comment_type, severity })),
+  };
+  try {
+    const response = await fetch(`${BACKEND_URL}/contributed-reviews`, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body),
+    });
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) {
+      const detail = typeof data.detail === 'string' ? data.detail : `The server refused the file (${response.status}).`;
+      $('upload').disabled = response.status === 409;
+      return setStatus('error', escapeHtml(detail));
+    }
+    takenIds.add(review.paper_id);
+    renderList();
+    const link = `math/paper.html?paper=${encodeURIComponent(review.paper_id)}&contributed=1${LOCAL_BACKEND_PORT ? `&backendPort=${LOCAL_BACKEND_PORT}` : ''}`;
+    setStatus('ok', `Thank you! The review is stored. <a href="${link}">Open it next to the paper &rarr;</a>`);
+  } catch {
+    $('upload').disabled = false;
+    setStatus('error', 'Could not reach the server. It may be starting. Try again in 30 seconds.');
+  }
+}
+
+async function main() {
+  $('copy-skill').onclick = () => copyText($('skill-text').textContent, $('copy-skill'));
+  $('file').onchange = readFile;
+  $('upload').onclick = upload;
+  $('search').oninput = renderList;
+  $('paper-list').onclick = e => {
+    const button = e.target.closest('button[data-id]');
+    if (button) choosePaper(button.dataset.id);
+  };
+  fetch('skill.md').then(r => r.ok ? r.text() : Promise.reject()).then(text => { $('skill-text').textContent = text; })
+    .catch(() => { $('skill-text').textContent = 'The skill could not be loaded. Use the download button.'; });
+
+  let catalog, index;
+  try {
+    [catalog, index] = await Promise.all([
+      fetch('math/data/catalog.json').then(r => r.json()),
+      fetch('math/data/index.json').then(r => r.json()),
+    ]);
+  } catch {
+    $('paper-list').innerHTML = '<div class="empty">The list of papers could not be loaded. Please reload the page.</div>';
+    return;
+  }
+  catalogIds = new Set(catalog.map(p => p.id));
+  takenIds = new Set([...(index.reviewed_ids || []), ...index.papers.map(p => p.id)]);
+  papers = catalog;
+  for (const p of papers) p.search = `${p.title} ${p.subject}`.replace(/<[^>]+>/g, '').toLowerCase();
+  renderList();
+  // The list does not wait for the server, which can take 30 seconds to start.
+  fetch(`${BACKEND_URL}/contributed-reviews/${COLLECTION}`).then(r => r.ok ? r.json() : { reviews: [] }).then(data => {
+    for (const row of data.reviews) takenIds.add(row.paper_id);
+    renderList();
+    if ($('file').files[0]) readFile();
+  }).catch(() => {});
+}
+main();
+</script>
+</body>
+</html>

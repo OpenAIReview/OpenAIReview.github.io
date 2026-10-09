@@ -4,6 +4,33 @@
   "commit": "adc7f1241b42e322a6451854ab7e4b4c146bf78a"
  },
  "reviewed": 25,
+ "reviewed_ids": [
+  "A-Gepner-stability-condition-on-every-smooth-quintic-threefold-September-24-2026",
+  "A-closed-Ricci-flow-with-bounded-scalar-curvature-and-finite-time-curvature-blowup-September-24-2026",
+  "A-counterexample-to-the-nearby-Lagrangian-conjecture-September-23-2026",
+  "Ambiently-homeomorphic-isolated-hypersurfaces-of-multiplicities-two-and-three-September-24-2026",
+  "An-Integral-Counterexample-to-Gerstens-Conjecture-September-25-2026",
+  "Anticanonical-nonvanishing-from-smooth-semipositivity-September-26-2026",
+  "Canonical-ampleness-of-compact-hyperbolic-Kahler-manifolds-September-23-2026",
+  "Continuous-Phase-Foliations-Create-Analytic-Caustic-Collars-September-24-2026",
+  "Cyclic-Length-and-Chromatic-Fixed-Point-Loss-September-24-2026",
+  "Etale-covers-with-a-prescribed-exterior-sheet-September-24-2026",
+  "Existential-universal-real-sentences-in-the-counting-hierarchy-October-4-2026",
+  "Filtered-products-and-boundary-preserving-compression-in-complex-cobordism-September-25-2026",
+  "Integral-points-on-character-varieties-of-curves-September-25-2026",
+  "Interior-regularity-of-planar-Mumford-Shah-minimizers-September-24-2026",
+  "Log-abundance-in-numerical-dimension-one-for-threefolds-in-positive-characteristic-October-5-2026",
+  "Pointwise-Multiple-Ergodic-Averages-for-Mixing-Transformations-October-4-2026",
+  "Positivity-of-Serres-Intersection-Multiplicity-September-23-2026",
+  "Spectral-scalar-curvature-and-uniform-Urysohn-width-October-5-2026",
+  "Subset-Sum-in-Time-2-power-0-49n-October-4-2026",
+  "The-Artinian-Lex-Plus-Powers-Betti-Theorem-September-23-2026",
+  "The-Campana-Peternell-conjecture-in-dimension-six-September-25-2026",
+  "The-Solomon-Yau-least-volume-theorem-September-23-2026",
+  "The-curve-scaling-limit-of-half-plane-double-dimers-September-23-2026",
+  "The-p-adic-section-conjecture-September-24-2026",
+  "Unrestricted-pro-modularity-at-the-prime-two-October-4-2026"
+ ],
  "papers": [
   {
    "id": "Unrestricted-pro-modularity-at-the-prime-two-October-4-2026",

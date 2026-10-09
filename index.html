@@ -78,7 +78,7 @@ a:hover { color: var(--accent-hover); }
 .header-links a { color: var(--text-secondary); transition: color 0.15s; }
 .header-links a:hover { color: var(--text); }
 .header-links a { white-space: nowrap; }
-@media (max-width: 480px) { div.header-links { gap: 12px; font-size: 12px; } }
+@media (max-width: 480px) { div.header-links { gap: 12px; font-size: 12px; } div.header-links a.home-link { display: none; } }
 .header-links a.current { color: var(--text); font-weight: 600; }
 
 /* ── Hero ── */
@@ -191,6 +191,7 @@ a:hover { color: var(--accent-hover); }
 <div class="header">
   <a class="logo" href="index.html">OpenAIReview</a>
   <div class="header-links">
+    <a href="index.html" class="current home-link">OpenVerification</a>
     <a href="reviewer.html">Review your paper</a>
     <a href="blogs.html">Blogs</a>
     <a href="https://github.com/ChicagoHAI/OpenAIReview" target="_blank">GitHub</a>
@@ -201,7 +202,6 @@ a:hover { color: var(--accent-hover); }
   <div class="hero">
     <h1>OpenVerification: catching issues in<br>AI-accelerated science</h1>
     <p class="hero-link">We use AI to detect potential issues and invite the public to help verify. <a href="openverification.html">Learn more here</a>.</p>
-    <p class="hero-link second">Want a review of your own paper? <a href="reviewer.html">Try OpenAIReview &rarr;</a></p>
   </div>
 </div>
 
