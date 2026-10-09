@@ -1,0 +1,231 @@
+{
+ "id": "A-closed-Ricci-flow-with-bounded-scalar-curvature-and-finite-time-curvature-blowup-September-24-2026",
+ "title": "A closed Ricci flow with bounded scalar curvature and finite-time curvature blowup",
+ "abstract": "We disprove the scalar-curvature extension conjecture in its unrestricted all-dimensions form. In sufficiently high dimension, we construct a Ricci flow on a closed manifold whose scalar curvature remains uniformly bounded while full curvature diverges at a finite maximal time. In one fixed sufficiently high dimension, the examples have two-sided power-law curvature blowup with arbitrarily large exponents.",
+ "result_id": "351",
+ "result_title": "Scalar curvature and finite-time Ricci-flow singularities",
+ "subject": "Differential geometry",
+ "source_pdf": "preprints/A-closed-Ricci-flow-with-bounded-scalar-curvature-and-finite-time-curvature-blowup-September-24-2026/paper.pdf",
+ "pdf": "pdf/A-closed-Ricci-flow-with-bounded-scalar-curvature-and-finite-time-curvature-blowup-September-24-2026.pdf",
+ "page_sizes": [
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ]
+ ],
+ "macros": "\\newcommand{\\D}{\\mathcal D}\n\\newcommand{\\Sp}{\\mathbb S}\n\\newcommand{\\Ut}{\\widetilde U}\n\\newcommand{\\Zt}{\\widetilde Z}\n\\newcommand{\\dt}{\\partial_t}\n\\newcommand{\\const}{C}\n\\newcommand{\\Ric}{\\operatorname{Ric}}\n\\newcommand{\\Rm}{\\operatorname{Rm}}\n\\newcommand{\\tr}{\\operatorname{tr}}\n\\newcommand{\\diag}{\\operatorname{diag}}",
+ "review": {
+  "method": "OpenAIReview (Claude Opus 5.5)",
+  "effort": "high",
+  "date": "2026-10-08"
+ },
+ "overall_assessment": "The paper claims a Ricci flow on $\\mathbb{S}^2\\times\\mathbb{S}^{q+1}$, for large $q$, with bounded scalar curvature and $\\max_M|\\mathrm{Rm}|\\to\\infty$ at a finite time $T$. It takes a singular flow from Stolarski's construction (Proposition 2.1) and proves new curvature estimates for it.\n\nI recomputed the estimates that the paper proves itself and found no error. This includes the warping equations and the equations for $u$, $v$ and $r_s$; the formula for $r^2R$ and its value $-m(m-1)z$ plus the ratio term at $f=1$; the pole-orbit bound $c\\theta\\le\\phi(0,t)\\le C\\theta$; the cap slope barrier $r/\\theta$; the moving-cylinder inclusions and coefficient bounds; the reaction matrix and its largest eigenvalue $q-1+C\\sqrt q$ after multiplication by $r^2$; the barrier $H=\\delta^L(r^2+b_0\\theta^2)^{-a/2}$ with $\\mathcal{D}H/H\\ge -L/\\delta+(a(q-1)-a^2z)/D_0$; the lateral exponent $(a-d)/2>0$; the exponent $e=a-d+d/k\\in(0,1)$; the scalar barrier $C_1-C_2r^{2-2e}+\\varepsilon r^{-1}$; the exterior barrier $1-b_1\\delta/r^2$; and the two-sided rate $\\theta^{-2}=(T-t)^{-2k/d_q}$.\n\nAll the risk is in Proposition 2.1, which has a source map and no proof. Two parts are major gaps: the inner inequalities come from inside a source proof and are not shown for the selected flow, and the paper changes the initial family of the source without a new proof of the degree argument. A third part is a moderate gap: the constant $C_0$, and thus the choice of $q$ by $\\mathfrak m>0$, needs the freedom to enlarge $Y_1$ and $Y_2$ after the tolerances. Two minor issues are the missing time range of the profile bounds and the unconditional wording of the abstract.\n\nSeven of the ten sub-agent reviews returned no findings. I could not read the source memoir in this run, so the review reports these gaps as unverified dependencies, not as proven errors. The result is correct if Proposition 2.1 holds as stated.",
+ "num_findings": 5,
+ "comments": [
+  {
+   "title": "The inner inequalities of Proposition 2.1(iii) come from inside a source proof, and the paper does not show them for the selected flow",
+   "quote": "the shorter list in Definition~4.1",
+   "explanation": "Proposition 2.1(iii) states $\\phi/r\\ge A/B$, $0\\le f\\le 1$, $f_r\\ge 0$ on $0<r\\le Y_1\\theta$ and $B^2\\le z\\le 1$ on $0<r\\le Y_2\\theta$ at all late times. The paper says that the final trapped class $\\mathcal P$ of the source does not list these conditions, and that they come from the proof of Theorem 4.3 and Lemmas 4.5--4.9 of the source. The paper quotes no source statement that gives them for the one flow that the degree argument selects. Three facts are necessary for that flow: (a) each initial datum of the family satisfies the four inequalities on the stated intervals; (b) the maximum principle preserves each inequality on the moving domain $0<r\\le Y_i\\theta(t)$, which includes the second-order condition $f_r\\ge 0$ up to the pole, where the coefficients of the $u$-equation are singular; (c) the data at the interface $\\gamma=Y_i\\delta^{\\nu/d}$ have the correct strict sign. I checked (c) for $U$ from the profile bounds: with $U_k\\sim c_1\\gamma^{-d}$, one gets $f-1\\approx(-dc_1\\pm\\eta_1^U)Y_1^{-d}$ and $\\widetilde U_{\\gamma\\gamma}+\\widetilde U_\\gamma/\\gamma\\approx(d^2c_1\\pm(\\eta_1^U+\\eta_2^U))\\delta^\\nu\\gamma^{-d-2}$, thus $f\\le 1$ and $f_r\\ge 0$ hold there for small tolerances. For $z\\ge B^2$ at $\\gamma=Y_2\\delta^{\\nu/d}$, a strictly positive $\\gamma^{-d}$ coefficient of $Z_k$ is necessary, but Proposition 2.1(ii) gives only $Z_k=O_{q,k}(\\gamma^{-d})$. The paper gives no argument for (a) or (b). I verified that these inequalities are essential later: Lemma 3.2 uses $f\\le 1$ to move the gap inward; Lemma 3.3 uses all of them below the cutoffs; Lemma 4.3 uses $0\\le f\\le 1$, $f_r\\ge 0$ and $z\\ge B^2$ together with the strict gap; Lemma 4.4 uses $B\\le v\\le 1$. I recomputed all the steps after Proposition 2.1 (the equations for $u$, $v$, $r_s$, the formula for $r^2R$, the barrier computations, the exponents) and found no error. Thus Theorem 1.1 and Corollary 6.4 depend fully on this input. The paper must quote the exact source statements, with their intervals and time ranges, or prove (a)--(c).",
+   "comment_type": "methodology",
+   "severity": "major",
+   "source": {
+    "file": "sections/02-construction.tex",
+    "lines": [
+     106,
+     106
+    ]
+   },
+   "boxes": [
+    {
+     "page": 4,
+     "x": 75.600212,
+     "y": 627.21189,
+     "w": 460.799591,
+     "h": 12.102081250000001
+    }
+   ]
+  },
+  {
+   "title": "The paper changes the initial family of the source and does not prove the existence argument again",
+   "quote": "gives the required tolerances. This choice is compatible with the degree",
+   "explanation": "Proposition 2.1(iv) is not a statement of the source. The paper derives it: it sets the bound on the lower-mode coefficients at the initial time to $\\epsilon_0\\delta^\\nu$ with small $\\epsilon_0$, and says in one sentence that this agrees with the degree argument of Lemma 3.10 of the source. One part is correct. The lower $U$-modes are $\\gamma^{-d}$ times polynomials in $\\gamma^2$ of degree below $k$, thus each mode and its first two derivatives is at most $C_{q,k}(\\gamma^{-d-j}+\\gamma^{2k-d})$ on $\\gamma>0$. The gap is the existence step. In a degree argument the size of the initial coefficient ball is not free. The map from the coefficients to the unstable projections at the exit time must have degree one onto the boundary of the trapping box. If the ball has radius $\\epsilon_0\\delta^\\nu$, the box must become smaller by the same factor. Then each error that the source compares with the box size (nonlinear terms, cutoff errors, projection errors, the inner gluing) must be small compared with $\\epsilon_0$. The paper names only the projection errors of Lemmas 6.13--6.14. It does not show that a later initial time decreases the other errors, and it does not show that the source's order of constants permits $\\tau_0$ to be chosen after $\\epsilon_0$, $Y_1$ and $Y_2$. There is also a constraint that the paper does not state: the tolerances must satisfy $\\eta_j\\ge C_{q,k}\\epsilon_0$, and also $\\eta_0^U<c_1/4$ (Lemma 3.2) and $\\eta_0^U$ small compared with $c_2$ (Lemma 3.4), at all times. The range $0<\\beta<\\nu/(2\\nu+1)\\le\\beta_{\\mathrm{init}}<1/2$ agrees with the weights, because $\\gamma\\widetilde U_\\gamma$ is small exactly when $\\delta^\\nu\\gamma^{2\\nu+1}\\ll 1$. But then the initial datum between $M_0e^{\\beta\\tau_0}$ and $G_{\\mathrm{init}}$ is outside the propagated class, and the paper refers to page 26 of the source for this without a quoted statement. If the source does not cover the changed family, the initial sign $\\widetilde U\\ge 0$ on $\\Gamma_0\\le\\gamma\\le G_{\\mathrm{init}}$ in Lemma 3.4 is not available. Then the global bound $\\phi/r\\ge c_0$, Lemma 4.2, Proposition 4.1 and Theorem 1.1 lose their input.",
+   "comment_type": "methodology",
+   "severity": "major",
+   "source": {
+    "file": "sections/02-construction.tex",
+    "lines": [
+     122,
+     122
+    ]
+   },
+   "boxes": [
+    {
+     "page": 5,
+     "x": 75.600212,
+     "y": 105.764866,
+     "w": 460.799591,
+     "h": 13.71117125
+    }
+   ]
+  },
+  {
+   "title": "The universal constant $C_0$ and the dimension margin $\\mathfrak m$ depend on an unproved freedom to enlarge $Y_1$ and $Y_2$",
+   "quote": "the right sides at those cutoffs are at most \\(1/q\\).",
+   "explanation": "I recomputed Lemma 3.3 and its computations are correct: $1-B^2=2/(q+1)$, $ru_r=1+\\gamma\\widetilde U_\\gamma$, $(p-1)r^2e^{-2u}=(q-1)e^{-2\\widetilde U}$, and $\\delta^\\nu(Y_i\\delta^{\\nu/d})^{-d}=Y_i^{-d}$. Thus $C_0=4$ is independent of $q$ and $k$ if the hypothesis holds. I also traced the constant $C$ in $\\mathfrak m=(a-2)(q-1)-C\\sqrt q-2a^2-1$. It comes from Proposition 5.3, then Lemma 5.2, then $C_0$. The cylinder bounds ($1\\le R_c/r_c\\le 3$, bounded drift, $|a-1|\\le C_0/q$, bounded source) and the matrix estimate add no dependence on $q$, $k$ or the flow. Thus Lemma 3.3 is the only entry point. The problem is the hypothesis. The proof needs $Y_1\\ge(qC_{q,k})^{1/d}$ and $Y_2\\ge(qC'_{q,k})^{1/d}$, where $C_{q,k}$ and $C'_{q,k}$ contain the tolerances and the size of $U_k$, $Z_k$ on $0<\\gamma\\le 1$. At $\\gamma=Y_1\\delta^{\\nu/d}$ the quantity $\\widetilde U\\approx c_1Y_1^{-d}$ does not decrease in time, so only a large $Y_1$ gives the bound $1/q$. The proof then uses the inner inequalities of Proposition 2.1(iii) on the larger intervals $r\\le Y_i\\theta$, with the tolerances already fixed. All of this comes from one sentence of Proposition 2.1(iv), \"subject only to lower-size requirements\", which the paper attributes to Appendix B of the source and does not prove. If the source has an upper limit on $Y_i$, or a constraint that connects the tolerances to $Y_1$, then $C_0$ depends on $q$ and $k$. In that case the choice of $q$ by $\\mathfrak m>0$ is circular, and the statement in the proof of Corollary 6.4 that each threshold for $q$ is independent of $k$ fails. The paper must show from the source's parameter list that $Y_1$ and $Y_2$ are free after the tolerances.",
+   "comment_type": "methodology",
+   "severity": "moderate",
+   "source": {
+    "file": "sections/03-geometry.tex",
+    "lines": [
+     159,
+     159
+    ]
+   },
+   "boxes": [
+    {
+     "page": 7,
+     "x": 75.600212,
+     "y": 393.33279000000005,
+     "w": 460.799591,
+     "h": 13.71117125
+    },
+    {
+     "page": 7,
+     "x": 75.600212,
+     "y": 406.82736400000005,
+     "w": 460.799591,
+     "h": 13.7794475
+    }
+   ]
+  },
+  {
+   "title": "Lemma 3.4 needs the profile bounds at all times, but Proposition 2.1(ii) gives no time range",
+   "quote": "value of its reaction. Initial and moving lateral data have the correct",
+   "explanation": "I recomputed the comparison. With $w=\\widetilde U$, the ratio identity and $(p-1)r^2/\\phi^2=(q-1)e^{-2w}$ give $(\\partial_t-\\Delta)w=\\frac{q-1}{r^2}(1-e^{-2w})$. The right side is $c\\,w$ with $c$ bounded on $\\{r\\ge\\Gamma_0\\sqrt\\delta\\}$ on each compact time slab, so the linear maximum principle keeps $w\\ge 0$. The structure is correct. The gap is in the hypothesis. The equilibrium $w=0$ is unstable, because the reaction is negative for $w<0$. Thus the argument needs $\\widetilde U(\\Gamma_0,t)\\ge 0$ on the lateral boundary for each $t\\in[0,T)$, not only for late $t$. This needs the first profile estimate with $j=0$ at $\\gamma=\\Gamma_0$ at all times, the tolerance condition $\\eta_0^U<c_2$ up to a fixed factor, and $Y_1\\delta^{\\nu/d}\\le\\Gamma_0\\le M_0e^{\\beta\\tau}$ from $\\tau_0$ on. Proposition 2.1(ii) states the profile bounds with no time range, item (iii) is only for \"sufficiently late times\", and item (iv) is only for the initial time. If the bounds hold only at late times, a negative value of $w$ can enter through the boundary at an early time, and the sign does not come back. The global bound $\\phi/r\\ge c_0$ is used on the full interval $[0,t_i]$ in the record-point argument of Lemma 4.2, so it sets $D_1$ and $C_*$ in Proposition 5.3. The proof also increases the starting time of the construction, and this step must be put before the flow is fixed in Section 6.1. The repair is probably easy: state in Proposition 2.1(ii) that the bounds hold for all $\\tau\\ge\\tau_0$. With that statement Theorem 1.1 is not affected.",
+   "comment_type": "missing_information",
+   "severity": "minor",
+   "source": {
+    "file": "sections/03-geometry.tex",
+    "lines": [
+     199,
+     199
+    ]
+   },
+   "boxes": [
+    {
+     "page": 7,
+     "x": 75.600212,
+     "y": 707.8688910000001,
+     "w": 460.799591,
+     "h": 14.508978749999999
+    },
+    {
+     "page": 8,
+     "x": 75.600212,
+     "y": 78.666469,
+     "w": 461.225006,
+     "h": 13.71117125
+    }
+   ]
+  },
+  {
+   "title": "The abstract and Theorem 1.1 are written as unconditional, but the proof depends on source properties that the paper only asserts",
+   "quote": "We disprove the scalar-curvature extension conjecture in its unrestricted",
+   "explanation": "The proof of Proposition 2.1 is a source map, not a proof. Three parts of the proposition are not literal statements of the source: the inner inequalities for the selected flow, the changed initial family with bounds up to $G_{\\mathrm{init}}$, and the order of choices with no upper limit on $Y_1$, $Y_2$. The paper itself says that the class $\\mathcal P$ of the source lists fewer conditions than it uses. I found no error in the estimates that the paper proves after Proposition 2.1, so the result is correct if Proposition 2.1 is correct. Until these three parts are proved from the source's definitions, the abstract (\"We disprove\", \"we construct\") and Theorem 1.1 must state that the result depends on them.",
+   "comment_type": "claim_accuracy",
+   "severity": "minor",
+   "source": {
+    "file": "sections/01-introduction.tex",
+    "lines": [
+     2,
+     2
+    ]
+   },
+   "boxes": [
+    {
+     "page": 1,
+     "x": 90.544167,
+     "y": 261.306609,
+     "w": 418.582825,
+     "h": 12.52163125
+    }
+   ]
+  }
+ ]
+}

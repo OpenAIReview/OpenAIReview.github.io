@@ -1,0 +1,205 @@
+{
+ "id": "An-Integral-Counterexample-to-Gerstens-Conjecture-September-25-2026",
+ "title": "An integral counterexample to Gersten's conjecture",
+ "abstract": "We construct a two-dimensional ramified regular local ring <i>A</i> of mixed characteristic <span class=\"math\">(0,5)</span> for which <span class=\"math\">K_5(A)\\to K_5(\\mathop{\\mathrm{Frac}}\\nolimits A)</span> has a nonzero kernel. This disproves Gersten's conjecture in its unrestricted integral form.",
+ "result_id": "209",
+ "result_title": "Integral counterexamples to Gersten’s conjecture",
+ "subject": "Algebra",
+ "source_pdf": "preprints/An-Integral-Counterexample-to-Gerstens-Conjecture-September-25-2026/An-Integral-Counterexample-to-Gerstens-Conjecture-September-25-2026.pdf",
+ "pdf": "pdf/An-Integral-Counterexample-to-Gerstens-Conjecture-September-25-2026.pdf",
+ "page_sizes": [
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ]
+ ],
+ "macros": "\\newcommand{\\Z}{\\mathbb Z}\n\\newcommand{\\Q}{\\mathbb Q}\n\\newcommand{\\F}{\\mathbb F}\n\\newcommand{\\OO}{\\mathcal O}\n\\newcommand{\\Dcal}{\\mathcal D}\n\\newcommand{\\Spec}{\\operatorname{Spec}}\n\\newcommand{\\Proj}{\\operatorname{Proj}}\n\\newcommand{\\Pic}{\\operatorname{Pic}}\n\\newcommand{\\Gal}{\\operatorname{Gal}}\n\\newcommand{\\Br}{\\operatorname{Br}}\n\\newcommand{\\Frac}{\\operatorname{Frac}}\n\\newcommand{\\im}{\\operatorname{im}}\n\\newcommand{\\Div}{\\operatorname{Div}}",
+ "review": {
+  "method": "OpenAIReview (Claude Opus 5.5)",
+  "effort": "high",
+  "date": "2026-10-08"
+ },
+ "overall_assessment": "The paper claims that $K_5(A)\\to K_5(\\operatorname{Frac}A)$ has a nonzero kernel for $A=(V[x,y]/(5+x^4+y^4))_{(5,x,y)}$. The class is $\\gamma=i_*\\widetilde c$, a pushforward from the divisor $\\operatorname{Spec}\\mathcal O$, and the proof detects $\\gamma$ modulo $5$ after the flat base change $V\\to L$.\n\nI checked each step of the argument against the source and found no mathematical error. The checks include: the coefficient pairing on $M=\\mathbb S/5$; the degree bookkeeping of the motivic spectral sequence in Lemma 2.3 and the range of each use; the arithmetic of $\\mathbb Z[\\zeta,1/5]$ (discriminant $125$, Minkowski bound below $2$, trivial Picard group); the Brauer argument of Lemma 3.1; the proof of $K_4(S)[5]=0$; the conjugation formula $(\\delta c)\\bmod5=\\chi(\\delta)^2b^2[\\delta u]_5$; the horizontal divisor $H(z)$ and the Picard test of Proposition 4.1; the point counts $\\#E(\\mathbb F_5)=4$ and $\\#E(\\mathbb F_{5^4})=640$; the weighted orbit sum $4Q$; the uniformizer $t$ with $t^4=-5$; the regularity of $A$ and the kernel generator $Y_0x-X_0y$; the four split points $p_\\delta$ and their specializations $g_{\\chi(\\delta)}P$; and the retained-point condition for $T$. Two consistency tests also pass. In a smooth analog the scalar sum is $1+4+4+1=0$, and in an equicharacteristic analog the lift $c$ does not exist because $K_4(k;5)\\ne0$. The method thus does not contradict the known positive results.\n\nThree issues remain, and none is an error in a statement. (1) The proof of Lemma 2.2 does not show that $b$ commutes with the localization boundary; it needs the $K(R)$-module structure of the localization fiber sequence. (2) Lemma 2.3 uses the multiplicativity of the motivic-to-etale comparison without a reference. (3) Appendix A refutes only the paper's own partial paraphrase of the cited Definition 12 and Lemma 13(III). Issues (1) and (2) are standard facts, but the full proof depends on the actual map $b$, so the paper must supply exact references.\n\nI removed three sub-agent findings. Two said that the paper hides its conflict with the cited Theorem 5; the Introduction and Appendix A state this conflict directly. One said that some cited results cannot be verified; it shows no error, and no proof uses those results. The theorem contradicts a claimed proof of Gersten's conjecture, and the result is of high consequence. An independent check of the cited inputs (Friedlander-Suslin, Voevodsky, Quillen) by a specialist is necessary before acceptance.",
+ "num_findings": 3,
+ "comments": [
+  {
+   "title": "Lemma 2.2: the proof does not show that $b$ commutes with the localization boundary",
+   "quote": "These pairings commute with all arrows of the triangle.",
+   "explanation": "The proof gives a pairing $(K(R)\\wedge M)\\wedge(B\\wedge M)\\to B\\wedge M$ for each term $B$ of the localization triangle $B'\\to B\\to B''\\to\\Sigma B'$. It then says that the pairings commute with all three arrows. The only support is the earlier sentence that the tensor pairings respect the null composite \"and hence its cofiber sequence\". This inference is not valid in the homotopy category. Exact tensor functors give commutation with $B'\\to B$ and $B\\to B''$, because exact functors induce these two maps. No functor induces the boundary $B''\\to\\Sigma B'$. A family of maps that is given termwise up to homotopy and that commutes with two arrows of a triangle determines the map on the third term only up to the image of a group of the form $[\\Sigma(K(R)\\wedge B''),B']$. Thus commutation with the boundary does not follow.\n\nThe missing input is that Quillen's localization sequence is a fiber sequence of $K(R)$-module spectra. Equivalently, the tensor action is biexact on the full sequence of categories (supported, whole, localized), and the fiber identification is compatible with this action. This statement is true and standard (Waldhausen fibration theorem, or the Thomason-Trobaugh treatment). With it, the pairing is a natural transformation of exact functors of the $K(R)$-module $B$, and it commutes with boundaries. I checked that the remainder of the lemma is then correct: no integral lift of $\\beta$ is necessary, no associativity of $\\mu$ is necessary for $b^2=b\\circ b$, and a class of even degree gives no sign. I also recomputed Lemma 2.1 ($\\pi_1M=\\pi_2M=0$, $5\\operatorname{id}_M=0$, existence and uniqueness of $\\mu$ from $[\\Sigma M,M]=0$) and found no error.\n\nThe statement is thus very probably true, but the written proof has a gap, and the cited sections of Quillen do not contain the module statement. The dependence is large. The identity $\\partial(b^2x)=b^2\\partial x$ gives the surjection $K_5(N;5)\\to\\bigoplus_vK_4(k_v;5)$ in Lemma 3.2, and thus $K_4(S)[5]=0$ and the class $c$. It also gives $\\partial_q^{(5)}(b^2\\xi_0)=b^2\\partial_q^{(5)}\\xi_0$ in Proposition 4.1. The paper must give a spectrum-level argument or an exact reference.",
+   "comment_type": "methodology",
+   "severity": "moderate",
+   "source": {
+    "file": "sections/coefficients.tex",
+    "lines": [
+     114,
+     114
+    ]
+   },
+   "boxes": [
+    {
+     "page": 5,
+     "x": 79.200432,
+     "y": 212.955738,
+     "w": 453.599091,
+     "h": 12.0452075
+    },
+    {
+     "page": 5,
+     "x": 79.200432,
+     "y": 224.924858,
+     "w": 453.599091,
+     "h": 14.77789875
+    }
+   ]
+  },
+  {
+   "title": "Lemma 2.3: the action of $\\beta_H$ on the graded pieces uses a multiplicative comparison that the paper does not cite",
+   "quote": "Multiplication by $\\beta_H$ preserves these filtrations and acts on",
+   "explanation": "I recomputed the degree bookkeeping of Lemma 2.3 and it is correct. A term $H^s(H,\\mathbb Z/5(j))$ has total degree $2j-s$ and is zero for $s>j$, and $d_\\rho$ goes from $(s,j)$ to $(s+2\\rho-1,j+\\rho-1)$. For $\\operatorname{cd}_5H\\le3$ and degree $2r$, only $(s,j)=(0,r)$ and $(2,r+1)$ remain, and the second term needs $r\\ge1$. The one possible differential is $d_2$ from $(0,r)$ to $(3,r+1)$, and it is zero because $\\alpha^{\\otimes r}$ is the edge image of $b^r(1)$. For $\\operatorname{cd}_5H\\le2$ and degree $2r+1$, only $(1,r+1)$ remains. Each use of the lemma is in range: $r=1$ for $K_2(N;5)\\to K_4(N;5)$, $r=0,1$ for $K_1\\to K_5$ on $N$ and on $\\kappa(q)$, $r=1,2$ for $K_2(J;5)\\to K_6(J;5)$, and the finite-field clause for $k_v$.\n\nThe quoted step is the one step without full support. The pairing of spectral sequences gives the action on $E_\\infty$ as the motivic cup product with the class of $\\beta_H$ in $H^0(H,\\mathbb Z/5(1))$. The paper then uses this as $-\\otimes\\alpha$ on $H^s_{\\mathrm{et}}(H,\\mu_5^{\\otimes j})$, which is an isomorphism because $\\mu_5\\subset H$. This needs the comparison $H^s(H,\\mathbb Z/5(j))\\cong H^s_{\\mathrm{et}}(H,\\mu_5^{\\otimes j})$ to be compatible with cup products. The sources are cited for the isomorphism (Voevodsky) and for the motivic product (Friedlander-Suslin), not for this compatibility. The proof also identifies the coefficient product of Friedlander-Suslin with $\\mu$ in one sentence about stable duality, with no argument.\n\nThe compatibility is true (the comparison is the change-of-topology map, and it is multiplicative), so the lemma holds. But Lemma 3.2, Proposition 3.3, Proposition 4.1 and Theorem 1.1 use the actual map $b$, not an abstract isomorphism. The proof must name the multiplicative comparison and give a reference.",
+   "comment_type": "missing_information",
+   "severity": "minor",
+   "source": {
+    "file": "sections/coefficients.tex",
+    "lines": [
+     269,
+     269
+    ]
+   },
+   "boxes": [
+    {
+     "page": 7,
+     "x": 79.200432,
+     "y": 146.444917,
+     "w": 453.599091,
+     "h": 12.12119875
+    }
+   ]
+  },
+  {
+   "title": "Appendix A: the counterexample refutes only the paper's partial paraphrase of Definition 12 and Lemma 13(III)",
+   "quote": "upper triangular structure arrows and allows lower triangular",
+   "explanation": "I recomputed the algebra of the appendix and it is correct. For $D=\\operatorname{diag}(g,1)$ the identity $DM_1=M_0D$ holds, and the product $M'_1M_1$ gives the stated law $\\star$. The matrices of $U,U',L,L'$ are as stated, and $L'\\star U=U'\\star L=\\left(\\begin{smallmatrix}1&1\\\\1&1\\end{smallmatrix}\\right)$. The image square has composites $1$ and $1-g$, and $1\\ne1-g$. Lemma A.1 is thus true for \"the upper-left-block assignments just described\".\n\nThe gap is the step from Lemma A.1 to \"a counterexample to the functor assertion\" of the cited Lemma 13(III). The appendix does not reproduce Definition 12. It gives only \"the part of that restriction needed below\". The conclusion needs these facts about the source, which the appendix assumes: (1) each triple of lower triangular isomorphisms that commutes with the structure arrows is a morphism, with no relation between the components. For an upper triangular $U'$ and a lower triangular $L$, the defect of a mixed square is exactly $g\\,b_{U'}c_L$. Here the square commutes only because this term compensates the diagonal change $1\\mapsto1-g$. A condition such as unipotent diagonals, or a standard block form of the admissible monomorphisms (with $b=0$), removes the example. (2) The degenerate $S_2$-object $X\\xrightarrow{U}X\\to0$, with a non-identity isomorphism as structure arrow, is an object of the source. (3) The assignments $\\mu'_1,\\mu'_2$ are exactly \"upper-left block in both chain degrees\". If one of these differs from the source, Lemma A.1 proves nothing about the cited lemma. The paper must quote Definition 12 and Lemma 13(III) in full and check each clause.\n\nTwo statements are also too strong. The sentence \"The calculation identifies the precise missing condition\" does not follow from one example. The hypothesis \"regular\" in Lemma A.1 has no function: the proof uses only that $g$ is a nonzero nonzerodivisor in the maximal ideal. In addition, the defect is zero up to homotopy: on $\\operatorname{Typ}(g)$ the maps $1$ and $1-g$ are chain homotopic (homotopy $h=1$). The appendix concedes this. The main theorem does not use the appendix, so the effect is local.",
+   "comment_type": "claim_accuracy",
+   "severity": "minor",
+   "source": {
+    "file": "sections/claimed-vanishing.tex",
+    "lines": [
+     82,
+     82
+    ]
+   },
+   "boxes": [
+    {
+     "page": 22,
+     "x": 79.200432,
+     "y": 192.465195,
+     "w": 453.817261,
+     "h": 13.63634125
+    },
+    {
+     "page": 22,
+     "x": 79.200432,
+     "y": 206.681217,
+     "w": 453.599091,
+     "h": 12.0452075
+    }
+   ]
+  }
+ ]
+}

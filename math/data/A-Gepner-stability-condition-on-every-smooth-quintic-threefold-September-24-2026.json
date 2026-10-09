@@ -1,0 +1,170 @@
+{
+ "id": "A-Gepner-stability-condition-on-every-smooth-quintic-threefold-September-24-2026",
+ "title": "A Gepner stability condition on every smooth quintic threefold",
+ "abstract": "We prove Toda's normalized quintic Gepner conjecture. On every smooth complex quintic threefold, we construct a numerical Bridgeland stability condition for which tensoring by the hyperplane bundle, followed by the spherical twist at the structure sheaf, increases phase by 2/5.",
+ "result_id": "055",
+ "result_title": "Gepner symmetry and large-volume stability on threefolds",
+ "subject": "Algebraic and complex geometry",
+ "source_pdf": "preprints/A-Gepner-stability-condition-on-every-smooth-quintic-threefold-September-24-2026/paper.pdf",
+ "pdf": "pdf/A-Gepner-stability-condition-on-every-smooth-quintic-threefold-September-24-2026.pdf",
+ "page_sizes": [
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ]
+ ],
+ "macros": "\\newcommand{\\C}{\\mathbb C}\n\\newcommand{\\R}{\\mathbb R}\n\\newcommand{\\Z}{\\mathbb Z}\n\\newcommand{\\Q}{\\mathbb Q}\n\\newcommand{\\D}{\\mathcal D}\n\\newcommand{\\OO}{\\mathcal O}\n\\newcommand{\\Db}{D^{\\mathrm b}}\n\\newcommand{\\Knum}{K_{\\mathrm{num}}}\n\\newcommand{\\norm}[1]{\\left\\lVert#1\\right\\rVert}\n\\newcommand{\\Re}{\\operatorname{Re}}\n\\newcommand{\\Im}{\\operatorname{Im}}\n\\newcommand{\\Coh}{\\operatorname{Coh}}\n\\newcommand{\\ch}{\\operatorname{ch}}\n\\newcommand{\\rk}{\\operatorname{rk}}\n\\newcommand{\\Hom}{\\operatorname{Hom}}\n\\newcommand{\\Ext}{\\operatorname{Ext}}\n\\newcommand{\\im}{\\operatorname{im}}",
+ "review": {
+  "method": "OpenAIReview (Claude Opus 5.5)",
+  "effort": "high",
+  "date": "2026-10-08"
+ },
+ "overall_assessment": "The manuscript claims a numerical Bridgeland stability condition on every smooth quintic threefold that is Gepner-type for $\\Phi=T_{\\mathcal O_X}\\circ(-\\otimes\\mathcal O_X(1))$ with phase shift $2/5$. I rechecked the internal mathematics and found no error. The matrix $M$, $\\det(zI-M)=z^4+z^3+z^2+z+1$, $\\det J=625$, the eigencharge $Z$, and the three margins $m_b$, $m_s$, $m_c$ are correct. The torsion pair of Lemma 3.3, the inclusion $\\mathcal U_+^\\alpha\\subset\\mathcal U_-^\\theta$ of Lemma 3.4, the twist step of Lemma 3.5, the inclusion $\\Phi U_\\eta\\subset U_\\theta$, the refinement $D_3^\\alpha\\subset D_0^\\beta[1]$, the block support estimate, the block Harder--Narasimhan filtrations, the phase cuts, local finiteness, and the kernel proof of $\\Phi^5\\simeq[2]$ all hold as written.\n\nThe result is conditional on one external input. Lemma 3.1 takes a stronger Bogomolov--Gieseker inequality from a cited theorem (Xu, Theorem 1.3) that the manuscript does not reproduce in full and that has no bibliography data in the source. The proof needs $d/r<\\tfrac14-u\\approx-0.0264$ at slope $\\pm\\tfrac12$ and has margins as small as $1.6\\cdot10^{-4}$, so the conclusion depends on the exact form of that bound. I could not confirm the citation. The abstract must state this dependence.\n\nThe claim to resolve Toda's conjecture is also not checked against the statement of the conjecture, and the theorem does not show that the double-tilt heart $\\mathcal A_0$ is the heart $\\mathcal P((0,1])$ of the constructed stability condition.\n\nEight of the ten sub-agents returned no findings. The three findings that were returned reduce to the two issues above.",
+ "num_findings": 2,
+ "comments": [
+  {
+   "title": "Theorem 1.1 depends fully on a cited inequality (Xu, Theorem 1.3) that the manuscript does not prove and that a reader cannot check",
+   "quote": "We use Xu's Theorem~1.3 \\cite{Xu2026}.",
+   "explanation": "Lemma 3.1 is the only geometric input, and its proof is this citation. The source has no bibliography data (only `\\bibliography{references}`, with no `references` file), so the entry has no title, author list, or identifier. I could not confirm that the cited theorem exists with the quoted bound $g$.\n\nWhat I checked and found correct. (1) $g\\le f$ on $[0,1/2]$: pieces 1 and 3 are clear, piece 2 needs $x\\le 25/62$ and $5/13<25/62$, piece 4 needs $3/10\\ge 7/25$. (2) $f$ satisfies $h(1-x)=h(x)+\\tfrac12-x$, and $f(1/2)=-3/100$. (3) All later steps follow from Lemma 3.1: the sign $N_b^\\eta/r\\le -m_b$ at slope $b$, the torsion pair of Lemma 3.3, the strip test $\\max_{1/2\\le s\\le s_0}(f(s)-s/2+u)=u-\\tfrac{13857}{50000}$, the final inequality of Lemma 3.4, Lemma 3.5, the shear $\\alpha_0=\\eta_0-\\eta_1$, the four half-plane argument of Proposition 4.1, Section 4, and Appendix A. I found no error in these steps.\n\nWhy the citation is critical. The proof uses Lemma 3.1 in three places: (a) $d/r\\le -3/100$ at slope $\\pm\\tfrac12$, which must be below $\\tfrac14-u-\\tfrac32\\delta\\approx-0.0264$; (b) $f(s)-s/2+u<0$ on $[1/2,s_0]$; (c) $d(S)\\le 0$ for slopes in $(-1/2,1/2]$. The classical Bogomolov--Gieseker inequality gives only $d/r\\le \\mu^2/2=\\tfrac18$ at $|\\mu|=\\tfrac12$, so (a) and (b) fail without the stronger bound. Item (a) is a strong Bogomolov--Gieseker inequality at slope $-\\tfrac12$, which is the type of statement that Toda's quintic paper gives as conjectural input for this construction. The margins are small: $m_b\\approx 3.6\\cdot10^{-3}$, $m_s\\approx 7.3\\cdot10^{-4}$, $m_c\\approx 1.6\\cdot10^{-4}$. The window for $s_0$ is also small: Lemma 3.4 needs $u/s_0<\\tfrac12$ (so $s_0>0.5528$) and the strip test needs $s_0<1-u/0.62\\approx0.5542$. A small change in the cited bound for $x$ near $0.45$ or at $x=\\tfrac12$ breaks the proof.\n\nThe sub-agents tested $g$ on explicit sheaves ($\\mathcal O_X(n)$, $\\Omega_{\\mathbb P^4}(1)|_X$ with equality at $x=\\tfrac14$, $\\Omega^2_{\\mathbb P^4}(2)|_X$, syzygy sheaves) and found no counterexample. Thus I do not say that the bound is false. The correct statement of the result is: Theorem 1.1 holds if the cited inequality holds, with all four properties that the proof of Lemma 3.1 asserts about it (all ranks, every smooth quintic, the displayed pieces on $[0,1/2]$, and the reflection symmetry on $[1/2,1]$). The abstract and the Introduction say \"We prove\" without this condition. The manuscript must give the full reference, reproduce the exact statement with its hypotheses and the full bound on $[-1,1]$, and say that this input contains the strong inequality at slope $-\\tfrac12$.",
+   "comment_type": "methodology",
+   "severity": "major",
+   "source": {
+    "file": "sections/aisles.tex",
+    "lines": [
+     39,
+     39
+    ]
+   },
+   "boxes": [
+    {
+     "page": 6,
+     "x": 66.545433,
+     "y": 313.128372,
+     "w": 473.454559,
+     "h": 13.63634125
+    },
+    {
+     "page": 6,
+     "x": 66.545433,
+     "y": 313.7952,
+     "w": 39.6362,
+     "h": 12.0452075
+    }
+   ]
+  },
+  {
+   "title": "The claim to resolve Toda's conjecture is not checked against the conjecture, and the theorem does not show that Toda's candidate heart is the heart of $\\sigma$",
+   "quote": "The following theorem positively resolves this quintic conjecture.",
+   "explanation": "The manuscript does not state Toda's Conjecture 3.1 and does not write Toda's central charge. Proposition 2.3 is correct: I rechecked $ZM=\\lambda Z$ and that $\\lambda$ is a simple eigenvalue, so the normalized eigenform is unique. But this identifies $Z$ with Toda's charge only if Toda's charge satisfies $Z\\circ\\Phi=e^{2\\pi i/5}Z$ and $Z(\\mathcal O_x)=-1$. The manuscript does not verify these two properties from the source. It also takes from citations that the grade shift corresponds to $\\Phi$ and not to $\\Phi^{-1}$ (which gives the eigenvalue $\\lambda^{-1}$).\n\nA second gap is between the theorem and the construction that the Introduction attributes to Toda (first tilt at $-\\tfrac12$, second tilt by $\\mathrm{Im}\\,Z$). The proof gives $\\mathcal A_0=\\mathcal H_0=\\langle\\mathcal S_4,\\ldots,\\mathcal S_0\\rangle$, and Proposition 4.3 puts the charges of $\\mathcal S_0$ in the closed sector $0\\le\\varphi\\le\\tfrac15$. The slicing puts the phase-$1$ objects of $\\mathcal S_5=\\mathcal S_0[1]$ in $\\mathcal P(1)$. Thus $\\mathcal P((0,1])=\\mathcal A_0$ if and only if no nonzero object $E$ of $\\mathcal A_0$ has $Z(E)\\in\\mathbb R_{>0}$. The manuscript does not prove this; in general $\\mathcal P((0,1])$ is a tilt of $\\mathcal A_0$ at the phase-$0$ objects. This is the Bogomolov--Gieseker type inequality for second-tilt objects with $\\mathrm{Im}\\,Z=0$, which the paper says it does not need.\n\nThe three formulas of Theorem 1.1 are not affected. If the conjecture is only the existence of a Gepner-type stability condition for $(\\Phi,2/5)$ with this charge, the theorem has the same form. The Introduction must state the conjecture exactly, verify the two properties of Toda's charge, and say that the identification of the heart with the double-tilt heart $\\mathcal A_0$ stays open.",
+   "comment_type": "claim_accuracy",
+   "severity": "minor",
+   "source": {
+    "file": "sections/introduction.tex",
+    "lines": [
+     50,
+     50
+    ]
+   },
+   "boxes": [
+    {
+     "page": 1,
+     "x": 71.999985,
+     "y": 683.3890839999999,
+     "w": 468.0,
+     "h": 13.63634125
+    },
+    {
+     "page": 1,
+     "x": 71.999985,
+     "y": 697.605045,
+     "w": 468.0,
+     "h": 12.0452075
+    }
+   ]
+  }
+ ]
+}

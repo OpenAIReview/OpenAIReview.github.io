@@ -91,21 +91,19 @@
  ],
  "macros": "",
  "review": {
-  "method": "claude CLI agent, claude-opus-5-5",
-  "effort": "xhigh",
-  "date": "2026-10-07"
+  "method": "OpenAIReview (Claude Opus 5.5)",
+  "effort": "high",
+  "date": "2026-10-08"
  },
- "overall_assessment": "I found no fatal error. The new argument (Sections 4–5) is correct as far as I can check, so Theorem 1.1 and Corollary 6.3 follow provided the results quoted from De Lellis–Focardi in Proposition 3.1 hold as stated. I could not check those quotations against the source. The decisive new step is the compact-piece exclusion: split $v=f+F$ with $F$ carrying the jump on $A$, translate $F$ rigidly, and use that the interaction $I_p(t)$ is harmonic in $t$. I recomputed it three ways (the paper's distributional computation; the boundary formula $I_p(t)=\\mp\\int_A [F]\\,\\partial_n f(\\cdot+t)\\,d\\mathcal H^1$; and $\\Delta_t I_p=-\\langle \\operatorname{curl}G,\\operatorname{curl}p_t\\rangle$ with disjoint supports $B$ and $A_t$). All agree. The cutoff errors, the absolute convergence, inequality (5.3), the minimum principle, the removal of the projected potential (5.7), the jump-flux identity (5.8), the implication \"one directional derivative constant on a disk $\\Rightarrow$ affine\" in 2D, and the final contradiction all check. I also tested the argument on cases where it should not give a contradiction (a Griffith crack in a uniform field; $f=x_1x_2$ with a straight crack; the cylinder, where affine $f$ has linear energy growth); it behaves correctly in each. The reduction in Section 2, the topology in Lemma 4.1, the assembly in Section 6 and the component count are also correct. What I could not verify is bibliographic: the exact content of the cited De Lellis–Focardi statements, namely Corollary 4.4.3 (\"at most one unbounded component\"), Theorem 1.4.6, Theorem 2.2.3 (in particular the claimed $L^2$-integrability of $v$ up to $H$), the endpoint/junction epsilon-regularity Theorem 1.3.3, and the weak-$L^4$ equivalence Theorem 1.5.4. Two of these are listed below as unresolved doubts; in both cases I believe the mathematics survives (the first by a short blow-down argument, the second because the hypothesis is not actually needed). Given how short the new argument is relative to the age of the problem, an expert with the monograph in hand should confirm those quotations before the result is accepted.",
- "num_findings": 2,
+ "overall_assessment": "The paper claims the interior regularity part of the planar Mumford--Shah conjecture. Its new argument (Section 5) excludes a compact piece of the limiting crack that is at positive distance from the remainder. I checked this argument line by line and found no error: the split v = f + F, the energy inequality (5.5), the harmonicity of the interaction I_p in the translation parameter, the jump-flux identity, and the conclusion that f is affine and the gradient is zero are all correct. The reduction to a rectifiable pair (Section 2) and the isolation lemma (Section 4) are also correct, apart from one cited boundary density bound.\n\nThe main theorem is not proved by this argument alone. Corollary 6.1 goes from \"no bounded component\" to \"H is connected\" with one cited sentence: a global generalized minimizer has at most one unbounded component of its crack set. The paper gives no statement or proof of this, its own description of the source is weaker, and the classification results in its introduction do not give it when the complement is connected. A crack with connected complement and two or more unbounded components is not excluded by anything in the paper, and the translation argument does not apply to an unbounded piece. If the cited sentence is not a theorem in that form, Theorem 1.1 and Corollary 6.2 do not follow, and the paper proves only that blow-up limits with connected complement have no bounded component.\n\nThe other findings are local. The epsilon-regularity input is stated with a scale threshold and constants that depend on the datum only, but they must depend on a local bound for u. Three more inputs (square integrability of v up to H, the boundary density bound in Lemma 2.2, the weak-L^4 equivalence) are cited by number without a statement. The relation to the Deangelis preprint, which the paper says proves the same structure, is not stated. All inputs come from one author version of a monograph that the review could not read, so each citation-based finding is a request for the exact statement, not a claim of error.",
+ "num_findings": 7,
  "comments": [
   {
-   "title": "The step from 'no bounded component' to 'connected' rests only on a quoted statement (at most one unbounded component) that is not proved in the paper and that I could not confirm.",
-   "severity": "minor",
-   "location": "Proposition 3.1(4), first sentence; used in the proof of Corollary 6.1",
+   "title": "The classification rests on an unproved cited claim: \"at most one unbounded component\" of the crack set",
    "quote": "A global generalized minimizer has at most one unbounded connected component",
-   "explanation": "This is not one of the classical named results (Bonnet: connected $K$; David–Léger: disconnected complement; Bonnet–David: cracktip), and the paper gives only a theorem number ('Corollary 4.4.3 bounds the number of unbounded components'). It is the only place where several unbounded components are excluded, so the classification depends on it. I believe the statement is true. Sketch: if $K_1\\neq K_2$ are unbounded components, take proper arcs $\\sigma_i\\subset K_i$ leaving a ball $B_{r_0}$; together with a segment in $B_{r_0}$ they form a properly embedded line in $K\\cup\\overline{B_{r_0}}$. Blow down along $R_j\\to\\infty$. At a regular point $y$ of the limit $K_\\infty$ on $\\lim\\sigma_1/R_j$, epsilon-regularity makes $K/R_j$ a single arc near $y$, contained in $\\sigma_1/R_j$, whose two sides are separated in $\\mathbb R^2\\setminus(K\\cup\\overline{B_{r_0}})/R_j$. Since $0\\in K_\\infty$, the two sides stay separated in $\\mathbb R^2\\setminus K_\\infty$. David–Léger then makes $K_\\infty$ a line or triod, and epsilon-regularity at scale $R_j$ makes $K\\cap B_{R_j}$ connected, a contradiction. This argument, or a verified citation, should be in the paper.",
-   "consequence": "If the quotation is accurate, there is no issue. If it is not, Corollary 6.1 and hence Theorem 1.1 are unproved as written until an argument like the one above is supplied; I expect the main results to survive.",
-   "status": "unverified",
+   "explanation": "This sentence of Proposition 3.1(4) is the only tool that Corollary 6.1 uses to go from \"$H$ has no bounded component\" to \"$H$ is empty or connected\". I checked the chain. Lemma 4.1 and Proposition 5.1 are correct, but they exclude only a compact piece $A$ at positive distance from the remainder. The translation argument needs $A$ compact: the projected field must decay like $|x|^{-2}$, the cutoff error $O(R^{-1/2})$ must go to zero, and $\\mathcal{H}^1(A_t) = \\mathcal{H}^1(A)$ must be finite. Thus nothing in the paper excludes a set $H$ with connected complement and two or more unbounded components, for example two disjoint unbounded curves that do not separate the plane. The paper attributes the sentence to Corollary 4.4.3 of De Lellis--Focardi and gives no statement or proof. The paper's own description of that corollary is weaker: it \"bounds the number of unbounded components\", which is not the bound 1. The three classification results in the introduction (Bonnet for connected $H$, Bonnet--David for a bounded part outside one component, David--Leger for a disconnected complement) do not give the claim when the complement is connected. The standard form of the open case is \"$H$ not connected and complement connected\", which includes several unbounded components. Bonnet monotonicity and the David--Leger formula both need connectedness or a disconnected complement, so I could not derive the claim from the listed tools. I could not read the cited author version, so I do not say that the sentence is false. If the source has an added hypothesis or a bound larger than 1, Corollary 6.1, Theorem 1.1 and Corollary 6.2 are not proved. The authors must quote the exact statement with its hypotheses, or give a proof.",
+   "comment_type": "methodology",
+   "severity": "major",
    "source": {
     "file": "sections/blowup.tex",
     "lines": [
@@ -124,13 +122,71 @@
    ]
   },
   {
-   "title": "The hypothesis $v\\in W^{1,2}(B_R\\setminus H)$ (square integrability of $v$ up to $H$) is attributed to the compactness theorem without justification.",
+   "title": "Epsilon-regularity is stated at all scales $s \\le 1$ with constants that depend on the datum only",
+   "quote": "chosen for the fixed bounds on the fidelity datum",
+   "explanation": "Proposition 3.1(5) has only one hypothesis, Hausdorff closeness to a model, for every $s \\le 1$ and for every reduced absolute minimizer. The fidelity term in $B_s$ has size at most $\\pi s^2 (\\sup|u| + \\sup|g|)^2$, and it must be small against the length $s$. For the absolute minimizers of Section 1.1 the bound $\\sup|u| \\le \\sup|g|$ is not available: Step 2 of Proposition 2.1 gives $|u| \\le M$ with $M$ larger than the circle trace, which $g$ does not control. Thus the scale threshold and $\\varepsilon$ must depend on a local bound for $u$, not on $g$ alone, and the item drops the hypotheses \"rectifiable\" and \"locally bounded $u$\" that item (1) has. The pointwise use in Theorem 1.1 survives, because $s_j = r_j \\rho$ goes to zero and each threshold is satisfied for large $j$. Two things stay open. The proof of Theorem 1.1 does not fix the set $W$ on which the bound for $u$ is taken, so $\\varepsilon$ and $\\alpha$ are not defined there. The exponent $\\alpha$ in Theorem 1.1 is uniform only if the source gives an $\\alpha$ that does not depend on $\\sup|u|$. The paper also attributes the pure-jump, triple-junction and crack-tip cases to one statement, Theorem 1.3.3, without the statement. The authors should state item (5) for the class of item (1), with the scale condition written.",
+   "comment_type": "methodology",
+   "severity": "moderate",
+   "source": {
+    "file": "sections/blowup.tex",
+    "lines": [
+     89,
+     89
+    ]
+   },
+   "boxes": [
+    {
+     "page": 9,
+     "x": 90.657303,
+     "y": 399.191299,
+     "w": 443.58255,
+     "h": 13.63634125
+    },
+    {
+     "page": 9,
+     "x": 105.032913,
+     "y": 413.407352,
+     "w": 429.20694,
+     "h": 12.0452075
+    }
+   ]
+  },
+  {
+   "title": "The introduction says that the known results leave only bounded components, which they do not",
+   "quote": "results leave the possible bounded components of a limiting crack as the",
+   "explanation": "The three results listed before this sentence treat a connected crack set, a bounded part outside one connected component, and a crack that disconnects the plane. A crack with connected complement and two unbounded components is in none of these classes. Thus the listed results do not reduce the problem to bounded components. The reduction needs the additional claim \"at most one unbounded component\", which appears only in Proposition 3.1(4) and is not in the history section. The introduction should name that claim and its source as a separate input, because the main new result (Proposition 5.1) is sufficient only together with it.",
+   "comment_type": "claim_accuracy",
    "severity": "minor",
-   "location": "Section 3, paragraph 'For (1) ...' after Proposition 3.1; used as a hypothesis in Proposition 5.1 and Lemmas 5.2–5.3",
+   "source": {
+    "file": "sections/introduction.tex",
+    "lines": [
+     119,
+     119
+    ]
+   },
+   "boxes": [
+    {
+     "page": 3,
+     "x": 77.760124,
+     "y": 385.664871,
+     "w": 456.479706,
+     "h": 13.63634125
+    },
+    {
+     "page": 3,
+     "x": 77.760124,
+     "y": 399.880924,
+     "w": 458.301544,
+     "h": 12.0452075
+    }
+   ]
+  },
+  {
+   "title": "Square integrability of $v$ up to $H$ is attributed to the compactness theorem without a statement",
    "quote": "stronger conclusion is part of the compactness theorem, not a consequence",
-   "explanation": "Standard compactness statements for blow-ups give convergence in $W^{1,2}_{loc}$ on each component of $\\mathbb R^2\\setminus H$ and $\\nabla v\\in L^2_{loc}(\\mathbb R^2)$, not $v\\in L^2$ up to $H$. The paper itself notes that this does not follow from componentwise convergence and simply asserts it is in the cited theorem; I could not confirm that. The property is plausible (local boundedness of $v$ for global minimizers), but more to the point it is not needed: $e=\\nabla(\\chi v)=\\chi\\nabla v+v\\nabla\\chi\\in L^2$ already, because $\\operatorname{supp}\\nabla\\chi$ is a compact subset of $\\mathbb R^2\\setminus H$ where $v$ is continuous. The construction of $\\phi,p,F,f$, the competitor $V_R$ and all estimates then use only $\\nabla v\\in L^2_{loc}$ and $W^{1,2}_{loc}$ regularity off the singular set.",
-   "consequence": "No effect on the main theorems once Proposition 5.1 and Lemmas 5.2–5.3 are stated with $W^{1,2}_{loc}$ off the singular set and $\\nabla v\\in L^2_{loc}$, or once local boundedness of $v$ is justified separately.",
-   "status": "unverified",
+   "explanation": "Proposition 5.1 has $v$ in $W^{1,2}(B_R \\setminus H)$ as a hypothesis, and the admissible class for $E_0$ needs it for the competitor. The usual compactness statements give $W^{1,2}$ convergence on compact subsets of each complementary component and the energy bound for the gradient. A gradient in $L^2$ does not give the function in $L^2$ near the boundary of a general open set. The paper says that Theorem 2.2.3 gives the stronger conclusion but does not quote it. I checked the effect. The projection uses only the gradient of $\\chi v$, and the gradient of $\\chi$ has support in a compact subset of the complement of $H$, so the main computation is not affected. The fact is also true by a short argument: on a.e. circle the trace of $v$ is bounded, and truncation inside the disk is an admissible competitor when the complement is connected. The paper should include that argument or quote the source statement.",
+   "comment_type": "missing_information",
+   "severity": "minor",
    "source": {
     "file": "sections/blowup.tex",
     "lines": [
@@ -151,6 +207,89 @@
      "x": 77.760124,
      "y": 94.753238,
      "w": 456.774261,
+     "h": 12.0452075
+    }
+   ]
+  },
+  {
+   "title": "Lemma 2.2 depends on a boundary density lower bound that is cited but not stated",
+   "quote": "The boundary density theorem supplies a positive lower bound for",
+   "explanation": "The paragraph after Lemma 2.2 is correct as measure theory. The part of $\\mu$ off the circle is singular to $\\nu$, the part on the circle has density zero at a.e. point outside $J_z$, and thus $\\mu(B_r(x))/r$ goes to zero at a.e. point of the circle outside $J_z$. But the argument assumes the one hard fact: a density lower bound at each boundary point of the closed jump set, for the functional that charges the trace mismatch on the circle, with the term $\\int |z-g|^2$ for bounded $g$, and for exterior data that are only $C^1$. The paper gives three item numbers of Appendix B and no statement. The result with this content that I know (Carriero--Leaci) has no fidelity term; the extension is probably routine. Step 4 of Proposition 2.1 needs this bound: without it $L_m$ can have infinite length, and $\\mathcal{H}^1(K \\setminus J_u) = 0$ is not proved. I checked the other parts of Steps 1 to 5 and found no error. The authors should state the boundary bound with its hypotheses.",
+   "comment_type": "missing_information",
+   "severity": "minor",
+   "source": {
+    "file": "sections/reductions.tex",
+    "lines": [
+     95,
+     95
+    ]
+   },
+   "boxes": [
+    {
+     "page": 5,
+     "x": 77.760124,
+     "y": 434.69511400000005,
+     "w": 456.883362,
+     "h": 13.63634125
+    },
+    {
+     "page": 5,
+     "x": 77.760124,
+     "y": 446.979201,
+     "w": 458.5961,
+     "h": 15.21776375
+    }
+   ]
+  },
+  {
+   "title": "Corollary 6.2 has no argument of its own; the cited equivalence is not stated",
+   "quote": "gives the superlevel estimate \\eqref{eq:weak-l4} on $U$, after increasing",
+   "explanation": "I checked the parts that the paper proves. The layer-cake integral is finite exactly for $0 < p < 4$, the adjustment for $0 < t < 1$ is harmless, and the exponent agrees with the crack-tip profile. The estimate itself comes only from Theorem 1.5.4 of the source. The paper does not state its direction, its class of minimizers, or whether it is local. The restricted pair on $W$ is an absolute minimizer with $\\sup|u|$ possibly larger than $\\sup|g|$, and the proof does not say that the source permits this class. The words \"after increasing $C_U$ for $0<t<1$\" show that the source estimate has a different form from (6.1). A direct proof is short: the closure of $U$ contains finitely many tips and junctions, the gradient is bounded by $C \\operatorname{dist}^{-1/2}$ near a tip and is bounded elsewhere. The paper should give that proof or the full cited statement.",
+   "comment_type": "missing_information",
+   "severity": "minor",
+   "source": {
+    "file": "sections/completion.tex",
+    "lines": [
+     129,
+     129
+    ]
+   },
+   "boxes": [
+    {
+     "page": 18,
+     "x": 77.760124,
+     "y": 556.137703,
+     "w": 456.479706,
+     "h": 14.77789875
+    },
+    {
+     "page": 18,
+     "x": 76.483765,
+     "y": 569.686897,
+     "w": 457.756073,
+     "h": 14.77789875
+    }
+   ]
+  },
+  {
+   "title": "The relation to the Deangelis preprint is not stated",
+   "quote": "Deangelis's recent preprint gives a proof of the global classification and",
+   "explanation": "The paper says as a fact that the preprint proves the global classification and the interior arc, endpoint and triple-junction structure. That is the first assertion of Theorem 1.1. The abstract and Section 1.2 present this assertion as the result of the paper. If the preprint is complete, the new items are the second proof, the component count (1.4) and Corollary 6.2. If the authors do not accept the preprint as complete, \"gives a proof\" is an overstatement. I found no step in Sections 2 to 6 that uses the preprint, so there is no circularity. The authors should say which reading applies and which parts of Theorem 1.1 are new.",
+   "comment_type": "presentation",
+   "severity": "minor",
+   "source": {
+    "file": "sections/introduction.tex",
+    "lines": [
+     136,
+     136
+    ]
+   },
+   "boxes": [
+    {
+     "page": 3,
+     "x": 77.760124,
+     "y": 521.823612,
+     "w": 456.697906,
      "h": 12.0452075
     }
    ]

@@ -1,0 +1,236 @@
+{
+ "id": "Continuous-Phase-Foliations-Create-Analytic-Caustic-Collars-September-24-2026",
+ "title": "Continuous Phase Foliations Create Analytic Caustic Collars",
+ "abstract": "For a smooth strictly convex planar billiard of positive curvature, a continuous foliation of a full grazing annulus by individually invariant essential curves forces an analytic boundary and a jointly analytic collar of smooth strictly convex caustics. The physical-collar rigidity theorem proved in the companion article then implies that the table is an ellipse.",
+ "result_id": "147",
+ "result_title": "The near-boundary Birkhoff conjecture",
+ "subject": "Dynamical systems and ergodic theory",
+ "source_pdf": "preprints/Continuous-Phase-Foliations-Create-Analytic-Caustic-Collars-September-24-2026/paper.pdf",
+ "pdf": "pdf/Continuous-Phase-Foliations-Create-Analytic-Caustic-Collars-September-24-2026.pdf",
+ "page_sizes": [
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ]
+ ],
+ "macros": "\\newcommand{\\R}{\\mathbb{R}}\n\\newcommand{\\C}{\\mathbb{C}}\n\\newcommand{\\T}{\\mathbb{T}}\n\\newcommand{\\ii}{\\mathrm{i}}\n\\newcommand{\\dd}{\\mathop{}\\!\\mathrm{d}}\n\\newcommand{\\eps}{\\varepsilon}\n\\newcommand{\\cS}{\\mathcal{S}}",
+ "review": {
+  "method": "OpenAIReview (Claude Opus 5.5)",
+  "effort": "high",
+  "date": "2026-10-08"
+ },
+ "overall_assessment": "The manuscript claims that a continuous foliation of a grazing phase annulus by invariant essential curves forces a strictly convex billiard table to be an ellipse. It proves a reduction: the foliation gives invariant graphs with a unique wholly periodic graph at each small rational rotation number (Section 2), an analytic boundary (Section 3), a jointly analytic family $V(y,t)$ of invariant graphs (Section 4), and an analytic collar of strictly convex caustics (Section 5). The ellipse then comes from a theorem of a companion article [NB].\n\nThe section reviews found no internal mathematical error. The twist inequalities, the separation barrier, the graph proposition, the closure lemma, the normalization $D_f(x,x+b)=-b^3/24+O(b^5)$, the rational compatibility conditions, the two Fourier divisions, and the support-function geometry of Section 5 were recomputed and are consistent. The majorant arithmetic of the Newton iteration in Section 4.5 is correct: the bound $\\varepsilon_i\\le d_0^{4B+4}2^{-(4B+4)i}$ is preserved with the ratio $Cd_0^{2B+3}2^{4B+4-(2B+3)i}$.\n\nThe main limit is the dependence on [NB]. The step from a caustic collar to an ellipse is [NB, Theorem 1.2], and it is the full rigidity content of the result. Three analytic estimates (stationary meshes, Fourier rows, buffered division) are also imported, and the argument needs them in strong forms: for inputs that are not billiard tables, uniformly for strip widths $0\\le\\sigma\\le1$, and with no loss of derivatives. The manuscript discloses these dependences, but a reader cannot check them from this text, and the manuscript says that [NB] has a stronger standing geometric hypothesis. Theorem 1.1 is thus proved here only as a conditional statement. Theorem 1.3 is conditional on the three estimates.\n\nTwo smaller points concern the introduction. One sentence names two imported estimates for Theorem 1.3 where the proof uses three. The reason given for a direct proof of the graph property does not follow, because Birkhoff's invariant-curve theorem applies to continuous essential invariant curves.\n\nRecommendation: the authors should include the proofs of the imported statements or state Theorems 1.1 and 1.3 as conditional, and should quote the [NB] definition and hypotheses word for word.",
+ "num_findings": 4,
+ "comments": [
+  {
+   "title": "The ellipse conclusion of Theorem 1.1 is imported from the companion article and is not proved here",
+   "quote": "Theorem~\\ref{thm:main} resolves the near-boundary Birkhoff conjecture",
+   "explanation": "The proof of Theorem 1.1 has two steps. Proposition 5.1 gives a collar of caustics. Then [NB, Theorem 1.2] gives the ellipse. The second step is one sentence that cites the companion article. The manuscript contains no proof and no sketch of it.\n\nThis step is the full rigidity content. A physical caustic collar $H_0:\\mathbb S^1\\times[0,1)\\to A$ gives a continuous foliation of a grazing phase annulus by the curves of tangent lines of its leaves. Thus Theorem 1.2 is the special case of Theorem 1.1 with smooth leaves, and the two theorems are equivalent modulo the regularity Theorem 1.3. The manuscript adds the reduction from continuous phase leaves to smooth caustics. It gives no independent evidence for the step from a caustic collar to an ellipse. That step has no symmetry hypothesis and no closeness hypothesis, so it is stronger than each result in the literature review of Section 1.1.\n\nThe abstract and the introduction disclose this dependence, so this is not a mathematical error in the manuscript. But Theorem 1.1 is stated as an unconditional theorem with the conclusion \"$\\Omega$ is an ellipse\", and the proof says that Proposition 5.1 gives \"exactly\" the object of [NB, Definition 1.1]. Section 1.2 only paraphrases that definition. A reader cannot confirm that [NB] requires no more of $H_0$, for example a regularity condition in the transverse parameter or a condition at the zero leaf. I checked that the delivered object agrees with the paraphrase: a homeomorphism of $\\mathbb T\\times[0,1)$ onto a relatively open set $A\\subset\\overline\\Omega$, with zero leaf $\\partial\\Omega$ and positive leaves that are smooth strictly convex caustics.\n\nThe authors should state Theorem 1.1 as conditional on [NB, Theorem 1.2], or include the proof of that theorem. They should also quote [NB, Definition 1.1] word for word.",
+   "comment_type": "claim_accuracy",
+   "severity": "moderate",
+   "source": {
+    "file": "sections/introduction.tex",
+    "lines": [
+     97,
+     97
+    ]
+   },
+   "boxes": [
+    {
+     "page": 2,
+     "x": 71.999985,
+     "y": 434.101517,
+     "w": 468.403625,
+     "h": 13.63634125
+    },
+    {
+     "page": 2,
+     "x": 71.999985,
+     "y": 448.317569,
+     "w": 468.0,
+     "h": 12.0452075
+    }
+   ]
+  },
+  {
+   "title": "Theorems 3.1 and 4.1 depend on three imported estimates in strong forms that the manuscript does not prove",
+   "quote": "Both inputs concern the arbitrary-input action",
+   "explanation": "Proposition 3.2 ([NB, Lemma 2.3]), Proposition 3.3 ([NB, Proposition 2.4]), and Lemma 4.5 ([NB, Lemma 3.5]) are stated without proof. They carry the analytic content of Sections 3 and 4. The bound $\\|b_n(f)-1\\|\\le K/|n|$ gives the inverse of Lemma 3.5 and thus the Newton scheme and the real contraction of Theorem 3.1. Lemma 4.5 gives the two Fourier divisions of Proposition 4.3.\n\nThe argument needs these statements in a strong form.\n\n(a) They must hold for inputs $f$ that are not billiard tables. The paper says so itself: the trial functions \"need not themselves represent billiard tables\".\n\n(b) The constants $K,N$ must depend only on $(m,M)$ and must be uniform for $0\\le\\sigma\\le1$. This includes $\\sigma=0$, where only $r_0=m+15$ real derivatives are bounded.\n\n(c) The Lipschitz bound $\\|b_n(f)-b_n(\\widehat f)\\|_{m,(1-K/n^2)\\sigma}\\le (K/|n|)\\|f-\\widehat f\\|_{r_0,\\sigma}$ must hold with the same $r_0$ and the same $\\sigma$ on the right side, with no loss of derivatives.\n\n(d) The statements have more clauses: the enlargement of the real uniqueness ball \"after increasing $N$\", the derivative identity for holomorphic variations, and the division lemma \"with exactly the buffers needed here\". The division lemma is written in the notation $\\mathcal D^\\nu_j$ and $Q=1+N+\\delta^{-1}$ of this manuscript.\n\nThe sentence after the quote says that [NB] proves its analytic-boundary result \"under its stronger standing geometric hypothesis\". Section 4 says that the paper proves \"this version of\" [NB, Proposition 3.3]. Thus [NB] has a standing hypothesis, the physical collar, which is not available here. The manuscript asserts that the three cited statements do not use that hypothesis and that they hold in the form (a) to (d). The reader cannot confirm this. If [NB] proves one of them only for actual tables, only for a fixed positive strip width, or with a loss in (c), then Lemma 3.5 does not apply to the Newton iterates and Theorem 3.1 is not proved.\n\nThe authors should give the proofs, or quote the three statements of [NB] word for word with their hypotheses and derive each added clause from them.",
+   "comment_type": "missing_information",
+   "severity": "moderate",
+   "source": {
+    "file": "sections/analytic.tex",
+    "lines": [
+     150,
+     150
+    ]
+   },
+   "boxes": [
+    {
+     "page": 11,
+     "x": 71.999985,
+     "y": 331.50804100000005,
+     "w": 468.0,
+     "h": 13.63634125
+    }
+   ]
+  },
+  {
+   "title": "Section 1.2 names two imported estimates for Theorem 1.3, but its proof uses three",
+   "quote": "Theorem~\\ref{thm:collar-regularity} uses the mesh and Fourier estimates",
+   "explanation": "The proof of Theorem 1.3 is Theorem 3.1 plus Theorem 4.1 plus Proposition 5.1. Theorem 4.1 uses Proposition 4.3, and the proof of Proposition 4.3 states that it uses \"two applications of\" Lemma 4.5. Lemma 4.5 is the buffered division lemma, which is cited from [NB, Lemma 3.5] and is not proved in the manuscript. Thus Theorem 1.3 uses three imported estimates: the mesh estimate, the Fourier-row estimate, and the division lemma. This agrees with the earlier sentence of the introduction that the companion article \"supplies three analytic inputs\", and it does not agree with the quoted sentence.\n\nThe next sentence says that the conclusion is \"proved directly from the phase foliation\". This is correct for the geometric hypothesis, because the proof does not assume a physical collar. But the jointly analytic family $V(y,t)$ of Theorem 4.1 is not obtained without the division lemma. The sentence should list all three inputs.",
+   "comment_type": "claim_accuracy",
+   "severity": "minor",
+   "source": {
+    "file": "sections/introduction.tex",
+    "lines": [
+     145,
+     145
+    ]
+   },
+   "boxes": [
+    {
+     "page": 3,
+     "x": 71.999985,
+     "y": 186.956436,
+     "w": 468.403625,
+     "h": 13.63634125
+    }
+   ]
+  },
+  {
+   "title": "The stated reason for a direct proof of the graph property does not follow",
+   "quote": "leaves are only continuous essential curves, and the entire annulus is",
+   "explanation": "The text says that the leaves are only continuous essential curves and that the paper \"therefore\" proves the graph property directly. The word \"therefore\" is not justified. Birkhoff's invariant-curve theorem applies to continuous essential invariant simple closed curves of an area-preserving twist map, and it gives a Lipschitz graph. The billiard map in the line coordinates $(\\theta,p)$ is such a map: it has the generating function $\\mathcal S(\\theta,\\theta')=2h\\bigl(\\tfrac{\\theta+\\theta'}{2}\\bigr)\\sin\\bigl(\\tfrac{\\theta'-\\theta}{2}\\bigr)$ of (2.4) and the twist $\\partial\\theta'/\\partial p<0$ of (2.3). Each leaf is a continuous essential invariant simple closed curve. Thus the first claim of Proposition 2.2, that each leaf is a graph $p=g_b(\\theta)$, appears to follow from the classical theorem, with a stronger conclusion than the paper proves.\n\nThis is not an error in the proof chain. The direct proof in Section 2 also gives the statements about rational rotation numbers (no rational plateaus, one wholly periodic graph for each small rational), and these do not follow from Birkhoff's theorem alone. But the introduction suggests that continuity of the leaves puts the graph step outside the classical theorem. The authors should say which part of Proposition 2.2 is classical and which part is new.",
+   "comment_type": "presentation",
+   "severity": "minor",
+   "source": {
+    "file": "sections/introduction.tex",
+    "lines": [
+     85,
+     85
+    ]
+   },
+   "boxes": [
+    {
+     "page": 2,
+     "x": 71.999985,
+     "y": 339.257156,
+     "w": 468.0,
+     "h": 13.63634125
+    },
+    {
+     "page": 2,
+     "x": 71.999985,
+     "y": 353.473148,
+     "w": 468.0,
+     "h": 12.0452075
+    }
+   ]
+  }
+ ]
+}

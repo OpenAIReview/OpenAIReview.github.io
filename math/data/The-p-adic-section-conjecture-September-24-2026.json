@@ -107,26 +107,77 @@
  ],
  "macros": "\\newcommand{\\Gal}{\\operatorname{Gal}}",
  "review": {
-  "method": "claude CLI agent, claude-opus-5-5",
-  "effort": "xhigh",
-  "date": "2026-10-07"
+  "method": "OpenAIReview (Claude Opus 5.5)",
+  "effort": "high",
+  "date": "2026-10-08"
  },
- "overall_assessment": "I could not find a break in the chain of either main theorem. After reading all eight sections and recomputing each estimate and case analysis, the local theorem (Theorem 1.1) and the completion theorem (Theorem 1.2) follow from the stated lemmas, provided the cited external results hold in the form quoted. I could not consult those sources, so they are the unverified part: Mochizuki–Tsujimura resolution of nonsingularities in the model-domination form (an unrefereed RIMS preprint as cited, and the only genuinely $p$-adic input), the ABBR lifting theorem, Baker–Rabinoff's Abel–Jacobi compatibility, Pop–Stix valuative localization, and Koenigsmann's birational theorem. The global results (Proposition 8.1, Theorem 8.2, Corollaries 8.3 and 8.5) are then formal consequences of Harari–Stix, Stix and Stoll as quoted. The one step I consider not established is Corollary 8.4, which rests on an unrefereed companion preprint. The steps where new ideas enter all checked out: the patching and point-transfer mechanism (Prop 3.2, Lemma 3.3), the reduction of $\\ell$-th roots on collars to node annuli of an RNS cover (Lemmas 4.2–4.3), and the parallel-edge Jacobian construction giving $m$-th roots including $p$-power $m$ (Lemma 5.1, Prop 5.2). In particular the bound $|h_j| \\le \\max(|T|,|\\alpha/T|)$ and the 'entire inverse image' claims are correct. The method also fails exactly where the statement is false (genus 1, residue characteristic 0, pro-$p$ quotients), each time at the RNS/$\\ell\\ne p$ step. Given the size of the claim, the precise statements of [MT, Thm A/Prop 2.4(iv)], [ABBR, Thm 7.7] and [Pop–Stix, Thm 26] should be confirmed by a specialist before the result is accepted.",
- "num_findings": 1,
+ "overall_assessment": "The paper claims a proof of the local p-adic section conjecture for proper curves of genus at least two. The reduction is short: Pop--Stix put each section in the decomposition group of a valuation above p, Theorem 1.2 lifts a section at a rank-one valuation to a birational section, and Koenigsmann's theorem with the two-valuation argument gives a contradiction.\n\nI checked the internal mathematics step by step and found no error. The patching statements (Lemma 3.1, Proposition 3.2, Lemmas 3.3 and 3.4), the annular unit lemma, the combinatorics of Lemma 4.2, the reduction analysis of Lemma 4.3, the division lemma and the estimates of Proposition 5.2, the proof of Theorem 1.2 from these, Corollary 7.1, the square-root argument of Lemma 7.2 (p = 2 included), the rank-two cases, the injectivity argument, and the deductions of Section 8 are correct as written. Sanity checks on Theorem 1.2 found no contradiction: it is trivial at type-1 points, the cohomological dimensions agree, and the residue field does become perfect after pullback by multiplication by p on an ordinary Jacobian.\n\nThus the result depends on the cited inputs, and these could not be checked against the sources. The most important one is the model-domination form of resolution of nonsingularities in Lemma 4.3: the first stage, Theorem 1.2, and the surjectivity in Theorem 1.1 all depend on one sentence that has no derivation. The second is the ABBR lifting theorem, which the paper applies to a skeleton with loops; this gap has a simple repair. Corollary 8.4 depends on an unpublished companion theorem that is stronger than the published p-converse results and must be stated as conditional. The remaining comments are about signs and citation forms.\n\nBecause the conclusion is a well-known open problem and the new input is small, the exact statements of Mochizuki--Tsujimura Proposition 2.4(iv), ABBR Theorem 7.7, Pop--Stix Theorem 26, and Koenigsmann Proposition 2.4(2) must be compared with the sources before the result is accepted.",
+ "num_findings": 5,
  "comments": [
   {
-   "title": "Corollary 8.4 is not proved here: it rests entirely on an unrefereed companion claim that Selmer corank zero at a single prime gives finiteness of all of Sha.",
-   "severity": "minor",
-   "location": "Corollary 8.4 (A Selmer-corank-zero elliptic target), proof",
-   "quote": "The corank-zero case of the companion Selmer converse\n\\cite[Theorem~1.1]{OpenAISelmerConverse2026} gives\n$\\operatorname{rank}_{\\mathbb Z}E(\\mathbb Q)=0$ and finiteness of the\nentire group $\\operatorname{Sha}(E/\\mathbb Q)$.",
-   "explanation": "From $s_p(E)=0$ one gets directly only $\\operatorname{rank}E(\\mathbb Q)=0$ and finiteness of $\\operatorname{Sha}(E/\\mathbb Q)[p^\\infty]$. Corollary 8.3(i) needs $\\operatorname{Sha}(E/\\mathbb Q)_{\\mathrm{div}}=0$, i.e. no divisible part at any prime $q$. Passing from one prime to all primes requires the rank-zero $p$-converse ($\\operatorname{Sel}_{p^\\infty}$ finite $\\Rightarrow L(E,1)\\neq 0$) for an arbitrary prime $p$ and arbitrary $E/\\mathbb Q$, followed by Kolyvagin. In the published literature this converse is known only under hypotheses on $p$ and on the reduction and residual representation of $E$. The paper supplies no argument and cites only a companion preprint by the same author.",
-   "consequence": "Corollary 8.4 is conditional on the companion preprint. Nothing else depends on it: Theorems 1.1, 1.2, 8.2 and Corollaries 8.3 and 8.5 are unaffected.",
-   "status": "unverified",
+   "title": "Lemma 4.3 depends on a model-domination form of resolution of nonsingularities that the paper does not derive",
+   "quote": "give, after finite extension of the ground field, a finite \\'etale",
+   "explanation": "The proof needs one connected finite etale cover $Y_0$ of $C$ whose STABLE model has a morphism to the non-stable semistable model $\\mathcal C$ (the split model blown up at all the sections $b_i$). The paper attributes this to Mochizuki--Tsujimura, Theorem A and Proposition 2.4(iv), and gives no statement or argument. The usual form of RNS is pointwise: one type-2 valuation becomes a component valuation of the stable model of some cover. The passage to domination needs three more facts: (a) the cover can be taken Galois, so that all points above a vertex of $\\mathcal C$ are stable vertices; (b) for a finite morphism of curves of genus at least two, the inverse image of the stable vertex set is in the stable vertex set, so that finitely many covers can be combined; (c) a model whose vertex set contains the full inverse image of the vertex set of $\\mathcal C$ maps to $\\mathcal C$. The step 'Pass to split reduction and a geometric connected component' also needs the domination for that component. Each of these facts is plausible, but none is in the text, and the cited item number could not be confirmed. I checked the other steps of Lemma 4.3 against the paper and they are correct: the blow-up annuli $|\\pi|^{j+1}<|u_i|<|\\pi|^j$, the constant norm of $t_i/u_i$, the three-case reduction analysis at an irrational level, the compactness argument for the collar $A_i'$, and the root of $f^*t_i = cS^d(1+h)$ for every $d$. Thus the full weight of Proposition 4.4, Theorem 1.2, Corollary 7.1, and the surjectivity in Theorem 1.1 is on this one sentence. The paper must state the exact cited result and give the derivation of the domination form.",
+   "comment_type": "missing_information",
+   "severity": "major",
+   "source": {
+    "file": "sections/04-tame-roots.tex",
+    "lines": [
+     236,
+     236
+    ]
+   },
+   "boxes": [
+    {
+     "page": 11,
+     "x": 71.999985,
+     "y": 356.022507,
+     "w": 451.275604,
+     "h": 13.63634125
+    },
+    {
+     "page": 11,
+     "x": 71.999985,
+     "y": 370.23852899999997,
+     "w": 451.275604,
+     "h": 12.0452075
+    }
+   ]
+  },
+  {
+   "title": "Lemma 4.2 applies the ABBR lifting theorem to a stable skeleton with loop edges",
+   "quote": "These rules also handle loops and chords",
+   "explanation": "The proof applies the lifting theorem for tame coverings directly to the metrized complex of the stable model, with loops allowed and with normalizations as residue curves. To my knowledge, the ABBR statements are for a triangulated punctured curve with a strongly semistable vertex set (no loop edges). The stable graph of a curve of genus at least two frequently has loops (one vertex with two loops, or the dumbbell graph), so the hypotheses of the cited theorem are not established as written. The gap can be repaired: add a genus-0 vertex of valence 2 at the midpoint of each loop; above it use $z \\mapsto z^\\ell$ if the loop is on the circuit (Riemann--Hurwitz gives $-2 = -2\\ell + 2(\\ell-1)$) and $\\ell$ identity copies if not. The stability identity then holds only at the original vertices, which is sufficient. The theorem number (7.7, where existence of a lift over the given curve may be Theorem 7.4) and the definition numbers could not be confirmed. I checked the combinatorial data and they are correct: the cyclic cover from $P-Q+\\ell E$ is totally ramified only at $P$ and $Q$, each direction has total degree $\\ell$, the formula $2g(D')-2 = \\ell(2g(D)-2)+2(\\ell-1)$ gives zero graph ramification, the count $2N-1 < 3N$ holds, and the $\\ell$ bridge edges are nonseparating. The existence of the cover in the nonseparating case also agrees with a dimension count on $H^1(C,\\mu_\\ell)$: the residues along the edges fill $H_1(\\Gamma,\\mathbb Z/\\ell)$.",
+   "comment_type": "methodology",
+   "severity": "moderate",
+   "source": {
+    "file": "sections/04-tame-roots.tex",
+    "lines": [
+     117,
+     117
+    ]
+   },
+   "boxes": [
+    {
+     "page": 9,
+     "x": 71.999985,
+     "y": 745.630924,
+     "w": 451.57016,
+     "h": 12.0452075
+    }
+   ]
+  },
+  {
+   "title": "Corollary 8.4 depends on an unpublished companion theorem that is stronger than the published $p$-converse results",
+   "quote": "The corank-zero case of the companion Selmer converse",
+   "explanation": "The proof needs, for every elliptic curve $E$ over $\\mathbb{Q}$ and every prime $p$ with $s_p(E)=0$, that $\\operatorname{rank} E(\\mathbb{Q})=0$ and that the ENTIRE group $\\mathrm{Sha}(E/\\mathbb{Q})$ is finite. The first fact is elementary: $E(\\mathbb{Q}) \\otimes \\mathbb{Q}_p/\\mathbb{Z}_p$ injects into the $p^\\infty$-Selmer group. The second is not: corank zero at $p$ gives only that $\\mathrm{Sha}[p^\\infty]$ is finite, and Corollary 8.3(i) needs the divisible part of $\\mathrm{Sha}$ to be zero at all primes. The known route is a rank-zero $p$-converse theorem (finite Selmer group implies $L(E,1)$ nonzero) followed by Kolyvagin. The published converse theorems have hypotheses on $p$, on the reduction type, and on the residual representation; to my knowledge none applies to every $E$ and every $p$ (for example $p=2$ or additive reduction). The unrestricted statement comes only from the companion article, which is not available for a check. The corollary must be stated as conditional on that theorem, or limited to the pairs $(E,p)$ for which a published converse applies, or the hypothesis must become $L(E,1)$ nonzero. Theorems 1.1, 1.2, 8.2 and Corollaries 8.3, 8.5 do not use this step.",
+   "comment_type": "claim_accuracy",
+   "severity": "moderate",
    "source": {
     "file": "sections/08-global-sections.tex",
     "lines": [
      203,
-     206
+     203
     ]
    },
    "boxes": [
@@ -136,11 +187,57 @@
      "y": 195.922821,
      "w": 456.730164,
      "h": 13.63634125
+    }
+   ]
+  },
+  {
+   "title": "The slope of the character unit is $+1$ or $-1$, not 'exactly one', and the cited statements give the map only modulo periods",
+   "quote": "of $v(u_j)$ along $e_j$, with respect to $v(T)$, is exactly one: the",
+   "explanation": "The pairing of $c_j = e_j - e_{j'}$ with a segment of $e_j$ is the length of the segment, so the absolute value of the slope is one. The sign depends on the convention for the tropicalization ($v$ or $-v$ of the character) and on the identification of $M$ with $H_1(\\Gamma,\\mathbb Z)$. With the opposite convention the expansion is $u_j = c_j' T^{-1}(1+h_j)$. The result does not change: replace $c_j$ by $-c_j$, and the bounds on $h_j$ and the root of $T$ follow in the same way. Also, the cited compatibility is about the map to the quotient of $\\operatorname{Hom}(M,\\mathbb R)$ by the tropical periods; the proof uses the lift on the simply connected annulus, which is correct but must be said with the convention fixed. The numbers of the cited sections and statements of Baker--Rabinoff could not be confirmed. I checked the remaining computations of Proposition 5.2 and they are correct: $g(Z)=\\ell-1$, the two reductions $T-1$ and $-S/(S-1)$, the unit $(T-1)/(1-U)$ at the node, the bounds $|h_{j,n}|\\le 1$ and $|h_{j,-n}|\\le|\\alpha|^n$, and the convergence of $\\exp(m^{-1}\\log(1+h_j))$ for $D > v_p(m)+1/(p-1)$.",
+   "comment_type": "presentation",
+   "severity": "minor",
+   "source": {
+    "file": "sections/05-arbitrary-roots.tex",
+    "lines": [
+     145,
+     145
+    ]
+   },
+   "boxes": [
+    {
+     "page": 14,
+     "x": 71.999985,
+     "y": 99.95668500000001,
+     "w": 452.551941,
+     "h": 16.60836625
     },
     {
-     "page": 21,
+     "page": 14,
      "x": 71.999985,
-     "y": 209.472015,
+     "y": 115.424664,
+     "w": 451.67923,
+     "h": 14.209885
+    }
+   ]
+  },
+  {
+   "title": "The quoted forms of Harari--Stix Theorem 2.1 and of Stix's finite-support result could not be confirmed",
+   "quote": "$U=1$ and $S=\\varnothing$, using implication (i)$\\Rightarrow$(iii),",
+   "explanation": "The mathematics of Proposition 8.1 and Theorem 8.2 is correct if Theorem 1.1 holds. The interpolation theorem gives the equivalence between survival of an adelic point for all finite torsors and the existence of a global section with the given local point sections; the two inclusions follow, also at real places. For Theorem 8.2, each neighbourhood of $s$ has the adelic point $\\operatorname{loc}(s)$ in its finite-cover set and in the finite fibre above $a$; Stoll's result for finite subschemes makes it rational, and a limit over the neighbourhoods gives $s = s_a$. But the paper quotes Theorem 2.1 with an 'omitted set of places $S$', which I do not recall in that theorem, and the label 'Corollary 5' with the support $Z(s)$ for the Stix reference could not be confirmed. The paper must give the statements in the form in which it uses them.",
+   "comment_type": "presentation",
+   "severity": "minor",
+   "source": {
+    "file": "sections/08-global-sections.tex",
+    "lines": [
+     108,
+     108
+    ]
+   },
+   "boxes": [
+    {
+     "page": 20,
+     "x": 71.999985,
+     "y": 115.424667,
      "w": 451.275604,
      "h": 13.63634125
     }

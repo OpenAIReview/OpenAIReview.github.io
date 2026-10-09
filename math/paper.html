@@ -132,27 +132,7 @@ a:hover { color: var(--accent-hover); }
   padding: 20px;
   background: var(--bg);
 }
-.notice {
-  background: var(--orange-light);
-  border: 1px solid var(--orange-border);
-  border-radius: var(--radius-sm);
-  padding: 10px 14px;
-  margin-bottom: 14px;
-  font-size: 13px;
-  line-height: 1.55;
-  color: #92400e;
-}
-.overall-feedback {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 16px 20px;
-  margin-bottom: 16px;
-  font-size: 15px;
-  line-height: 1.65;
-  box-shadow: var(--shadow-sm);
-}
-.overall-feedback h3, .section-label {
+.section-label {
   font-size: 12px;
   font-weight: 600;
   text-transform: uppercase;
@@ -160,8 +140,6 @@ a:hover { color: var(--accent-hover); }
   color: var(--accent);
   margin-bottom: 8px;
 }
-.overall-feedback.clamped .body { max-height: 8.2em; overflow: hidden; -webkit-mask-image: linear-gradient(#000 60%, transparent); mask-image: linear-gradient(#000 60%, transparent); }
-.overall-feedback button { margin-top: 8px; border: 0; background: none; color: var(--accent); font: inherit; font-size: 13px; font-weight: 600; cursor: pointer; padding: 0; }
 .section-label { color: var(--text-muted); margin: 18px 0 10px; }
 
 .comment-card {
@@ -201,7 +179,8 @@ a:hover { color: var(--accent-hover); }
   flex-shrink: 0;
 }
 .badge.critical, .badge.major { background: var(--red-light); color: #b91c1c; border: 1px solid var(--red-border); }
-.badge.minor { background: var(--orange-light); color: #92400e; border: 1px solid var(--orange-border); }
+.badge.moderate { background: var(--orange-light); color: #92400e; border: 1px solid var(--orange-border); }
+.badge.minor { background: #f3f4f6; color: #4b5563; border: 1px solid var(--border); }
 .comment-card .quote {
   color: var(--text-secondary);
   font-size: 14px;
@@ -379,6 +358,13 @@ mjx-container { overflow-x: auto; overflow-y: hidden; max-width: 100%; }
   mix-blend-mode: multiply;
 }
 .hl:hover, .hl.active { background: rgba(128, 0, 32, 0.26); }
+body:not(.show-all) .extra { display: none; }
+.more-issues {
+  display: block; width: 100%; margin: 4px 0 16px; padding: 10px;
+  border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface);
+  color: var(--accent); font: inherit; font-size: 14px; font-weight: 600; cursor: pointer;
+}
+.more-issues:hover { border-color: #d1d5db; }
 .hl.flash { animation: flash 1.4s ease-out; }
 @keyframes flash { 0% { background: rgba(245, 158, 11, 0.6); } 100% { background: rgba(128, 0, 32, 0.26); } }
 .hl-tag {
@@ -443,6 +429,7 @@ pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs
 
 const GITHUB = 'https://github.com/openai/math/blob/main/';
 const BACKEND_URL = 'https://openaireview-backend-947059889174.us-central1.run.app';
+const SEVERITY_RANK = { critical: 0, major: 1, moderate: 2, minor: 3 };
 const $ = id => document.getElementById(id);
 let paper, pdfDoc, pageObserver, activeIndex = -1, zoom = 1, redrawTimer;
 
@@ -576,6 +563,7 @@ function renderHeader(index) {
   document.title = `${paper.title.replace(/<[^>]+>/g, '')} — OpenAIReview`;
   $('paper-title').innerHTML = withMath(paper.title);
   typeset($('paper-title'));
+  $('paper-select').hidden = !index.papers.some(p => p.id === paper.id);
   $('paper-select').innerHTML = index.papers.map(p =>
     `<option value="${escapeHtml(p.id)}" ${p.id === paper.id ? 'selected' : ''}>${p.result_id}. ${escapeHtml(p.title.replace(/<[^>]+>/g, ''))}</option>`).join('');
   $('paper-select').onchange = e => { location.search = `?paper=${encodeURIComponent(e.target.value)}`; };
@@ -585,31 +573,39 @@ function renderHeader(index) {
     `Result <strong>${paper.result_id}</strong>`,
     escapeHtml(paper.subject),
     `Reviewer <strong>${escapeHtml(model)}</strong>`,
-    `Reviewed <strong>${paper.review.date}</strong>`,
+    paper.review.date ? `Reviewed <strong>${paper.review.date}</strong>` : 'Review started by a visitor',
     `<a href="${GITHUB}${paper.source_pdf.split('/').map(encodeURIComponent).join('/')}" target="_blank" rel="noopener">Original PDF on GitHub &rarr;</a>`,
   ];
   $('metrics-bar').innerHTML = metrics.map(m => `<span class="metric">${m}</span>`).join('<span class="metric-divider"></span>');
+}
+
+// The panel opens with the most serious issues. A button shows the rest.
+const TOP_ISSUES = 3;
+function showAllIssues(on) {
+  document.body.classList.toggle('show-all', on);
+  const rest = paper.comments.length - TOP_ISSUES;
+  if ($('more-issues')) $('more-issues').textContent = on ? 'Show fewer issues' : `Show ${rest} more ${rest === 1 ? 'issue' : 'issues'}`;
 }
 
 function renderComments() {
   const cards = paper.comments.map((c, i) => {
     const page = firstPage(c);
     return `
-    <div class="comment-card" data-index="${i}">
+    <div class="comment-card${i >= TOP_ISSUES ? ' extra' : ''}" data-index="${i}">
       <div class="card-header">
         <span class="card-num">${i + 1}</span>
         <div class="card-title">${escapeHtml(c.title)}</div>
       </div>
       <div class="card-tags">
-        <span class="badge ${c.severity}">${c.severity}</span>
+        ${c.severity ? `<span class="badge ${c.severity}">${c.severity}</span>` : ''}
       </div>
       <div class="quote">${quoteHtml(c.quote)}</div>
       <div class="explanation">${escapeHtml(c.explanation)}</div>
-      <div class="explanation"><span class="label">What it affects.</span> ${escapeHtml(c.consequence)}</div>
+      ${c.consequence ? `<div class="explanation"><span class="label">What it affects.</span> ${escapeHtml(c.consequence)}</div>` : ''}
       <span class="para-link ${page ? '' : 'unlocated'}">${page ? `Page ${page} &rarr;` : 'Not located in the PDF'}</span>
       <div class="comment-footer" title="By giving feedback you agree to share your response to help improve open reviewing.">
-        <button class="vote-btn" data-index="${i}" data-vote="up" title="Helpful">${SVG_THUMB_UP} Helpful</button>
-        <button class="vote-btn" data-index="${i}" data-vote="down" title="Not helpful">${SVG_THUMB_DOWN} Not helpful</button>
+        <button class="vote-btn" data-index="${i}" data-vote="up" title="This issue is correct">${SVG_THUMB_UP} Correct</button>
+        <button class="vote-btn" data-index="${i}" data-vote="down" title="This issue is incorrect">${SVG_THUMB_DOWN} Incorrect</button>
         <button class="note-toggle" data-index="${i}">Add a note</button>
       </div>
       <div class="note-box" data-index="${i}" hidden>
@@ -619,18 +615,11 @@ function renderComments() {
     </div>`;
   }).join('');
   $('comment-panel').innerHTML = `
-    <div class="notice">These issues come from an AI review. No person has checked them yet.</div>
-    <div class="overall-feedback clamped" id="overall">
-      <h3>Overall assessment</h3>
-      <div class="body">${escapeHtml(paper.overall_assessment)}</div>
-      <button id="overall-toggle">Show more</button>
-    </div>
     <div class="section-label">Issues</div>
-    ${cards}`;
-  $('overall-toggle').onclick = () => {
-    const clamped = $('overall').classList.toggle('clamped');
-    $('overall-toggle').textContent = clamped ? 'Show more' : 'Show less';
-  };
+    ${cards}
+    ${paper.comments.length > TOP_ISSUES ? '<button class="more-issues" id="more-issues"></button>' : ''}`;
+  if ($('more-issues')) $('more-issues').onclick = () => showAllIssues(!document.body.classList.contains('show-all'));
+  showAllIssues(false);
   for (const card of document.querySelectorAll('.comment-card')) {
     card.onclick = e => {
       if (!e.target.closest('.comment-footer, .note-box')) activate(Number(card.dataset.index), 'pdf');
@@ -678,7 +667,7 @@ function renderPages() {
       const boxes = c.boxes.filter(b => b.page === i + 1);
       boxes.forEach((b, bi) => {
         const hl = document.createElement('div');
-        hl.className = 'hl';
+        hl.className = ci >= TOP_ISSUES ? 'hl extra' : 'hl';
         hl.dataset.index = ci;
         hl.style.cssText = `left:${b.x / w * 100}%;top:${b.y / h * 100}%;width:${b.w / w * 100}%;height:${b.h / h * 100}%`;
         hl.title = c.title;
@@ -686,7 +675,7 @@ function renderPages() {
         page.append(hl);
         if (bi === 0 && c.boxes[0] === b) {
           const tag = document.createElement('div');
-          tag.className = 'hl-tag';
+          tag.className = ci >= TOP_ISSUES ? 'hl-tag extra' : 'hl-tag';
           tag.textContent = ci + 1;
           tag.style.cssText = `left:${b.x / w * 100}%;top:${b.y / h * 100}%`;
           tag.onclick = () => activate(ci, 'comments');
@@ -880,6 +869,7 @@ function setupZoom() {
 // Select a comment. `scroll` names the panel that should move to show it.
 function activate(index, scroll) {
   activeIndex = index;
+  if (index >= TOP_ISSUES) showAllIssues(true);
   for (const card of document.querySelectorAll('.comment-card')) {
     card.classList.toggle('active', Number(card.dataset.index) === index);
   }
@@ -929,23 +919,85 @@ function setupResize() {
   });
 }
 
+// ── Reviews that visitors started ──
+// The review server returns the comments with no position in the PDF. The page
+// shows the collection's own PDF and finds each quoted passage in its text.
+const RAW = 'https://raw.githubusercontent.com/openai/math/main/';
+
+async function loadVisitorReview(id, token) {
+  const [catalog, result] = await Promise.all([
+    fetch('data/catalog.json').then(r => r.json()),
+    fetch(`${BACKEND_URL}/results/${encodeURIComponent(token)}`).then(r => r.ok ? r.json() : Promise.reject()),
+  ]);
+  const entry = catalog.find(p => p.id === id);
+  const method = Object.values(result.methods)[0];
+  const comments = method.comments
+    .map((c, i) => ({ ...c, severity: SEVERITY_RANK[c.severity] === undefined ? null : c.severity, order: i, boxes: [] }))
+    .sort((a, b) => (SEVERITY_RANK[a.severity] ?? 9) - (SEVERITY_RANK[b.severity] ?? 9) || a.order - b.order);
+  return { ...entry, source_pdf: entry.pdf, pdf: RAW + entry.pdf, macros: '', comments,
+           review: { method: method.label || 'OpenAIReview' } };
+}
+
+// The plain-text pieces of a LaTeX passage, longest first, with all spaces removed.
+// Math and commands do not match the text of a PDF, so they split the passage.
+function plainPieces(tex) {
+  return tex.replace(/\$\$[^]*?\$\$|\$[^$]*\$|\\\([^]*?\\\)|\\\[[^]*?\\\]/g, '\u0000')
+    .replace(/\\[a-zA-Z]+\*?(\[[^\]]*\])?(\{[^{}]*\})?|[{}~]/g, '\u0000')
+    .split('\u0000').map(piece => piece.toLowerCase().replace(/\s+/g, ''))
+    .filter(piece => piece.length >= 14).sort((a, b) => b.length - a.length);
+}
+
+// Find a quoted passage in the PDF text. Returns highlight boxes in PDF points, or [].
+function locateInPdf(quote, pages) {
+  for (const piece of plainPieces(quote)) {
+    for (let i = 0; i < pages.length; i++) {
+      const pg = pages[i];
+      if (!pg.squashed) {
+        pg.offsets = [];
+        pg.squashed = [...pg.text].filter((ch, at) => /\S/.test(ch) && pg.offsets.push(at)).join('');
+      }
+      const at = pg.squashed.indexOf(piece);
+      if (at < 0) continue;
+      const from = pg.offsets[at], to = pg.offsets[at + piece.length - 1] + 1;
+      return pg.runs.filter(run => run.end > from && run.start < to)
+        .map(run => ({ page: i + 1, x: run.x, y: run.y, w: run.w, h: run.h }));
+    }
+  }
+  return [];
+}
+
 async function main() {
   setupResize();
   setupZoom();
   setupSearch();
+  const params = new URLSearchParams(location.search);
   const index = await fetch('data/index.json').then(r => r.json());
-  const id = new URLSearchParams(location.search).get('paper') || index.papers[0].id;
-  paper = await fetch(`data/${encodeURIComponent(id)}.json`).then(r => r.json());
+  const id = params.get('paper') || index.papers[0].id;
+  const token = params.get('review');
+  try {
+    paper = token ? await loadVisitorReview(id, token)
+                  : await fetch(`data/${encodeURIComponent(id)}.json`).then(r => r.json());
+  } catch (err) {
+    $('pdf-status').textContent = 'The review could not be loaded.';
+    return;
+  }
   renderHeader(index);
   if (paper.macros) await defineMacros(paper.macros);
-  renderComments();
   try {
-    pdfDoc = await pdfjsLib.getDocument(paper.pdf.split('/').map(encodeURIComponent).join('/')).promise;
+    const url = token ? paper.pdf : paper.pdf.split('/').map(encodeURIComponent).join('/');
+    pdfDoc = await pdfjsLib.getDocument(url).promise;
+    if (token) {
+      const pages = await loadPageTexts();
+      paper.page_sizes = pages.map(pg => [pg.width, pg.height]);
+      for (const c of paper.comments) c.boxes = locateInPdf(c.quote, pages);
+    }
+    renderComments();
     renderPages();
     const wanted = Number(new URLSearchParams(location.search).get('comment')) - 1;
     if (paper.comments.length) setTimeout(() => activate(paper.comments[wanted] ? wanted : 0, 'pdf'), 300);
   } catch (err) {
     $('pdf-status').textContent = 'The PDF could not be loaded.';
+    if (!document.querySelector('.comment-card')) renderComments();
   }
 }
 main();

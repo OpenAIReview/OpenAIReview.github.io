@@ -1,0 +1,364 @@
+{
+ "id": "Pointwise-Multiple-Ergodic-Averages-for-Mixing-Transformations-October-4-2026",
+ "title": "Pointwise Multiple Ergodic Averages for Mixing Transformations",
+ "abstract": "Let <i>T</i> be an invertible mixing probability-preserving transformation. For every integer <i>n</i> ≥ 2 and every fixed tuple of bounded measurable functions, we prove that the consecutive multiple ergodic averages of length <i>n</i> converge almost everywhere to the product of the integrals, as the averaging length tends to infinity through all positive integers. The probability space need not be standard, and no rate of mixing is required.",
+ "result_id": "154",
+ "result_title": "Pointwise multiple ergodic averages for mixing transformations",
+ "subject": "Dynamical systems and ergodic theory",
+ "source_pdf": "preprints/Pointwise-Multiple-Ergodic-Averages-for-Mixing-Transformations-October-4-2026/multiple-ergodic-averages.pdf",
+ "pdf": "pdf/Pointwise-Multiple-Ergodic-Averages-for-Mixing-Transformations-October-4-2026.pdf",
+ "page_sizes": [
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ]
+ ],
+ "macros": "\\newcommand{\\arraystretch}{1.45}\n\\newcommand{\\DoNotLoadEpstopdf}{}\n\\newcommand{\\R}{\\mathbb R}\n\\newcommand{\\Z}{\\mathbb Z}\n\\newcommand{\\N}{\\mathbb N}\n\\newcommand{\\C}{\\mathbb C}\n\\newcommand{\\T}{\\mathbb T}\n\\newcommand{\\E}{\\mathbb E}\n\\newcommand{\\dd}{\\,d}\n\\newcommand{\\law}{\\mathcal L}\n\\newcommand{\\norm}[1]{\\lVert#1\\rVert}\n\\newcommand{\\abs}[1]{\\lvert#1\\rvert}\n\\newcommand{\\ip}[2]{\\langle#1,#2\\rangle}\n\\newcommand{\\articleid}[1]{\\begingroup\\hyphenchar\\font=-1\\relax\\textnormal{#1}\\endgroup}\n\\newcommand{\\tr}{\\operatorname{tr}}\n\\newcommand{\\Ran}{\\operatorname{Ran}}\n\\newcommand{\\supp}{\\operatorname{supp}}\n\\newcommand{\\rank}{\\operatorname{rank}}\n\\newcommand{\\spanop}{\\operatorname{span}}",
+ "review": {
+  "method": "OpenAIReview (Claude Opus 5.5)",
+  "effort": "high",
+  "date": "2026-10-08"
+ },
+ "overall_assessment": "The manuscript claims almost-everywhere convergence of $\\frac1N\\sum_{k\\le N}\\prod_{j\\le n}f_j(T^{jk}x)$ to $\\prod_j\\int f_j\\,d\\mu$ for each mixing $T$ and each $n\\ge2$. The claim is not established. The proof rests on two inputs that are taken without proof from companion papers that are not available, and each input is a well-known open problem.\n\nFirst, Theorem 2.1 (mixing implies mixing of all orders) is Rokhlin's problem. Proposition 4.3 uses it at order up to $2n$, and through Corollary 4.4 it gives $r<k$ and the final contradiction for each $n\\ge4$. Second, Proposition 2.2 is equivalent to almost-everywhere convergence of triple averages $\\frac1N\\sum_{l\\le N}g_1(R^{b_1l}y)g_2(R^{b_2l}y)g_3(R^{b_3l}y)$ on arbitrary systems: Lemma 2.5 gives one direction and summation by parts gives the other. This input gives the cases $n\\le3$ directly, and it gives the bound $k\\ge4$ that the three-group regrouping in Section 5.3 needs. A third import, Proposition 2.3, supplies nonergodic forms of the Furstenberg--Zimmer theory and of the distal pointwise theorem; these are plausible but are not in the cited literature in the form used.\n\nI checked the steps that are written out: Lemma 2.4, Lemma 2.5, the selector and selected-law construction, Proposition 3.3, the channel closure with its density bound $\\norm{p\\rho}_2\\le\\sqrt p$ and rank choice $d_m=\\lceil(1+\\log m)^{3/2}\\rceil$, the minimum-support and saturation arguments, the square argument, and the tensor-packing appendix. I found no step that fails if the three inputs are given. The sub-agents for those sections also reported no internal error.\n\nThus the manuscript supports at most a conditional theorem: if $T$ is mixing of all orders and triple averages converge almost everywhere on arbitrary systems, then the averages of length $n$ converge. The abstract, Theorem 1.1 and the completion of the proof must state this condition, or the paper must include complete proofs of Theorem 2.1 and Proposition 2.2. The paper must also give the dependency graph between the four manuscripts, because the case $n=4$ and most of the method are attributed to a companion.",
+ "num_findings": 9,
+ "comments": [
+  {
+   "title": "Theorem 2.1 is Rokhlin's open multiple-mixing problem, and the main theorem is stated without this condition",
+   "quote": "mixing of every finite order, the assertion of Rokhlin's",
+   "explanation": "Theorem 2.1 says that each mixing transformation is mixing of each order $s\\ge2$. This is Rokhlin's problem. To my knowledge it is open: the known cases need more structure (singular spectrum, finite rank), and the analog for $\\Z^2$-actions is false. The paper gives no proof. It cites only a companion paper that is not available. I traced each use of the mixing hypothesis. Weak mixing is sufficient for $B_L\\to0$ in $L^2(\\mu)$ (Section 3.1) and for Lemma 4.2. Ergodicity of $T^{hb}$ is sufficient for the Birkhoff step in Proposition 4.3. The only place that needs more is Proposition 4.3, in two steps. First, the integral of up to $n$ functions at the times $e_\\gamma il+a_{\\gamma,i}$ must tend to the product of the means. Second, the pair inner products $\\langle u_l,u_{l'}\\rangle$ must be at most $\\eta$ outside a graph of bounded degree. Each such inner product has a factor $\\int\\prod_i g_{\\gamma,i}(T^{e_\\gamma il+a_{\\gamma,i}}x)\\,g_{\\gamma,i}(T^{e_\\gamma il'+a_{\\gamma,i}}x)\\,d\\mu$ with up to $2n$ functions, so the proof uses Theorem 2.1 at order $2n$, uniformly in $\\min_{i\\ne j}|t_i-t_j|$. Proposition 4.3 gives Corollary 4.4, which gives $r<k$ and the final contradiction. Thus each case $n\\ge4$ depends on Theorem 2.1. The reduction after Theorem 2.1 (simple functions, reordering of times) is correct, but the input is not established. What the manuscript can support is at most: if $T$ is mixing of all orders and Lemma 2.5 is true, then the averages converge. The abstract, Theorem 1.1 and the completion of the proof say `we prove' with no condition. The authors must state Theorem 1.1 as conditional, or use the hypothesis `mixing of all orders', which removes the dependence on Theorem 2.1.",
+   "comment_type": "claim_accuracy",
+   "severity": "major",
+   "source": {
+    "file": "sections/introduction.tex",
+    "lines": [
+     59,
+     59
+    ]
+   },
+   "boxes": [
+    {
+     "page": 2,
+     "x": 71.999985,
+     "y": 183.837482,
+     "w": 468.403625,
+     "h": 12.0452075
+    },
+    {
+     "page": 2,
+     "x": 71.999985,
+     "y": 196.71984899999998,
+     "w": 468.0,
+     "h": 13.63634125
+    }
+   ]
+  },
+  {
+   "title": "Proposition 2.2 is equivalent to the open pointwise problem for triple averages on arbitrary systems",
+   "quote": "converges almost everywhere as $k\\to\\infty$. Moreover, for each",
+   "explanation": "I checked the proof of Lemma 2.5 and each step is correct. With $h_c=c^{-1}\\mathbf 1_{(0,c]}$ and $N_k=\\lfloor c2^k\\rfloor$, $\\sum_l2^{-k}h_c(l/2^k)F_l=\\frac1{c2^k}\\sum_{l=1}^{N_k}F_l$ and $N_k\\left|\\frac1{N_k}-\\frac1{c2^k}\\right|\\le\\frac1{c2^k}$. The Riemann sums converge. The bound $2|M-N|/\\max(M,N)$ is correct. Thus Lemma 2.5 is a soft consequence of Proposition 2.2, and all the difficulty is in the first assertion of Proposition 2.2. The converse also holds. Let $A_N$ be the ordinary average. For the part of a profile on $(0,\\infty)$, summation by parts gives $\\sum_{l>0}2^{-k}\\varphi(l/2^k)F_l=-\\int_0^\\infty t\\varphi'(t)A_{\\lfloor t2^k\\rfloor}\\,dt+o(1)$, and the part on $(-\\infty,0)$ is the same with $R^{-1}$. Thus a.e. convergence of $A_N$ gives a.e. convergence of $V_k^\\varphi$. Therefore Proposition 2.2 is equivalent to a.e. convergence of $\\frac1N\\sum_{l\\le N}g_1(R^{b_1l}y)g_2(R^{b_2l}y)g_3(R^{b_3l}y)$ on each invertible system. The zero moments and the bounds $\\norm{\\varphi^{(r)}}_\\infty\\le(G(r+2))^{G(r+2)}$ do not make the statement weaker. With $(b_1,b_2,b_3)=(1,2,3)$ this is the pointwise problem for triple Furstenberg averages. To my knowledge it is open. The introduction itself says that Bourgain's theorem `treats two factors' and that results of greater length need structural assumptions. With $g_3=1$ the same deduction gives Bourgain's double recurrence theorem, so no short proof of Proposition 2.2 can be expected. The paper gives no proof and cites a companion that is not available. Lemma 2.5 is the source of the three-slot law in Proposition 3.3 and of the bound $k\\ge4$. The introduction sentence that this input `yields pointwise triple convergence ... without a mixing assumption' shows that it is a second major claim, not an auxiliary fact. The paper must include a complete proof of Proposition 2.2, or state Theorem 1.1 as conditional on it.",
+   "comment_type": "methodology",
+   "severity": "major",
+   "source": {
+    "file": "sections/inputs.tex",
+    "lines": [
+     71,
+     71
+    ]
+   },
+   "boxes": [
+    {
+     "page": 4,
+     "x": 71.999985,
+     "y": 74.777084,
+     "w": 468.0,
+     "h": 13.63634125
+    }
+   ]
+  },
+  {
+   "title": "The bound $k\\ge4$ and the regrouping step for $n\\ge4$ depend fully on the unproved triple input",
+   "quote": "For $\\abs{J}\\le3$, Lemma~\\ref{lem:triple-convergence} and the same",
+   "explanation": "I recomputed the proof of Proposition 3.3 and found no internal error. With $t=l+s$ the product $\\prod_iG_i(S_Y^{it}y)$ is the discrete product at slopes $i$ for $G_i\\circ S_Y^{is}$. Because $N_a(\\pi_Yy)\\ge2^a$, a.e. convergence along all lengths gives the deterministic limit at the selected lengths. The step from the replacement identity to $\\law_{\\lambda_Y}((y_i)_{i\\in J}\\mid(P_i)_{i\\in J})=\\bigotimes_{i\\in J}m_{Y,P_i}$ is correct, and relative disjointness then gives the law conditional on the full $P$. The problem is the hypothesis. For $|J|=3$ the first step needs a.e. convergence of $\\frac1N\\sum_{l\\le N}\\prod_{i\\in J}(G_i\\circ S_Y^{is})(S_Y^{il}y)$ for the time-one map of an arbitrary flow extension $Y$, with no mixing and no ergodicity. This is Lemma 2.5, thus Proposition 2.2. The dependence is structural for $n\\ge4$. Section 5.1 gets $k\\ge4$ from this law. Section 5.3 needs a surjection $\\tau:J\\setminus\\{b\\}\\to\\{1,2,3\\}$, which needs $k-1\\ge3$. Lemma 5.3 uses that surjection to omit one slot in each test with a proper set of groups. With Bourgain's theorem only, the same proof gives the law for $|J|\\le2$, thus $k\\ge3$, and the regrouping into three groups is not possible. The paper must say that the three-group construction of Sections 4 to 6 is not available without the triple input.",
+   "comment_type": "methodology",
+   "severity": "major",
+   "source": {
+    "file": "sections/selected.tex",
+    "lines": [
+     266,
+     266
+    ]
+   },
+   "boxes": [
+    {
+     "page": 9,
+     "x": 71.999985,
+     "y": 554.890732,
+     "w": 469.821838,
+     "h": 13.63634125
+    }
+   ]
+  },
+  {
+   "title": "The cases $n\\le3$ are a restatement of the companion input, and the argument implies a stronger unstated claim",
+   "quote": "out immediately when $n<4$, and the saturated, regrouped square",
+   "explanation": "For $n<4$ the `minimum-support argument' is only the inequality $k\\ge4$. This inequality is the case $|J|\\le3$ of Proposition 3.3, which is Lemma 2.5. No part of Sections 4 to 6 is used. A direct proof is shorter: Lemma 2.5 gives a.e. convergence, and Lemma 2.4 over the trivial factor identifies the limit as $\\prod_j\\int f_j\\,d\\mu$. That step needs only weak mixing, because condition (2.1) over the trivial factor is weak mixing. Thus the paper implicitly claims a.e. convergence of $\\frac1N\\sum_{k\\le N}f_1(T^kx)f_2(T^{2k}x)f_3(T^{3k}x)$ to the product of the integrals for each weakly mixing $T$, which is stronger than Theorem 1.1 for $n=3$. The case $n=2$ is Bourgain's theorem. I also checked Section 6 line by line: the two saturation identities, the row--column identity, the conditional independence of $p$ and $E_b$ given $w$, $R_*\\beta_w=\\alpha_w$, the identity $\\E_{\\beta_w}[u(e,\\cdot)\\mid R(e)]=g(R(e),\\cdot)$, the Hilbert-space lemma, and the count of $r+1$ output roles are correct as formal deductions. Section 6 uses no property of a mixing system. The contradiction comes from $r<k$, that is from Corollary 4.4, Proposition 4.3 and Theorem 2.1. The completion paragraph must state these dependencies. As written, a reader can conclude that Sections 5 and 6 prove the cases $n<4$ and close the case $n\\ge4$ without the two open inputs.",
+   "comment_type": "claim_accuracy",
+   "severity": "moderate",
+   "source": {
+    "file": "sections/square.tex",
+    "lines": [
+     285,
+     285
+    ]
+   },
+   "boxes": [
+    {
+     "page": 21,
+     "x": 71.999985,
+     "y": 102.542293,
+     "w": 468.0,
+     "h": 12.0452075
+    },
+    {
+     "page": 21,
+     "x": 71.999985,
+     "y": 116.091488,
+     "w": 468.0,
+     "h": 12.0452075
+    }
+   ]
+  },
+  {
+   "title": "Proposition 2.3(5) for nonergodic distal systems is not covered by the cited theorem",
+   "quote": "gives the component-disintegration argument needed for the latter",
+   "explanation": "Theorem C of Huang--Shao--Ye gives a.e. convergence of $\\frac1N\\sum_{l\\le N}\\prod_{i\\le d}g_i\\circ R^{il}$ for ergodic measure-distal systems. The introduction quotes it in this form. Item (5) is applied only to nonergodic systems. The time-one map of the suspension is $S_C^1(x,u)=(Tx,u)$, so the phase $\\upsilon$ is an invariant function on each flow over $C$, and $W_Y$ with time one is never ergodic. The item is used with $d=n$ for the deterministic parameter law of Proposition 3.3 on each flow $Y$ over $C$, and again in Lemma 6.2 on $Z=\\mathsf M_b(Y)$ with $Y$ the saturated extension. The paper defines a nonergodic distal system as a tower of relatively compact extensions over the trivial factor. To use the ergodic theorem, one must show that almost each ergodic component of such a system is distal in the ergodic sense, measurably along a countable ordinal tower. This does not follow at once from the definition. I think that the statement is true, but the paper gives only a pointer to Proposition 2.2 of a third companion that is not available. Lemma 6.2 cannot be proved without this item. The argument must be in the paper or in a citable source.",
+   "comment_type": "missing_information",
+   "severity": "moderate",
+   "source": {
+    "file": "sections/inputs.tex",
+    "lines": [
+     138,
+     138
+    ]
+   },
+   "boxes": [
+    {
+     "page": 5,
+     "x": 71.999985,
+     "y": 101.875473,
+     "w": 468.0,
+     "h": 13.63634125
+    },
+    {
+     "page": 5,
+     "x": 71.999985,
+     "y": 116.091488,
+     "w": 468.0,
+     "h": 12.0452075
+    }
+   ]
+  },
+  {
+   "title": "All of Proposition 2.3 is a third unproved import, but the introduction names two companion inputs and says the rest is proved in full",
+   "quote": "\\cite[Proposition~2.2]{FourfoldCompanion}. They include the",
+   "explanation": "The introduction says that the proof `uses two substantial companion results' and that the selected-law construction and the extension argument `are proved in full'. Proposition 2.3 has no proof in the paper. It is the conclusion of a proposition in a third companion. Its items are used throughout: item (1) in Section 3.3, Section 5.2 and Lemma 6.2; item (2) in the last step of Proposition 3.3, in Lemma 3.4 and in Lemma 4.2; item (3) in the last step of Proposition 3.3; item (4) in Proposition 3.3 and Lemma 4.2. Each base is nonergodic: the phase factor $V$ has the identity action at time $h$, and the base $(P_i)_{i\\in J}$ is a joining. Zimmer (1976) works with ergodic actions. Jamneshan (2023) gives the nonergodic dichotomy, but, to my knowledge, not the statements on joinings of distal systems, on relative distality over each factor, on powers, on conditional products of relatively weakly mixing extensions, or on relative disjointness. The paper also says that the module definition depends on a 2026 corrigendum. I checked the items and found no false statement. For example, if $M$ is a finitely generated $R^m$-invariant $L^\\infty(B)$-module over an $R$-invariant base, then $M+RM+\\dots+R^{m-1}M$ is finitely generated and $R$-invariant, which gives the power statements. But these are proofs that the reader must supply. The singleton case of the small-marginal law, the bound $k\\ge4$, Lemma 4.2 and Lemma 6.2 all rest on them. The authors must give short proofs or exact published references for the nonergodic forms, and correct the count of companion inputs.",
+   "comment_type": "missing_information",
+   "severity": "moderate",
+   "source": {
+    "file": "sections/inputs.tex",
+    "lines": [
+     134,
+     134
+    ]
+   },
+   "boxes": [
+    {
+     "page": 5,
+     "x": 71.999985,
+     "y": 74.777084,
+     "w": 468.0,
+     "h": 13.63634125
+    }
+   ]
+  },
+  {
+   "title": "The method and the case $n=4$ are attributed to an unavailable companion, so the new content and a possible circular dependence cannot be audited",
+   "quote": "The present proof extends the fourfold mixing theorem of",
+   "explanation": "The paper attributes these items to the fourfold companion: its Theorem 1.1 (the case $n=4$ of the main theorem), Proposition 2.3, Lemma 2.4, the selector and joining construction, the three-group channels, the closure argument of Proposition 4.3, the saturation of Lemma 5.2, and Theorem A.1. The text says that Sections 3, 4 and 5 `follow', `adapt' and `continue' that paper. The new steps that the paper names are the minimum-support choice of $k$ and the input roles with a proper subset $H_i$ of groups. Two consequences follow. First, the case $n=4$ is presented as known, and the cases $n=2,3$ come from Lemma 2.5, so the stated new contribution is $n\\ge5$; the abstract does not say this. Second, the reader cannot check if the companion's proof for $n=4$ depends on the same two open inputs, or if a companion depends on this paper. In this paper the case $n=4$ needs Theorem 2.1 for products of up to $8$ functions. I checked the steps of Sections 3 to 6 and Appendix A that are written out here, and I found no step that fails if Theorem 2.1, Proposition 2.2 and Proposition 2.3 are given. The problem is the status of these inputs, not the internal chain. The paper must state the dependency graph between the four manuscripts.",
+   "comment_type": "missing_information",
+   "severity": "moderate",
+   "source": {
+    "file": "sections/introduction.tex",
+    "lines": [
+     56,
+     56
+    ]
+   },
+   "boxes": [
+    {
+     "page": 2,
+     "x": 71.999985,
+     "y": 169.62145999999998,
+     "w": 468.0,
+     "h": 13.63634125
+    }
+   ]
+  },
+  {
+   "title": "Proposition 2.2 is a paraphrase of results that are cited inconsistently, and its derivation is not given",
+   "quote": "of \\cite[Proposition~3.5 and Lemma~3.6]{SlopesCompanion}.",
+   "explanation": "The introduction cites Proposition 3.5 of the slopes companion as `an oscillation estimate' and refers to `its profile approximation'. Section 2.1 calls Proposition 2.2 a `consequence of' Proposition 3.5 and Lemma 3.6, and then says that the approximation is Lemma 3.9. Thus Proposition 2.2 is not a quoted theorem. It is a deduction, from an oscillation estimate to a.e. convergence of $V_k^\\varphi$ for each profile, that the paper does not show. The hypotheses of the estimate are not given: the condition $\\gcd(b_1,b_2,b_3)=1$, the role of the zero moments of orders $1,2,3$, and the dependence on $G$. This is important because the profile class degenerates along the approximation. Let $h_c=c^{-1}\\mathbf 1_{(0,c]}$ and $\\supp\\varphi\\subset[-A,A]$. Then $\\int x\\varphi\\,dx=0$ and $\\int xh_c\\,dx=c/2$ give $c/2\\le A\\norm{\\varphi-h_c}_{L^1}$, thus $A\\ge c/(2\\epsilon)$. The supports are not bounded as $\\epsilon\\to0$, and the constants $G$ cannot stay bounded. This is not a contradiction, because Lemma 2.5 uses each profile only qualitatively. But it shows that the input must hold for the full profile class with no uniformity. The authors must quote the companion statements exactly and give the derivation.",
+   "comment_type": "presentation",
+   "severity": "minor",
+   "source": {
+    "file": "sections/inputs.tex",
+    "lines": [
+     52,
+     52
+    ]
+   },
+   "boxes": [
+    {
+     "page": 3,
+     "x": 71.999985,
+     "y": 543.389999,
+     "w": 469.821838,
+     "h": 13.63634125
+    },
+    {
+     "page": 3,
+     "x": 71.999985,
+     "y": 556.939255,
+     "w": 468.0,
+     "h": 13.63634125
+    }
+   ]
+  },
+  {
+   "title": "The summary of pointwise inputs omits the $n$-slot theorem on nonergodic distal factors",
+   "quote": "at most three slots on arbitrary systems is used.",
+   "explanation": "The sentence is literally correct, because the $n$-slot input is for distal systems and not for arbitrary systems. But it gives the impression that the only pointwise input has three slots. The proof also uses Proposition 2.3(5) with $d=n$ functions on the factors $W_Y$ and $W_Z$ at time one. These are maximal distal factors of extensions that come from the energy construction of Lemma 5.2 and from selected joinings. The proof has no control of their structure, and they are nonergodic. This step removes the selectors from the full parameter law, and Lemma 6.2 depends on it. The sentence must list this input, and also mixing of all orders up to $2n$.",
+   "comment_type": "presentation",
+   "severity": "minor",
+   "source": {
+    "file": "sections/introduction.tex",
+    "lines": [
+     110,
+     110
+    ]
+   },
+   "boxes": [
+    {
+     "page": 2,
+     "x": 71.999985,
+     "y": 613.022098,
+     "w": 468.403625,
+     "h": 12.0452075
+    },
+    {
+     "page": 2,
+     "x": 71.999985,
+     "y": 626.571231,
+     "w": 468.0,
+     "h": 12.0452075
+    }
+   ]
+  }
+ ]
+}

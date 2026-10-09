@@ -123,26 +123,24 @@
  ],
  "macros": "\\newcommand{\\bibsection}{\\section*{\\refname}\\addcontentsline{toc}{section}{\\refname}}\n\\newcommand{\\R}{\\mathbb R}\n\\newcommand{\\Z}{\\mathbb Z}\n\\newcommand{\\T}{\\mathbf T}\n\\newcommand{\\Hs}{H^s}\n\\newcommand{\\Wh}{\\operatorname{Wh}}\n\\newcommand{\\Crit}{\\operatorname{Crit}}\n\\newcommand{\\Diff}{\\operatorname{Diff}}\n\\newcommand{\\id}{\\operatorname{id}}\n\\newcommand{\\norm}[1]{\\lVert#1\\rVert}\n\\newcommand{\\abs}[1]{\\lvert#1\\rvert}\n\\newcommand{\\im}{\\operatorname{im}}\n\\newcommand{\\supp}{\\operatorname{supp}}\n\\newcommand{\\Int}{\\operatorname{int}}",
  "review": {
-  "method": "claude CLI agent, claude-opus-5-5",
+  "method": "OpenAIReview (Claude Opus 5.5)",
   "effort": "high",
-  "date": "2026-10-07"
+  "date": "2026-10-08"
  },
- "overall_assessment": "I did not find a step that I can show to be false, so I cannot confirm an error; equally, I cannot certify the theorem, because it rests on external inputs I could not check. I read the full source and recomputed every step of the chain: existence of the class $a$ (Section 2), the one-critical-point obstruction (Sections 3-4), the embedded realization (Section 5) and the Hamiltonian transport (Section 6). The internal computations all check: the embedding and momentum-separation argument, the generating-family composition formulas, the smoothing estimates, the Morse/handle argument, the flow arguments giving the product complement, and the dimension counts. I also tested the two new ideas. For the zero-level cobordism argument, the $\\pi_0$ (Whitehead torsion) analogue is consistent with the sum formula, and families obtained from slow paths in the tube space produce exactly $\\ker(\\partial)$, as the proposition predicts. For the embedding, the construction is multiplication of a Legendrian generating family by $e^{K\\theta}$, and the collision estimate is correct. What I could not verify is the external input: (i) Waldhausen's tube fibration $\\mathcal H^s(*)\\to\\mathbf T\\to BG$ for this specific function-space model with diagonal stabilization, together with the identification of $\\gamma$ and Rognes's value of $\\pi_{10}\\mathrm{Wh}^{\\mathrm{Diff}}(*)$; (ii) the quoted connectivity statements (Igusa stability in the Courte-Porcelli form, and connectivity of stable extension) and their compatibility with the geometric composite of $\\sigma$ and $e_!$ used in Proposition 4.5. If either input fails as quoted or as applied, the main theorem is not established. Given the extraordinary nature of the claim, these inputs need expert verification against the sources before the result can be accepted.",
- "num_findings": 2,
+ "overall_assessment": "The paper claims a counterexample to the nearby Lagrangian conjecture: a closed exact embedded Lagrangian L in T^*(S^9 x S^{N-1}), diffeomorphic to the base, that is not Hamiltonian isotopic to the zero section. The proof has four parts: a nonzero class a in pi_9 of the stable tube space T with trivial spherical class (Section 2); an obstruction that such a class cannot be the infinity data of a family with one nondegenerate critical point in each fiber (Sections 3-4); an embedded realization of a by a generating family (Section 5); and transport of the generating family along a Hamiltonian isotopy (Section 6).\n\nI checked the internal mathematics of each part and found no false step. In Section 2, the count in Proposition 2.2 is correct if Theorem 2.1 holds as stated. In Sections 3-4, the Morse normalization, the smoothing estimates, the signed flows, the h-cobordism decomposition, the product complement, the connectivity numbers of Proposition 4.5 and the multijet dimension counts are correct. In Section 5, the critical locus, the Morse-family regularity and the two-momentum injectivity argument are correct, so L is a closed exact embedded Lagrangian for each such family g_b. In Section 6, the cylinder extension, the mixed generating function, the critical equations with all cutoff terms, and the error bounds for the return to homogeneous data are correct.\n\nThe result thus depends on inputs that the paper does not prove. The most important is Theorem 2.1: the fiber sequence H^s(*) -> T -> BG is applied to a function model of T that the paper defines, and the comparison with Waldhausen's tube space is asserted and cited from 2025-2026 references. The existence of a is sensitive to the exact delooping in this sequence. The second is the pair of statements behind Proposition 4.5 (Igusa stability for the product stabilization that the paper uses, and naturality of the stable h-cobordism theorem for the geometric extension map). The paper also does not check its example against the necessary conditions for nearby Lagrangians that it quotes, and it does not explain why the tube-space constraints of the cited prior work do not exclude the class a.\n\nBecause the claim contradicts a conjecture that most specialists expect to be true, the paper is not sufficient in its present form. It must prove Theorem 2.1 for its own model or give the full comparison, make the two inputs of Proposition 4.5 exact, and add the consistency check. A specialist in Waldhausen K-theory must verify the cited statements against the primary sources. I could not verify the 2025-2026 references.",
+ "num_findings": 4,
  "comments": [
   {
-   "title": "The existence of the class a rests on a tube fibration quoted for a specific function-space model, which is not proved and which I could not confirm applies as stated.",
+   "title": "Theorem 2.1 is applied to the paper's own model of $T$, and the comparison with Waldhausen's tube space is not proved",
+   "quote": "Waldhausen's tube theorem identifies the fiber of $\\gamma$ with",
+   "explanation": "The class $a$ exists only because of the fiber sequence $H^s(*) \\to T \\to BG$. The paper does not prove this sequence. It applies it to a model that it defines itself: the path component of $q_{k,l}$ in the $C^1$ functions on $S^{k+l-1}$ with regular value $0$, with a telescope along the diagonal $T_{m,m}$ by the direct sum with $q_{1,1}$. Waldhausen 1982 uses partitions and its own handle stabilizations. The text gives the comparison only by assertion (\"These descriptions agree with the smooth tube models\", \"The comparison of the partition and spherical-domain models is a stable equivalence\") and by citation of AIS2026 and AACK2025. Three items need a proof or an exact citation: (i) the two stabilizations ($+$ square, $-$ square) of the function model agree up to homotopy with those of Waldhausen; (ii) the map $\\gamma$ on this telescope is the map to $BG$ of the cited theorem, and $\\gamma \\circ \\iota = BJ$; (iii) the fiber is $H^s(*) = \\Omega \\operatorname{Wh}^{\\mathrm{diff}}(*)$ with no shift of degree. Item (iii) is critical. I recomputed Proposition 2.2 with the theorem as stated and it is correct: $\\pi_9 H^s(*) = \\pi_{10} \\operatorname{Wh}^{\\mathrm{diff}}(*)$ has 2-primary order 32, $\\pi_{10} BG = \\pi_9^S$ has order 8, the image of $J_9$ is in $\\ker(\\partial)$, thus $\\partial$ is not surjective and a nonzero $a$ in $\\ker(\\gamma_*)$ exists; $J_8$ is injective on $\\pi_9 BO$. But if the fiber had one more loop, the group would be $\\pi_{11} \\operatorname{Wh}^{\\mathrm{diff}}(*)$, with 2-primary part $\\mathbb{Z}/2$, and the count would give nothing. Because Proposition 2.2, Lemma 2.4, Proposition 5.2 and the last contradiction all use $a$, the paper must prove the fiber sequence for its model, or give the comparison in full.",
+   "comment_type": "missing_information",
    "severity": "major",
-   "location": "Theorem 2.1 and Proposition 2.2 (Section 2.2)",
-   "quote": "Waldhausen's tube theorem identifies the fiber of $\\gamma$ with\n$\\Hs(*)$.",
-   "explanation": "This is an unresolved dependency, not a demonstrated mistake. The paper defines $\\mathbf T$ as the diagonal telescope of path components of $C^1$ functions on $S^{2m-1}$ with regular zero, and defines $\\gamma$ by the negative-domain spherical fibration. It then asserts a fibre sequence $\\mathcal H^s(*)\\to\\mathbf T\\to BG$ with $\\gamma\\circ\\iota\\simeq BJ$, by reference to Waldhausen, AIS and AACK, saying only that the comparison of models 'is a stable equivalence'. No argument is given that this exact model, with this stabilization system and this map $\\gamma$, is the one for which the cited theorem holds. Nor is it shown that the connecting map $\\partial:\\pi_{10}BG\\to\\pi_9\\mathcal H^s(*)$ is the one whose image is bounded by $|\\pi_9^S|$. The order count ($|\\mathrm{im}\\,\\partial|\\le 4<32$) is correct if both the fibration and Rognes's value $\\pi_{10}\\mathrm{Wh}^{\\mathrm{diff}}(*)_{(2)}\\cong\\mathbb Z/8\\oplus(\\mathbb Z/2)^2$ are as quoted. I could not check either against the sources.",
-   "consequence": "If the fibre sequence or the identification of $\\gamma$ fails for this model, there is no class $0\\ne a\\in\\ker\\gamma_*$, and both the construction of $L$ and the final contradiction lose their input.",
-   "status": "unverified",
    "source": {
     "file": "sections/tubes.tex",
     "lines": [
      125,
-     126
+     125
     ]
    },
    "boxes": [
@@ -156,34 +154,71 @@
    ]
   },
   {
-   "title": "The vanishing of the cobordism class depends on quoted connectivity theorems and on their compatibility with the geometric stabilization and extension maps, which is asserted but not checked.",
-   "severity": "major",
-   "location": "Section 4.3, Proposition 4.5 (hcob-injectivity)",
-   "quote": "Compatibility of extension and stabilization identifies the composite of\nthese two isomorphisms with \\eqref{eq:hcob-injectivity-map}.",
-   "explanation": "This is an unresolved dependency, not a demonstrated mistake. Deducing $c_B=0\\in[B,H(\\Sigma)]$ from $[W]=0\\in[B,H(Y)]$ needs injectivity on $\\pi_9$ of $H(\\Sigma)\\xrightarrow{\\sigma}H(\\Sigma\\times J)\\xrightarrow{e_!}H(Y)\\to\\mathcal H^s(Y)$. The paper obtains it from (a) Igusa stability in the form $\\dim X\\ge\\max(2r+8,3r+5)$, (b) the statement that an $(r+1)$-connected map induces an $r$-connected map on $\\mathcal H^s$, and (c) the claim that the paper's $\\sigma$ and $e_!$ (with the face conventions of its equation for the stabilization faces) are the maps to which (a) and (b) apply. Points (a) and (b) are cited from CP2025 and (c) is asserted in one sentence. The numerics are consistent ($\\dim\\Sigma\\ge 38\\ge 35$, $d-1\\ge 18$) and a $\\pi_0$ Whitehead-torsion analogue checks out, but I could not confirm the quoted statements or the convention matching against the sources.",
-   "consequence": "Proposition 3.1 (one critical point implies null tube class) depends entirely on this injectivity. Without it, the product structure on $C_b$ over all of $S^9$ is not obtained and the contradiction in the proof of Theorem 1.1 does not follow.",
-   "status": "unverified",
+   "title": "The injectivity in Proposition 4.5 uses two quoted statements for maps that the paper does not identify with its geometric maps",
+   "quote": "For the first statement we use Igusa's stability",
+   "explanation": "Proposition 4.5 gives $c_B = 0$, and thus Proposition 3.1, only if the composite $H(\\Sigma) \\to H(\\Sigma \\times J) \\to H(Y) \\to H^s(Y)$ is injective on $\\pi_9$. I recomputed the numbers and they are correct. Igusa's theorem is for the concordance suspension $P(M) \\to P(M \\times I)$, which is $k$-connected if $\\dim M \\ge \\max(2k+7, 3k+4)$. On the product component $H(M)_0 = BP(M)$ this gives $r$-connectivity of $H(M) \\to H(M \\times J)$ for $\\dim M \\ge \\max(2r+5, 3r+1)$. The range $\\max(2r+8, 3r+5)$ in the paper is more restrictive, so $r = 10$ with $\\dim \\Sigma \\ge 38$ is safe. $\\Sigma \\times J$ is $(d-1)$-connected with $d = \\min(k,l)-1 \\ge 19$, and $\\pi_i(Y) = 0$ for $i \\le d$, thus $e$ is $d$-connected and the map on $H^s$ is an isomorphism on $\\pi_9$. Two identifications have no argument in the paper and are given only by citation of CP2025: (1) the stabilization of (eq:stabilization-faces), where the two faces $C \\times \\partial J$ are in the outgoing end, is the map for which the Igusa range holds; Lemma 4.3 identifies $W_b$ with this stabilization and with no other. (2) The geometric extension $e_!$ of (eq:hcob-extension) is the map that $e$ induces on $\\Omega \\operatorname{Wh}^{\\mathrm{diff}}$ under the equivalence (eq:stable-hcob-theorem). The two are standard, and I expect them to be true. But the full obstruction uses them at this one step, so the paper should give a short proof or cite the primary sources (Igusa 1988; Waldhausen; WJR) with exact statements.",
+   "comment_type": "methodology",
+   "severity": "moderate",
    "source": {
     "file": "sections/obstruction.tex",
     "lines": [
-     253,
-     254
+     213,
+     213
     ]
    },
    "boxes": [
     {
      "page": 16,
      "x": 71.999985,
-     "y": 389.3392,
+     "y": 101.52639199999999,
      "w": 468.0,
-     "h": 13.772625000000001
-    },
+     "h": 14.508978749999999
+    }
+   ]
+  },
+  {
+   "title": "The example is not checked against the necessary conditions that the introduction quotes",
+   "quote": "is $2$-torsion \\cite[Corollary~1.2]{AACK2025}. Porcelli and Smith's",
+   "explanation": "The introduction lists conditions that each nearby Lagrangian must satisfy: the projection is a simple homotopy equivalence, the stable Gauss map is zero on homotopy groups, the normal invariant is 2-torsion and is in the image of the stable Hopf action. The paper says that these are \"distinct from\" the ambient isotopy class, but it does not show that $L$ satisfies them. From (eq:critical-parametrization), the projection $L \\to Q$ is the map $(b,u) \\mapsto (b, \\nabla g_b(u)/|\\nabla g_b(u)|)$. This is a family over $S^9$ of degree-one self-maps of $S^{N-1}$, so its normal invariant can be computed from the family $g_b$. AACK2025 also gets its constraints from tube-space data at infinity of generating functions, which is the same type of data as the class $a$. The paper should compute the normal invariant of this projection, and it should explain why the tube-space method of AACK2025 does not exclude a nonzero class $a$ in $\\ker(\\gamma_*)$ at infinity of a generating family of an embedded exact Lagrangian. For a claim of this size, this check is a necessary test of consistency. I found no known theorem that contradicts Theorem 1.1, but I could not verify the 2025-2026 references.",
+   "comment_type": "missing_information",
+   "severity": "moderate",
+   "source": {
+    "file": "sections/introduction.tex",
+    "lines": [
+     80,
+     80
+    ]
+   },
+   "boxes": [
     {
-     "page": 16,
+     "page": 2,
      "x": 71.999985,
-     "y": 402.937557,
+     "y": 359.59936100000004,
      "w": 468.0,
      "h": 13.71117125
+    }
+   ]
+  },
+  {
+   "title": "The identity $[g_\\infty] = [a]$ does not state the comparison of coordinate conventions",
+   "quote": "Its homogeneous data belong to $T_{p,p}$, since each",
+   "explanation": "The telescope (eq:stable-tubes) uses the direct sum with $q_{1,1}$ and one fixed order of coordinates (negative before positive). Proposition 6.3 gives data homotopic to $g_b$ plus a split form in the order $(w,z,p)$. After $s$ steps, the data in $T_{p,p}$ are thus $(g_b + q_{ds,ds}) \\circ A$ for a fixed linear isomorphism $A$, and not the image of $a$ under the telescope maps. The proof writes the equality of free classes with no comment. I checked that the step is correct. The map $h \\mapsto h \\circ A$ is a homeomorphism of the function space, so nullity transfers, and $A + \\mathrm{id}$ is compatible with later stabilizations. If $\\det A > 0$, $A$ is isotopic to the identity; if $\\det A < 0$, compose first with a reflection of one added coordinate, which preserves the split form. Section 3 has only the sentence \"Fixed reordering of coordinate blocks does not affect nullity\" for one finite stage. The paper should state this argument at the place where the non-nullity of $a$ is transferred to the final family.",
+   "comment_type": "presentation",
+   "severity": "minor",
+   "source": {
+    "file": "sections/transport.tex",
+    "lines": [
+     525,
+     525
+    ]
+   },
+   "boxes": [
+    {
+     "page": 26,
+     "x": 71.999985,
+     "y": 508.919838,
+     "w": 468.0,
+     "h": 14.72735375
     }
    ]
   }

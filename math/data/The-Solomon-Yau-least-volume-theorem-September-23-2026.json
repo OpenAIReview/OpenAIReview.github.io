@@ -1,0 +1,233 @@
+{
+ "id": "The-Solomon-Yau-least-volume-theorem-September-23-2026",
+ "title": "The Solomon–Yau least-volume theorem",
+ "abstract": "We prove the Solomon–Yau least-volume conjecture for minimal hypersurfaces of unit round spheres: in every dimension <i>m</i> ≥ 2, a closed connected minimal immersion with non-totally-geodesic image has volume at least the smallest <i>m</i>-dimensional minimal Clifford product. Volume is measured on the domain, so covering multiplicities are included.",
+ "result_id": "349",
+ "result_title": "The Solomon–Yau least-volume conjecture",
+ "subject": "Differential geometry",
+ "source_pdf": "preprints/The-Solomon-Yau-least-volume-theorem-September-23-2026/paper.pdf",
+ "pdf": "pdf/The-Solomon-Yau-least-volume-theorem-September-23-2026.pdf",
+ "page_sizes": [
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ]
+ ],
+ "macros": "\\newcommand{\\maketitle}{\n  \\begin{center}\n    {\\LARGE\\bfseries\\@title\\par}\n    \\vspace{0.8em}\n    {\\large\\@author\\par}\n    \\vspace{0.4em}\n    {\\@date\\par}\n  \\end{center}\n  \\vspace{0.4em}\n}\n\\newcommand{\\Vol}{\\operatorname{Vol}}\n\\newcommand{\\Area}{\\operatorname{Area}}\n\\newcommand{\\ind}{\\operatorname{ind}}\n\\newcommand{\\spt}{\\operatorname{spt}}\n\\newcommand{\\dist}{\\operatorname{dist}}\n\\newcommand{\\tr}{\\operatorname{tr}}\n\\newcommand{\\diam}{\\operatorname{diam}}",
+ "review": {
+  "method": "OpenAIReview (Claude Opus 5.5)",
+  "effort": "high",
+  "date": "2026-10-08"
+ },
+ "overall_assessment": "The manuscript claims a proof of the Solomon--Yau least-volume conjecture: a closed connected minimal immersion $F:M^m\\to S^{m+1}$ with non-totally-geodesic image has volume at least $a_m$, for every $m\\ge2$. The proof is an induction on $m$ with a least-area counterexample. Its parts are: cone monotonicity (reduction to embedded hypersurfaces), a two-point maximum principle that gives $\\int_\\Sigma|A|^2\\ge m|\\Sigma|$ and index at least $m+3$ with equality only for Clifford products, a Lorentz-boost family of mod-two cycles on $\\mathbb{RP}^{m+3}$ with all masses at most $|\\Sigma|$, Almgren--Pitts min--max with a detection gap $\\gamma_m>\\sigma_m$, and a dimension reduction for stationary cones of density less than $\\vartheta_m=a_m/\\sigma_m$.\n\nI checked the chain link by link against the source and found no mathematical error. The checks include: the convexity of $\\log d_j$ and the values $\\vartheta_2=\\pi/2$, $\\vartheta_4\\le3/2$ (Lemma 2.1); the two-point Hessian sum and the diagonal contact computation, which give $\\Delta\\log\\phi\\ge m-P$ (Lemma 3.1); the identity $\\frac{d}{d\\tau}\\int_\\Sigma\\beta^m=-mS\\int_\\Sigma\\beta^{m+1}\\eta^2$ (Lemma 3.4); the equality case $P=m$, $\\nabla A=0$ and the Clifford classification (Proposition 3.5); the odd map to $\\mathbb R^{m+3}$ and the hemisphere centroid $\\frac{\\sigma_m}{m+1}a$ (Lemma 4.4); the Lorentz invariance $|z|^2-h^2=|y|^2-b^2$, the isometry $O$, the Jacobian $dY_{v,b}=O(rI-h_{v,b}A)$ and the bound $\\det(rI-h_{v,b}A)\\le r^m$ from $\\operatorname{tr}A=0$ (Section 5); the limit map at infinite boosts, the strict loss away from the center, and the second variation $\\int_\\Sigma wLw=m|\\Sigma|t^2+\\int_\\Sigma P(t+f)^2$; the base case $\\Theta=N/2$ and the induction for low-density cones (Proposition 6.5); and the final contradiction in Section 7. There is no circular use of Theorem 1.1 in dimension $m$.\n\nThree issues remain, and none is a confirmed error. The most important one is the existence step of Theorem 4.6 for $m\\ge7$. It depends on one sentence that says a cited min--max existence theorem has no dimension restriction, for $\\mathbb Z_2$ coefficients and a general cubical parameter complex. The paper must make this interface exact. The other two issues are in Lemma 6.4: a constancy step on a $C^{1,\\alpha}$ graph and a citation for higher regularity. Both have standard repairs and do not change a result.\n\nLimits of this review: I could not open the cited sources, so the three issues have low confidence and the imported theorems were not checked against their original statements. Eight of the eleven sub-agent reviews returned no findings. A result of this importance needs a full check by specialists in geometric measure theory and min--max theory, in particular of the imported Almgren--Pitts and White statements.",
+ "num_findings": 3,
+ "comments": [
+  {
+   "title": "Existence step for $m\\ge7$ depends on an unverified claim about the range of a cited theorem",
+   "quote": "That theorem has no dimension restriction.",
+   "explanation": "Section 7 uses the output of Theorem 4.6 for every $m\\ge2$. For $m\\ge7$ the only source of the stationary integral varifold $V$ with $\\|V\\|(S^{m+1})=\\mathbf L(\\Pi)$ is this one cited statement. The paper asserts its range in one sentence and does not verify it. The cited paper of Marques and Neves works, to my memory, with the ambient dimension restricted to $3\\le m+1\\le7$, and it states existence together with regularity. I could not open the source, so I cannot confirm that the cited existence statement is separate from this restriction. The mathematics is very likely correct: Pitts gives a stationary varifold of mass $\\mathbf L(\\Pi)$ that is almost minimizing in annuli, and integrality of such varifolds, with no upper bound on the dimension. Only the regularity step needs $2\\le m\\le6$. But Pitts states these results for integer coefficients and for cube parameter spaces. The paper needs them for $\\mathbb Z_2$ coefficients and for a homotopy class on the cubical complex $K$ of Lemma 4.5, which is not a manifold and can have dimension larger than $p$. The authors must quote the exact statement with its standing hypotheses, or add a paragraph that shows why the combinatorial argument and the pull-tight step do not use the ambient dimension, the structure of $X$, or the coefficient group. This affects Theorem 1.1 only for $m\\ge7$. I checked the other steps of Theorem 4.6 and they are correct: the retraction in Lemma 4.5, the bound $\\sup_X\\mathbf M(\\widehat\\phi)\\le\\max_v\\mathbf M(\\phi(v))+C_X\\mathbf f(\\phi)$, the order of quantifiers in $\\gamma_m\\le\\mathbf L(\\mathcal S')$, and the hypothesis $\\mathbf L(\\Pi)\\ge\\gamma_m>0$.",
+   "comment_type": "missing_information",
+   "severity": "moderate",
+   "source": {
+    "file": "sections/minmax.tex",
+    "lines": [
+     378,
+     378
+    ]
+   },
+   "boxes": [
+    {
+     "page": 16,
+     "x": 71.999985,
+     "y": 707.511093,
+     "w": 451.275604,
+     "h": 13.63634125
+    },
+    {
+     "page": 16,
+     "x": 71.999985,
+     "y": 721.060287,
+     "w": 451.275604,
+     "h": 13.63634125
+    }
+   ]
+  },
+  {
+   "title": "Lemma 6.4: the multiplicity-one step uses a constancy argument on a graph that is only $C^{1,\\alpha}$",
+   "quote": "On that connected graph the stationary integral multiplicity is",
+   "explanation": "At this point of the proof the graph is only $C^{1,\\alpha}$. The standard constancy theorem for stationary varifolds needs a $C^2$ submanifold, so the sentence is not supported as written. The conclusion is correct, and a direct argument is available. The tangent is a multiplicity-one plane, so the mass ratio at a small scale $\\rho$ is at most $(1+\\delta)\\omega_k\\rho^k$. Monotonicity at a nearby point $x$ then gives $\\Theta(V,x)<2$. Integrality gives $\\Theta(V,x)=1$ almost everywhere. I checked the hypotheses of Allard's theorem for the lemma (density at least $1$ almost everywhere, zero mean curvature, mass ratio near $1$, center in the support) and they hold. The use of Lemma 6.4 in Proposition 6.5 is not affected.",
+   "comment_type": "methodology",
+   "severity": "minor",
+   "source": {
+    "file": "sections/cones.tex",
+    "lines": [
+     252,
+     252
+    ]
+   },
+   "boxes": [
+    {
+     "page": 28,
+     "x": 71.999985,
+     "y": 301.59858,
+     "w": 451.275604,
+     "h": 14.02029875
+    },
+    {
+     "page": 28,
+     "x": 71.999985,
+     "y": 316.727848,
+     "w": 451.275604,
+     "h": 12.0452075
+    }
+   ]
+  },
+  {
+   "title": "Lemma 6.4: the citation for the step from $C^{1,\\alpha}$ to $C^\\infty$ is probably not the correct statement",
+   "quote": "\\cite[Chapter~5, Theorem~6.1]{SimonGMT}, applied with the smoothly",
+   "explanation": "To my knowledge, Section 6 of Chapter 5 in Simon's notes is the second version of the Allard regularity theorem, with the mass-ratio hypothesis $1+\\delta$. It is not a higher-regularity theorem for a prescribed smooth mean curvature in arbitrary codimension. The step from a $C^{1,\\alpha}$ graph to a smooth graph is correct, but it comes from elliptic regularity for the minimal surface system (a weak $C^{1,\\alpha}$ solution is smooth). I could not open the source, so the confidence is low. The authors must check the locator or cite the elliptic regularity result directly. The result of the lemma does not change.",
+   "comment_type": "presentation",
+   "severity": "minor",
+   "source": {
+    "file": "sections/cones.tex",
+    "lines": [
+     255,
+     255
+    ]
+   },
+   "boxes": [
+    {
+     "page": 28,
+     "x": 71.999985,
+     "y": 329.61021400000004,
+     "w": 451.67923,
+     "h": 13.63634125
+    }
+   ]
+  }
+ ]
+}
