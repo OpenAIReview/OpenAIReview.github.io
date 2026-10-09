@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="canonical" href="https://openaireview.org/reviewer.html" />
+<title>OpenAIReview — AI-Powered Academic Paper Reviewer</title>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-P2VZL2X4NX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-P2VZL2X4NX');
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lora:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #fafafa;
+  --surface: #ffffff;
+  --border: #e5e7eb;
+  --text: #1a1a2e;
+  --text-secondary: #6b7280;
+  --text-muted: #9ca3af;
+  --accent: #800000;
+  --accent-light: #fdf2f2;
+  --accent-hover: #600000;
+  --green: #10b981;
+  --green-light: #ecfdf5;
+  --orange: #f59e0b;
+  --orange-light: #fffbeb;
+  --radius: 12px;
+  --radius-sm: 8px;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+  --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -2px rgba(0,0,0,0.05);
+  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.08), 0 4px 6px -4px rgba(0,0,0,0.04);
+  --shadow-focus: 0 0 0 3px rgba(128,0,0,0.15);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { color: var(--accent-hover); }
+
+/* ── Header ── */
+.header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 0 32px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.header .logo {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: -0.3px;
+}
+.header-links {
+  margin-left: auto;
+  display: flex;
+  gap: 20px;
+  font-size: 14px;
+  font-weight: 500;
+}
+.header-links a {
+  color: var(--text-secondary);
+  transition: color 0.15s;
+}
+.header-links a:hover { color: var(--text); }
+.header-links a { white-space: nowrap; }
+@media (max-width: 480px) { div.header-links { gap: 12px; font-size: 12px; } div.header-links a.home-link { display: none; } }
+.header-links a.current { color: var(--text); font-weight: 600; }
+
+/* ── Hero wrapper with dot pattern ── */
+.hero-wrapper {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--bg);
+  background-image: radial-gradient(circle, rgba(128,0,0,0.07) 1px, transparent 1px);
+  background-size: 26px 26px;
+}
+.hero-wrapper::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 140px;
+  background: linear-gradient(to bottom, transparent, var(--bg));
+  pointer-events: none;
+}
+
+/* ── Hero ── */
+.hero {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 52px 32px 44px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+.hero h1 {
+  font-family: 'Lora', Georgia, 'Times New Roman', serif;
+  font-size: 34px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  line-height: 1.2;
+  margin-bottom: 20px;
+  color: var(--text);
+  white-space: nowrap;
+}
+.hero .subtitle {
+  font-size: 17px;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  max-width: 560px;
+  margin: 0 auto 44px;
+}
+
+/* Install block */
+.install-block {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--text);
+  color: #e5e7eb;
+  padding: 14px 24px;
+  border-radius: var(--radius);
+  font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+  font-size: 15px;
+  margin-bottom: 28px;
+  cursor: pointer;
+  transition: background 0.15s, box-shadow 0.2s;
+  position: relative;
+  box-shadow: 0 0 0 0 rgba(128,0,0,0);
+}
+.install-block:hover {
+  background: #111;
+  box-shadow: 0 0 0 3px rgba(128,0,0,0.25), 0 4px 12px rgba(0,0,0,0.15);
+}
+.install-block .prompt { color: var(--accent); user-select: none; }
+.install-block .copy-hint {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  color: var(--text-muted);
+  position: absolute;
+  right: -90px;
+  white-space: nowrap;
+}
+.install-block.copied .copy-hint { color: var(--green); }
+
+.hero-link {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+/* ── Features Strip ── */
+.features-section {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 32px 32px;
+}
+.features-grid {
+  max-width: 900px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+}
+.feature-card {
+  text-align: center;
+}
+.feature-icon {
+  width: 48px;
+  height: 48px;
+  background: var(--accent-light);
+  border-radius: var(--radius);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+  color: var(--accent);
+}
+.feature-icon svg {
+  width: 22px;
+  height: 22px;
+  stroke: currentColor;
+}
+.feature-card h3 {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.feature-card p {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.55;
+}
+
+/* ── Examples Section ── */
+.examples-section {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 32px;
+}
+.section-title {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  margin-bottom: 8px;
+}
+.section-desc {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 32px;
+}
+.examples-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+.example-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  transition: box-shadow 0.2s, border-color 0.2s, transform 0.15s;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+}
+.example-card:hover {
+  box-shadow: var(--shadow-md), inset 3px 0 0 var(--accent);
+  border-color: #d1d5db;
+  transform: translateY(-1px);
+  color: inherit;
+}
+.example-card .card-field {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+.example-card .card-title {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.45;
+  margin-bottom: 16px;
+  flex: 1;
+}
+.example-card .card-meta {
+  font-size: 12px;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Count row (Refine · OpenAIReview) */
+.count-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 14px;
+  font-size: 11.5px;
+  font-weight: 500;
+}
+.count-row .cr-label {
+  color: var(--text-secondary);
+}
+.count-row .cr-num {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.count-row .cr-num.refine-num { color: #92400e; }
+.count-row .cr-num.ai-num     { color: var(--accent); }
+.count-row .cr-sep {
+  color: var(--text-muted);
+  font-size: 14px;
+  line-height: 1;
+  margin: 0 2px;
+}
+
+/* ── Footer ── */
+.footer {
+  border-top: 1px solid var(--border);
+  padding: 32px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-secondary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .hero h1 { font-size: 22px; white-space: normal; }
+  .hero .subtitle { font-size: 15px; }
+  .features-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .examples-grid { grid-template-columns: 1fr; }
+  .install-block .copy-hint { display: none; }
+}
+@media (max-width: 480px) {
+  .features-grid { grid-template-columns: 1fr; }
+  .header { padding: 0 16px; }
+  .hero { padding: 56px 16px 48px; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <a class="logo" href="index.html">OpenAIReview</a>
+  <div class="header-links">
+    <a href="index.html" class="home-link">OpenVerification</a>
+    <a href="reviewer.html" class="current">Review your paper</a>
+    <a href="blogs.html">Blogs</a>
+    <a href="https://github.com/ChicagoHAI/OpenAIReview" target="_blank">GitHub</a>
+  </div>
+</div>
+
+<!-- Hero -->
+<div class="hero-wrapper">
+  <div class="hero">
+    <h1>AI-powered academic paper reviewer</h1>
+    <p class="subtitle">
+      Rigorous AI review to help you publish your best work.
+    </p>
+
+    <div class="install-block" id="install-block" onclick="copyInstall()">
+      <span class="prompt">$</span> pip install openaireview
+      <span class="copy-hint" id="copy-hint">click to copy</span>
+    </div>
+
+    <p class="hero-link">
+      <a href="https://github.com/ChicagoHAI/OpenAIReview" target="_blank">Learn more at GitHub &rarr;</a>
+    </p>
+    <p class="hero-link">
+      we recommend using <a href="https://github.com/astral-sh/uv" target="_blank">uv</a>, and there are additional guidelines for best results with PDF inputs
+    </p>
+    <p class="hero-link" style="margin-top: 12px;">
+      <a href="blog.html">Read our blog post: AI-assisted reviewing is necessary and should be open &rarr;</a>
+    </p>
+    <p class="hero-link">
+      <a href="https://sai.science/blog/how-much-science-is-verifiable" target="_blank">New blog on replicating ICML papers &rarr;</a>
+    </p>
+    <p style="margin-top: 16px;">
+      <a href="review.html" style="display:inline-block;padding:10px 28px;background:var(--accent);color:#fff;border-radius:6px;font-weight:600;text-decoration:none;font-size:15px;">Try it on the web!</a>
+    </p>
+  </div>
+</div>
+
+
+<!-- Featured Examples -->
+<div class="examples-section">
+  <h2 class="section-title">Featured Reviews</h2>
+  <p class="section-desc">Full paper reviews generated by OpenAIReview with multiple models.</p>
+  <div class="examples-grid">
+    <a class="example-card" href="viz/index.html?paper=260218458v1">
+      <div class="card-field">AI / Interpretability</div>
+      <div class="card-title">The Story is Not the Science: Execution-Grounded Evaluation of Mechanistic Interpretability Research</div>
+      <div class="card-meta"><span>Claude + Gemini</span> <span>View review &rarr;</span></div>
+    </a>
+    <a class="example-card" href="viz/index.html?paper=apep-0001-tex">
+      <div class="card-field">Economics</div>
+      <div class="card-title">Do State Paid Sick Leave Mandates Increase Work Hours? [TEX]</div>
+      <div class="card-meta"><span>Claude + Gemini</span> <span>View review &rarr;</span></div>
+    </a>
+    <a class="example-card" href="viz/index.html?paper=apep-0001-pdf">
+      <div class="card-field">Economics</div>
+      <div class="card-title">Do State Paid Sick Leave Mandates Increase Work Hours? [PDF]</div>
+      <div class="card-meta"><span>Claude + Gemini</span> <span>View review &rarr;</span></div>
+    </a>
+    <a class="example-card" href="viz/index.html?paper=smoothing-shifts-pdf">
+      <div class="card-field">Mathematics</div>
+      <div class="card-title">Smooth shifts of the &#934;&#8323;&#8308; measure on &#120139;&#179;</div>
+      <div class="card-meta"><span>Claude + Gemini</span> <span>View review &rarr;</span></div>
+    </a>
+  </div>
+</div>
+
+<!-- Refine Examples -->
+<div class="examples-section" style="padding-top: 0;">
+  <h2 class="section-title">Comparison with Refine</h2>
+  <p class="section-desc">
+    Papers from the <a href="https://refine.ink" target="_blank">Refine</a> benchmark.
+    Compare AI-generated reviews against human annotations.
+  </p>
+  <div class="examples-grid" id="examples-grid"></div>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  <div>Built by <a href="https://chicagohai.github.io/" target="_blank">Chicago Human+AI Lab (ChicagoHAI)</a></div>
+</div>
+
+<script>
+const PAPERS = [
+  {
+    slug: "inference-molecular",
+    title: "Inference in molecular population genetics",
+    field: "Statistical Genetics",
+    gt: 15,
+    ai: 21
+  },
+  {
+    slug: "coset-codes",
+    title: "Coset Codes \u2014 Part I: Introduction and Geometrical Classification",
+    field: "Information Theory",
+    gt: 19,
+    ai: 16
+  },
+  {
+    slug: "targeting-interventions-networks",
+    title: "Targeting Interventions in Networks",
+    field: "Economic Theory",
+    gt: 6,
+    ai: 10
+  },
+  {
+    slug: "chaotic-balanced-state",
+    title: "Chaotic Balanced State in a Model of Cortical Circuits",
+    field: "Neuroscience",
+    gt: 12,
+    ai: 21
+  }
+];
+
+function animateCount(el, target, duration) {
+  const start = performance.now();
+  function step(now) {
+    const elapsed = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    const ease = 1 - Math.pow(1 - progress, 3);
+    el.textContent = Math.round(ease * target);
+    if (progress < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+function renderExamples() {
+  const grid = document.getElementById('examples-grid');
+  grid.innerHTML = PAPERS.map(p => `
+    <a class="example-card" href="viz/index.html?paper=${p.slug}">
+      <div class="card-field">${p.field}</div>
+      <div class="card-title">${p.title}</div>
+      <div class="count-row">
+        <span class="cr-label">Refine:</span>
+        <span class="cr-num refine-num" data-target="${p.gt}">0</span>
+        <span class="cr-sep">&middot;</span>
+        <span class="cr-label">OpenAIReview:</span>
+        <span class="cr-num ai-num" data-target="${p.ai}">0</span>
+      </div>
+      <div class="card-meta"><span>View review &rarr;</span></div>
+    </a>
+  `).join('');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.querySelectorAll('.cr-num').forEach(el => {
+          animateCount(el, parseInt(el.dataset.target), 900);
+        });
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.25 });
+
+  grid.querySelectorAll('.example-card').forEach(card => observer.observe(card));
+}
+
+function copyInstall() {
+  navigator.clipboard.writeText('pip install openaireview').then(() => {
+    const block = document.getElementById('install-block');
+    const hint = document.getElementById('copy-hint');
+    block.classList.add('copied');
+    hint.textContent = 'copied!';
+    setTimeout(() => {
+      block.classList.remove('copied');
+      hint.textContent = 'click to copy';
+    }, 2000);
+  });
+}
+
+document.addEventListener('DOMContentLoaded', renderExamples);
+</script>
+</body>
+</html>

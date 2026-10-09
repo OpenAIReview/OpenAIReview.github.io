@@ -1,0 +1,305 @@
+{
+ "id": "Positivity-of-Serres-Intersection-Multiplicity-September-23-2026",
+ "title": "Positivity of Serre's Intersection Multiplicity",
+ "abstract": "We prove Serre's positivity conjecture, including ramified mixed characteristic. If two nonzero finitely generated modules over a regular local ring have tensor product of finite length and complementary dimensions, then their intersection multiplicity is strictly positive.",
+ "result_id": "193",
+ "result_title": "Serre’s intersection-multiplicity conjecture",
+ "subject": "Algebra",
+ "source_pdf": "preprints/Positivity-of-Serres-Intersection-Multiplicity-September-23-2026/paper.pdf",
+ "pdf": "pdf/Positivity-of-Serres-Intersection-Multiplicity-September-23-2026.pdf",
+ "page_sizes": [
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ]
+ ],
+ "macros": "\\newcommand{\\Perf}{\\operatorname{Perf}}\n\\newcommand{\\Spec}{\\operatorname{Spec}}\n\\newcommand{\\Tor}{\\operatorname{Tor}}\n\\newcommand{\\rank}{\\operatorname{rank}}\n\\newcommand{\\length}{\\operatorname{length}}\n\\newcommand{\\Q}{\\mathbb{Q}}\n\\newcommand{\\Z}{\\mathbb{Z}}\n\\newcommand{\\m}{\\mathfrak{m}}\n\\newcommand{\\K}{K}\n\\newcommand{\\cL}{\\mathcal{L}}\n\\newcommand{\\arraystretch}{1.5}",
+ "review": {
+  "method": "OpenAIReview (Claude Opus 5.5)",
+  "effort": "high",
+  "date": "2026-10-08"
+ },
+ "overall_assessment": "The paper claims a proof of Serre's positivity conjecture for all regular local rings. The proof has two Galois norm comparisons: one for ordinary supported complexes over $A_D\\subset D'$ and one for sequences of complexes modulo free sequences of rank $o(s_n)$ over $A_E\\subset E'$.\n\nI checked the arguments that the paper gives in full and found no error in them. This includes the characteristic-$p$ construction of $(C_D,\\lambda_D)$, the supported descent argument of Section 3 (given cdh descent), the supported quotient and its Euler evaluations in Section 4, and all of Section 5: the bound $\\tau_i(L)=0$ for $i>l$, the approximation by $M_n$, the truncation argument, the identity of the ordinary evaluation with $c_\\sigma$, and the bound $b_{\\sigma,\\gamma}\\ge\\nu_\\sigma\\eta_E$. Small examples in $k[[x,y]]$ agree with $c_\\sigma=b_{\\sigma,\\gamma}$. The honest (non-asymptotic) form of each comparison agrees with known results on Dutta multiplicity and Roberts rings.\n\nThe proof is not complete as written, because the steps that carry the new case are citations without statements. (1) In mixed characteristic, the equality $\\lambda_D(C_D/(z)C_D)=e((z),D)$ and the vanishing $\\lambda_D H_i(z;C_D)=0$, $i>0$, are necessary for every parameter system $z$ of $D'$, not only for the parameters of the base $A_D$. The paper gives no argument and relies on three numbered items of one source. All strict positivity comes from these two facts. (2) The second comparison needs cdh descent of a truncating invariant with a noncommutative, non-Noetherian connective coefficient algebra $H$. This is also a citation only. (3) The normalized-length formalism is cited for a mixed-characteristic tower and used for a characteristic-$p$ tower. I could not confirm the cited statements, so these items are gaps in the written proof, not confirmed errors. Seven of the twelve sub-agents returned no findings, and none found an internal error.\n\nCorollary 1.2 has a separate gap: its blowup identity is taken from proofs in a paper on the unramified case. The introduction also describes earlier conditional results in a way that reads as unconditional.\n\nA claim of this size needs each external input stated with its hypotheses and checked against the objects $D'$, $E'$, $A_D$, $A_E$ and $H$ of this paper.",
+ "num_findings": 6,
+ "comments": [
+  {
+   "title": "Mixed-characteristic equality $\\lambda_D(C_D/(z^v)C_D)=v^h e((z),D)$ has no proof in the paper and is the only source of strict positivity",
+   "quote": "Proposition~4.0.14, again at $n=0$, identifies the",
+   "explanation": "I checked the characteristic-$p$ half of this proof and it is complete: the field property of $K'\\otimes_{K^{1/q}}L^{1/q}$, the formula $\\lambda_\\infty(V_q)=q^{-h}\\operatorname{length}_D(D/H^{[q]})$, the inclusions $gC_D\\subseteq B_1$ and $g^{1/q}C_D\\subseteq B_q$, the $O(q^{-1})$ kernel bound, and the Koszul Euler characteristic step all hold. The mixed-characteristic half gives no argument. It attributes the equality $\\lambda_D(C_D/(z)C_D)=e((z),D)$ for every parameter system $z$ of $D$ to one numbered proposition of Cai--Lee--Ma--Schwede--Tucker. For the base parameters $p,t_2,\\ldots,t_h$ the equality is a rank computation. For a general $z$ it needs a comparison of the Koszul Euler characteristics of $D\\otimes_A A_\\infty$ and of its perfectoidization, and the cone of that map is only almost zero with respect to $(g)_{\\mathrm{perfd}}$. Section 5 needs exactly the general case: $I_\\sigma=(\\iota_\\sigma(x_1),\\ldots,\\iota_\\sigma(x_h))D'$ is not extended from $A_D$, and the proof uses $0<\\lambda(U)=e(I_\\sigma,D')$ to get $\\nu_\\sigma>0$. Corollary 2.6 uses the same equality for $\\lambda_D(C_D/\\mathfrak d C_D)>0$, which gives $\\eta_E>0$. If the cited proposition covers only ideals extended from $A$, or gives only an inequality, then the bound $b_{\\sigma,\\gamma}\\ge\\nu_\\sigma\\eta_E>0$ is not established and Theorem 1.1 is unproved in mixed characteristic, which is the only new case. The paper must state the cited result with its hypotheses (normality, the role of $g$, the completed tower $A_\\infty$) and show that $D'$ with base $A_D$ satisfies them. The construction of $C_D$ is also attributed to Proposition 8.5 of Bhatt--Scholze; the paper must confirm that this item gives a discrete perfectoid ring for the finite map $A_\\infty\\to D\\otimes_A A_\\infty$.",
+   "comment_type": "missing_information",
+   "severity": "major",
+   "source": {
+    "file": "sections/lengths.tex",
+    "lines": [
+     365,
+     365
+    ]
+   },
+   "boxes": [
+    {
+     "page": 9,
+     "x": 71.999985,
+     "y": 314.317569,
+     "w": 468.0,
+     "h": 12.0452075
+    }
+   ]
+  },
+  {
+   "title": "Mixed-characteristic Koszul vanishing for arbitrary parameter systems of $D$ is asserted from a citation; the necessary extra step is not given",
+   "quote": "At $n=0$ this includes every parameter system of $D$.",
+   "explanation": "The almost finite etale property of $C_D$ over $A_\\infty$ gives almost vanishing of $H_i(z;C_D)$, $i>0$, directly only when $z$ comes from $A$. Section 5 uses the vanishing $\\lambda H_q(x;C)=0$, $q>0$, for the twisted sequence $\\iota_\\sigma(x_1),\\ldots,\\iota_\\sigma(x_h)$, which comes from $Q\\subset R$ and has no relation to $p,t_2,\\ldots,t_h$. This vanishing gives $\\tau_i(k)=0$ for $i>l$ in Lemma 5.3, and thus the rank estimate $\\operatorname{rank}_B F^\\infty_{n,i}=o(s_n)$ for $i>l$, on which the truncation argument depends. I checked that a repair exists: if $H^j_{\\mathfrak d}(C_D)$ is almost zero for $j<h$, then the spectral sequence $H_i(z;H^j_{\\mathfrak d}(C_D))\\Rightarrow H_{i-j}(z;C_D)$ gives almost vanishing for every parameter system $z$ of $D$. The paper must include this step or confirm that the cited Corollary 4.0.4 has this generality. The paper must also confirm that the cited Proposition 4.0.10 gives $\\lambda_\\infty=0$ for modules that are almost zero with respect to $(g)_{\\mathrm{perfd}}$ for an arbitrary nonzero $g\\in A$, not only with respect to $p^{1/p^\\infty}$. The sentence that the stated hypotheses are exactly those of the cited paper is not sufficient for a result on which the main theorem depends.",
+   "comment_type": "missing_information",
+   "severity": "moderate",
+   "source": {
+    "file": "sections/lengths.tex",
+    "lines": [
+     362,
+     362
+    ]
+   },
+   "boxes": [
+    {
+     "page": 9,
+     "x": 71.999985,
+     "y": 286.552345,
+     "w": 468.21817,
+     "h": 14.330435
+    },
+    {
+     "page": 9,
+     "x": 71.999985,
+     "y": 300.768375,
+     "w": 468.403625,
+     "h": 12.0452075
+    }
+   ]
+  },
+  {
+   "title": "The second norm comparison depends on cdh descent with the coefficient algebra $H$ of Lemma 4.6, which the paper only cites",
+   "quote": "\\cite[Theorem~A.2 and Appendix~B, especially Theorem~B.3]{LT}.",
+   "explanation": "I checked the internal steps of Section 3 and they hold: $E(U)=\\operatorname{fib}(K(U)_\\mathbb{Q}\\to K(U[1/p])_\\mathbb{Q})$ is truncating because the negative cyclic terms cancel; $\\pi_0(H\\otimes_A^{\\mathbf L}B)=\\pi_0(H)\\otimes_A\\pi_0(B)$, so $B\\mapsto E(H\\otimes_A^{\\mathbf L}B)$ is truncating; the transfer and retract argument for finite flat covers, the flattening induction, and the orbit argument are correct. I also checked the hypotheses of Theorem 3.1 in its two applications ($p\\in J$, surjectivity, geometric transitivity through the norm argument of Section 5.1, connectivity of $H$, and $H\\otimes_A^{\\mathbf L}T\\simeq H\\otimes_A T$). The remaining input is cdh descent of $Y\\mapsto E(Y;H)$ on finite-type $A$-schemes, with non-affine blowups, for a connective associative $H$. In Theorem 4.7 this $H$ is $\\operatorname{End}_{\\mathcal P_A}(q_AE_A)$, a Drinfeld quotient of $\\prod_n M_{s_n}(A)$: it is not commutative, not Noetherian, and not finite over $A$. The paper takes this from Appendix B and Lemma B.2 of Land--Tamme without a statement of the cited result. The first comparison ($H=A$) agrees with what local Riemann--Roch gives for a Galois extension of a regular local ring, so it has an independent check. The second comparison has no independent check, and the identity $|G_E|c_\\sigma=\\sum_{\\gamma}b_{\\sigma,\\gamma}$ in the proof of Theorem 1.1 depends on it completely. The paper must state the cited theorem exactly, with the definition $E(Y;H)=E(\\operatorname{Perf}(Y)\\otimes_A\\operatorname{Perf}(H))$, and show that its hypotheses hold for this $H$.",
+   "comment_type": "methodology",
+   "severity": "moderate",
+   "source": {
+    "file": "sections/descent.tex",
+    "lines": [
+     83,
+     83
+    ]
+   },
+   "boxes": [
+    {
+     "page": 10,
+     "x": 71.999985,
+     "y": 700.231186,
+     "w": 468.403625,
+     "h": 13.63634125
+    },
+    {
+     "page": 11,
+     "x": 71.999985,
+     "y": 74.777084,
+     "w": 468.0,
+     "h": 13.63634125
+    }
+   ]
+  },
+  {
+   "title": "The normalized-length formalism is cited from mixed-characteristic sources but is used for the tower $\\Lambda=A_{\\mathrm{perf}}$ in characteristic $p$",
+   "quote": "\\cite[Definition~2.2.1 and Propositions~2.2.3, 2.2.6(a)]{CLMST}.",
+   "explanation": "The paper proves the descent of finitely presented modules to a stage $A_n$, the independence of the stage through the rank $p^{(b-a)h}$, and the isomorphism $\\Lambda/p^a\\Lambda\\simeq A_\\infty/p^aA_\\infty$; I checked these and they are correct. The other properties of $\\lambda_\\infty$ are taken from the citation: consistency of the infimum definition with $\\lambda_\\infty(V_n\\otimes_{A_n}\\Lambda)=p^{-nh}\\operatorname{length}_{A_n}(V_n)$, monotonicity on finitely generated submodules, and additivity on short exact sequences of modules that are not finitely generated. The cited sections treat the $p$-adically completed tower $A_\\infty$ over $W(k)[[t_2,\\ldots,t_h]]$. Lemma 2.3 is also asserted for $A=k[[t_1,\\ldots,t_h]]$, and the paper says that this case is necessary because a prime quotient can have characteristic $p$. For that tower the paper gives no source and no argument. The later proofs use these properties in characteristic $p$: Lemma 2.4, the limit $\\lambda_D(C_D/HC_D)=e_{\\mathrm{HK}}(H,D)$ in Theorem 2.5, and the choice of a finitely generated $V\\subseteq U$ with $\\lambda(U/V)<\\epsilon$ in Lemma 5.4. The gap is probably repairable, because the proofs need only a tower of regular local rings with finite free transition maps of rank $p^h$ and a common residue field. The paper must say that the cited proofs apply without change, or cite a general source.",
+   "comment_type": "missing_information",
+   "severity": "moderate",
+   "source": {
+    "file": "sections/lengths.tex",
+    "lines": [
+     168,
+     168
+    ]
+   },
+   "boxes": [
+    {
+     "page": 7,
+     "x": 71.999985,
+     "y": 74.777084,
+     "w": 469.090942,
+     "h": 13.63634125
+    },
+    {
+     "page": 7,
+     "x": 71.999985,
+     "y": 88.326279,
+     "w": 468.0,
+     "h": 13.63634125
+    }
+   ]
+  },
+  {
+   "title": "Corollary 1.2 uses a blowup formula for an arbitrary regular local ring $A$ on the authority of proofs from a paper on the unramified case",
+   "quote": "Fulton's blowup formula and Skalit's finite-support calculation",
+   "explanation": "I checked the other steps of this proof and they are correct: the case $\\dim A=0$; the equivalence of $S=\\emptyset$ and $\\dim T=0$; finiteness of $S$ when $\\dim T\\le 1$; regularity of $B_x$; finite length of $M_x\\otimes_{B_x}N_x$; and $\\dim M_x=\\dim(A/P)$ from the dimension formula. The examples in $k[[x,y]]$ agree with the statement, for example $y^2=x^3$ with $y=0$ gives $3>2\\cdot 1$ and $\\dim T=1$. The gap is the identity $\\chi^A(A/P,A/Q)-e_{\\mathfrak m}(A/P)e_{\\mathfrak m}(A/Q)=\\sum_{x\\in S}[\\kappa(x):k]\\,\\chi^{B_x}(M_x,N_x)$. Fulton's blowup formula is a statement for schemes of finite type over a field or a regular base of dimension at most $1$. The paper cites Theorem 3.4 and the proof of Proposition 3.10 of a paper on the unramified case, and does the same for the dimension equalities. A citation of a proof, not of a statement, shows that the stated result does not cover the necessary case. The corollary is new only for ramified $A$, where the relation between $\\chi$ and Fulton's refined products on the blowup is not supplied. The paper must state the identity for a general regular local ring and prove it or give an exact reference. Theorem 1.1 is not affected.",
+   "comment_type": "missing_information",
+   "severity": "moderate",
+   "source": {
+    "file": "sections/introduction.tex",
+    "lines": [
+     224,
+     224
+    ]
+   },
+   "boxes": [
+    {
+     "page": 4,
+     "x": 71.999985,
+     "y": 272.498123,
+     "w": 468.381836,
+     "h": 13.63634125
+    }
+   ]
+  },
+  {
+   "title": "The summary of Bhatt--Hochster--Ma and Ishiro--Shimomoto reads as an unconditional proof of positivity",
+   "quote": "positivity \\cite[Theorem~6.1]{BHM}. Ishiro--Shimomoto obtain such",
+   "explanation": "The text says that lim Cohen--Macaulay sequences for $R/P$ and $R/Q$ imply $\\chi^R(R/P,R/Q)>0$, and then that Ishiro--Shimomoto obtain such sequences over complete mixed-characteristic local domains with $F$-finite residue field. Read as written, the two sentences together with the reductions of Lemma 5.1 give Theorem 1.1 for these rings without the new argument. The next sentence calls these conditional routes. Thus one hypothesis is missing from the text: either the second result assumes a perfectoid tower with specified properties, or it gives sequences of algebras and not the sequences of finite modules that the first result needs. The paper must give the exact hypotheses of each result and say which one is not known for a general quotient domain.",
+   "comment_type": "presentation",
+   "severity": "minor",
+   "source": {
+    "file": "sections/introduction.tex",
+    "lines": [
+     82,
+     82
+    ]
+   },
+   "boxes": [
+    {
+     "page": 2,
+     "x": 71.999985,
+     "y": 359.310196,
+     "w": 468.0,
+     "h": 13.63634125
+    }
+   ]
+  }
+ ]
+}

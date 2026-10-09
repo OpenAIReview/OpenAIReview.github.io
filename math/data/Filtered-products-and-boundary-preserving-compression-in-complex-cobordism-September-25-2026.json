@@ -1,0 +1,221 @@
+{
+ "id": "Filtered-products-and-boundary-preserving-compression-in-complex-cobordism-September-25-2026",
+ "title": "Filtered products and boundary-preserving compression in complex cobordism",
+ "abstract": "We prove that, in sufficiently large smash powers, an <span class=\"math\">MU</span>-null restriction to a finite pointed subcomplex becomes stably null on the entire union of products with a fixed positive proportion of restricted factors. This coherent vanishing theorem yields boundary-preserving compression of cube-valued maps on every compact metrizable input space. When the torus slot bundle embeds continuously into a trivial bundle of rank less than twice the source rank, the compression places a positive proportion of slots on their boundaries in arbitrarily large powers and fixes every original boundary slot exactly. An example at equality shows that the strict rank inequality cannot be removed.",
+ "result_id": "302",
+ "result_title": "Radius of comparison equals half the mean dimension",
+ "subject": "Operator algebras",
+ "source_pdf": "preprints/Filtered-products-and-boundary-preserving-compression-in-complex-cobordism-September-25-2026/paper.pdf",
+ "pdf": "pdf/Filtered-products-and-boundary-preserving-compression-in-complex-cobordism-September-25-2026.pdf",
+ "page_sizes": [
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ]
+ ],
+ "macros": "\\newcommand{\\preserveresulttype}[1]{\n  \\AtBeginEnvironment{#1}{\\crefalias{theorem}{#1}}}\n\\newcommand{\\Z}{\\mathbb Z}\n\\newcommand{\\R}{\\mathbb R}\n\\newcommand{\\C}{\\mathbb C}\n\\newcommand{\\N}{\\mathbb N}\n\\newcommand{\\T}{\\mathbb T}\n\\newcommand{\\Sph}{\\mathbb S}\n\\newcommand{\\rc}{\\operatorname{rc}}\n\\newcommand{\\mdim}{\\operatorname{mdim}}\n\\newcommand{\\supp}{\\operatorname{supp}}\n\\newcommand{\\rank}{\\operatorname{rank}}\n\\newcommand{\\id}{\\operatorname{id}}\n\\newcommand{\\cofib}{\\operatorname{cofib}}\n\\newcommand{\\fib}{\\operatorname{fib}}\n\\newcommand{\\hocolim}{\\operatorname*{hocolim}}\n\\newcommand{\\holim}{\\operatorname*{holim}}",
+ "review": {
+  "method": "OpenAIReview (Claude Opus 5.5)",
+  "effort": "high",
+  "date": "2026-10-08"
+ },
+ "overall_assessment": "The paper proves a filtered-product vanishing theorem (Theorem 1.1): an $MU$-null restriction to $G\\subset E$ becomes stably null on the union $U_\\ell\\subset E^{\\wedge\\ell}$ with at least $\\lceil\\ell/2\\rceil$ factors in $G$, for all large $\\ell$. It then uses point tests, local duality, and padding to get boundary-preserving compression (Theorem 4.2), and a torus-bundle criterion with rank $K<2pn$ (Theorem 1.3).\n\nI checked the mathematics of each reported finding against the paper, and I found no error in a theorem, lemma, or proof. The checks included the numerical steps in the proof of Theorem 1.1 ($k_\\ell=(e-d)\\ell+1>D_\\ell$, and the bound $n_\\ell(2p-3)>D_\\ell$ for large primes), the connectivity $I_{BP}\\in\\mathrm{Sp}_{\\ge 2p-3}$ in Lemma 2.5, the count of groups in Lemma 4.1, the inequalities $2q_j-5>\\dim W_j$ and $jH/(b(B+j))\\ge a/8$ in Theorem 4.2, the Chern-class step $c_r^{MU}(F)=0$ in Lemma 5.2, and the degree argument in Remark 5.4. I did not check Section 3 (local duality and stable avoidance) line by line.\n\nThe remaining issues are about claims and exposition. The most important issue is in the introduction: it presents the equality $\\mathrm{rc}(C(X)\\rtimes_h\\mathbb{Z})=\\tfrac12\\mathrm{mdim}(X,h)$ for all minimal homeomorphisms as proved, on the authority of an unpublished companion. This manuscript gives only a conditional compression theorem and does not show that dynamical inputs satisfy its bundle hypothesis. The other issues are minor. Theorem 2.3 says that two definitions of $f_R(k)$ are equivalent, but the text proves one implication only; the other implication is true, and the comment gives a short proof. The $BP$ case of Theorem 2.3 is not used, and its attribution could not be confirmed. The paper has no example with a nonempty torus locus and $K<2pn$.\n\nOne sub-agent finding was removed. It doubted the locator in Basterra--Mandell for $H_*(BP;\\mathbb{F}_p)$, but the fact $H_i(BP;\\mathbb{F}_p)=0$ for $0<i<2p-2$ is correct and Lemma 2.5 is correct, so there is no mathematical problem. The cited sources were not available here, so no citation locator was verified.",
+ "num_findings": 4,
+ "comments": [
+  {
+   "title": "The introduction states that the equality $\\mathrm{rc}(C(X)\\rtimes_h\\mathbb{Z})=\\tfrac12\\mathrm{mdim}(X,h)$ is proved, but the proof is in a companion manuscript that the reader cannot check",
+   "quote": "$\\rc(C(X)\\rtimes_h\\Z)=\\tfrac12\\mdim(X,h)$ for every minimal",
+   "explanation": "The sentence says that the companion uses Theorem 1.3 to prove $\\mathrm{rc}(C(X)\\rtimes_h\\mathbb{Z})=\\tfrac12\\mathrm{mdim}(X,h)$ for every minimal homeomorphism $h$ of an infinite compact metrizable space $X$. To my knowledge this equality is the Phillips--Toms conjecture, and it is open in this generality. The literature has the upper bound $\\mathrm{rc}\\le\\tfrac12\\mathrm{mdim}$ (Niu), the case $\\mathrm{mdim}=0$ (Elliott--Niu), and the lower bound $\\mathrm{rc}\\ge\\tfrac12\\mathrm{mdim}$ only for special systems (Hirshberg--Phillips). The paper thus reports the solution of a known open problem as a fact, and the only support is an unpublished companion. I checked the dependence. No statement of this manuscript uses the companion, so Theorems 1.1 and 1.3 and their proofs are not affected. But this manuscript proves only a conditional statement: if one continuous monomorphism $E_f\\to\\mathcal T(f,Z_{an}(t,n))\\times\\mathbb{C}^K$ with $K<2pn$ exists on the full locus, then compression exists for arbitrarily large $u$. The manuscript does not show that a general minimal system gives a map $f$ with this bundle hypothesis, and it does not contain the dynamical comparison or the cover reconstruction steps. The sentence must say that the application is a claim of a separate manuscript that is not yet verified. It must not present the equality as an established result.",
+   "comment_type": "claim_accuracy",
+   "severity": "moderate",
+   "source": {
+    "file": "sections/01-introduction.tex",
+    "lines": [
+     208,
+     208
+    ]
+   },
+   "boxes": [
+    {
+     "page": 4,
+     "x": 82.204712,
+     "y": 192.12569299999998,
+     "w": 430.86615,
+     "h": 16.49173
+    }
+   ]
+  },
+  {
+   "title": "Theorem 2.3: the word \"Equivalently\" joins two definitions of $f_R(k)$, but the text proves only one of the two implications",
+   "quote": "Equivalently, $f_R(k)$ is the least $n$ such that, for every connective",
+   "explanation": "Let $n_t(k)$ be the least $n$ for which $\\varphi_{R,n}\\wedge\\mathrm{id}$ on $\\tau_{<k}\\mathbb{S}_{(p)}$ is null. Let $n_c(k)$ be the least $n$ for which each class of $R$-Adams filtration at least $n$ in $\\pi_iX$ is zero, for all connective $p$-local $X$ and all $i<k$. The theorem says $n_t(k)=n_c(k)$. The paragraph after the theorem proves only $n_c(k)\\le n_t(k)$. The proof of Theorem 1.1 uses the null map $\\eta_k\\circ\\varphi_{R,n}=0$ for $n\\ge f_R(k)$, which comes from $n_t$. Thus the sublinear bound must be known for $n_t$. If the cited sources state the bound for $n_t$ (from memory, Mathew defines $f_R(k)$ as the exponent of $\\tau_{\\le k}\\mathbb{S}_{(p)}$, which is $n_t$ with the index shift $k\\mapsto k-1$), then the proof is complete and the unproved direction is not used. If the sources state the bound for $n_c$, then the paper needs $n_t(k)\\le n_c(k)$, which it does not prove. I checked that this inequality is true. Let $Y=\\tau_{<k}\\mathbb{S}_{(p)}$ and $W=I_R^{\\wedge n}\\wedge Y$. The spectrum $W$ is connective and of finite type over $\\mathbb{Z}_{(p)}$. Let $W'$ be a $p$-local $(k-1)$-skeleton of $W$. The cofiber $W/W'$ is $k$-connective, thus $[W/W',Y]=0$ and $[W,Y]\\to[W',Y]$ is injective. The restricted map $W'\\to Y$ lifts through $I_R^{\\wedge n}\\wedge Y$. By duality it is a class of filtration at least $n$ in $\\pi_{k-1}(X)$ with $X=\\Sigma^{k-1}DW'\\wedge Y$, and $X$ is connective and $p$-local. For $n\\ge n_c(k)$ this class is zero, thus the truncated action is null. No result of the paper changes. The authors must add this argument, or must quote the source definition and state the index shift between $\\tau_{\\le k}$ and $\\tau_{<k}$.",
+   "comment_type": "missing_information",
+   "severity": "minor",
+   "source": {
+    "file": "sections/02-filtered-products.tex",
+    "lines": [
+     359,
+     359
+    ]
+   },
+   "boxes": [
+    {
+     "page": 8,
+     "x": 82.204712,
+     "y": 660.220566,
+     "w": 430.86615,
+     "h": 13.63634125
+    }
+   ]
+  },
+  {
+   "title": "Theorem 2.3 includes the case $R=BP$, but the paper does not use this case, and its attribution is not necessary",
+   "quote": "For $BP$, the same formulation and its sublinear bound are recorded in",
+   "explanation": "Theorem 2.3 states $\\lim_{k\\to\\infty}f_R(k)/k=0$ for $R=MU_{(p)}$ and for $R=BP$. The proof of Theorem 1.1 uses the sublinear bound only for $R=MU_{(p)}$. For $BP$ it uses only the connectivity $I_{BP}\\in\\mathrm{Sp}_{\\ge 2p-3}$ from Lemma 2.5. Thus the $BP$ case of Theorem 2.3 has no function in the paper. I could not confirm the three locators in the appendix of Burklund--Hahn--Senger. As I remember it, the result that this appendix proves is an explicit linear vanishing line, and the sublinear statement $f_{BP}(k)=o(k)$ is there only as a recollection of earlier work. The $BP$ case also follows from the $MU_{(p)}$ case with no citation. A unital map $R\\to R'$ gives a map $I_R\\to I_{R'}$ over $\\mathbb{S}_{(p)}$, thus $\\varphi_{R,n}$ factors through $\\varphi_{R',n}$ and $f_R(k)\\le f_{R'}(k)$. Lemma 2.5 gives unital maps in the two directions between $MU_{(p)}$ and $BP$ for odd $p$, thus $f_{BP}=f_{MU_{(p)}}$. The authors can remove the $BP$ case from Theorem 2.3, or can derive it in this way and check the locators.",
+   "comment_type": "presentation",
+   "severity": "minor",
+   "source": {
+    "file": "sections/02-filtered-products.tex",
+    "lines": [
+     367,
+     367
+    ]
+   },
+   "boxes": [
+    {
+     "page": 8,
+     "x": 82.204712,
+     "y": 709.834579,
+     "w": 432.382507,
+     "h": 13.63634125
+    }
+   ]
+  },
+  {
+   "title": "Theorem 1.3: the paper gives no example of a map $f$ with a nonempty torus locus that satisfies the bundle hypothesis with $K<2pn$",
+   "quote": "torus locus; on a nonempty locus the embedding itself forces $K\\ge pn$.",
+   "explanation": "I checked the chain Theorem 1.1 $\\to$ Lemma 4.1 $\\to$ Theorem 4.2 $\\to$ Theorem 1.3 and the hypotheses agree at each link. But the paper does not show that the hypothesis of Theorem 1.3 holds in a case that is not trivial. On a nonempty locus the hypothesis needs $pn\\le K<2pn$, and the monomorphism must be continuous while the support of $z\\in Z_{an}(t,n)$ changes. The only worked example is Remark 5.4. There $n=1$, $K=2p$, the hypothesis $K<2pn$ fails, and the conclusion fails. When the locus $\\mathcal T(f,Z_{an}(t,n))$ is empty, the hypothesis holds with $K=0$, and the paper has no example between these two cases. The reader thus cannot see how to get a monomorphism of rank $K<2pn$ on a locus where $E_f$ is not trivial. Also, the proof gives $u$ only in the set $\\{\\ell(B+j):j\\ge 2B\\}$, where $\\ell$ and $B$ depend on $f$, on $a$, and on the dimension of the polyhedron $P$ of Lemma 5.3. That dimension has no bound in terms of $t$ and $n$. The statement of Theorem 1.3 is correct, because it claims only that some $u\\ge U$ exists. The authors can add one explicit example with a nonempty locus and $K<2pn$, and a sentence that says there is no control of $u$ in terms of $p$, $n$, $a$ only.",
+   "comment_type": "missing_information",
+   "severity": "minor",
+   "source": {
+    "file": "sections/01-introduction.tex",
+    "lines": [
+     143,
+     143
+    ]
+   },
+   "boxes": [
+    {
+     "page": 3,
+     "x": 82.204712,
+     "y": 308.885666,
+     "w": 430.86615,
+     "h": 13.63634125
+    },
+    {
+     "page": 3,
+     "x": 82.204712,
+     "y": 323.101719,
+     "w": 430.86615,
+     "h": 12.045245
+    }
+   ]
+  }
+ ]
+}

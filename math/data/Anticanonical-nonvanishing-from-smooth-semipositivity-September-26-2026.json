@@ -1,0 +1,206 @@
+{
+ "id": "Anticanonical-nonvanishing-from-smooth-semipositivity-September-26-2026",
+ "title": "Anticanonical nonvanishing from smooth semipositivity",
+ "abstract": "Every smooth connected projective complex variety with smoothly semipositive anticanonical bundle has a nonzero section of some positive anticanonical power.",
+ "result_id": "068",
+ "result_title": "Anticanonical nonvanishing in every dimension",
+ "subject": "Algebraic and complex geometry",
+ "source_pdf": "preprints/Anticanonical-nonvanishing-from-smooth-semipositivity-September-26-2026/main.pdf",
+ "pdf": "pdf/Anticanonical-nonvanishing-from-smooth-semipositivity-September-26-2026.pdf",
+ "page_sizes": [
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ]
+ ],
+ "macros": "\\newcommand{\\C}{\\mathbb C}\n\\newcommand{\\OO}{\\mathcal O}\n\\newcommand{\\ord}{\\operatorname{ord}}\n\\newcommand{\\Supp}{\\operatorname{Supp}}",
+ "review": {
+  "method": "OpenAIReview (Claude Opus 5.5)",
+  "effort": "high",
+  "date": "2026-10-08"
+ },
+ "overall_assessment": "The paper claims that a smooth projective variety $X$ with smoothly semipositive $-K_X$ has $H^0(X,-mK_X)\\ne 0$ for some $m>0$. The proof reduces to a rationally connected factor $Z$ of the universal cover with a compact torus action (Theorem 2.1), proves a finite-volume nonvanishing theorem by induction on dimension (Theorem 1.2), makes the section torus-invariant (Theorem 7.2), and descends it with a finite etale norm.\n\nThe sub-agents returned three findings, all with low confidence. Eight of the eleven review tasks returned no finding. I checked each step of the main chain against the source and found no error that breaks a stated result. The checks were: the commutator computation $[g_i^e,g_j^e]=[g_i,g_j]^{e^2}=1$ and the torus closure in Theorem 2.1; the ramification order $e-1$ and the bound $\\psi\\le (e-1)\\log|z_1|^2+C$ in Lemma 4.1; the Harder--Narasimhan contradiction and the sharpness example in Theorem 4.2; the frame rule \\eqref{eq:frames}, the bounds $V_0\\ge C|s_1|^{2(q-\\ell+1)/\\ell}$ and $V_j\\le C_U^jV_0$, and the lifting step in Proposition 5.1; the Euler characteristic $\\chi(K_Z+mL)$ with constant term $(-1)^d$ in Lemma 6.1; the interpolation identity $k(\\operatorname{ord}_Q s_i-\\operatorname{ord}_Q s_1)=(m_i-m_1)\\operatorname{ord}_Q\\rho$ and the rank-one argument in Lemma 6.2; the orthogonal projection onto the invariant line in Proposition 7.1. I also tested Proposition 5.1 on a rational elliptic surface with one multiple fibre of multiplicity $m$; the weights agree with the canonical bundle formula.\n\nThree minor issues remain. Two are repairable gaps in the use of the relative Bergman kernel: the cited theorem gives the fibrewise formula only on generic fibres, and the slice argument for $\\Phi_j$ must use a chart where $\\widehat u_j\\ne 0$. The third is the framing of Theorem 1.1 against Yau's question, because the proof needs projectivity.\n\nLimits of this assessment. The result is a strong claim about an open question, and this review does not certify it. I did not check the cited statements against their sources, in particular the Campana--Paun criterion and the slope theory for real classes on the boundary of the movable cone, the multiplier-ideal hard Lefschetz theorem, and the exact form of the Berndtsson--Paun theorem for singular metrics. The correctness of Theorem 1.2 depends on these inputs in the exact form the paper uses. A specialist check of those citations is necessary before the main theorem is accepted.",
+ "num_findings": 3,
+ "comments": [
+  {
+   "title": "The cited Bergman theorem gives the fibrewise formula only on generic fibres",
+   "quote": "\\cite[Theorem~0.1]{BerndtssonPaun2008}.  Over the smooth-fibre locus, in a holomorphic frame its weight",
+   "explanation": "The hypotheses of the cited theorem hold in Lemma 4.1 and in Proposition 5.1: $f:Y\\to S$ is a surjective projective morphism of smooth varieties, the metrics $\\pi^*h_J$ and $\\pi^*(h_Jh_L^{jk})$ are semipositive, and Fubini gives a nonzero $L^2$ section on almost every smooth fibre. The gap is in the conclusion that the paper uses. The text states the supremum formula for the weight $\\psi$ on the full smooth-fibre locus. For a singular metric $h_J$, the theorem identifies the global metric with the fibrewise Bergman kernel on generic fibres only. On other smooth fibres the space of $L^2$ sections can change, and the two objects can differ. I checked the estimate: the fibre coefficient of $a\\xi$ is $a/(e z_1^{e-1})$, so a section of norm at most $1$ satisfies $|a|^2\\le C|z_1|^{2(e-1)}$, and $\\psi\\le (e-1)\\log|z_1|^2+C$ holds for the fibrewise kernel on each smooth fibre. Thus the bound holds for the global psh weight almost everywhere, and then everywhere by the submean inequality. The paper gives this last step in one sentence but does not show that the set of fibres where the identification can fail has measure zero in $Y$. The same step occurs in Proposition 5.1 for the identity between the Bergman weight and $\\Phi_j\\circ f+\\log|\\widehat u_j|^2$. Lemma 4.1, Theorem 4.2, Corollary 4.3 and Proposition 5.1 depend on it. The gap is repairable: state the set of fibres that the theorem covers and prove that its complement is a null set.",
+   "comment_type": "methodology",
+   "severity": "minor",
+   "source": {
+    "file": "sections/slope.tex",
+    "lines": [
+     90,
+     90
+    ]
+   },
+   "boxes": [
+    {
+     "page": 12,
+     "x": 75.600212,
+     "y": 215.18933099999998,
+     "w": 460.799591,
+     "h": 13.63634125
+    }
+   ]
+  },
+  {
+   "title": "The slice argument for the psh representative of $\\Phi_j$ ignores the zeros of $\\widehat u_j$",
+   "quote": "Restriction to any of these slices gives a psh representative of",
+   "explanation": "I recomputed this step. If $u_j$ spans the fibrewise $L^2$ space, the Bergman kernel is $|\\widehat u_j|^2/V_j$, and its logarithm is $\\Phi_j\\circ f+\\log|\\widehat u_j|^2$. The sign is correct. The function $\\Phi_j\\circ f$ is then psh only where $\\widehat u_j\\ne 0$. A constant slice of a product chart can meet the zero locus of $\\widehat u_j$. The restriction is then psh only on the base chart minus the image of that intersection, and no upper bound is available at this point of the proof; the bound $\\Phi_j\\le C+jC'$ comes later in \\eqref{eq:common-open}. The text also does not require the product chart to lie in the locus where $f$ is a submersion. The conclusion is correct after a small change: take the chart around a point where $\\widehat u_j\\ne 0$. On $S^\\circ$ each fibre has such a point, because $\\eta_Y$ and $e$ are nonzero there. The chart then does not meet the zero locus, each good slice gives a psh function equal to $\\Phi_j$ almost everywhere, and two such functions agree. The proof must state this choice of chart.",
+   "comment_type": "methodology",
+   "severity": "minor",
+   "source": {
+    "file": "sections/transfer.tex",
+    "lines": [
+     178,
+     178
+    ]
+   },
+   "boxes": [
+    {
+     "page": 17,
+     "x": 75.600212,
+     "y": 466.882537,
+     "w": 461.017761,
+     "h": 13.37635125
+    }
+   ]
+  },
+  {
+   "title": "The relation between Theorem 1.1 and the cited question of Yau is not stated precisely",
+   "quote": "anticanonical nonvanishing question \\cite[Problem~75, p.~395]{Yau1994}.",
+   "explanation": "The sentence relates Theorem 1.1 to Yau's question but does not say which part of that question the theorem answers. Theorem 1.1 assumes that $X$ is projective, and the proof uses projectivity at each main step: duality between the pseudoeffective cone and $\\operatorname{Mov}_1(Z)$, Harder--Narasimhan filtrations for movable classes, the Campana--Paun algebraicity criterion, Raynaud--Gruson flattening, bigness of $H_0$ in Lemma 6.2, and the Rosenlicht quotient in Theorem 7.2. If the source states the question for compact Kahler manifolds with nonnegative Ricci curvature (I could not check the source), then the paper answers the projective case only, and the sentence must say so. The effect on the mathematics is small. After Theorem 2.1 the factor $Z$ is rationally connected and thus projective, so Theorems 1.2 and 7.2 do not change; a Kahler version needs only the cover, torus and descent arguments of Section 2 without the projectivity of $X$.",
+   "comment_type": "claim_accuracy",
+   "severity": "minor",
+   "source": {
+    "file": "sections/introduction.tex",
+    "lines": [
+     21,
+     21
+    ]
+   },
+   "boxes": [
+    {
+     "page": 2,
+     "x": 75.600212,
+     "y": 191.821262,
+     "w": 460.799591,
+     "h": 12.0452075
+    },
+    {
+     "page": 2,
+     "x": 75.600212,
+     "y": 204.70362799999998,
+     "w": 461.094116,
+     "h": 13.63634125
+    }
+   ]
+  }
+ ]
+}

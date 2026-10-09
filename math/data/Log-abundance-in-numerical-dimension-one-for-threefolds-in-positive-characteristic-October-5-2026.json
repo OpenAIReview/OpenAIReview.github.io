@@ -1,0 +1,222 @@
+{
+ "id": "Log-abundance-in-numerical-dimension-one-for-threefolds-in-positive-characteristic-October-5-2026",
+ "title": "Log abundance in numerical dimension one for threefolds in positive characteristic",
+ "abstract": "We prove the numerical-dimension-one case of log abundance for threefolds over algebraically closed fields of characteristic <i>p</i> &gt; 3. If <span class=\"math\">(X,B)</span> is a projective log canonical threefold pair with effective rational boundary, and <span class=\"math\">K_X+B</span> is ℚ-Cartier, nef, and of numerical dimension one, then <span class=\"math\">K_X+B</span> is semiample. Neither terminality nor ℚ-factoriality of <i>X</i> is required.",
+ "result_id": "035",
+ "result_title": "Log-canonical threefold abundance in numerical dimension one",
+ "subject": "Algebraic and complex geometry",
+ "source_pdf": "preprints/Log-abundance-in-numerical-dimension-one-for-threefolds-in-positive-characteristic-October-5-2026/paper.pdf",
+ "pdf": "pdf/Log-abundance-in-numerical-dimension-one-for-threefolds-in-positive-characteristic-October-5-2026.pdf",
+ "page_sizes": [
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ]
+ ],
+ "macros": "\\newcommand{\\Q}{\\mathbb Q}\n\\newcommand{\\Z}{\\mathbb Z}\n\\newcommand{\\N}{\\mathbb N}\n\\newcommand{\\Supp}{\\operatorname{Supp}}\n\\newcommand{\\Pic}{\\operatorname{Pic}}\n\\newcommand{\\Spec}{\\operatorname{Spec}}\n\\newcommand{\\Div}{\\operatorname{div}}\n\\newcommand{\\rk}{\\operatorname{rk}}\n\\newcommand{\\id}{\\operatorname{id}}\n\\newcommand{\\simQ}{\\sim_{\\mathbb Q}}\n\\newcommand{\\Floor}[1]{\\lfloor #1\\rfloor}",
+ "review": {
+  "method": "OpenAIReview (Claude Opus 5.5)",
+  "effort": "high",
+  "date": "2026-10-08"
+ },
+ "overall_assessment": "The paper claims log abundance for projective lc threefold pairs with $K_X+B$ nef of numerical dimension one in characteristic $p>3$. The proof reduces to the case $n(K_X+B)=3$, constructs a connected nef Cartier divisor $D$ on a smooth threefold $V$ with torsion normal bundle and a local canonical relation, and then cites a cycle obstruction (Theorem 2.1) from an unpublished companion manuscript to get a contradiction.\n\nI checked the internal arguments and found no error in them: the numerical lemma, the reduction to a terminal $\\mathbb{Q}$-factorial variety, boundary separation by bend-and-break ($BN_0H=0$), the isolation of $S_Y$ by the $(K_W+G)$-trivial partial MMP, the local cohomology argument for torsion on the nonreduced divisor, the adjunction step, the cyclic cover that gives the exponent $p^b$, and the Hodge index argument for $D\\equiv cN_V$. These steps are correct if the cited MMP results hold in the forms used.\n\nThe primary weakness is the dependence on Theorem 2.1. The paper does not prove it, and the full contradiction comes from it. The data (i)-(iv) exist in characteristic $0$, so Sections 3-6 give no contradiction by themselves. The paper also uses the obstruction in a wider setting than the companion's: the term $-mq^*B$ removes the positivity of the integers $b_\\alpha$, and the paper only asserts that the companion's proof is independent of this. The sketch of the obstruction does not show where $n(D)=3$ and the characteristic are used, although both are necessary. The abstract must state the result as conditional on Theorem 2.1, or the paper must include a complete proof of it.\n\nTwo smaller points remain: the exact termination statement used for the partial MMP is not quoted, and the bend-and-break reference must be checked (the classical Miyaoka-Mori bound is sufficient).",
+ "num_findings": 5,
+ "comments": [
+  {
+   "title": "The main theorem is conditional on the companion's cycle obstruction, but the abstract states it as proved",
+   "quote": "We prove the numerical-dimension-one case of log abundance for threefolds",
+   "explanation": "The proof of Theorem 1.1 is one step: Theorem 2.1 excludes the triple $(V,H_V,D)$ of Proposition 6.1. Theorem 2.1 is not proved here. It is cited from an unpublished companion manuscript by the same author.\n\nI checked the other uses of the companion. Lemma 2.4 is reproduced in full as Lemma 5.1, Lemma 2.3 is the standard fact that a terminal threefold has finite singular locus, and Sections 2.7-2.8 are reproduced in the proof of Proposition 6.1. Only Theorem 2.1 is not replaced.\n\nI also checked that Sections 3-6 give no contradiction by themselves. They construct data with (i)-(iv), and such data exist in characteristic $0$. Let $A$ be a simple abelian surface, $\\mathcal{E}$ a non-split extension of $\\mathcal{O}_A$ by $\\mathcal{O}_A$, $V=\\mathbb{P}(\\mathcal{E})$, and $D$ the section with $\\mathcal{O}_D(D)\\simeq\\mathcal{O}_D$. Then $K_V\\sim -2D$, so (iv) holds with $b=0$. Also $D$ is nef, $DH_V^2>0$ and $D^2H_V=0$. A complete curve in $V\\setminus D$ gives a curve $\\Gamma\\to A$ on which the extension class in $H^1(A,\\mathcal{O}_A)$ becomes $0$; this is impossible for simple $A$ in characteristic $0$. Thus $n(D)=3$. All of the content that excludes the case $n(N_0)=3$ is therefore in Theorem 2.1.\n\nThe introduction says that the obstruction is an essential input. The abstract and Theorem 1.1 must say the same: the result holds if Theorem 2.1 holds. A self-contained proof of Theorem 2.1 is the alternative.",
+   "comment_type": "claim_accuracy",
+   "severity": "major",
+   "source": {
+    "file": "main.tex",
+    "lines": [
+     41,
+     41
+    ]
+   },
+   "boxes": [
+    {
+     "page": 1,
+     "x": 90.544167,
+     "y": 258.575313,
+     "w": 418.951447,
+     "h": 11.000218749999998
+    }
+   ]
+  },
+  {
+   "title": "Theorem 2.1 is used outside the setting of the companion: the integers $b_\\alpha$ have no sign control",
+   "quote": "applies to any cycle with the displayed properties",
+   "explanation": "The paper does not quote a theorem of the companion. It infers Theorem 2.1 from a statement about which hypotheses the proofs in Sections 3-6 of the companion use. The reader cannot check this inference from this paper.\n\nThe new application is different from the companion's in a concrete way. In the companion, $X$ is terminal and $N_0\\sim mK_X$, so $\\operatorname{div}(\\theta)=q^*N_0+m(K_{V_0}-q^*K_X)$ is effective and contains every component of $q^*N_0$. The Jacobian $J_\\pi$ is a regular section. Thus $\\operatorname{div}(\\psi)$ is effective and all $b_\\alpha$ are positive. In this paper, $\\operatorname{div}(\\theta)=q^*N_0+m(K_{V_0}-q^*K_X)-mq^*B$ has the negative term $-mq^*B$. The integers $b_\\alpha$ in the relation $\\omega_V^{\\otimes p^b}|_W\\simeq\\mathcal{O}_W(\\sum_\\alpha b_\\alpha D_\\alpha)$ can be negative or $0$; the paper itself says that components of $q^*N_0$ can cancel.\n\nTheorem 2.1 permits arbitrary integers $b_\\alpha$, but the paper gives no check that the companion's control of differential forms with poles along $D$ is independent of $b_\\alpha>0$, of a regular section of $\\omega_V^{\\otimes p^b}$, and of $D\\equiv c\\,\\rho^*K_X$. If the companion uses one of these properties, Theorem 2.1 does not follow and the proof of Theorem 1.1 has a gap. The paper must show, step by step, that the companion's argument holds for $b_\\alpha$ of each sign.\n\nI recomputed the other properties that Proposition 6.1 gives to $D$ and found no error: connectedness and the equality of $C$ with a connected component of $\\operatorname{Supp}\\rho^*N_0$, $D^2H_V=0$, $DH_V^2>0$, the triviality of $\\mathcal{O}_D(taD)$, the proportionality $D\\equiv cN_V$ by the Hodge index theorem, and $n(D)=3$.",
+   "comment_type": "methodology",
+   "severity": "moderate",
+   "source": {
+    "file": "sections/foundations.tex",
+    "lines": [
+     55,
+     55
+    ]
+   },
+   "boxes": [
+    {
+     "page": 3,
+     "x": 75.600212,
+     "y": 522.507145,
+     "w": 460.799591,
+     "h": 12.0452075
+    },
+    {
+     "page": 3,
+     "x": 75.600212,
+     "y": 536.056339,
+     "w": 461.017761,
+     "h": 12.0452075
+    }
+   ]
+  },
+  {
+   "title": "The sketch of the obstruction does not show where $n(D)=3$ and the characteristic are used",
+   "quote": "give a nonzero integer-valued degree homomorphism on the same group,",
+   "explanation": "The sketch derives $p$-divisibility of a Picard group from the torsion of $\\mathcal{O}_D(D)$ and the canonical relation, and derives a nonzero degree map from the numerical conditions. It does not mention $n(D)=3$. This hypothesis cannot be removed.\n\nExample 1: let $V=S\\times C$ with $S$ an abelian surface and $C$ a curve, and $D=S\\times\\{c\\}$. Then (i), (iii) and (iv) hold with $b=0$ and $b_\\alpha=0$, and $D|_D\\equiv 0$, $DH_V^2>0$, $D^2H_V=0$. Only $n(D)=1$ is different, and this $V$ exists in each characteristic.\n\nExample 2: let $V=\\mathbb{P}(\\mathcal{E})$ over an abelian surface $A$, with $\\mathcal{E}$ a non-split extension of $\\mathcal{O}_A$ by $\\mathcal{O}_A$ and $D$ the section with trivial normal bundle. All conditions hold except possibly $n(D)=3$. In characteristic $0$ with $A$ simple, $n(D)=3$. In characteristic $p$, $[p]^*$ is multiplication by $p=0$ on $H^1(A,\\mathcal{O}_A)$, so $[p]^*\\mathcal{E}$ splits. Then $A\\times\\mathbb{P}^1\\to V$ is finite and surjective, $D$ pulls back to a fibre of the second projection, and $n(D)=1$.\n\nThus the obstruction is false in characteristic $0$, and it is false without $n(D)=3$. The argument must use $n(D)=3$ and $p>0$ in an essential way, and the sketch does not say in which step. The roles of $p>3$ and of the exponent $p^b$ with $b>0$ in the Cartier descent are also not given. This is the central mechanism of the paper, so the sketch must identify these steps.",
+   "comment_type": "missing_information",
+   "severity": "moderate",
+   "source": {
+    "file": "sections/foundations.tex",
+    "lines": [
+     62,
+     62
+    ]
+   },
+   "boxes": [
+    {
+     "page": 3,
+     "x": 75.600212,
+     "y": 590.253147,
+     "w": 460.799591,
+     "h": 12.045245
+    },
+    {
+     "page": 3,
+     "x": 75.600212,
+     "y": 603.802311,
+     "w": 462.915894,
+     "h": 12.0452075
+    }
+   ]
+  },
+  {
+   "title": "The termination result used for the $(K_W+G)$-trivial partial MMP is not stated",
+   "quote": "therefore supplied by \\cite[Theorem~1.5]{XuNonvanishing}.",
+   "explanation": "The steps are $(K_W+G-\\epsilon S)$-negative, and the rays are selected by the condition $(K_{W_i}+G_i)\\cdot R_i=0$. This is not an MMP with scaling of an ample divisor. Termination follows from the cited theorem only if that theorem gives termination of each sequence of flips for a pseudoeffective lc threefold pair.\n\nI checked the hypotheses that the paper controls: $(W,G-\\epsilon S)$ is $\\mathbb{Q}$-factorial dlt, and $K_W+G-\\epsilon S\\sim_{\\mathbb{Q}}\\tau N-\\epsilon S\\geq 0$. These are correct. Section 2.3 describes the theorem as termination of flips in the pseudoeffective case, which agrees with the necessary form, but the paper does not quote the statement. The existence of $Y$, and thus Sections 5-6, depends on this step. The paper must give the exact statement of the theorem that it uses.",
+   "comment_type": "missing_information",
+   "severity": "minor",
+   "source": {
+    "file": "sections/isolation.tex",
+    "lines": [
+     132,
+     132
+    ]
+   },
+   "boxes": [
+    {
+     "page": 8,
+     "x": 75.600212,
+     "y": 431.95155300000005,
+     "w": 460.799591,
+     "h": 13.63634125
+    }
+   ]
+  },
+  {
+   "title": "Bibliographic data and scope of the bend-and-break citation",
+   "quote": "Forum Math. Pi \\textbf{14} (2026), e16, 1--4.",
+   "explanation": "The page range of four pages is not credible for this article, so the entry must be checked. The paper also says that the cited theorem applies to a singular projective variety with the curve in the smooth locus and an arbitrary nef Cartier test divisor; it does not quote the statement.\n\nThe mathematics of Proposition 3.1 is not at risk. I recomputed the ratio: $N\\cdot C_l=u_lv_l\\,NH^2$ and $-K_X\\cdot C_l=u_lv_l(-K_XH^2-lK_XHN)$, because $N^2H=0$, so the ratio goes to $0$. The classical bound of Miyaoka and Mori, $N\\cdot\\Gamma\\leq 6\\,\\frac{N\\cdot C_l}{-K_X\\cdot C_l}$ for a threefold that is smooth along $C_l$, is then sufficient in place of the constant $4$. A citation of the classical result makes the step independent of the new reference.",
+   "comment_type": "presentation",
+   "severity": "minor",
+   "source": {
+    "file": "bibliography.tex",
+    "lines": [
+     62,
+     62
+    ]
+   },
+   "boxes": [
+    {
+     "page": 16,
+     "x": 75.600212,
+     "y": 74.603947,
+     "w": 460.799591,
+     "h": 18.05728375
+    },
+    {
+     "page": 16,
+     "x": 129.539062,
+     "y": 91.042304,
+     "w": 406.860718,
+     "h": 12.4533
+    }
+   ]
+  }
+ ]
+}

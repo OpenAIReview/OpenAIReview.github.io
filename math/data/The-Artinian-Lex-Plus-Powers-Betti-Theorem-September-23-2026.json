@@ -1,0 +1,285 @@
+{
+ "id": "The-Artinian-Lex-Plus-Powers-Betti-Theorem-September-23-2026",
+ "title": "The Artinian Lex-Plus-Powers Betti Theorem",
+ "abstract": "We prove the Eisenbud–Green–Harris and lex-plus-powers conjectures over every characteristic-zero field for homogeneous regular sequences of any positive length, with degrees at least two. For every homogeneous ideal containing such a sequence, the corresponding lex-plus-powers ideal has the same Hilbert function and at least as large a graded Betti number in every homological and internal degree.",
+ "result_id": "200",
+ "result_title": "Eisenbud–Green–Harris and lex-plus-powers",
+ "subject": "Algebra",
+ "source_pdf": "preprints/The-Artinian-Lex-Plus-Powers-Betti-Theorem-September-23-2026/paper.pdf",
+ "pdf": "pdf/The-Artinian-Lex-Plus-Powers-Betti-Theorem-September-23-2026.pdf",
+ "page_sizes": [
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ]
+ ],
+ "macros": "\\newcommand{\\C}{\\mathbb C}\n\\newcommand{\\N}{\\mathbb Z_{\\ge0}}\n\\newcommand{\\Z}{\\mathbb Z}\n\\newcommand{\\Q}{\\mathbb Q}\n\\newcommand{\\Tor}{\\operatorname{Tor}}\n\\newcommand{\\Hilb}{\\operatorname{Hilb}}\n\\newcommand{\\Lex}{\\operatorname{Lex}}\n\\newcommand{\\rank}{\\operatorname{rank}}\n\\newcommand{\\Sym}{\\operatorname{Sym}}\n\\newcommand{\\inm}{\\operatorname{in}}",
+ "review": {
+  "method": "OpenAIReview (Claude Opus 5.5)",
+  "effort": "high",
+  "date": "2026-10-08"
+ },
+ "overall_assessment": "The paper claims the Eisenbud--Green--Harris and lex-plus-powers conjectures in characteristic zero. The argument has four parts: a filtered Koszul comparison (Section 3), a transfer of a minimal resolution through commuting forms with division-algebra coefficients (Section 4), a new proof of the Mermin--Murai monomial theorem by stabilization, box compression, and a Koszul-rank induction (Sections 5 to 7), and a reduction to the non-Artinian case and to all characteristic-zero fields (Section 9).\n\nI checked each internal step against the source and found no mathematical error. The leading-submodule comparison, the transfer lemma, the power containment $P\\subseteq M$, the root-of-unity distraction, the termination argument, the three box inequalities, and the endpoint induction are all correct as written.\n\nThe main problem is the foundation. Proposition 4.2 starts with Theorem 2.1, which is quoted from an unrefereed companion preprint by the same author and is not proved here. This theorem alone already gives the Artinian Eisenbud--Green--Harris statement, and the paper says that Sections 5 to 7 prove a known theorem again. Thus all new content is in Theorem 2.1 together with the short formal argument of Section 4. A small case ($n=2$, degrees $(3,3)$) shows that Theorem 2.1 needs a noncommutative division algebra over a field $k\\ne\\mathbb{C}$, so it is a strong statement, and the paper gives no example of it. Theorem 1.1 and Corollary 1.2 must be stated as conditional on the companion theorem, or its proof must be included.\n\nSmaller points: the paper does not say which parts of Theorem 2.1 the companion states (the full-basis part follows from the degree-one part by a short argument); the multipliers in Proposition 4.2 are in $N$ and not in $A$; Section 9 uses [CM08, Proposition 10] and [CK14, Theorem 4.1] without their hypotheses and asserts the identification of the output ideal with $J$; and the degreewise $J$ is not compared with the lex-plus-powers ideal of the literature.\n\nFive of the nine sub-agents (Sections 3, 5, 6, 7, and the computational check) reported no findings. My own check of these sections agrees with that result.",
+ "num_findings": 7,
+ "comments": [
+  {
+   "title": "The main results are conditional on Theorem 2.1, which the paper does not prove",
+   "quote": "We prove the Eisenbud--Green--Harris and lex-plus-powers conjectures over every",
+   "explanation": "The abstract, Theorem 1.1, and Corollary 1.2 are stated without a condition. The dependency chain is: Corollary 1.2 uses Theorem 1.1 and two published reductions; Theorem 1.1 uses Proposition 4.2, Proposition 5.3, Proposition 6.2, and Theorem 7.2; Proposition 4.2 starts with Theorem 2.1. Theorem 2.1 is quoted from an unrefereed companion preprint by the same author with the same date. It has no proof and no sketch here. I checked the internal steps again and found no error: (i) in Proposition 3.3, the slot quotient is $(V/V_\\alpha)y^\\alpha$, the Koszul filtration at $\\alpha+\\mathbf{1}_\\sigma$ is preserved, and $\\operatorname{rank} d\\ge\\operatorname{rank}(\\operatorname{gr} d)$ gives the Betti inequality; (ii) in Lemma 4.1, $N\\simeq\\Delta\\otimes_k T$ is right $T$-free of rank $m$ and the transferred resolution is minimal; (iii) in Proposition 4.2, each exponent of $C_{h\\ell}t_\\ell$ has a positive coordinate of index $\\ell>h$, so it comes after $a_he_h$ in the chosen order, and $x_h^{a_h}\\in M$; (iv) in Lemma 5.2, $qD(x^u)=D(qx^u)+\\zeta^{u_\\ell}\\xi D(x^u)$ and $\\prod_{s=0}^{a_\\ell-1}(q-\\zeta^s\\xi)=q^{a_\\ell}-\\xi^{a_\\ell}$; (v) in Lemma 6.1, $s-c=v_k-u_k-\\sum_{k<j<r}(b_j-v_j)$ and $|\\partial X|=|\\partial'X(0)|+|X|-|X(b_r)|$; (vi) in Theorem 7.2, the inclusions $G^{(0)}\\subseteq\\Lambda'H^{(0)}$ and $\\Lambda'H^{(a-1)}\\subseteq G^{(a-1)}$ have the direction that Lemma 7.1 needs. Thus the only open edge is Theorem 2.1. The paper says that Sections 5 to 7 prove again the known theorem of Mermin and Murai. Thus all new content is in Theorem 2.1 together with the short formal argument of Section 4. Theorem 2.1 alone already gives the Artinian Eisenbud--Green--Harris statement over $\\mathbb{C}$, because the Hilbert-function part of Proposition 4.2 gives a monomial $M\\supseteq P$ with $\\operatorname{Hilb}(S/M)=\\operatorname{Hilb}(S/I)$ and Clements--Lindstr\\\"om then applies. The open problem is therefore moved into the citation. State Theorem 1.1 and Corollary 1.2 as conditional on the companion theorem, or include its proof.",
+   "comment_type": "claim_accuracy",
+   "severity": "major",
+   "source": {
+    "file": "main.tex",
+    "lines": [
+     46,
+     46
+    ]
+   },
+   "boxes": [
+    {
+     "page": 1,
+     "x": 86.943947,
+     "y": 230.547558,
+     "w": 427.447021,
+     "h": 11.000218749999998
+    }
+   ]
+  },
+  {
+   "title": "Theorem 2.1 cannot hold with commutative coefficients, and the paper gives no example or check of it",
+   "quote": "There are a field extension \\(k/\\C\\), a central division \\(k\\)-algebra",
+   "explanation": "A small case shows how much Theorem 2.1 must supply. Let $n=2$, $a=(3,3)$, $f_1=x^2y$, $f_2=x^3+y^3$. These forms are coprime, so they are a regular sequence. The identity (2.1) for $h=2$ is $t_2^3=c_2f_2+B_{21}f_1$ with $\\deg B_{21}=0$. The algebra $A$ is generated over $k$ in degree one, so $A_0=k$ and $B_{21}\\in k$. If $\\Delta=k$, then $t_2=px+qy$ with $p,q\\in k$, and $(px+qy)^3=\\alpha x^2y+\\beta(x^3+y^3)$. The coefficient of $xy^2$ gives $pq^2=0$. The coefficients of $x^3$ and $y^3$ give $p^3=q^3=\\beta$. Thus $p=q=0$ and $\\beta=c_2=0$, which contradicts $c_2\\in k^\\times$. Therefore $\\Delta$ must be noncommutative in this case. A finite-dimensional division algebra over an algebraically closed field is the field itself, so $k\\ne\\mathbb{C}$ is also necessary. More generally, if $u=\\sum_j\\delta_jx_j$ and $u^a=g\\in k[x]$, then $\\delta_j^a=g(e_j)$. If $g(e_j)=\\sigma^a$ with $\\sigma\\in k$, then $\\delta_j$ is a root of $X^a-\\sigma^a$ in the field $k(\\delta_j)$. This polynomial splits over $k\\supseteq\\mathbb{C}$, so $\\delta_j\\in k$. The theorem thus needs a noncommutative division algebra of finite dimension over its centre, commuting forms $t_1,\\ldots,t_n$, and the triangular identities, all together and for every regular sequence. This is not a contradiction, but the manuscript gives no construction, no example, and no worked case. The reader cannot check the one statement on which Theorem 1.1 depends. Add a worked example, for instance the pencil above, with explicit $k$, $\\Delta$, $t_1$, $t_2$.",
+   "comment_type": "missing_information",
+   "severity": "moderate",
+   "source": {
+    "file": "sections/01-forms.tex",
+    "lines": [
+     14,
+     14
+    ]
+   },
+   "boxes": [
+    {
+     "page": 4,
+     "x": 71.999985,
+     "y": 547.826523,
+     "w": 468.0,
+     "h": 13.63634125
+    },
+    {
+     "page": 4,
+     "x": 71.999985,
+     "y": 561.7465659999999,
+     "w": 468.0,
+     "h": 12.415105
+    }
+   ]
+  },
+  {
+   "title": "It is not clear which parts of Theorem 2.1 the companion theorem states and which parts this paper adds",
+   "quote": "is a graded left-\\(\\Delta\\) basis of the \\emph{full} algebra \\(N\\).",
+   "explanation": "Lemma 4.1 needs $N=\\bigoplus_{\\alpha}\\Delta t^\\alpha$ for all $\\alpha\\in\\mathbb{Z}_{\\ge0}^n$. The paper says that Section 2 states the input \"including the basis assertion for the full algebra rather than only its complete-intersection quotient\" and that this is \"stronger than a basis of the finite complete-intersection quotient\". This wording leaves open that the companion theorem gives only the basis $\\{t^\\alpha:\\alpha_i<a_i\\}$ of the quotient. In that case Theorem 2.1 is not the cited statement, and the step between the two has no proof here. The step is short, and I checked it. Suppose the $t_h$ commute and $t_1,\\ldots,t_n$ are a left $\\Delta$-basis of $N_1$. This follows from a basis of the quotient, because $a_i\\ge2$ gives $((f)N)_1=0$. Write $x_j=\\sum_h\\varepsilon_{jh}t_h$ with $\\varepsilon_{jh}\\in\\Delta$. Because $x_j$ is central, $N_d=\\sum_jN_{d-1}x_j\\subseteq\\sum_hN_{d-1}t_h$. Induction and commutativity give $N_d=\\sum_{|\\alpha|=d}\\Delta t^\\alpha$. The number of these monomials is equal to the left $\\Delta$-dimension of $N_d$, so the spanning set is a basis. Thus the full-basis property is automatic, and the emphasis on it moves attention away from the hypotheses that carry the weight: the commutativity of the $t_h$, the strict triangular shape of (2.1), and $c_h\\ne0$. Quote the companion statement word for word and prove each added part.",
+   "comment_type": "missing_information",
+   "severity": "moderate",
+   "source": {
+    "file": "sections/01-forms.tex",
+    "lines": [
+     32,
+     32
+    ]
+   },
+   "boxes": [
+    {
+     "page": 4,
+     "x": 71.999985,
+     "y": 712.189071,
+     "w": 468.0,
+     "h": 12.415105
+    }
+   ]
+  },
+  {
+   "title": "Corollary 1.2 for $c<n$ uses [CK14, Theorem 4.1] without its hypotheses, and the identification of the output with $J$ has no proof",
+   "quote": "selects exactly the prescribed \\(q_d\\) greatest monomials outside \\(P_F\\)",
+   "explanation": "For $c<n$, the idealness of $J$, the Hilbert equality, and the Betti bound have no proof in the paper other than two citations. The paper does not write the statements that it uses. The reader cannot check three points. (1) The cited conclusion must be for the ideal $L+(x_1^{a_1},\\ldots,x_c^{a_c})$ with the order $x_1>\\cdots>x_n$, the powers on the first $c$ variables, and the free variables $x_{c+1},\\ldots,x_n$ last. With a different order on the added variables, the target can be a different ideal with the same Hilbert function. (2) The hypothesis must be the statement that Theorem 1.1 supplies, for each $(p,j)$ and for one ideal. (3) The field hypotheses must hold. The quoted sentence is only asserted. It is correct if the target is $L+P_F$ with $L$ a lex ideal: the monomials of $(L+P_F)_d$ outside $P_F$ are then a prefix of the decreasing lex list of monomials outside $P_F$, of length $q_d=\\dim_FI_d-\\dim_F(P_F)_d$, by the argument of Section 8. The bound $0\\le q_d\\le\\#\\{\\text{degree-}d\\text{ monomials outside }P_F\\}$ in Corollary 1.2 also comes only from the cited reduction. I found no error in the other steps: the coordinate change exists over an infinite field, $J$ depends only on the Hilbert function of $I$, $\\beta^A_{p+1,j}(A/K)=\\beta^A_{p,j}(K)$, and the descent through a finitely generated field $F_0\\hookrightarrow\\mathbb{C}$ with flat base change of the Koszul complex is correct. State the cited theorem in full and add the short proof of the sentence on $q_d$.",
+   "comment_type": "missing_information",
+   "severity": "moderate",
+   "source": {
+    "file": "sections/08-characteristic-zero.tex",
+    "lines": [
+     39,
+     39
+    ]
+   },
+   "boxes": [
+    {
+     "page": 20,
+     "x": 71.999985,
+     "y": 445.50336100000004,
+     "w": 468.0,
+     "h": 12.045245
+    }
+   ]
+  },
+  {
+   "title": "The input given to [CM08, Proposition 10] is not identified",
+   "quote": "\\cite[Proposition~10]{CM08} transfers the Hilbert-function assertion to",
+   "explanation": "The proof applies Theorem 1.1 in $\\overline S=\\mathbb{C}[x_1,\\ldots,x_c]$ to the images $\\overline f_1,\\ldots,\\overline f_c$ and then says that the cited proposition transfers the Hilbert-function statement to $f_1,\\ldots,f_c$ in $n$ variables. The ideal $I$ is not extended from an ideal of $\\overline S$, so a transfer from the one sequence $\\overline f$ is not immediate. The cited reduction is possibly stated for a degree sequence: the Artinian statement for all regular sequences of the given degrees gives the statement for shorter sequences in more variables. I could not compare with the source, so this point has low confidence. The conclusion is not in danger, because Theorem 1.1 holds for every $n$ and every ordered degree sequence $2\\le a_1\\le\\cdots\\le a_n$, and thus supplies each such hypothesis. But the proof must say which instance of Theorem 1.1 it gives to the proposition.",
+   "comment_type": "missing_information",
+   "severity": "minor",
+   "source": {
+    "file": "sections/08-characteristic-zero.tex",
+    "lines": [
+     26,
+     26
+    ]
+   },
+   "boxes": [
+    {
+     "page": 20,
+     "x": 71.999985,
+     "y": 326.975571,
+     "w": 468.0,
+     "h": 13.63634125
+    },
+    {
+     "page": 20,
+     "x": 71.999985,
+     "y": 340.524765,
+     "w": 470.116394,
+     "h": 13.63634125
+    }
+   ]
+  },
+  {
+   "title": "The multipliers in the proof of Proposition 4.2 are not those of Theorem 2.1",
+   "quote": "where the multipliers belong to $N=\\Delta[x_1,\\ldots,x_n]$.",
+   "explanation": "Theorem 2.1 has $B_{h\\ell},C_{h\\ell}\\in A$ with $A$ a commutative subalgebra. The proof of Proposition 4.2 quotes the identities with multipliers in $N$. Section 2 says that it states the theorem \"in the precise form used below\", so the two forms must agree. The change is harmless. I checked what the proof uses: the $t_h$ commute; $\\{t^\\alpha\\}$ is a left $\\Delta$-basis of $N$; $f_\\ell$ is central, so $B_{h\\ell}f_\\ell=f_\\ell B_{h\\ell}\\in IN$ for each $B_{h\\ell}\\in N$; and the last sum has $t_\\ell$ on the right with $\\ell>h$ only, so $t_h^{a_h}\\in IN+\\sum_{\\ell>h}Nt_\\ell$. The proof does not use $c_h\\in k^\\times$, the algebra $A$, or $a_1\\le\\cdots\\le a_n$. If the companion gives a weaker form, for example $C_{h\\ell}$ on the other side of $t_\\ell$, the step \"leading position $a_he_h$ with coefficient $1$\" fails and $P\\subseteq M$ is lost. State one form and use it in both places.",
+   "comment_type": "presentation",
+   "severity": "minor",
+   "source": {
+    "file": "sections/03-monomial.tex",
+    "lines": [
+     121,
+     121
+    ]
+   },
+   "boxes": [
+    {
+     "page": 9,
+     "x": 71.999985,
+     "y": 288.490585,
+     "w": 469.090942,
+     "h": 13.63634125
+    }
+   ]
+  },
+  {
+   "title": "The paper does not compare the degreewise ideal $J$ with the lex-plus-powers ideal of the literature",
+   "quote": "Thus Theorem~\\ref{thm:main} resolves the Artinian lex-plus-powers",
+   "explanation": "The paper defines $J_d=L_d+P_d$ degree by degree, with $L_d$ a lex-segment subspace. The conjecture in the cited literature uses an ideal $L+P$ with $L$ a lex ideal, and some formulations require the powers $x_i^{a_i}$ to be minimal generators. The paper gives no comparison. Two points need one sentence each. (1) The largest spaces $L_d$ do form an ideal: $L_d$ is the set of monomials $m$ such that each $m'\\ge m$ of degree $d$ is in $J_d$. If $m'\\ge mx_i$, then the predecessor map of Lemma 6.1 gives $p(m')\\ge p(mx_i)\\ge m$, so $p(m')\\in J_d$ and $m'\\in J_{d+1}$. (2) When $I$ contains a form of small degree, $J$ can contain a proper divisor of a power. For $n=1$, $a_1=2$, $I=(x_1)$, one has $J=(x_1)$, and $x_1^2$ is not a minimal generator. The case $a_i=1$ is also excluded without the easy reduction, while the abstract says \"the\" conjectures. This affects only the sentence that the conjecture of the literature is resolved, not the inequalities of Theorem 1.1. Add one paragraph that compares the definitions.",
+   "comment_type": "presentation",
+   "severity": "minor",
+   "source": {
+    "file": "sections/01-introduction.tex",
+    "lines": [
+     55,
+     55
+    ]
+   },
+   "boxes": [
+    {
+     "page": 2,
+     "x": 71.999985,
+     "y": 354.06357199999997,
+     "w": 469.821838,
+     "h": 12.0453975
+    }
+   ]
+  }
+ ]
+}

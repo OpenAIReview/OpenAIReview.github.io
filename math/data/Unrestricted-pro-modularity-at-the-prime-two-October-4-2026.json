@@ -1,0 +1,726 @@
+{
+ "id": "Unrestricted-pro-modularity-at-the-prime-two-October-4-2026",
+ "title": "Unrestricted pro-modularity at the prime two",
+ "abstract": "Every continuous, odd, absolutely irreducible two-dimensional 2-adic representation of <span class=\"math\">G_{\\mathbb Q}</span> that is unramified outside finitely many finite primes occurs in the full completed Hecke algebra at some odd tame level. The level may contain auxiliary tame primes, and scalar and reducible residual representations are included. This is a completed-Hecke occurrence result, with no de Rham hypothesis; it does not assert classical modularity.",
+ "result_id": "010",
+ "result_title": "Unrestricted pro-modularity at the prime two",
+ "subject": "Number theory",
+ "source_pdf": "preprints/Unrestricted-pro-modularity-at-the-prime-two-October-4-2026/two-adic-promodularity.pdf",
+ "pdf": "pdf/Unrestricted-pro-modularity-at-the-prime-two-October-4-2026.pdf",
+ "page_sizes": [
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ]
+ ],
+ "macros": "\\newcommand{\\Q}{\\mathbb Q}\n\\newcommand{\\Z}{\\mathbb Z}\n\\newcommand{\\C}{\\mathbb C}\n\\newcommand{\\F}{\\mathbb F}\n\\newcommand{\\OO}{\\mathcal O}\n\\newcommand{\\kk}{k}\n\\newcommand{\\eps}{\\varepsilon}\n\\newcommand{\\cts}{\\mathrm{cts}}\n\\newcommand{\\articleid}[1]{{\\def\\UrlBreaks{\\do\\-}\\nolinkurl{#1}}}\n\\newcommand{\\GL}{\\operatorname{GL}}\n\\newcommand{\\SL}{\\operatorname{SL}}\n\\newcommand{\\PGL}{\\operatorname{PGL}}\n\\newcommand{\\Spec}{\\operatorname{Spec}}\n\\newcommand{\\Spf}{\\operatorname{Spf}}\n\\newcommand{\\Hom}{\\operatorname{Hom}}\n\\newcommand{\\End}{\\operatorname{End}}\n\\newcommand{\\tr}{\\operatorname{tr}}\n\\newcommand{\\ad}{\\operatorname{ad}}\n\\newcommand{\\HT}{\\operatorname{HT}}\n\\newcommand{\\Ind}{\\operatorname{Ind}}\n\\newcommand{\\rank}{\\operatorname{rank}}\n\\newcommand{\\edim}{\\operatorname{edim}}\n\\newcommand{\\Frac}{\\operatorname{Frac}}\n\\newcommand{\\Sym}{\\operatorname{Sym}}\n\\newcommand{\\WD}{\\operatorname{WD}}\n\\newcommand{\\Gal}{\\operatorname{Gal}}\n\\newcommand{\\Supp}{\\operatorname{Supp}}\n\\newcommand{\\Ann}{\\operatorname{Ann}}\n\\newcommand{\\Fil}{\\operatorname{Fil}}\n\\newcommand{\\gr}{\\operatorname{gr}}\n\\newcommand{\\coker}{\\operatorname{coker}}",
+ "review": {
+  "method": "OpenAIReview (Claude Opus 5.5)",
+  "effort": "high",
+  "date": "2026-10-08"
+ },
+ "overall_assessment": "The manuscript claims that each continuous, odd, absolutely irreducible $r:G_{\\mathbb{Q}}\\to\\mathrm{GL}_2(E)$ with $E/\\mathbb{Q}_2$ finite is a continuous point of the full Hecke algebra $\\mathbb T_2(N)$ for some odd $N$, with no de Rham condition and no residual condition.\n\nI checked the arguments that are internal to the paper, and most of them are correct. These include: the determinant normalization (Lemma 2.1); the count $\\dim B\\ge 6$, $\\dim D\\ge 3$ and the bounds for the dihedral and exceptional loci (Lemma 2.2); the degree arithmetic of Proposition 2.3; the diagonal argument that gives a one-factor object finite over $\\mathcal O[[K]]$ (Section 3); the growth chain $4\\ge g(V)\\ge\\dim D+1\\ge 4$ (Proposition 4.2); the type capture and the exclusion of reducible parameters by $\\sigma\\otimes U$ (Lemmas 4.3 and 4.4); the twist argument with $\\Theta_X$ (Proposition 5.2); the local count $5-2=3$ at $2$ (Proposition 6.1); and the regular-point lemma (Lemma 6.2).\n\nThe main theorem is not established by the manuscript alone, for two reasons.\n\nFirst, three inputs carry the proof and cannot be checked. They are cited as FM2 and Dim, and no reference list is supplied. (a) Theorem 1.1 of FM2 is the regular Fontaine--Mazur conjecture at $p=2$ with no residual hypothesis; it is the only source of the classical point over $\\mathbb{Q}$. (b) Theorem 1.1 of Dim says that each component of $\\mathbb T_2(N)$ has dimension $4$; Lemma 6.2 uses it with no margin, and the twist proposition uses the related density. (c) Proposition 2.3 uses the internal lemmas of FM2 Section 7 outside the hypothesis (a regular de Rham target) of the theorem that they prove. These inputs are about as deep as the result.\n\nSecond, I found one step that is false as written. The proof of Proposition 2.3 says that restriction from $A$ to $F_0$ is injective on the residual extension groups for $\\alpha$ and $\\alpha^{-1}$. For $\\alpha=1$ the kernel is $\\mathrm{Hom}(\\mathrm{Gal}(F_0/A),\\Bbbk)\\ne 0$, because $F_0/A$ is a nontrivial $2$-extension and $\\Bbbk$ has characteristic $2$. This is the scalar residual case, which the theorem claims explicitly. The transversality of the curve charts over $F_0$ is then not proved. A condition on the ramification of $F_0/A$ can possibly repair it, but the paper does not state one. A smaller problem of the same type: absolute irreducibility of $\\bar r$ is not automatic on $G_A$ when $\\bar r$ is induced from a real quadratic field in $A$.\n\nOther gaps are local: the transfer of Hecke support between $A$, $F_0$ and $F$ for characteristic-two curves; the composite attribution of Theorem 3.2 to Pa\\v{s}k\\=unas--Tung; the quoted form of the Newton--Thorne theorem with its CM clause at $p=2$; the fibre argument for $\\dim D\\ge\\dim B-3$; and the tangent-space identification for $R_{\\mathrm{glob}}$.\n\nRecommendation: the result cannot be accepted in this form. The authors must make FM2 and Dim available with exact statements, repair the scalar case of Proposition 2.3, and state each cited result with the hypotheses that the paper verifies.",
+ "num_findings": 21,
+ "comments": [
+  {
+   "title": "Restriction from $A$ to $F_0$ is not injective on extension classes when $\\alpha=1$",
+   "quote": "distinct, and restriction from $A$ to $F_0$ is injective on the",
+   "explanation": "The proof of Proposition 2.3 uses this injectivity for the scalar residual case: \"its nonzero additive extension remains nonzero by the same injectivity\". I checked it with inflation-restriction. The kernel of $H^1(G_A,\\Bbbk(\\alpha))\\to H^1(G_{F_0},\\Bbbk(\\alpha))$ is $H^1(\\mathrm{Gal}(F_0/A),\\Bbbk(\\alpha)^{G_{F_0}})$. For $\\alpha\\ne 1$ the kernel is zero, because $\\alpha$ has odd order, $F_0/A$ is a $2$-extension, and thus $\\alpha|_{G_{F_0}}\\ne 1$. That part is correct. For $\\alpha=1$ the kernel is $\\mathrm{Hom}(\\mathrm{Gal}(F_0/A),\\Bbbk)$. This group is not zero: $\\Bbbk$ has characteristic $2$ and $F_0/A$ is a nontrivial abelian $2$-extension (the marked case needs $m=[F_0:A]>u_0+4$). Thus the statement is false as written in the globally scalar case, and this case is always a marked case. Consequence: if the reduction $\\mathcal V/t\\mathcal V$ of the curve lattice is the extension $\\begin{pmatrix}1&\\varphi\\\\0&1\\end{pmatrix}$ with $\\varphi$ a character of $\\mathrm{Gal}(F_0/A)$, then its restriction to $G_{F_0}$ is split scalar. Each line is then globally invariant, the point is not transverse, and the connectedness inputs (Lemmas 7.3 to 7.5 of FM2) do not apply to that curve. Such $\\varphi$ is trivial at the dyadic and real places, so the local conditions on the curve do not exclude it. The statement can hold only on classes unramified outside the allowed set, and only if each quadratic subextension of $F_0/A$ ramifies at a prime outside that set. The paper does not state this condition or show that it is compatible with $u_0\\le U$. The main theorem claims scalar residual representations explicitly, so the authors must repair this step.",
+   "comment_type": "methodology",
+   "severity": "major",
+   "source": {
+    "file": "sections/family.tex",
+    "lines": [
+     301,
+     301
+    ]
+   },
+   "boxes": [
+    {
+     "page": 7,
+     "x": 71.999985,
+     "y": 246.40286600000002,
+     "w": 468.0,
+     "h": 12.0452075
+    }
+   ]
+  },
+  {
+   "title": "The classical point comes only from an unavailable regular Fontaine--Mazur theorem at $p=2$ with no residual hypothesis",
+   "quote": "\\cite[Theorem~1.1]{FM2} have now been verified for $r_x$: continuity,",
+   "explanation": "Proposition 4.5 shows that $r_x|_{G_F}$ is attached to a regular Hilbert eigensystem over the solvable field $F$. The step from $F$ to a classical eigenform over $\\mathbb{Q}$ is not proved; the paper takes it from Theorem 1.1 of FM2. In the form used, that theorem says: each continuous, odd, absolutely irreducible, finitely ramified $r_x:G_{\\mathbb{Q}}\\to\\mathrm{GL}_2(E')$ with two distinct de Rham weights at $2$ is modular up to Tate twist, with no condition on $\\bar r_x$. This is the full regular Fontaine--Mazur conjecture at $p=2$, including scalar and reducible residue. To my knowledge, the published results at $p=2$ have residual hypotheses. FM2 is not in a bibliography that the reader can consult (no reference list is supplied). All of Section 6 depends on this step: Proposition 6.1 needs a cuspidal automorphic $r_x$ for the Newton--Thorne input, and the final proof needs $x$ to be a point of $\\mathbb T_2(N)$. The cited input is also about as deep as the main theorem. The paper must give a complete reference with the exact statement, or prove the descent from $F$ to $\\mathbb{Q}$ for $r_x$ directly (the paper already has automorphy over a solvable totally real field and local irreducibility at $2$).",
+   "comment_type": "methodology",
+   "severity": "major",
+   "source": {
+    "file": "sections/regular-point.tex",
+    "lines": [
+     399,
+     399
+    ]
+   },
+   "boxes": [
+    {
+     "page": 20,
+     "x": 71.999985,
+     "y": 443.434006,
+     "w": 468.0,
+     "h": 13.63634125
+    }
+   ]
+  },
+  {
+   "title": "The final comparison needs $\\dim=4$ for every component of $\\mathbb T_2(N)$, taken from an unavailable manuscript, with no margin",
+   "quote": "Every component of $A$ has dimension four by",
+   "explanation": "I checked Lemma 6.2 and it is correct: $3=\\dim(A_0/P)_{\\mathfrak x_0}\\le\\dim(R_0)_{\\mathfrak x_0}\\le\\mathrm{edim}(R_0)_{\\mathfrak x_0}\\le 3$, so the localized kernel is zero and the domain $D_0$ kills $\\ker(R_0\\to A_0)$. But the chain closes only if the component of $A$ through $x$ has dimension exactly $4$. If that component has dimension $3$, the left side is $2$ and the lemma gives nothing. The equality comes only from Theorem 1.1 of the manuscript cited as Dim. The statement that each irreducible component of the full Hecke algebra $\\mathbb T_2(N)$ has dimension $4$ is a strong Gouv\\^ea--Mazur type dimension statement at $p=2$, for all residual factors, including Eisenstein and scalar ones. The same citation supports the density of classical cuspidal points of weight at least $3$ on each component, which the finite-order twist step of Proposition 5.2 uses. The twist proposition is used two times (to normalize $\\det r$ and to undo the twist). Thus the last step of the proof and both twist steps depend fully on a result that the reader cannot check. The authors must give the complete reference and the exact statement, with its hypotheses on $N$ and on the residual factor.",
+   "comment_type": "methodology",
+   "severity": "major",
+   "source": {
+    "file": "sections/conclusion.tex",
+    "lines": [
+     243,
+     243
+    ]
+   },
+   "boxes": [
+    {
+     "page": 26,
+     "x": 71.0,
+     "y": 34.138229,
+     "w": 0.999988,
+     "h": 0.0
+    },
+    {
+     "page": 26,
+     "x": 71.999985,
+     "y": 47.093388,
+     "w": 468.0,
+     "h": 0.0
+    },
+    {
+     "page": 26,
+     "x": 71.999985,
+     "y": 71.999985,
+     "w": 0.0,
+     "h": 0.0
+    },
+    {
+     "page": 26,
+     "x": 531.515015,
+     "y": 437.31064899999996,
+     "w": 8.484936,
+     "h": 9.204583750000001
+    },
+    {
+     "page": 26,
+     "x": 267.993652,
+     "y": 657.405836,
+     "w": 76.012711,
+     "h": 16.936476250000002
+    },
+    {
+     "page": 26,
+     "x": 267.993652,
+     "y": 668.962477,
+     "w": 76.012711,
+     "h": 16.936476250000002
+    },
+    {
+     "page": 26,
+     "x": 267.993652,
+     "y": 680.519178,
+     "w": 76.012711,
+     "h": 16.936476250000002
+    },
+    {
+     "page": 26,
+     "x": 267.993652,
+     "y": 692.075819,
+     "w": 76.012711,
+     "h": 16.936476250000002
+    },
+    {
+     "page": 26,
+     "x": 267.993652,
+     "y": 703.63246,
+     "w": 76.012711,
+     "h": 16.936476250000002
+    },
+    {
+     "page": 26,
+     "x": 71.999985,
+     "y": 743.0182229999999,
+     "w": 468.0,
+     "h": 8.587145
+    },
+    {
+     "page": 27,
+     "x": 71.999985,
+     "y": 142.523056,
+     "w": 470.116394,
+     "h": 13.63634125
+    }
+   ]
+  },
+  {
+   "title": "Proposition 2.3 uses the proof parts of FM2 Theorem 7.1 without the regular de Rham target that the theorem assumes",
+   "quote": "a target at this stage.  We therefore use its curve and connectedness",
+   "explanation": "The paper says that Theorem 7.1 of FM2 needs a regular de Rham target and that the family $B$ has no such target. It then proves potential pro-modularity only by citation of the parts of that same proof: Theorem 5.1, Proposition 6.1, Lemmas 7.2 to 7.5, Sections 7.2 and 7.4, Proposition 4.4, and Lemmas 3.3, 3.8, 3.9, 4.6. The paper replaces the target by two unrelated objects: an auxiliary non-CM eigenform that supplies only the determinant $\\chi$ (Lemma 2.1), and a modular seed that lifts only the semisimple residue. No argument shows that the cited lemmas use the target only through $\\chi$ and $\\bar r^{\\mathrm{ss}}$ separately. The numerical steps that are internal to the paper are correct. I recomputed them: $\\dim C_{\\mathrm{fam}}\\ge 1+2d_A+3-3-3=2d_A-2$; the cut has dimension at least $2d_A-3-u_A-\\kappa>d_A$ when $d_A>U+\\kappa+3$; the trace image of a chart intersection has dimension at least $(2d-m-1)-(3+m)=2d-2m-4$; and $2d-2m-4-u_0>d$ is condition (2.1). The gap is in the hypotheses. For example, the seed has central character equal to $\\psi$ only modulo $\\varpi$, and the propagation theorem is restated with no condition at the dyadic places although the marked curves are scalar-unipotent there. This proposition is the source of Hecke support for all later sections. The authors must state each cited result with its hypotheses and show that they hold with separated determinant and residue.",
+   "comment_type": "methodology",
+   "severity": "major",
+   "source": {
+    "file": "sections/family.tex",
+    "lines": [
+     250,
+     250
+    ]
+   },
+   "boxes": [
+    {
+     "page": 6,
+     "x": 71.999985,
+     "y": 489.816959,
+     "w": 468.0,
+     "h": 12.0452075
+    }
+   ]
+  },
+  {
+   "title": "Transfer of Hecke support between the fields $A$, $F_0$ and $F$ is not justified",
+   "quote": "$C_s$, which is pro-modular, the preceding chart propagation makes",
+   "explanation": "The curve $C_s$ is on Hecke support over $A$. The chart argument is over $F_0$ and needs $C_s|_{G_{F_0}}$ on Hecke support over $F_0$, with central character $\\psi|_{G_{F_0}}$ and one tame level. $C_s$ is a characteristic-two curve and has no classical points, so solvable base change does not apply to it directly. A density argument on $C_{\\mathrm{seed}}$ with control of level is necessary, and the proof does not give it. Each propagation step also gives support only after a new solvable extension. The degree conditions (2.1), $d>u_0+4$ and $2d-2m-4-u_0>d$, and the bound $u_0\\le U$ were arranged only for $A$ and $F_0$. Over a later field the number of allowed non-dyadic places can increase when these primes split, and the paper does not show that the conditions still hold. The last sentence takes a compositum $F$ and assumes that all supports found over the intermediate fields persist over $F$ at one level. This also needs a base-change statement for non-classical loci.",
+   "comment_type": "missing_information",
+   "severity": "moderate",
+   "source": {
+    "file": "sections/family.tex",
+    "lines": [
+     433,
+     433
+    ]
+   },
+   "boxes": [
+    {
+     "page": 8,
+     "x": 71.999985,
+     "y": 642.113712,
+     "w": 469.516357,
+     "h": 12.0452075
+    },
+    {
+     "page": 8,
+     "x": 71.999985,
+     "y": 654.996134,
+     "w": 468.0,
+     "h": 16.25399375
+    }
+   ]
+  },
+  {
+   "title": "The hypotheses of Proposition 3.1 and the transfer of the type to forms over $F$ rest on one citation, FM2 Proposition 4.2",
+   "quote": "By \\cite[Proposition~4.2]{FM2}, its completed",
+   "explanation": "I checked the steps of Proposition 2.4 that are internal to the paper and they are correct: the recurrence gives $P_n(T(g),\\chi(g))=T(g^n)\\in D_F$, so $D$ is finite over $D_F$; $L\\ne 0$ by Nakayama at the contraction of the generic point; and the object of $L$ is a quotient of finitely many copies of $M$. But one proposition of FM2 carries four different statements: (a) $\\mathbb T$ is finite over $R^{\\widehat\\otimes b}$ with the true Galois restriction action; (b) $L_0=\\mathrm{Hom}(P^{\\widehat\\otimes b},M)$ is finite and faithful over $\\mathbb T$; (c) $P^{(b)}$ is a projective generator of a product block and $-\\widehat\\otimes_{\\mathcal E^{(b)}}P^{(b)}$ is an exact equivalence; (d) the eigenspace at $x$ contains $\\widehat\\bigotimes_{v\\mid 2}\\Pi_v$ with each $\\Pi_v$ a simple of parameter $q_x$. Statements (a) to (c) are exactly the hypotheses of Proposition 3.1 (finite $R\\to D$, equal $R$-actions, admissible product object). Statement (d) moves the type $\\sigma\\otimes U$, found in the one-factor object $\\Pi_V[x]$, to the completed forms. The step from (d) to the type is correct because an absolutely irreducible parameter has a unique Banach simple. At $p=2$ the paper itself notes that $R$ is not identified with the integral centre of the block. Thus (a) and the scalar-block case of (c) are not routine. The paper must state these four facts separately, with their hypotheses.",
+   "comment_type": "missing_information",
+   "severity": "moderate",
+   "source": {
+    "file": "sections/regular-point.tex",
+    "lines": [
+     354,
+     354
+    ]
+   },
+   "boxes": [
+    {
+     "page": 20,
+     "x": 71.999985,
+     "y": 88.326279,
+     "w": 468.0,
+     "h": 13.63634125
+    }
+   ]
+  },
+  {
+   "title": "The quoted Newton--Thorne theorem (CM clause, $p=2$, full adjoint, no residual hypothesis) must be matched to the published statement",
+   "quote": "provided either $\\pi$ is non-CM, or its CM field $K$ is not",
+   "explanation": "$H^1_f(\\mathbb{Q},W)=0$ is the only global input of Proposition 6.1. The paper quotes it with a clause for CM forms whose field is not in $\\mathbb{Q}(\\zeta_{p^\\infty})$, for each prime $p$, and for the full adjoint. I cannot confirm that Theorem 5.4 of Newton--Thorne has this form. As I recall, their statement for $\\mathrm{GL}_2$ over a totally real field is for non-CM forms, and their general theorem has the hypothesis that $r|_{G_{F(\\zeta_{p^\\infty})}}$ is irreducible. The CM clause in the paper is equivalent to that hypothesis, but then a different theorem must be cited and its conditions at $p=2$ checked. The CM case is necessary here. The local parameter of $r_x$ at $2$ is induced from the unramified quadratic extension, so $r_x$ can have CM by a field in which $2$ is inert. The paper excludes only the fields in $\\mathbb{Q}(\\zeta_{2^\\infty})$. The steps of the paper around this input are correct. A ramified quadratic character of $\\mathbb{Q}_2^\\times$ is wild because inertia in the abelianization is $\\mathbb{Z}_2^\\times$, a pro-$2$ group; then $r_x\\simeq r_x\\otimes\\eta$ would give $I=-I$ on a wild element. The local count is also correct: $h^1_2=1+4=5$, $\\dim H^1_f(\\mathbb{Q}_2,W)=1+1=2$, quotient $3$, and quotient $0$ at $v\\ne 2$. The passage from $\\mathrm{ad}^0$ to $\\mathrm{ad}$ needs only $H^1_f(\\mathbb{Q},E_x)=0$.",
+   "comment_type": "claim_accuracy",
+   "severity": "moderate",
+   "source": {
+    "file": "sections/conclusion.tex",
+    "lines": [
+     61,
+     61
+    ]
+   },
+   "boxes": [
+    {
+     "page": 24,
+     "x": 71.999985,
+     "y": 698.2689330000001,
+     "w": 468.0,
+     "h": 14.209885
+    }
+   ]
+  },
+  {
+   "title": "Theorem 3.2 is a composite statement; the integral corner identification of $\\mathrm{CH}_R^{\\mathrm{tf}}$ and the list of simples are not direct quotations",
+   "quote": "\\cite[Propositions~4.10 and~4.18, Theorem~6.13]{PaskunasTung2021};",
+   "explanation": "Theorem 3.2 is attributed to Pa\\v{s}k\\=unas--Tung, but it is assembled from many places of that paper. Three parts carry later arguments and need a derivation. (1) Part (2) gives $\\mathrm{CH}_R^{\\mathrm{tf}}\\simeq(e\\mathcal Ee)^{\\mathrm{op}}$ or $M_2((e\\mathcal Ee)^{\\mathrm{op}})$ integrally for each block at $2$. As I recall, the source makes the comparison for the endomorphism ring of a projective object in the quotient category by the $\\mathrm{SL}_2(\\mathbb{Q}_2)$-trivial objects. The translation to the corner $e\\mathcal Ee$ of $\\mathrm{End}(P)$ is correct but is an additional argument. Lemma 3.5 uses this part for the rank-one corner modules and their Galois labels. (2) Part (3) is used as a complete list of Banach simples for each parameter. Lemma 4.4 and Proposition 4.5 need completeness: if one more simple with reducible parameter exists, the type $\\sigma\\otimes U$ does not force irreducibility. The word \"exactly\" is given only for ratio outside $\\{1,\\varepsilon,\\varepsilon^{-1}\\}$. (3) The theorem does not say that the $R[1/2]$-action on a Banach simple selects its parameter. Propositions 4.2 and 4.5 use this link. I checked the internal consistency of the list: $\\mathrm{Ind}_B^G(\\gamma_1\\otimes\\gamma_2\\varepsilon^{-1})$ has central character $\\gamma_1\\gamma_2\\varepsilon^{-1}=\\psi$ when the determinant is $\\psi\\varepsilon$, and the three special cases agree with this formula.",
+   "comment_type": "missing_information",
+   "severity": "moderate",
+   "source": {
+    "file": "sections/diagonal.tex",
+    "lines": [
+     122,
+     122
+    ]
+   },
+   "boxes": [
+    {
+     "page": 12,
+     "x": 71.999985,
+     "y": 74.777084,
+     "w": 468.272705,
+     "h": 13.63634125
+    },
+    {
+     "page": 12,
+     "x": 71.999985,
+     "y": 88.326279,
+     "w": 469.516357,
+     "h": 13.63634125
+    }
+   ]
+  },
+  {
+   "title": "The bound $\\dim D\\ge\\dim B-3$ is not a closed-fibre statement, and Proposition 4.2 uses $\\dim D\\ge 3$ with no margin",
+   "quote": "$\\dim D\\ge\\dim B-3\\ge3$.",
+   "explanation": "For a local map $D\\to B$ of complete local rings, the general inequality is $\\dim B\\le\\dim D+\\dim B/\\mathfrak m_DB$. The closed fibre is not bounded by $3$ here, because $\\bar r$ can be reducible or scalar. For trivial $\\bar r$, the framed deformations $g\\mapsto 1+\\sum_i x_ia_i(g)N$ with $N$ nilpotent and $a_i$ a basis of $\\mathrm{Hom}(G_{\\mathbb{Q},S},\\mathbb{F}_2)$ all have the residual trace and determinant, so the closed fibre dimension increases with $|S|$. The bound is plausible for a different reason: the generic fibre over an absolutely irreducible pseudorepresentation is a $\\mathrm{PGL}_2$-orbit, of dimension $3$. This needs a finite-type model of the framed ring over $R^{\\mathrm{ps}}$ and the dimension formula over the universally catenary domain $D$. The paper gives only the citation of Lemma 3.2 of FM2. I recomputed the other numbers and they agree with the standard count: the real framed ring has dimension $4-2=2$; $g-r_{\\mathrm{rel}}\\ge 3$ because $\\mathrm{Hom}(r,r\\otimes\\varepsilon)\\ne 0$ would give $\\varepsilon^2=1$; thus $5$ at the point, $6$ for $B$, and $3$ for $D$. The value $3$ is used with no margin. Proposition 4.2 gives $4\\ge g(V)\\ge\\dim D+1$, so the argument works only if $\\dim D\\ge 3$, and it also shows $\\dim D=3$ exactly. The paper should state this equality and give the fibre argument in full.",
+   "comment_type": "missing_information",
+   "severity": "moderate",
+   "source": null,
+   "boxes": []
+  },
+  {
+   "title": "The step from $\\dim H^1(G_{\\mathbb{Q},S},\\mathrm{ad}\\,r_x)\\le 3$ to $\\mathrm{edim}(R_{\\mathrm{glob}})_{\\mathfrak x}\\le 3$ is delegated to an unavailable manuscript",
+   "quote": "tangent comparison of \\cite[Proposition~4.1]{Dim} to",
+   "explanation": "$R_{\\mathrm{glob}}$ is a determinant (pseudo)deformation ring for semisimplified residual data that can be scalar or reducible. The identification of the tangent space of $(R_{\\mathrm{glob}})_{\\mathfrak x}$ with $H^1(G_{\\mathbb{Q},S},\\mathrm{ad}\\,r_x)$ is the place where this residual degeneracy becomes harmless, and the paper does not prove it. The argument needs these steps: (1) the dual of $\\mathfrak x/\\mathfrak x^2\\otimes\\kappa(\\mathfrak x)$ is the set of pseudodeformations of $\\mathrm{tr}\\,r_x$ to $\\kappa(\\mathfrak x)[\\epsilon]$; (2) a pseudodeformation of an absolutely irreducible representation over an Artinian local ring is a deformation of the representation (Nyssen, Rouquier, Chenevier); (3) $\\kappa(\\mathfrak x)$ can be a proper subfield of $E_x$, so a base-change of $H^1$ is necessary. I believe the conclusion is correct. The non-dyadic vanishing $H^2(\\mathbb{Q}_v,W)=0$ is also attributed to Lemma 5.2 of the same manuscript; it follows from genericity as the paper says. The authors should write the three steps in the paper, because Lemma 6.2 uses the bound $3$ with equality.",
+   "comment_type": "missing_information",
+   "severity": "moderate",
+   "source": {
+    "file": "sections/conclusion.tex",
+    "lines": [
+     133,
+     133
+    ]
+   },
+   "boxes": [
+    {
+     "page": 25,
+     "x": 71.999985,
+     "y": 617.055179,
+     "w": 468.0,
+     "h": 12.0452075
+    },
+    {
+     "page": 25,
+     "x": 71.999985,
+     "y": 629.9376299999999,
+     "w": 468.0,
+     "h": 14.33051125
+    }
+   ]
+  },
+  {
+   "title": "Absolute irreducibility of $\\bar r$ does not persist automatically on restriction to $G_A$",
+   "quote": "irreducible residue remains absolutely irreducible.  In the",
+   "explanation": "The sentence is given with no condition on $A$. It is false for some $A$. If $\\bar r=\\mathrm{Ind}_{G_K}^{G_{\\mathbb{Q}}}\\bar\\theta$ for a real quadratic field $K$ in which $2$ splits (for example $K=\\mathbb{Q}(\\sqrt{17})$) and $\\bar\\theta\\ne\\bar\\theta^{s}$ has odd order, then $\\bar r$ is absolutely irreducible, and oddness gives no restriction in characteristic $2$. If $K\\subseteq A$, then $\\bar r|_{G_A}=\\bar\\theta\\oplus\\bar\\theta^{s}$ is reducible. I checked that this is the only failure: by Clifford theory for the normal subgroup $G_A$ of $2$-power index, either $\\bar r$ is induced from a quadratic subfield of $A$, or $\\bar r|_{G_A}$ has one repeated character, and then $\\bar r$ is reducible. Thus the field preparation must make $A$ and $F_0$ disjoint from at most one quadratic field. The paper should state this condition, because the proof then goes into the reducible case with a different marking rule.",
+   "comment_type": "claim_accuracy",
+   "severity": "minor",
+   "source": {
+    "file": "sections/family.tex",
+    "lines": [
+     298,
+     298
+    ]
+   },
+   "boxes": [
+    {
+     "page": 7,
+     "x": 71.999985,
+     "y": 219.304477,
+     "w": 468.0,
+     "h": 12.0452075
+    },
+    {
+     "page": 7,
+     "x": 71.999985,
+     "y": 232.186859,
+     "w": 470.116394,
+     "h": 13.63634125
+    }
+   ]
+  },
+  {
+   "title": "The marked curves are scalar-unipotent at the marked dyadic places, and the restated propagation theorem has no dyadic hypothesis",
+   "quote": "pseudo at $v_0$ is constant and scalar after a character twist.",
+   "explanation": "I confirmed the local claim: after a twist each element has characteristic polynomial $(X+1)^2$, so the local image is unipotent and has an invariant line. The consequence is that $C_s$ and $C_f$ are, at all $m$ marked places of $F_0$, a character times a unipotent representation in characteristic $2$. This is the most degenerate local stratum (the scalar block of $\\mathrm{GL}_2(\\mathbb{Q}_2)$). The hypotheses that the paper lists for Theorem 5.1 of FM2 are potential pro-modularity, a generic representation that is not virtually solvable, and finite local images at the allowed non-dyadic places. No dyadic condition is given. The paper should say explicitly that the propagation theorem applies to curves with this local behaviour at a proportion $1/d_A$ of the dyadic places.",
+   "comment_type": "missing_information",
+   "severity": "minor",
+   "source": {
+    "file": "sections/family.tex",
+    "lines": [
+     385,
+     385
+    ]
+   },
+   "boxes": [
+    {
+     "page": 8,
+     "x": 71.999985,
+     "y": 259.95206,
+     "w": 468.294556,
+     "h": 12.0452075
+    },
+    {
+     "page": 8,
+     "x": 71.999985,
+     "y": 273.501255,
+     "w": 468.21817,
+     "h": 12.0452075
+    }
+   ]
+  },
+  {
+   "title": "The map $\\mathbb T\\to D$ and the surjection $R_{\\mathrm{glob}}\\to D$ need statements that the text leaves implicit",
+   "quote": "Support containment gives a continuous map",
+   "explanation": "$\\mathbb T$ is a Hecke algebra over $F$ and $D$ is a trace ring of $G_{\\mathbb{Q}}$. A set-theoretic support containment gives a ring map only if a surjection $R^{\\mathrm{ps}}_F\\to\\mathbb T$ exists, that is, a two-dimensional determinant law with values in $\\mathbb T$ at residue characteristic $2$. With that surjection the argument is correct: $\\ker(R^{\\mathrm{ps}}_F\\to D_F)$ is a prime that contains $\\ker(R^{\\mathrm{ps}}_F\\to\\mathbb T)$, and reducedness of $\\mathbb T$ is not necessary. In the final proof, $D$ was defined as a quotient of $R^{\\mathrm{ps},\\chi}_S$ for the first set $S$, but $R_{\\mathrm{glob}}$ has varying determinant and the larger set of primes that divide $2N$. The map is the composite $R_{\\mathrm{glob}}\\to R^{\\mathrm{ps},\\chi}_{S'}\\to R^{\\mathrm{ps},\\chi}_S\\to D$. It is surjective, and the residual data agree because $x$ and $r$ are points of the local ring $D$. The sentence \"its definition as a trace-image quotient\" does not include this change of ring. The authors should add these two statements.",
+   "comment_type": "missing_information",
+   "severity": "minor",
+   "source": {
+    "file": "sections/family.tex",
+    "lines": [
+     452,
+     452
+    ]
+   },
+   "boxes": [
+    {
+     "page": 9,
+     "x": 71.999985,
+     "y": 165.898639,
+     "w": 468.0,
+     "h": 12.0452075
+    },
+    {
+     "page": 9,
+     "x": 71.999985,
+     "y": 179.44768200000001,
+     "w": 468.0,
+     "h": 12.0453975
+    }
+   ]
+  },
+  {
+   "title": "Lemma 4.4 does not treat a parameter that is irreducible over $E'$ but reducible over an extension",
+   "quote": "This excludes every reducible parameter in the classification.",
+   "explanation": "The lemma concludes that the parameter is absolutely irreducible. The proof excludes only the simples of Theorem 3.2(3) for $\\gamma_1+\\gamma_2$ with the two characters defined over $E'$. A parameter that becomes $\\gamma+\\gamma^{c}$ only over a quadratic extension $E''$ has an $E'$-Banach simple that is not in the list. Proposition 4.5 applies the lemma to a simple factor of $\\Pi_V[x]$ over $E'$ and does not exclude this case. The gap closes easily: $\\mathrm{Hom}_{K_0}(\\sigma\\otimes U,\\Pi)\\otimes_{E'}E''=\\mathrm{Hom}_{K_0}(\\sigma\\otimes U,\\Pi\\otimes_{E'}E'')$ because the type has finite dimension, and $\\Pi\\otimes_{E'}E''$ has a finite filtration by listed simples. I checked the arguments of the lemma for the listed simples and they are correct: $\\sigma(u)=-1$, so $u-1$ is invertible on $\\sigma\\otimes U$; a functional invariant under the upper unipotent subgroup is zero; and $\\mathrm{SL}_2(\\mathbb{Z}_2)$ is transitive on $\\mathbb{P}^1(\\mathbb{Q}_2)$.",
+   "comment_type": "missing_information",
+   "severity": "minor",
+   "source": {
+    "file": "sections/regular-point.tex",
+    "lines": [
+     290,
+     290
+    ]
+   },
+   "boxes": [
+    {
+     "page": 19,
+     "x": 71.999985,
+     "y": 210.935871,
+     "w": 468.0,
+     "h": 12.0452075
+    }
+   ]
+  },
+  {
+   "title": "The graded ring $\\mathrm{gr}_{\\mathfrak a}\\mathscr A$ for ramified $\\mathcal O$: the identity between $\\mathfrak a^n$ and the monomial filtration is not proved",
+   "quote": "take $K$ deep enough that its commutator relations have",
+   "explanation": "The result $\\mathrm{gr}_{\\mathfrak a}\\mathscr A\\simeq\\Bbbk[X_0,X_1,X_2,X_3]$ is correct, but the text proves only part of it. The commutator claim holds: for $K$ uniform at $p=2$, $[K,K]\\subseteq K^4$, and $c-1=4b+6b^2+4b^3+b^4$ has $\\mathfrak a$-degree at least $3$ for each ramification index $e\\ge 1$. The missing step is $\\mathfrak a^n=F_n$, where $F_n$ is the closed span of the monomials $\\varpi^{a_0}b_1^{a_1}b_2^{a_2}b_3^{a_3}$ with $a_0+a_1+a_2+a_3\\ge n$. The commutator bound alone does not give it. One needs $F_nF_m\\subseteq F_{n+m}$, which follows from the $\\mathbb{Z}_2$ result because $e\\,v_2(\\lambda)\\ge v_2(\\lambda)$. The bound $0\\le g(M)\\le 4$ and Lemma 4.1 depend on this identity. I checked the two parts of Lemma 4.1 and they are correct: $H_{M/fM}(n)\\le H_M(n)-H_M(n-c)$, and a cyclic torsion module has growth degree at most $3$.",
+   "comment_type": "missing_information",
+   "severity": "minor",
+   "source": {
+    "file": "sections/regular-point.tex",
+    "lines": [
+     34,
+     34
+    ]
+   },
+   "boxes": [
+    {
+     "page": 16,
+     "x": 71.999985,
+     "y": 102.542293,
+     "w": 468.0,
+     "h": 12.0452075
+    }
+   ]
+  },
+  {
+   "title": "The product coinvariant formula of Lemma 3.3 is not stated, and it has two different kinds of tensor product",
+   "quote": "The analogous formula holds for product coinvariants.",
+   "explanation": "Because $K^b$ acts factor by factor, $P^{(b)}/(\\varpi,K^b-1)$ is the completed tensor product over $\\Bbbk$ of $b$ copies of $C_K$. $C_K$ is finite over $R$ but not over $\\Bbbk$, so this is not the ordinary tensor power $C_K^{\\otimes_{\\Bbbk}b}$. The proof sentence that ordinary and completed tensor products agree is correct for the tensor product over $\\mathcal E^{(b)}$, but it does not apply to the product of the copies of $C_K$. The formula used in the proof of Proposition 3.1, $L_H\\otimes_{\\mathcal E_H^{\\otimes_Hb}}C_{K,H}^{\\otimes_Hb}$, is correct: $C_K$ is finitely presented over $R$, and base change along $R^{\\widehat\\otimes b}\\to R\\to H$ gives $C_{K,H}^{\\otimes_Hb}$. I also checked the rest of that proof (iterated use of Lemma 3.6, and the contradiction with a module supported at the closed point) and found no error. The lemma should state the product formula explicitly.",
+   "comment_type": "presentation",
+   "severity": "minor",
+   "source": {
+    "file": "sections/diagonal.tex",
+    "lines": [
+     154,
+     154
+    ]
+   },
+   "boxes": [
+    {
+     "page": 12,
+     "x": 71.999985,
+     "y": 367.74179399999997,
+     "w": 468.0,
+     "h": 12.0452075
+    }
+   ]
+  },
+  {
+   "title": "Lemma 3.5: the corner labels and the bound on the number of simples need two short arguments and a correct reference",
+   "quote": "\\cite[Theorems~2.12 and~2.22]{Chenevier2014}. Thus our two modules",
+   "explanation": "(1) The text deduces the labels $\\Gamma_1,\\Gamma_2$ from the fact that the two corner modules are distinct. One must first show that each $\\lambda_i$ specializes to one of the two characters. On the rank-one module $\\widetilde W_ie$ the Cayley--Hamilton identity gives $(\\lambda_i(g)-\\Gamma_1(g))(\\lambda_i(g)-\\Gamma_2(g))=0$ at each point, and a group is not the union of two proper subgroups. After that, $I_{i1}I_{i2}=0$ in the domain $J_0$ gives the conclusion; this part is correct. (2) The statement used is: a Cayley--Hamilton algebra over the field $H$ with determinant $\\gamma_1+\\gamma_2$, $\\gamma_1\\ne\\gamma_2$, has at most two simple modules, each of dimension $1$. As I recall, the two cited theorems are for an algebraically closed field and for the absolutely irreducible case, so they do not give this statement directly. It needs $\\ker(\\det)\\subseteq\\mathrm{rad}$. (3) In Lemma 3.6 the case where the quotient of $M_2(H)$ is $0$ is not mentioned; it is harmless because then $C_{K,H}=0$. I checked the coinvariant calculation: on a stabilizer of determinant $1$ the two inducing characters have product $\\varepsilon^{-2}(d)=1$ in characteristic $2$, so they generate the same ideal.",
+   "comment_type": "missing_information",
+   "severity": "minor",
+   "source": {
+    "file": "sections/diagonal.tex",
+    "lines": [
+     328,
+     328
+    ]
+   },
+   "boxes": [
+    {
+     "page": 14,
+     "x": 71.999985,
+     "y": 388.361099,
+     "w": 470.116394,
+     "h": 13.63634125
+    },
+    {
+     "page": 14,
+     "x": 71.999985,
+     "y": 402.577121,
+     "w": 468.0,
+     "h": 12.0452075
+    }
+   ]
+  },
+  {
+   "title": "Proposition 4.2: the infinite dimension of the Banach simples at $y$ uses facts that Theorem 3.2 does not state",
+   "quote": "Our choice of $y$ excludes the exceptional character",
+   "explanation": "The step needs: (a) each simple factor of the Banach representation of $L^{(s-1)}$ is in the list of Theorem 3.2(3) for the parameter of $y$; (b) each listed simple for that parameter has infinite dimension. The theorem does not say that the unique simple at an absolutely irreducible parameter has infinite dimension. The conclusion is correct by a direct argument: a unitary Banach representation of $\\mathrm{GL}_2(\\mathbb{Q}_2)$ of finite dimension is trivial on $\\mathrm{SL}_2(\\mathbb{Q}_2)$, so its simples are characters $\\gamma\\circ\\det$, and these have parameter $\\gamma+\\gamma\\varepsilon$ only. Thus only ratio $\\varepsilon^{\\pm1}$ must be excluded; ratio $1$ is not a problem. I checked the count of exceptional parameters: $\\gamma_1^2$ is fixed by the determinant and the ratio, so $\\gamma_1$ is fixed up to one of finitely many quadratic characters of $\\mathbb{Q}_2^\\times$. I also checked the growth chain $g(V)\\ge s-1+g(V_{s-1})$ and $g(V_{s-1})\\ge 2$.",
+   "comment_type": "missing_information",
+   "severity": "minor",
+   "source": {
+    "file": "sections/regular-point.tex",
+    "lines": [
+     150,
+     150
+    ]
+   },
+   "boxes": [
+    {
+     "page": 17,
+     "x": 71.999985,
+     "y": 356.091587,
+     "w": 470.116394,
+     "h": 12.045245
+    }
+   ]
+  },
+  {
+   "title": "Hodge-theoretic conditions enter at three auxiliary objects, not only at the point $x$",
+   "quote": "condition is needed only at the auxiliary point.",
+   "explanation": "It is correct that no de Rham condition is put on $r$. But the proof uses regular de Rham objects at three places: the non-CM eigenform that supplies the determinant $\\chi=\\delta\\varepsilon^{w}$ (Lemma 2.1), the regular modular lift of the residue used as seed (Proposition 2.3), and the point $x$. The first two are the reason for the cyclotomic normalization of $\\det r$ and for the dependence on Proposition 5.2. The sentence should say that these conditions are on auxiliary objects only.",
+   "comment_type": "claim_accuracy",
+   "severity": "minor",
+   "source": {
+    "file": "sections/introduction.tex",
+    "lines": [
+     132,
+     132
+    ]
+   },
+   "boxes": [
+    {
+     "page": 2,
+     "x": 71.999985,
+     "y": 678.653812,
+     "w": 468.0,
+     "h": 12.0452075
+    }
+   ]
+  },
+  {
+   "title": "The tame level $N$ is not controlled, so the result is weaker than Emerton's conjecture in a way that the text understates",
+   "quote": "primes in the tame level.",
+   "explanation": "In the final proof, $N$ must be divisible by the odd part of the level of the classical form $g$ attached to $r_x$. The point $x$ comes from an eigenvector in a Hom space, and $g$ comes from the cited Theorem 1.1 of FM2. Its level includes the tame level of the forms over $F$ and the primes added in Proposition 2.3 (seed, auxiliary form, field preparation). Thus the proof gives no bound for $N$ in terms of the conductor of $r$, and no statement that the added primes can be removed. The abstract and the introduction say only that auxiliary primes are allowed. The paper should say that $N$ is not effective and that level lowering in $\\mathbb T_2(N)$ is not addressed.",
+   "comment_type": "claim_accuracy",
+   "severity": "minor",
+   "source": null,
+   "boxes": []
+  },
+  {
+   "title": "Two classical citations do not match the generality used at $p=2$",
+   "quote": "\\cite[Section~4.2, Lemma~4.2.1 and Theorem~4.2.2]{Katz1973}.",
+   "explanation": "(1) As I recall, Chapter 4 of Katz (1973) treats the rank-one \\'etale quotient over the ordinary locus for full level $n\\ge 3$ prime to $p$. The ring of functions on the tower of trivializations $\\widehat{\\mathbb G}_m\\simeq\\widehat E$ and its Hecke action are in his later papers. Section 2.1 there lifts the Hasse invariant by $E_{p-1}$ only for $p\\ge 5$. The paper gives its own density proof, and I checked its main steps: $E_4\\equiv 1 \\pmod 2$ on the tower, $x^{2^n}\\to 1$ and $x^{2^n-1}\\to x^{-1}$ for $x\\equiv 1$, and $\\iota^*z=\\exp_{\\widehat E}(a_1\\log(1+T))$ makes each $a_j$ a polynomial in $a_1$ after inversion of $2$. The effect of the citation is thus small. (2) The depth-zero citation is applied at residue field $\\mathbb{F}_2$, where $\\sigma$ is the sign character of $\\mathrm{GL}_2(\\mathbb{F}_2)\\simeq S_3$. The conclusion is correct by a direct argument: a representation that contains $\\sigma$ has depth $0$; if it is not supercuspidal, its invariants under the principal congruence subgroup are in $1\\oplus\\mathrm{St}$, which does not contain the sign character; and $\\sigma$ is not $\\eta\\circ\\det$ because $\\sigma$ is nontrivial on $\\mathrm{SL}_2(\\mathbb{Z}_2)$. The authors should give this argument or a reference that includes $q=2$.",
+   "comment_type": "presentation",
+   "severity": "minor",
+   "source": {
+    "file": "sections/hecke.tex",
+    "lines": [
+     87,
+     87
+    ]
+   },
+   "boxes": [
+    {
+     "page": 21,
+     "x": 71.999985,
+     "y": 554.870773,
+     "w": 469.516357,
+     "h": 13.63634125
+    },
+    {
+     "page": 21,
+     "x": 527.62854,
+     "y": 556.1828959999999,
+     "w": 10.909072,
+     "h": 8.587145
+    },
+    {
+     "page": 21,
+     "x": 71.999985,
+     "y": 568.4199679999999,
+     "w": 468.272705,
+     "h": 13.63634125
+    }
+   ]
+  }
+ ]
+}

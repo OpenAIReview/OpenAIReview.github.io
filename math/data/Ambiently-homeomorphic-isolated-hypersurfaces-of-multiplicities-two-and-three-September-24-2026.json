@@ -1,0 +1,668 @@
+{
+ "id": "Ambiently-homeomorphic-isolated-hypersurfaces-of-multiplicities-two-and-three-September-24-2026",
+ "title": "Ambiently homeomorphic isolated hypersurfaces of multiplicities two and three",
+ "abstract": "We give a negative answer to the embedded Zariski multiplicity conjecture. We construct two reduced hypersurface germs that are ambiently homeomorphic but have multiplicities two and three. Both have isolated singularities and lie in a common complex affine space of dimension divisible by eight. Their defining function germs are also topologically right equivalent, and the same examples answer Arnold's corank problem negatively for ambient topological equivalence.",
+ "result_id": "059",
+ "result_title": "Counterexamples to Zariski’s multiplicity conjecture",
+ "subject": "Algebraic and complex geometry",
+ "source_pdf": "preprints/Ambiently-homeomorphic-isolated-hypersurfaces-of-multiplicities-two-and-three-September-24-2026/paper.pdf",
+ "pdf": "pdf/Ambiently-homeomorphic-isolated-hypersurfaces-of-multiplicities-two-and-three-September-24-2026.pdf",
+ "page_sizes": [
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ]
+ ],
+ "macros": "\\newcommand{\\arraystretch}{1.08}\n\\newcommand{\\Z}{\\mathbb Z}\n\\newcommand{\\Q}{\\mathbb Q}\n\\newcommand{\\R}{\\mathbb R}\n\\newcommand{\\C}{\\mathbb C}\n\\newcommand{\\F}{\\mathbb F}\n\\newcommand{\\A}{\\mathbb A}\n\\newcommand{\\ord}{\\operatorname{ord}}\n\\newcommand{\\Spec}{\\operatorname{Spec}}\n\\newcommand{\\GL}{\\operatorname{GL}}\n\\newcommand{\\SL}{\\operatorname{SL}}\n\\newcommand{\\SU}{\\operatorname{SU}}\n\\newcommand{\\Res}{\\operatorname{Res}}\n\\newcommand{\\tr}{\\operatorname{Tr}}\n\\newcommand{\\diag}{\\operatorname{diag}}\n\\newcommand{\\rank}{\\operatorname{rank}}\n\\newcommand{\\Hom}{\\operatorname{Hom}}\n\\newcommand{\\End}{\\operatorname{End}}\n\\newcommand{\\Aut}{\\operatorname{Aut}}\n\\newcommand{\\Gal}{\\operatorname{Gal}}\n\\newcommand{\\rad}{\\operatorname{rad}}\n\\newcommand{\\lcm}{\\operatorname{lcm}}",
+ "review": {
+  "method": "OpenAIReview (Claude Opus 5.5)",
+  "effort": "high",
+  "date": "2026-10-08"
+ },
+ "overall_assessment": "The paper claims two weighted homogeneous polynomials $f_1,f_2$ in $N=4s_0+16$ variables with isolated critical points, $\\operatorname{ord}_0 f_1=2$, $\\operatorname{ord}_0 f_2=3$, and ambiently homeomorphic zero sets. I found no mathematical error in the argument. The review has two minor findings and no major or moderate finding.\n\nI checked each step against the source. The chain completion gives exponents $a_i\\geq 2$, monomial degrees at least $3$, and an isolated critical point. The signed weight table gives a variable excess of $4E$. The spectral comparison is correct in all three cases: for even $k$ the exceptional products are $\\prod_b A_b^{2e_b}$ and $\\prod_b (R_b/A_b)^{2e_b}$; for odd $k$ with $3\\nmid k$ the identity $\\cot x\\,\\cot(x+k\\pi/3)\\,\\cot(x+2k\\pi/3)=-\\cot 3x$ gives the row identity with the correct signs; for odd $k$ with $3\\mid k$ the cube factor $t^{1/3}+t^{2/3}$ is $0$. The symmetrization $B=ST^r$ is symmetric and $T$-invariant. The odd-prime square-root and two-squares arguments, the dyadic hermitian classification, the hermitian descent, and the reverser identity $C^{\\mathsf t}SC=S^{\\mathsf t}$ for even $s$ are correct. The determinant of $a\\otimes CaC^{-1}$ is $1$ on each eigenspace. The six-cube signatures are $(20,2)$, $(6,15)$, $(6,15)$ up to a common sign. The strong approximation step, $\\det(1-T)=1$ from $\\Phi_d(1)=1$, the Wang sequence, and the weighted cone extension are correct. The three corollaries follow.\n\nThe finite certificate is the one step that the text does not prove. I recomputed it with an independent program and got the same numbers: $1118\\times 1100$, then $896\\times 867$, and $\\operatorname{rank}_{\\mathbb F_{1009}}\\widetilde M=868$. The source must include the listing.\n\nThe result depends on cited theorems that I did not check against the original papers: the real Seifert form from the spectrum modulo $2$ (N\\'emethi, Balnojan--Hertling), the integral monodromy of sums of chains (Hertling--Mase), Sakamoto's sign formula, Levine's classification, and the Saeki--King transfer to right equivalence. A referee must confirm these statements and their conventions, because the claim is a negative answer to Zariski's multiplicity question. The introduction also cites an unrefereed companion result on $\\mu$-constant families in $\\mathbb C^3$; no proof in this paper uses it.",
+ "num_findings": 2,
+ "comments": [
+  {
+   "title": "The finite rank certificate is not in the manuscript source",
+   "quote": "\\lstinputlisting{../verification/support/supplied_finite_rank.py}",
+   "explanation": "The appendix says that it gives the complete program, but the source only reads an external file. The explicit relation with $849$ coefficients is a second external file. The text thus contains no evidence for the three computed facts in the lemma on the finite product relation: the size $1118\\times 1100$ after the prime cutoff, the size $896\\times 867$ after the deletions, and $\\operatorname{rank}_{\\mathbb F_{1009}}\\widetilde M=868$. All later results depend on these facts. The proposition on the seeds uses $E>0$ for the $4E$ squares that give $\\operatorname{ord}_0 p_1=2$, and it uses $\\prod_b A_b^{e_b}=\\prod_b R_b^{e_b}=1$ for the even characters. The counts alone give a kernel of dimension at least $896-867=29$, but they do not show that the row of ones is outside the row space of $M$. I wrote an independent program from the description in the proof (sieve to $3d$ with $d=3^{11}$, cutoff $4450$, repeated deletion of columns that are the only support of a row, elimination modulo a prime). It gives $1118$ columns and $1100$ rows, then $896$ columns and $867$ rows, and $\\operatorname{rank}\\,M=867$, $\\operatorname{rank}\\,\\widetilde M=868$ modulo $1009$ and also modulo $1000003$. The adjugate argument is correct after that, because rank $868$ modulo a prime gives an $868\\times 868$ minor of $\\widetilde M$ with nonzero integer determinant. The lemma is true. The problem is one of evidence: the listing must be part of the manuscript, and the sentence that all construction is proved in the text must name this computation as an exception.",
+   "comment_type": "missing_information",
+   "severity": "minor",
+   "source": {
+    "file": "sections/certificate.tex",
+    "lines": [
+     9,
+     9
+    ]
+   },
+   "boxes": [
+    {
+     "page": 28,
+     "x": -349.39447,
+     "y": 86.94168099999999,
+     "w": 868.687256,
+     "h": 4.23411375
+    },
+    {
+     "page": 28,
+     "x": 84.94915,
+     "y": 86.94168099999999,
+     "w": 434.742126,
+     "h": 4.23411375
+    },
+    {
+     "page": 28,
+     "x": -339.232635,
+     "y": 87.340179,
+     "w": 855.138123,
+     "h": 0.0
+    },
+    {
+     "page": 28,
+     "x": -339.232635,
+     "y": 90.328976,
+     "w": 430.557861,
+     "h": 13.698630000000001
+    },
+    {
+     "page": 28,
+     "x": -339.232635,
+     "y": 101.287876,
+     "w": 430.557861,
+     "h": 13.698630000000001
+    },
+    {
+     "page": 28,
+     "x": -339.232635,
+     "y": 112.246777,
+     "w": 430.557861,
+     "h": 13.698630000000001
+    },
+    {
+     "page": 28,
+     "x": -339.232635,
+     "y": 123.205677,
+     "w": 430.557861,
+     "h": 13.698630000000001
+    },
+    {
+     "page": 28,
+     "x": -339.232635,
+     "y": 134.16458500000002,
+     "w": 430.557861,
+     "h": 13.698630000000001
+    },
+    {
+     "page": 28,
+     "x": -339.232635,
+     "y": 145.123493,
+     "w": 430.557861,
+     "h": 13.698630000000001
+    },
+    {
+     "page": 28,
+     "x": -339.232635,
+     "y": 156.082402,
+     "w": 430.557861,
+     "h": 13.698630000000001
+    },
+    {
+     "page": 28,
+     "x": -339.232635,
+     "y": 163.753589,
+     "w": 855.138123,
+     "h": 17.80826125
+    },
+    {
+     "page": 28,
+     "x": -339.232635,
+     "y": 174.71249699999998,
+     "w": 855.138123,
+     "h": 17.80826125
+    },
+    {
+     "page": 28,
+     "x": -339.232635,
+     "y": 185.671406,
+     "w": 855.138123,
+     "h": 17.80826125
+    },
+    {
+     "page": 28,
+     "x": -339.232635,
+     "y": 196.63029799999998,
+     "w": 855.138123,
+     "h": 17.80826125
+    },
+    {
+     "page": 28,
+     "x": -339.232635,
+     "y": 207.589206,
+     "w": 855.138123,
+     "h": 17.80826125
+    },
+    {
+     "page": 28,
+     "x": -339.232635,
+     "y": 221.83582,
+     "w": 430.557861,
+     "h": 13.698630000000001
+    },
+    {
+     "page": 28,
+     "x": -339.232635,
+     "y": 232.79472800000002,
+     "w": 430.557861,
+     "h": 13.698630000000001
+    },
+    {
+     "page": 28,
+     "x": -339.232635,
+     "y": 243.75362,
+     "w": 430.557861,
+     "h": 13.698630000000001
+    },
+    {
+     "page": 28,
+     "x": -339.232635,
+     "y": 254.712544,
+     "w": 430.557861,
+     "h": 13.698630000000001
+    },
+    {
+     "page": 28,
+     "x": -339.232635,
+     "y": 265.671406,
+     "w": 430.557861,
+     "h": 13.698630000000001
+    },
+    {
+     "page": 28,
+     "x": -339.232635,
+     "y": 276.63032899999996,
+     "w": 430.557861,
+     "h": 13.698630000000001
+    },
+    {
+     "page": 28,
+     "x": -339.232635,
+     "y": 287.589253,
+     "w": 430.557861,
+     "h": 13.698630000000001
+    },
+    {
+     "page": 28,
+     "x": -339.232635,
+     "y": 298.548115,
+     "w": 430.557861,
+     "h": 13.698630000000001
+    },
+    {
+     "page": 28,
+     "x": -339.232635,
+     "y": 309.50703799999997,
+     "w": 430.557861,
+     "h": 13.698630000000001
+    },
+    {
+     "page": 28,
+     "x": -339.232635,
+     "y": 320.465962,
+     "w": 430.557861,
+     "h": 13.698630000000001
+    },
+    {
+     "page": 28,
+     "x": -339.232635,
+     "y": 331.42488499999996,
+     "w": 430.557861,
+     "h": 13.698630000000001
+    },
+    {
+     "page": 28,
+     "x": -339.232635,
+     "y": 342.38374699999997,
+     "w": 430.557861,
+     "h": 13.698630000000001
+    },
+    {
+     "page": 28,
+     "x": -339.232635,
+     "y": 353.342671,
+     "w": 430.557861,
+     "h": 13.698630000000001
+    },
+    {
+     "page": 28,
+     "x": -339.232635,
+     "y": 364.30159399999997,
+     "w": 430.557861,
+     "h": 13.698630000000001
+    },
+    {
+     "page": 28,
+     "x": -339.232635,
+     "y": 375.260456,
+     "w": 430.557861,
+     "h": 13.698630000000001
+    },
+    {
+     "page": 28,
+     "x": -339.232635,
+     "y": 386.21938,
+     "w": 430.557861,
+     "h": 13.698630000000001
+    },
+    {
+     "page": 28,
+     "x": -339.232635,
+     "y": 397.17830299999997,
+     "w": 430.557861,
+     "h": 13.698630000000001
+    },
+    {
+     "page": 28,
+     "x": -339.232635,
+     "y": 408.137165,
+     "w": 430.557861,
+     "h": 13.698630000000001
+    },
+    {
+     "page": 28,
+     "x": -339.232635,
+     "y": 419.096089,
+     "w": 430.557861,
+     "h": 13.698630000000001
+    },
+    {
+     "page": 28,
+     "x": -339.232635,
+     "y": 430.055012,
+     "w": 430.557861,
+     "h": 13.698630000000001
+    },
+    {
+     "page": 28,
+     "x": -339.232635,
+     "y": 441.013874,
+     "w": 430.557861,
+     "h": 13.698630000000001
+    },
+    {
+     "page": 28,
+     "x": -339.232635,
+     "y": 451.97279799999995,
+     "w": 430.557861,
+     "h": 13.698630000000001
+    },
+    {
+     "page": 28,
+     "x": -339.232635,
+     "y": 462.931721,
+     "w": 430.557861,
+     "h": 13.698630000000001
+    },
+    {
+     "page": 28,
+     "x": -339.232635,
+     "y": 473.890583,
+     "w": 430.557861,
+     "h": 13.698630000000001
+    },
+    {
+     "page": 28,
+     "x": -339.232635,
+     "y": 484.84950699999996,
+     "w": 430.557861,
+     "h": 13.698630000000001
+    },
+    {
+     "page": 28,
+     "x": -339.232635,
+     "y": 495.80843,
+     "w": 430.557861,
+     "h": 13.698630000000001
+    },
+    {
+     "page": 28,
+     "x": -339.232635,
+     "y": 506.767353,
+     "w": 430.557861,
+     "h": 13.698630000000001
+    },
+    {
+     "page": 28,
+     "x": -339.232635,
+     "y": 517.726216,
+     "w": 430.557861,
+     "h": 13.698630000000001
+    },
+    {
+     "page": 28,
+     "x": -339.232635,
+     "y": 528.685139,
+     "w": 430.557861,
+     "h": 13.698630000000001
+    },
+    {
+     "page": 28,
+     "x": -339.232635,
+     "y": 539.6440620000001,
+     "w": 430.557861,
+     "h": 13.698630000000001
+    },
+    {
+     "page": 28,
+     "x": -339.232635,
+     "y": 550.602925,
+     "w": 430.557861,
+     "h": 13.698630000000001
+    },
+    {
+     "page": 28,
+     "x": -339.232635,
+     "y": 561.561848,
+     "w": 430.557861,
+     "h": 13.698630000000001
+    },
+    {
+     "page": 28,
+     "x": -339.232635,
+     "y": 572.5207710000001,
+     "w": 430.557861,
+     "h": 13.698630000000001
+    },
+    {
+     "page": 28,
+     "x": -339.232635,
+     "y": 583.479634,
+     "w": 430.557861,
+     "h": 13.698630000000001
+    },
+    {
+     "page": 28,
+     "x": -339.232635,
+     "y": 594.4385570000001,
+     "w": 430.557861,
+     "h": 13.698630000000001
+    },
+    {
+     "page": 28,
+     "x": -339.232635,
+     "y": 605.3974800000001,
+     "w": 430.557861,
+     "h": 13.698630000000001
+    },
+    {
+     "page": 28,
+     "x": -339.232635,
+     "y": 616.356343,
+     "w": 430.557861,
+     "h": 13.698630000000001
+    },
+    {
+     "page": 28,
+     "x": -339.232635,
+     "y": 627.3152660000001,
+     "w": 430.557861,
+     "h": 13.698630000000001
+    },
+    {
+     "page": 28,
+     "x": -339.232635,
+     "y": 638.2741890000001,
+     "w": 430.557861,
+     "h": 13.698630000000001
+    },
+    {
+     "page": 28,
+     "x": -339.232635,
+     "y": 649.233052,
+     "w": 430.557861,
+     "h": 13.698630000000001
+    },
+    {
+     "page": 28,
+     "x": -339.232635,
+     "y": 660.1919750000001,
+     "w": 430.557861,
+     "h": 13.698630000000001
+    },
+    {
+     "page": 28,
+     "x": -339.232635,
+     "y": 671.150898,
+     "w": 430.557861,
+     "h": 13.698630000000001
+    },
+    {
+     "page": 28,
+     "x": -339.232635,
+     "y": 682.109822,
+     "w": 430.557861,
+     "h": 13.698630000000001
+    },
+    {
+     "page": 28,
+     "x": -339.232635,
+     "y": 693.0686840000001,
+     "w": 430.557861,
+     "h": 13.698630000000001
+    },
+    {
+     "page": 28,
+     "x": -339.232635,
+     "y": 704.027607,
+     "w": 430.557861,
+     "h": 13.698630000000001
+    },
+    {
+     "page": 28,
+     "x": -339.232635,
+     "y": 714.986531,
+     "w": 430.557861,
+     "h": 13.698630000000001
+    },
+    {
+     "page": 28,
+     "x": -339.232635,
+     "y": 725.9453930000001,
+     "w": 430.557861,
+     "h": 13.698630000000001
+    },
+    {
+     "page": 28,
+     "x": -339.232635,
+     "y": 736.904316,
+     "w": 430.557861,
+     "h": 13.698630000000001
+    },
+    {
+     "page": 28,
+     "x": -339.232635,
+     "y": 744.575535,
+     "w": 855.138123,
+     "h": 17.80826125
+    },
+    {
+     "page": 28,
+     "x": -339.232635,
+     "y": 747.86324,
+     "w": 430.557861,
+     "h": 13.698630000000001
+    },
+    {
+     "page": 28,
+     "x": -349.39447,
+     "y": 758.82206,
+     "w": 868.687256,
+     "h": 4.23411375
+    },
+    {
+     "page": 28,
+     "x": 84.94915,
+     "y": 758.82206,
+     "w": 434.742126,
+     "h": 4.23411375
+    },
+    {
+     "page": 28,
+     "x": -339.232635,
+     "y": 762.209351,
+     "w": 855.138123,
+     "h": 0.0
+    }
+   ]
+  },
+  {
+   "title": "An unrefereed companion result on $\\mathbb C^3$ is stated as an established theorem",
+   "quote": "\\cite[Theorem~1.1]{OpenAIMuConstant2026} proves, after shrinking,",
+   "explanation": "The sentence states as a fact that a holomorphic one-parameter family $f_t$ in $\\mathbb C^3$ with constant $\\mu(f_t,0)$ is topologically right-trivial. This is the case that the L\\^e--Ramanujam theorem excludes, and it is a known open problem. The only source is a companion manuscript by the same author. The text gives no argument for it, so a reader cannot confirm it. I checked the dependency: no result of this paper uses it. The main theorem and the three corollaries work in dimension $N=4s_0+16\\geq 16$ and $N+1$. The statement that the multiplicities $2$ and $3$ preclude a connecting $\\mu$-constant family uses only the equimultiplicity theorem of Fern\\'andez de Bobadilla and Pe\\l ka. The claim is thus context only. It must be marked as unrefereed, or removed.",
+   "comment_type": "claim_accuracy",
+   "severity": "minor",
+   "source": {
+    "file": "sections/introduction.tex",
+    "lines": [
+     110,
+     110
+    ]
+   },
+   "boxes": [
+    {
+     "page": 2,
+     "x": 79.370071,
+     "y": 672.129402,
+     "w": 436.535431,
+     "h": 14.77789875
+    },
+    {
+     "page": 2,
+     "x": 79.370071,
+     "y": 687.25867,
+     "w": 436.535431,
+     "h": 12.0452075
+    }
+   ]
+  }
+ ]
+}

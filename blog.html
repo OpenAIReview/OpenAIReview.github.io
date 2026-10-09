@@ -82,6 +82,9 @@ a:hover { color: var(--accent-hover); }
 }
 .header-links a { color: var(--text-secondary); transition: color 0.15s; }
 .header-links a:hover { color: var(--text); }
+.header-links a { white-space: nowrap; }
+@media (max-width: 480px) { div.header-links { gap: 12px; font-size: 12px; } div.header-links a.home-link { display: none; } }
+.header-links a.current { color: var(--text); font-weight: 600; }
 
 /* Blog layout */
 .blog-hero {
@@ -246,12 +249,15 @@ a:hover { color: var(--accent-hover); }
 <div class="header">
   <a class="logo" href="index.html">OpenAIReview</a>
   <div class="header-links">
-    <a href="blog.html">Blog</a>
+    <a href="index.html" class="home-link">OpenVerification</a>
+    <a href="reviewer.html">Review your paper</a>
+    <a href="blogs.html" class="current">Blogs</a>
     <a href="https://github.com/ChicagoHAI/OpenAIReview" target="_blank">GitHub</a>
   </div>
 </div>
 
 <div class="blog-hero">
+  <p class="byline" style="margin-bottom:18px;"><a href="blogs.html">&larr; All blogs</a></p>
   <h1>AI-assisted Reviewing is Necessary and Should be Open</h1>
   <p class="byline">March 2026 &nbsp;&middot;&nbsp; Chenhao Tan</p>
 </div>
@@ -260,12 +266,12 @@ a:hover { color: var(--accent-hover); }
 
 <div style="background:var(--accent-light);border-left:3px solid var(--accent);border-radius:var(--radius-sm);padding:16px 20px;margin-bottom:28px;">
   <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.6px;color:var(--accent);">TL;DR</span>
-  <p style="margin:6px 0 0;font-size:15px;line-height:1.6;">We build <a href="https://openaireview.github.io">OpenAIReview</a> as an open tool so that everyone can get high-quality reviews for the cost of a coffee.</p>
+  <p style="margin:6px 0 0;font-size:15px;line-height:1.6;">We build <a href="reviewer.html">OpenAIReview</a> as an open tool so that everyone can get high-quality reviews for the cost of a coffee.</p>
 </div>
 
 <p>Academic peer review is at an inflection point. AI tools are transforming the production process, and <a href="https://cichicago.substack.com/p/the-mirage-of-autonomous-ai-scientists">our scientific community needs to shift focus towards selection and evaluation</a>. I believe that the right response is not to resist AI in review, but to embrace it deliberately and openly.</p>
 
-<p>In this post, I lay out why AI-assisted reviewing is necessary, why it should be open, and what we are doing about it with <a href="https://openaireview.github.io">OpenAIReview</a>.</p>
+<p>In this post, I lay out why AI-assisted reviewing is necessary, why it should be open, and what we are doing about it with <a href="reviewer.html">OpenAIReview</a>.</p>
 
 <h2>AI-assisted reviewing is necessary</h2>
 
@@ -291,7 +297,7 @@ a:hover { color: var(--accent-hover); }
 
 <p><strong>Openness keeps the stakes honest.</strong> AI-assisted reviewing will shape what gets published and what does not. That is too consequential to leave to closed, proprietary systems with no public accountability. The scientific community should be able to see, question, and improve the tools that influence its own knowledge production.</p>
 
-<p>We are releasing <a href="https://openaireview.github.io">OpenAIReview</a> for this purpose. If you would like to customize this package, a lot of key information is in <a href="https://github.com/ChicagoHAI/OpenAIReview/blob/main/src/reviewer/prompts.py">prompts.py</a>. We will also explore whether it is possible to achieve similar quality with just a Claude skill for users that already have Claude Code. Any feedback is welcome!</p>
+<p>We are releasing <a href="reviewer.html">OpenAIReview</a> for this purpose. If you would like to customize this package, a lot of key information is in <a href="https://github.com/ChicagoHAI/OpenAIReview/blob/main/src/reviewer/prompts.py">prompts.py</a>. We will also explore whether it is possible to achieve similar quality with just a Claude skill for users that already have Claude Code. Any feedback is welcome!</p>
 
 <img src="assets/example.png" alt="An example OpenAIReview output">
 
@@ -322,6 +328,7 @@ a:hover { color: var(--accent-hover); }
   <li><strong>Progressive</strong>: processes the paper sequentially while maintaining a running summary of definitions, equations, and key claims. After a post-hoc consolidation step, it reaches <strong>25% LLM recall</strong> (44% pre-consolidation) at ~$4/paper, with 83% location coverage.</li>
 </ul>
 
+<div style="overflow-x:auto">
 <table>
   <thead>
     <tr><th>Method</th><th>Comments</th><th>LLM Recall</th><th>Location Recall</th><th>Cost/paper</th></tr>
@@ -333,6 +340,7 @@ a:hover { color: var(--accent-hover); }
     <tr><td>Progressive (Full)</td><td>247</td><td>44.2%</td><td>86.5%</td><td>~$4</td></tr>
   </tbody>
 </table>
+</div>
 
 <div id="blog-chart" style="margin:24px 0;"></div>
 

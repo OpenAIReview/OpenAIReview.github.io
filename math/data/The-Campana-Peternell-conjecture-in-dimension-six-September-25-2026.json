@@ -1,0 +1,335 @@
+{
+ "id": "The-Campana-Peternell-conjecture-in-dimension-six-September-25-2026",
+ "title": "The Campana–Peternell conjecture in dimension six",
+ "abstract": "We prove that every smooth connected complex projective Fano sixfold with nef tangent bundle is rational homogeneous, resolving the Campana–Peternell conjecture in complex dimension six. As a consequence, a connected compact Kähler manifold <i>X</i> with nef holomorphic tangent bundle and <span class=\"math\">\\dim_{\\mathbb C}X-\\widetilde q(X)\\leq6</span> has ordinary universal cover <span class=\"math\">F\\times\\mathbb C^{\\widetilde q(X)}</span>, where <i>F</i> is a rational homogeneous manifold and <span class=\"math\">\\widetilde q(X)</span> is the maximal irregularity of a connected finite étale cover.",
+ "result_id": "067",
+ "result_title": "The Campana–Peternell conjecture in dimension six",
+ "subject": "Algebraic and complex geometry",
+ "source_pdf": "preprints/The-Campana-Peternell-conjecture-in-dimension-six-September-25-2026/main.pdf",
+ "pdf": "pdf/The-Campana-Peternell-conjecture-in-dimension-six-September-25-2026.pdf",
+ "page_sizes": [
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ]
+ ],
+ "macros": "",
+ "review": {
+  "method": "OpenAIReview (Claude Opus 5.5)",
+  "effort": "high",
+  "date": "2026-10-08"
+ },
+ "overall_assessment": "The manuscript claims a proof of the Campana--Peternell conjecture in dimension six. The new case is Picard number one and pseudoindex five, where a characteristic-number calculation on the universal family gives (u-4)(3u-8)=0 and then identifies the variety of minimal rational tangents with the Segre threefold, hence X with Gr(2,5).\n\nThe review found no mathematical error. Each step that the manuscript proves itself was checked against the text: the splitting of T_e on every minimal curve, the pseudoindex reduction, the P^1-fibration involution lemma and its power formulas, the full pseudoindex-four intersection argument (a=b=-1, the Betti-number contradiction, the moment identities, the orthogonal lift, lambda=9/4), the descent of r,s,t, the Newton, Todd and Delta recurrences, the six row families of A, the product factorization, the counts |C_n|, the logic from modular ranks to the rational bound, the six witness columns and their minor, the nondegeneracy lemma, the sectional-genus step, normality of the scrolls, and the two corollaries. Six of the eleven section reviews returned no finding.\n\nThe computational Lemma 5.1 was reconstructed independently from the definitions in Section 4, without the authors' program. The reconstruction gave the same sizes and ranks (1785 x 581 with rank 516, kernel of dimension 65, P of rank 60, N of size 69 x 129, dim K_2 = 163 and rank 6814 for the 8280 x 6820 matrix, all modulo 10007 where applicable), confirmed the three product witnesses and the three sparse columns over Q, and confirmed that the true intersection numbers of Gr(2,5) satisfy all constraints and equal the witness (B', H^b).\n\nThe remaining concerns are about what the paper takes from the literature and how it presents the certificate. The most important one: the pseudoindex-four case starts from a dichotomy in Kanemitsu's fivefold paper, and its validity for sixfolds is asserted for Theorem 3.3 without a pinpoint. The proof of Theorem 1.1 is complete only if that statement holds in dimension six. The other points are minor: the Watanabe attribution (index versus pseudoindex), the use of a Claudon--Horing--Kollar theorem over a possibly non-projective torus (a short direct proof exists), the attribution of dimensions at most five to the rho>n-5 theorem, several theorem numbers that could not be checked, and the fact that the matrices and the program are not in the manuscript text.\n\nLimits of this review: no cited source and no bibliography file was available, so all statements about cited theorems are unconfirmed. The authors' program verify.py was not available; the confirmation of Lemma 5.1 comes from the independent reconstruction only.",
+ "num_findings": 8,
+ "comments": [
+  {
+   "title": "The pseudoindex-four case rests on a Kanemitsu dichotomy whose validity in dimension six is asserted, not shown",
+   "quote": "Kanemitsu's Theorem~3.3 and Proposition~4.1",
+   "explanation": "Proposition 3.1 starts from an external dichotomy: either $X$ is rational homogeneous, or $e=g\\circ f$ with $f,g$ smooth $\\mathbb P^1$-fibrations and $q:W\\to Y$ a smooth elementary contraction. The cited paper is about fivefolds. The manuscript says that both results 'apply in arbitrary dimension', but it gives a source for this only for Proposition 4.1 (Remark 4.2). For Theorem 3.3 the dimension-free range is an assertion. The fibre list $\\mathbb P^1,\\mathbb P^2,\\mathbb P^3,Q^3,Q^5,K(G_2)$ is attributed to a remark, and the paper does not say where smoothness and elementarity of $q$ and the map $V\\to Y$ come from. The sources were not available to the reviewers, so this is not a claim that the cited statements are wrong. All steps that the manuscript itself proves in Section 3 were checked and are correct: $a+b=-2$, $a\\le-1$, $g_*(c-bh)^2=-4bH$, the exclusion of $b=0$, hence $a=b=-1$; the Betti-number identity $b_6(X)=b_4(X)-1$ for $\\mathbb P^2$ fibres; the three moment identities and their solution $m_1=m_2=5m_4$, $m_3=3m_4$; the special orthogonal lift $\\widetilde A=(\\mu^2/\\det A)A$; $q_*(-K_q)^4=2\\cdot3^4c_1(E)=0$; and $\\lambda=9/4$. The fibre list is also consistent with the classification of rank-two complete flag manifolds: $a=-1$ and $-K_W\\cdot f(C)=3$ leave exactly $\\mathbb P^2$, $Q^3$, $K(G_2)$. Thus the argument is sound if the dichotomy holds for $n=6$. The paper must quote the exact statements of Theorem 3.3, Proposition 4.1, Remark 2.3 and Remark 4.2 with their dimension hypotheses, and must give a precise reason why Theorem 3.3 holds for sixfolds. The word 'independent' in the introduction is also too strong for an argument that starts from these results.",
+   "comment_type": "missing_information",
+   "severity": "moderate",
+   "source": {
+    "file": "sections/03-pseudoindex-four.tex",
+    "lines": [
+     27,
+     27
+    ]
+   },
+   "boxes": [
+    {
+     "page": 8,
+     "x": 72.305573,
+     "y": 116.60199,
+     "w": 462.152466,
+     "h": 13.63634125
+    },
+    {
+     "page": 8,
+     "x": 72.305573,
+     "y": 117.26881,
+     "w": 39.6362,
+     "h": 12.0452075
+    }
+   ]
+  },
+  {
+   "title": "Watanabe 2021 is cited for pseudoindex four; the result may be for Fano index four",
+   "quote": "Watanabe treated the pseudoindex-four sixfold case",
+   "explanation": "The same attribution opens Section 3. The source was not available, so this point is not confirmed. The 2021 paper of Watanabe on this subject that the reviewers know treats Fano manifolds of coindex three, that is, Fano index $n-2$ (index 4 for a sixfold). Index and pseudoindex are different invariants: with $\\rho=1$ and $-K_X=rH$, pseudoindex four permits $r\\in\\{1,2,4\\}$, and an index-four theorem covers only $r=4$. If the cited theorem assumes index four, the introduction misstates the literature and Proposition 3.1 carries the cases $r=1,2$ alone. If it covers all pseudoindex-four sixfolds, Section 3 is a second proof and the paper should say so. The correctness of Theorem 1.1 does not depend on this, because the paper gives its own argument. The authors should quote the hypothesis of the cited theorem.",
+   "comment_type": "claim_accuracy",
+   "severity": "minor",
+   "source": {
+    "file": "sections/01-introduction.tex",
+    "lines": [
+     47,
+     47
+    ]
+   },
+   "boxes": [
+    {
+     "page": 2,
+     "x": 77.760124,
+     "y": 448.002762,
+     "w": 457.996094,
+     "h": 13.63634125
+    }
+   ]
+  },
+  {
+   "title": "Claudon--Höring--Kollár Theorem 4.4 is applied to a fibration over a torus that can be non-projective",
+   "quote": "\\cite{ClaudonHoringKollar2013} applies to the locally trivial proper",
+   "explanation": "The cited paper is about projective varieties with quasi-projective universal cover. Here $X'$ is only compact Kähler and $A$ can be a non-projective torus, as the text itself says. The manuscript does not state the hypotheses of Theorem 4.4 or show that they hold in this case. The source was not available for a check. The conclusion is correct and has a short direct proof: the pullback of $\\alpha$ to $\\mathbb C^q$ is a holomorphic fibre bundle with fibre $F$ and structure group the complex Lie group $\\operatorname{Aut}(F)$; $\\mathbb C^q$ is Stein and contractible, so Grauert's Oka principle makes the bundle holomorphically trivial; $F\\times\\mathbb C^q$ is simply connected and covers $X'$, so it is the universal cover. The other steps of the proof of Corollary 1.2 were checked and are correct (existence of the maximal irregularity, fibre dimension, rigidity from $H^1(G/P,T_{G/P})=0$, Fischer--Grauert, the case $d=0$, simple connectedness of $G/P$, the Remmert reduction). The authors should give the direct argument or state the hypotheses of the cited theorem.",
+   "comment_type": "missing_information",
+   "severity": "minor",
+   "source": {
+    "file": "sections/07-conclusion.tex",
+    "lines": [
+     113,
+     113
+    ]
+   },
+   "boxes": [
+    {
+     "page": 22,
+     "x": 77.760124,
+     "y": 148.283203,
+     "w": 456.697906,
+     "h": 13.63634125
+    }
+   ]
+  },
+  {
+   "title": "Lemma 5.1 depends on matrices that the text never displays; the certificate is an external file",
+   "quote": "The following complete Python program verifies the finite calculations",
+   "explanation": "The pseudoindex-five case, the only new case of Theorem 1.1, depends on Lemma 5.1. Its proof is a computation: the matrices $A$, $K$, $P$, $N$ are defined by recurrences and are not printed, and the appendix reads the program from `../verification/verify.py`, which is not part of the source given for review. The sentence 'All resulting characteristic-number constraints are written explicitly' is thus stronger than the text. This is a presentation gap, not an error. An independent reconstruction from the definitions in Section 4 only (exact rational arithmetic, no use of the authors' program) gave the same data: $|\\mathcal T_9|=581$; $1785$ nonzero rows of $A$; rank of $A$ modulo $10007$ equal to $516$ with an exact rational kernel basis of $65$ columns; rational rank of $P$ equal to $60$; $N$ of size $69\\times129$; $N(B_iH_j)=0$ for $(B(0),H^a)$, $(B(1),H^a)$, $(B',H^b)$; zero violations of the $120$ double-slice equations for $s_1,s_2,s_3$; $\\dim\\mathcal K_2(\\mathbb F_{10007})=163$; and rank $6814$ modulo $10007$ for the $8280\\times6820$ matrix. The true intersection numbers of $\\operatorname{Gr}(2,5)$ satisfy all $1785$ rows and are equal to $(B',H^b)$. The hand-checkable parts are also correct: $|C_n|=129,1140,6820$, the minors $-8/15$, $6$, $-16/5$, and $32-20H_1+3H_1^2=0$ for $H_1=4,8/3$. The lemma is thus confirmed, but a reader of the manuscript alone cannot confirm it. The authors should publish the program with the paper and give $N$, or a hash of it, in a supplement.",
+   "comment_type": "presentation",
+   "severity": "minor",
+   "source": {
+    "file": "sections/08-certificate.tex",
+    "lines": [
+     4,
+     4
+    ]
+   },
+   "boxes": [
+    {
+     "page": 22,
+     "x": 77.760124,
+     "y": 402.821354,
+     "w": 456.479706,
+     "h": 12.0452075
+    }
+   ]
+  },
+  {
+   "title": "The appendix does not list the rank calculation that gives the rational upper bound",
+   "quote": "is also tested directly against every double-slice constraint.",
+   "explanation": "Section 5.2 puts the rational bound $\\dim_{\\mathbb Q}\\mathcal K_3\\le6$ on one fact: the $8280\\times6820$ double-slice matrix has rank $6814$ modulo $10007$. The appendix describes three parts of the program, and a rank calculation for this matrix is not among them. A test that six basis vectors satisfy every double-slice constraint shows nullity at least $6$, that is, rank at most $6814$. The proof needs rank at least $6814$. As described, that inequality comes only from the slice-merging procedure, through $\\dim\\mathcal K_3(\\mathbb F_{10007})=6$. This is mathematically correct, but it then depends on the correct implementation of about 135 merges, and the direct test does not detect an error that makes the computed space too small. A direct Gaussian elimination of the matrix, built from an independent reconstruction of $N$, gave rank $6814$ and nullity $6$ modulo $10007$, so the stated value is correct. The appendix should say that the program does this direct elimination, or the program should be changed to do it.",
+   "comment_type": "presentation",
+   "severity": "minor",
+   "source": {
+    "file": "sections/08-certificate.tex",
+    "lines": [
+     18,
+     18
+    ]
+   },
+   "boxes": [
+    {
+     "page": 22,
+     "x": 77.760124,
+     "y": 511.21490800000004,
+     "w": 456.774261,
+     "h": 12.0452075
+    },
+    {
+     "page": 22,
+     "x": 77.760124,
+     "y": 524.764103,
+     "w": 456.697906,
+     "h": 12.0452075
+    }
+   ]
+  },
+  {
+   "title": "Kanemitsu's $\\rho>n-5$ theorem is used as the source for all dimensions at most five",
+   "quote": "one and hence greater than $n-5$, so Kanemitsu's Theorem~0.2",
+   "explanation": "The same use occurs in the proof of Corollary 1.2 ('$\\rho(F_a)\\geq1>d-5$'). For $n\\le5$ the inequality $\\rho>n-5$ always holds, so the theorem applies formally. But in that range the statement is the full Campana--Peternell conjecture in dimension $n$, and the cited paper takes those cases from earlier work: Campana--Peternell ($n\\le3$, and $n=4$ with $\\rho>1$), Mok and Hwang ($n=4$, $\\rho=1$), Watanabe ($n=5$, $\\rho>1$) and Kanemitsu's fivefold paper ($n=5$, $\\rho=1$). There is no logical circle, and the conclusion is correct. The source was not available to confirm that the theorem is stated without a lower bound on $n$. The corollaries should cite the dimension-specific results that the introduction already lists.",
+   "comment_type": "presentation",
+   "severity": "minor",
+   "source": {
+    "file": "sections/07-conclusion.tex",
+    "lines": [
+     42,
+     42
+    ]
+   },
+   "boxes": [
+    {
+     "page": 21,
+     "x": 77.760124,
+     "y": 224.927219,
+     "w": 456.752441,
+     "h": 12.0452075
+    }
+   ]
+  },
+  {
+   "title": "Theorem pinpoints for the minimal-degree classification and for Mok's recognition theorem need a check",
+   "quote": "\\cite[Theorem~0.1]{EisenbudGreenHulekPopescu2006} now makes",
+   "explanation": "The sources were not available, so this is a request to check, not a confirmed error. The main subject of Eisenbud--Green--Hulek--Popescu (2006) is 2-regular and 'small' schemes; the del Pezzo--Bertini classification is background there, and the usual reference is Eisenbud--Harris, 'On varieties of minimal degree (a centennial account)'. In the same way, the location '\\S2.1' for the Main Theorem of Mok (2008) could not be confirmed, and the paraphrase omits the hypothesis 'rank at least two', which the next sentence supplies. The mathematics that the paper uses is correct: an irreducible nondegenerate threefold of degree 3 in $\\mathbb P^5$ is a rational normal scroll $S(a_1,a_2,a_3)$ with $a_1+a_2+a_3=3$; these scrolls are normal; smoothness forces $(1,1,1)$; and the paper establishes the hypotheses of the recognition theorem. The sectional-genus step was also checked: $g(B)=1+(1-u/2)L^3$ excludes $u=4$ and gives $L^3=3$ for $u=8/3$. Proposition 6.2 is not affected.",
+   "comment_type": "presentation",
+   "severity": "minor",
+   "source": {
+    "file": "sections/06-grassmannian.tex",
+    "lines": [
+     112,
+     112
+    ]
+   },
+   "boxes": [
+    {
+     "page": 20,
+     "x": 77.760124,
+     "y": 134.210434,
+     "w": 456.872467,
+     "h": 13.63634125
+    },
+    {
+     "page": 20,
+     "x": 77.760124,
+     "y": 148.426471,
+     "w": 456.697906,
+     "h": 12.0452075
+    }
+   ]
+  },
+  {
+   "title": "Rational and simple connectedness of Fano manifolds are cited to a source that could not be identified",
+   "quote": "\\cite[Theorems~2.11 and~5.3.2]{CampanaPeternell1999}.",
+   "explanation": "Both facts are true and standard. Rational connectedness is due to Campana and to Kollár--Miyaoka--Mori (1992), and simple connectedness follows from it. The mixed numbering '2.11' and '5.3.2' suggests a survey chapter; the bibliography file was not available for a check. Simple connectedness of $X$ is used twice: for the connected fibres of $e$ in Proposition 2.1, and for the triviality of the Hodge bundles in Lemma 4.3, which gives the Riemann--Roch vanishings. Both uses are correct. The authors should cite the primary sources and confirm the theorem numbers.",
+   "comment_type": "presentation",
+   "severity": "minor",
+   "source": {
+    "file": "sections/02-minimal-curves.tex",
+    "lines": [
+     18,
+     18
+    ]
+   },
+   "boxes": [
+    {
+     "page": 5,
+     "x": 77.760124,
+     "y": 232.46894799999998,
+     "w": 456.479706,
+     "h": 13.63634125
+    }
+   ]
+  }
+ ]
+}

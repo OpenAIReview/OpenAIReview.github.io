@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OpenAIReview — Math collection review</title>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-P2VZL2X4NX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-P2VZL2X4NX');
+</script>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']],
+    processEscapes: true,
+  },
+  options: {
+    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+    ignoreHtmlClass: 'no-mathjax',
+  },
+  // Safe mode removes script links and unsafe styles from math, since review text can come from an uploaded review.
+  loader: { load: ['ui/safe'] },
+  startup: { typeset: false }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #fafafa;
+  --surface: #ffffff;
+  --border: #e5e7eb;
+  --text: #1a1a2e;
+  --text-secondary: #6b7280;
+  --text-muted: #9ca3af;
+  --accent: #800020;
+  --accent-light: #fdf0f2;
+  --accent-hover: #5c0017;
+  --orange-light: #fffbeb;
+  --orange-border: #fde68a;
+  --red-light: #fef2f2;
+  --red-border: #fecaca;
+  --radius: 12px;
+  --radius-sm: 8px;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+  --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -2px rgba(0,0,0,0.05);
+  --shadow-focus: 0 0 0 3px rgba(128,0,32,0.15);
+  --header-h: 64px;
+  --metrics-h: 44px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { color: var(--accent-hover); }
+
+/* ── Header ── */
+.header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+  height: var(--header-h);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.header .logo { font-size: 16px; font-weight: 700; color: var(--accent); letter-spacing: -0.3px; flex-shrink: 0; }
+.header .separator { width: 1px; height: 24px; background: var(--border); flex-shrink: 0; }
+.header .paper-title { font-size: 14px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; flex: 1; }
+.paper-select-wrapper select {
+  font-family: inherit;
+  font-size: 13px;
+  padding: 7px 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--text);
+  max-width: 260px;
+}
+.paper-select-wrapper select:focus { outline: none; border-color: var(--accent); box-shadow: var(--shadow-focus); }
+
+/* ── Metrics Bar ── */
+.metrics-bar {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+  height: var(--metrics-h);
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  overflow-x: auto;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+.metric { display: inline-flex; align-items: center; gap: 4px; white-space: nowrap; }
+.metric strong { color: var(--text); font-weight: 600; }
+.metric-divider { width: 1px; height: 16px; background: var(--border); flex-shrink: 0; }
+
+/* ── Main Layout ── */
+.main { display: flex; height: calc(100vh - var(--header-h) - var(--metrics-h)); }
+
+/* ── Resize Handle ── */
+.resize-handle {
+  flex: 0 0 5px;
+  cursor: col-resize;
+  background: var(--border);
+  transition: background 0.15s;
+  position: relative;
+  z-index: 10;
+}
+.resize-handle:hover, .resize-handle.dragging { background: var(--accent); }
+
+/* ── Comment Panel ── */
+.comment-panel {
+  flex: 0 0 40%;
+  overflow-y: auto;
+  padding: 20px;
+  background: var(--bg);
+}
+.section-label {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+.section-label { color: var(--text-muted); margin: 18px 0 10px; }
+
+.comment-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: box-shadow 0.15s, border-color 0.15s;
+  box-shadow: var(--shadow-sm);
+}
+.comment-card:hover { box-shadow: var(--shadow-md); border-color: #d1d5db; }
+.comment-card.active { border-color: var(--accent); box-shadow: var(--shadow-focus), var(--shadow); }
+.comment-card .card-header { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 8px; }
+.comment-card .card-num {
+  flex-shrink: 0;
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  display: inline-flex; align-items: center; justify-content: center;
+  margin-top: 1px;
+}
+.comment-card .card-title { font-weight: 600; font-size: 16px; line-height: 1.4; flex: 1; }
+.comment-card .card-tags { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-bottom: 8px; font-size: 13px; color: var(--text-secondary); }
+.badge {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.badge.critical, .badge.major { background: var(--red-light); color: #b91c1c; border: 1px solid var(--red-border); }
+.badge.moderate { background: var(--orange-light); color: #92400e; border: 1px solid var(--orange-border); }
+.badge.minor { background: #f3f4f6; color: #4b5563; border: 1px solid var(--border); }
+.comment-card .quote {
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.6;
+  border-left: 2px solid var(--border);
+  padding-left: 12px;
+  margin: 8px 0;
+}
+.comment-card .explanation { font-size: 15px; line-height: 1.6; margin-top: 8px; }
+.comment-card .explanation .label { font-weight: 600; }
+.comment-card .para-link { font-size: 13px; font-weight: 500; color: var(--accent); margin-top: 10px; display: inline-block; }
+.comment-card .para-link.unlocated { color: var(--text-muted); }
+
+/* ── Per-comment vote buttons ── */
+.comment-footer {
+  display: flex; align-items: center; gap: 6px;
+  margin-top: 10px; padding-top: 8px;
+  border-top: 1px solid #f0f0f0;
+}
+.vote-btn {
+  height: 26px; padding: 0 9px;
+  border-radius: var(--radius-sm);
+  border: 1px solid #c5c9d0;
+  background: var(--surface);
+  font-size: 13px; font-family: inherit;
+  color: var(--text-secondary); cursor: pointer;
+  display: inline-flex; align-items: center; gap: 4px;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+  flex-shrink: 0;
+}
+.vote-btn:hover { border-color: #9ca3af; color: var(--text); background: var(--bg); }
+.vote-btn.active-up   { border-color: #10b981; color: #10b981; background: #ecfdf5; }
+.vote-btn.active-down { border-color: #ef4444; color: #ef4444; background: var(--red-light); }
+
+.note-toggle {
+  margin-left: auto;
+  border: 0; background: none; padding: 0;
+  font: inherit; font-size: 13px; font-weight: 500;
+  color: var(--accent); cursor: pointer;
+}
+.note-toggle:hover { color: var(--accent-hover); }
+.note-box { margin-top: 10px; display: flex; flex-direction: column; gap: 8px; align-items: flex-end; }
+.note-box[hidden] { display: none; }
+.no-feedback .comment-footer, .no-feedback .note-box { display: none; }
+.note-box textarea {
+  width: 100%; min-height: 84px; resize: vertical;
+  font: inherit; font-size: 14px; line-height: 1.5;
+  padding: 9px 11px;
+  border: 1px solid var(--border); border-radius: var(--radius-sm);
+  background: var(--surface); color: var(--text);
+}
+.note-box textarea:focus { outline: none; }
+.note-send {
+  border: 0; border-radius: 6px;
+  background: var(--accent); color: #fff;
+  font: inherit; font-size: 13px; font-weight: 600;
+  padding: 7px 14px; cursor: pointer;
+}
+.note-send:hover { background: var(--accent-hover); }
+
+/* ── Toast ── */
+.feedback-toast {
+  position: fixed; bottom: 24px; left: 50%;
+  transform: translateX(-50%) translateY(8px);
+  background: #1a1a2e; color: #fff;
+  padding: 10px 20px; border-radius: 20px;
+  font-size: 13px; font-weight: 500;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.2s, transform 0.2s;
+  z-index: 9999;
+}
+.feedback-toast.visible { opacity: 1; transform: translateX(-50%) translateY(0); }
+mjx-container { overflow-x: auto; overflow-y: hidden; max-width: 100%; }
+
+/* ── PDF Panel ── */
+.pdf-wrap { flex: 1 1 auto; min-width: 0; position: relative; display: flex; }
+.pdf-panel { flex: 1 1 auto; overflow: auto; background: #eceef1; padding: 20px 24px 64px; min-width: 0; }
+.zoom-controls {
+  position: absolute;
+  left: 16px;
+  bottom: 16px;
+  display: flex;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  z-index: 5;
+}
+.search-box {
+  position: absolute;
+  right: 22px;
+  top: 12px;
+  display: flex;
+  align-items: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  z-index: 5;
+}
+.search-box input {
+  border: 0;
+  outline: none;
+  font: inherit;
+  font-size: 13px;
+  padding: 7px 10px;
+  width: 170px;
+  background: none;
+  color: var(--text);
+}
+.search-box:focus-within { border-color: var(--accent); box-shadow: var(--shadow-focus); }
+.search-count { font-size: 12px; color: var(--text-secondary); padding: 0 8px; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.search-box button {
+  border: 0;
+  border-left: 1px solid var(--border);
+  background: none;
+  font: inherit;
+  font-size: 13px;
+  color: var(--text);
+  padding: 7px 10px;
+  cursor: pointer;
+}
+.search-box button:hover { background: var(--accent-light); color: var(--accent); }
+.search-hit { position: absolute; background: rgba(250, 204, 21, 0.45); mix-blend-mode: multiply; pointer-events: none; border-radius: 2px; }
+.search-hit.current { background: rgba(249, 115, 22, 0.6); }
+.pdf-link { position: absolute; z-index: 3; cursor: pointer; border-radius: 2px; }
+.pdf-link:hover { background: rgba(37, 99, 235, 0.18); }
+.jump-back {
+  position: absolute;
+  left: 16px;
+  top: 12px;
+  z-index: 5;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  box-shadow: var(--shadow-md);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent);
+  padding: 7px 12px;
+  cursor: pointer;
+}
+.jump-back:hover { background: var(--accent-light); }
+.zoom-controls button {
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  padding: 7px 12px;
+  cursor: pointer;
+  min-width: 36px;
+}
+.zoom-controls button:hover { background: var(--accent-light); color: var(--accent); }
+.zoom-controls button + button { border-left: 1px solid var(--border); }
+.pdf-status { text-align: center; font-size: 13px; color: var(--text-secondary); padding: 40px 0; }
+.page {
+  position: relative;
+  width: calc(min(100%, 900px) * var(--zoom, 1));
+  margin: 0 auto 16px;
+  background: #fff;
+  box-shadow: var(--shadow-md);
+}
+.page canvas { display: block; width: 100%; height: 100%; }
+.page .page-num { position: absolute; right: 8px; bottom: 6px; font-size: 10px; color: var(--text-muted); }
+.hl {
+  position: absolute;
+  background: rgba(128, 0, 32, 0.13);
+  border-left: 3px solid var(--accent);
+  cursor: pointer;
+  transition: background 0.15s;
+  mix-blend-mode: multiply;
+}
+.hl:hover, .hl.active { background: rgba(128, 0, 32, 0.26); }
+body:not(.show-all) .extra { display: none; }
+.more-issues {
+  display: block; width: 100%; margin: 4px 0 16px; padding: 10px;
+  border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface);
+  color: var(--accent); font: inherit; font-size: 14px; font-weight: 600; cursor: pointer;
+}
+.more-issues:hover { border-color: #d1d5db; }
+.hl.flash { animation: flash 1.4s ease-out; }
+@keyframes flash { 0% { background: rgba(245, 158, 11, 0.6); } 100% { background: rgba(128, 0, 32, 0.26); } }
+.hl-tag {
+  position: absolute;
+  transform: translate(-135%, -10%);
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+}
+
+@media (max-width: 900px) {
+  body { overflow: auto; }
+  .main { flex-direction: column; height: auto; }
+  .comment-panel { flex: none; border-left: 0; border-top: 1px solid var(--border); max-height: 50vh; }
+  .pdf-wrap { height: 60vh; }
+  .pdf-panel { padding: 12px; }
+  .paper-select-wrapper, .resize-handle { display: none; }
+  .search-box input { width: 120px; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <a class="logo" href="../index.html">OpenAIReview</a>
+  <span class="separator"></span>
+  <div class="paper-title" id="paper-title"></div>
+  <div class="paper-select-wrapper">
+    <select id="paper-select" aria-label="Paper"></select>
+  </div>
+</div>
+<div class="metrics-bar" id="metrics-bar"></div>
+<div class="main">
+  <div class="pdf-wrap">
+    <div class="pdf-panel" id="pdf-panel"><div class="pdf-status" id="pdf-status">Loading paper…</div></div>
+    <div class="search-box">
+      <input type="search" id="search-input" placeholder="Search in paper" aria-label="Search in paper">
+      <span class="search-count" id="search-count"></span>
+      <button id="search-prev" title="Previous match" aria-label="Previous match">&uarr;</button>
+      <button id="search-next" title="Next match" aria-label="Next match">&darr;</button>
+    </div>
+    <button class="jump-back" id="jump-back" hidden>&larr; Back</button>
+    <div class="zoom-controls">
+      <button id="zoom-out" title="Zoom out" aria-label="Zoom out">&minus;</button>
+      <button id="zoom-reset" title="Fit width" aria-label="Fit width">100%</button>
+      <button id="zoom-in" title="Zoom in" aria-label="Zoom in">+</button>
+    </div>
+  </div>
+  <div class="resize-handle" id="resize-handle"></div>
+  <div class="comment-panel" id="comment-panel"></div>
+</div>
+
+<div class="feedback-toast" id="feedback-toast"></div>
+
+<script>
+pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+const GITHUB = 'https://github.com/openai/math/blob/main/';
+// For testing, ?backendPort=<port> sends requests to a backend on the machine that serves this page.
+// The live site ignores it.
+// The port is remembered for the browser tab, so it stays on when you open another paper.
+const LOCAL_BACKEND_PORT = !/(^|\.)openaireview\.(org|github\.io)$/.test(location.hostname) && (() => {
+  const given = new URLSearchParams(location.search).get('backendPort');
+  try {
+    if (given) sessionStorage.setItem('backendPort', given);
+    return given || sessionStorage.getItem('backendPort');
+  } catch (err) { return given; }
+})();
+const BACKEND_URL = LOCAL_BACKEND_PORT
+  ? `http://${location.hostname}:${LOCAL_BACKEND_PORT}`
+  : 'https://openaireview-backend-947059889174.us-central1.run.app';
+const SEVERITY_RANK = { critical: 0, major: 1, moderate: 2, minor: 3 };
+const $ = id => document.getElementById(id);
+let paper, pdfDoc, pageObserver, activeIndex = -1, zoom = 1, redrawTimer;
+
+function escapeHtml(text) {
+  return (text || '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+}
+// Catalog titles mark math as <span class="math">tex</span>.
+function withMath(html) {
+  return html.replace(/<span class="math">(.*?)<\/span>/gs, '\\($1\\)');
+}
+function typeset(el) {
+  if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([el]).catch(() => {});
+  else setTimeout(() => typeset(el), 200);
+}
+function cap(s) { return s[0].toUpperCase() + s.slice(1); }
+
+// Turn a passage of LaTeX source into HTML. Math stays for MathJax, and the
+// common text commands become plain text.
+function quoteHtml(tex) {
+  return escapeHtml(tex)
+    .replace(/\\cite\[([^\]]*)\]\{([^}]*)\}/g, '[$2, $1]')
+    .replace(/\\cite\{([^}]*)\}/g, '[$1]')
+    .replace(/\\(?:eq|c|C)?ref\{[^}]*\}/g, '(ref)')
+    .replace(/\\label\{[^}]*\}/g, '')
+    .replace(/\\(?:emph|textit)\{([^{}]*)\}/g, '<em>$1</em>')
+    .replace(/\\textbf\{([^{}]*)\}/g, '<strong>$1</strong>')
+    .replace(/\\(?:begin|end)\{(?:proof|lemma|theorem|proposition|corollary|remark|definition)\}/g, '')
+    .replace(/\\item\b/g, '•')
+    .replace(/~/g, ' ');
+}
+
+// Load the paper's own macros into MathJax before any math is typeset.
+async function defineMacros(macros) {
+  // If MathJax does not load (a blocked or slow network), show the paper with plain math text.
+  for (let waited = 0; !(window.MathJax && MathJax.typesetPromise); waited += 100) {
+    if (waited >= 5000) return;
+    await new Promise(r => setTimeout(r, 100));
+  }
+  for (const line of macros.split('\n')) {
+    const holder = document.createElement('div');
+    holder.style.display = 'none';
+    holder.textContent = `\\(${line}\\)`;
+    document.body.append(holder);
+    await MathJax.typesetPromise([holder]).catch(() => {});
+    holder.remove();
+  }
+}
+
+// ── Per-comment votes (same backend and payload as the review results page) ──
+const SVG_THUMB_UP = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 10v12"/><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z"/></svg>`;
+const SVG_THUMB_DOWN = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M17 14V2"/><path d="M9 18.12 10 14H4.17a2 2 0 0 1-1.92-2.56l2.33-8A2 2 0 0 1 6.5 2H20a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.76a2 2 0 0 0-1.79 1.11L12 22a3.13 3.13 0 0 1-3-3.88Z"/></svg>`;
+
+const FEEDBACK_COLLECTION = 'openai-math';
+
+// A random id kept in this browser, so that each visitor has one record per comment.
+function viewerId() {
+  try {
+    let id = localStorage.getItem('oar_viewer_id');
+    if (!id) {
+      id = crypto.randomUUID ? crypto.randomUUID() : `v-${Date.now()}-${Math.random().toString(36).slice(2, 12)}`;
+      localStorage.setItem('oar_viewer_id', id);
+    }
+    return id;
+  } catch { return `v-${Date.now()}-${Math.random().toString(36).slice(2, 12)}`; }
+}
+function feedbackKey(index, field) { return `oar_public:${FEEDBACK_COLLECTION}:${paper.id}:${index}:${field}`; }
+function readFeedback(index, field) { try { return localStorage.getItem(feedbackKey(index, field)); } catch { return null; } }
+function writeFeedback(index, field, value) {
+  try {
+    if (value) localStorage.setItem(feedbackKey(index, field), value);
+    else localStorage.removeItem(feedbackKey(index, field));
+  } catch { /* storage can be unavailable */ }
+}
+
+function showVote(index) {
+  const vote = readFeedback(index, 'vote');
+  for (const btn of document.querySelectorAll(`.vote-btn[data-index="${index}"]`)) {
+    btn.classList.toggle('active-up', btn.dataset.vote === 'up' && vote === 'up');
+    btn.classList.toggle('active-down', btn.dataset.vote === 'down' && vote === 'down');
+  }
+  const note = readFeedback(index, 'note');
+  const toggle = document.querySelector(`.note-toggle[data-index="${index}"]`);
+  if (toggle) toggle.textContent = note ? 'Edit note' : 'Add a note';
+}
+
+function showToast(msg) {
+  const el = $('feedback-toast');
+  el.textContent = msg;
+  el.classList.add('visible');
+  setTimeout(() => el.classList.remove('visible'), 2500);
+}
+
+// Send this visitor's current vote and note for one comment. Returns true if the server stored it.
+async function submitFeedback(index) {
+  try {
+    const response = await fetch(`${BACKEND_URL}/public-feedback`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        collection: FEEDBACK_COLLECTION,
+        paper_id: paper.id,
+        comment_id: String(index + 1),
+        viewer_id: viewerId(),
+        comment_title: paper.comments[index].title,
+        reviewer: paper.review.method.replace(/^.*, /, ''),
+        vote: readFeedback(index, 'vote'),
+        note: readFeedback(index, 'note'),
+      }),
+    });
+    return response.ok;
+  } catch { return false; }
+}
+
+async function castVote(index, vote) {
+  const previous = readFeedback(index, 'vote');
+  writeFeedback(index, 'vote', previous === vote ? null : vote);
+  showVote(index);
+  if (await submitFeedback(index)) {
+    if (readFeedback(index, 'vote')) showToast('Feedback sent — thank you!');
+  } else {
+    // Show the buttons as they were, so the page agrees with what the server has.
+    writeFeedback(index, 'vote', previous);
+    showVote(index);
+    showToast('Could not send feedback. Please try again later.');
+  }
+}
+
+async function saveNote(index) {
+  const box = document.querySelector(`.note-box[data-index="${index}"]`);
+  writeFeedback(index, 'note', box.querySelector('textarea').value.trim());
+  showVote(index);
+  box.hidden = true;
+  const stored = await submitFeedback(index);
+  showToast(stored ? 'Note sent — thank you!' : 'Could not send the note. Please try again later.');
+}
+
+function firstPage(comment) {
+  return comment.boxes.length ? comment.boxes[0].page : null;
+}
+
+function renderHeader(index) {
+  document.title = `${paper.title.replace(/<[^>]+>/g, '')} — OpenAIReview`;
+  $('paper-title').innerHTML = withMath(paper.title);
+  typeset($('paper-title'));
+  $('paper-select').hidden = !index.papers.some(p => p.id === paper.id);
+  $('paper-select').innerHTML = index.papers.map(p =>
+    `<option value="${escapeHtml(p.id)}" ${p.id === paper.id ? 'selected' : ''}>${p.result_id}. ${escapeHtml(p.title.replace(/<[^>]+>/g, ''))}</option>`).join('');
+  $('paper-select').onchange = e => { location.search = `?paper=${encodeURIComponent(e.target.value)}`; };
+
+  const model = paper.review.method.replace(/^.*, /, '');
+  const metrics = [
+    `Result <strong>${paper.result_id}</strong>`,
+    escapeHtml(paper.subject),
+    `Reviewer <strong>${escapeHtml(model)}</strong>`,
+    paper.review.contributor ? `Contributed by <strong>${escapeHtml(paper.review.contributor)}</strong> on ${escapeHtml(paper.review.date)}${paper.review.pending ? ' (not public yet, waiting for our check)' : ''}`
+      : `Reviewed <strong>${paper.review.date}</strong>`,
+    `<a href="${GITHUB}${paper.source_pdf.split('/').map(encodeURIComponent).join('/')}" target="_blank" rel="noopener">Original PDF on GitHub &rarr;</a>`,
+  ];
+  $('metrics-bar').innerHTML = metrics.map(m => `<span class="metric">${m}</span>`).join('<span class="metric-divider"></span>');
+}
+
+// The panel opens with the most serious issues. A button shows the rest.
+const TOP_ISSUES = 3;
+function showAllIssues(on) {
+  document.body.classList.toggle('show-all', on);
+  const rest = paper.comments.length - TOP_ISSUES;
+  if ($('more-issues')) $('more-issues').textContent = on ? 'Show fewer issues' : `Show ${rest} more ${rest === 1 ? 'issue' : 'issues'}`;
+}
+
+function renderComments() {
+  const cards = paper.comments.map((c, i) => {
+    const page = firstPage(c);
+    return `
+    <div class="comment-card${i >= TOP_ISSUES ? ' extra' : ''}" data-index="${i}">
+      <div class="card-header">
+        <span class="card-num">${i + 1}</span>
+        <div class="card-title">${escapeHtml(c.title)}</div>
+      </div>
+      <div class="card-tags">
+        ${c.severity ? `<span class="badge ${c.severity}">${c.severity}</span>` : ''}
+      </div>
+      <div class="quote">${quoteHtml(c.quote)}</div>
+      <div class="explanation">${escapeHtml(c.explanation)}</div>
+      ${c.consequence ? `<div class="explanation"><span class="label">What it affects.</span> ${escapeHtml(c.consequence)}</div>` : ''}
+      <span class="para-link ${page ? '' : 'unlocated'}">${page ? `Page ${page} &rarr;` : 'Not located in the PDF'}</span>
+      <div class="comment-footer" title="By giving feedback you agree to share your response to help improve open reviewing.">
+        <button class="vote-btn" data-index="${i}" data-vote="up" title="This issue is correct">${SVG_THUMB_UP} Correct</button>
+        <button class="vote-btn" data-index="${i}" data-vote="down" title="This issue is incorrect">${SVG_THUMB_DOWN} Incorrect</button>
+        <button class="note-toggle" data-index="${i}">Add a note</button>
+      </div>
+      <div class="note-box" data-index="${i}" hidden>
+        <textarea maxlength="2000" placeholder="Is this comment right or wrong? Tell us why, for example with a reference."></textarea>
+        <button class="note-send" data-index="${i}">Send note</button>
+      </div>
+    </div>`;
+  }).join('');
+  $('comment-panel').innerHTML = `
+    <div class="section-label">Issues</div>
+    ${cards}
+    ${paper.comments.length > TOP_ISSUES ? '<button class="more-issues" id="more-issues"></button>' : ''}`;
+  if ($('more-issues')) $('more-issues').onclick = () => showAllIssues(!document.body.classList.contains('show-all'));
+  showAllIssues(false);
+  for (const card of document.querySelectorAll('.comment-card')) {
+    card.onclick = e => {
+      if (!e.target.closest('.comment-footer, .note-box')) activate(Number(card.dataset.index), 'pdf');
+    };
+  }
+  for (const btn of document.querySelectorAll('.vote-btn')) {
+    btn.onclick = () => castVote(Number(btn.dataset.index), btn.dataset.vote);
+  }
+  for (const toggle of document.querySelectorAll('.note-toggle')) {
+    toggle.onclick = () => {
+      const box = document.querySelector(`.note-box[data-index="${toggle.dataset.index}"]`);
+      box.hidden = !box.hidden;
+      if (!box.hidden) {
+        box.querySelector('textarea').value = readFeedback(Number(toggle.dataset.index), 'note') || '';
+        box.querySelector('textarea').focus();
+      }
+    };
+  }
+  for (const send of document.querySelectorAll('.note-send')) {
+    send.onclick = () => saveNote(Number(send.dataset.index));
+  }
+  paper.comments.forEach((_, i) => showVote(i));
+  typeset($('comment-panel'));
+}
+
+// Lay out every page at its final size first, then draw each page when it scrolls into view.
+function renderPages() {
+  const panel = $('pdf-panel');
+  panel.innerHTML = '';
+  const observer = pageObserver = new IntersectionObserver(entries => {
+    for (const entry of entries) {
+      if (!entry.isIntersecting) continue;
+      observer.unobserve(entry.target);
+      drawPage(entry.target);
+    }
+  }, { root: panel, rootMargin: '800px' });
+
+  paper.page_sizes.forEach(([w, h], i) => {
+    const page = document.createElement('div');
+    page.className = 'page';
+    page.dataset.page = i + 1;
+    page.style.aspectRatio = `${w} / ${h}`;
+    page.innerHTML = `<span class="page-num">${i + 1}</span>`;
+    paper.comments.forEach((c, ci) => {
+      const boxes = c.boxes.filter(b => b.page === i + 1);
+      boxes.forEach((b, bi) => {
+        const hl = document.createElement('div');
+        hl.className = ci >= TOP_ISSUES ? 'hl extra' : 'hl';
+        hl.dataset.index = ci;
+        hl.style.cssText = `left:${b.x / w * 100}%;top:${b.y / h * 100}%;width:${b.w / w * 100}%;height:${b.h / h * 100}%`;
+        hl.title = c.title;
+        hl.onclick = () => activate(ci, 'comments');
+        page.append(hl);
+        if (bi === 0 && c.boxes[0] === b) {
+          const tag = document.createElement('div');
+          tag.className = ci >= TOP_ISSUES ? 'hl-tag extra' : 'hl-tag';
+          tag.textContent = ci + 1;
+          tag.style.cssText = `left:${b.x / w * 100}%;top:${b.y / h * 100}%`;
+          tag.onclick = () => activate(ci, 'comments');
+          page.append(tag);
+        }
+      });
+    });
+    panel.append(page);
+    observer.observe(page);
+  });
+}
+
+async function drawPage(pageEl) {
+  const page = await pdfDoc.getPage(Number(pageEl.dataset.page));
+  const scale = pageEl.clientWidth / page.getViewport({ scale: 1 }).width * Math.min(window.devicePixelRatio || 1, 2);
+  const viewport = page.getViewport({ scale });
+  const canvas = document.createElement('canvas');
+  canvas.width = viewport.width;
+  canvas.height = viewport.height;
+  await page.render({ canvasContext: canvas.getContext('2d'), viewport }).promise;
+  pageEl.querySelector('canvas')?.remove();
+  pageEl.prepend(canvas);
+  if (!pageEl.dataset.links) {
+    pageEl.dataset.links = '1';
+    addLinks(page, pageEl);
+  }
+}
+
+// Make the PDF's own links clickable: citations, cross-references, and web links.
+async function addLinks(page, pageEl) {
+  const [x0, y0, x1, y1] = page.view;
+  const width = x1 - x0, height = y1 - y0;
+  for (const annot of await page.getAnnotations()) {
+    if (annot.subtype !== 'Link' || !(annot.url || annot.dest)) continue;
+    const [left, bottom, right, top] = annot.rect;
+    const link = document.createElement('a');
+    link.className = 'pdf-link';
+    link.style.cssText = `left:${(left - x0) / width * 100}%;top:${(y1 - top) / height * 100}%;` +
+      `width:${(right - left) / width * 100}%;height:${(top - bottom) / height * 100}%`;
+    if (annot.url) {
+      link.href = annot.url;
+      link.target = '_blank';
+      link.rel = 'noopener';
+    } else {
+      link.href = '#';
+      link.onclick = e => { e.preventDefault(); followDest(annot.dest); };
+    }
+    pageEl.append(link);
+  }
+}
+
+async function followDest(dest) {
+  const target = typeof dest === 'string' ? await pdfDoc.getDestination(dest) : dest;
+  if (!target) return;
+  const index = await pdfDoc.getPageIndex(target[0]);
+  const pageEl = document.querySelector(`.page[data-page="${index + 1}"]`);
+  const pageHeight = paper.page_sizes[index][1];
+  // XYZ destinations carry the height at index 3, FitH and FitBH at index 2.
+  const y = target[1].name === 'XYZ' ? target[3] : /^FitB?H$/.test(target[1].name) ? target[2] : pageHeight;
+  const panel = $('pdf-panel');
+  $('jump-back').dataset.top = panel.scrollTop;
+  $('jump-back').hidden = false;
+  const top = pageEl.offsetTop + (1 - (y ?? pageHeight) / pageHeight) * pageEl.offsetHeight;
+  panel.scrollTo({ top: top - 60, behavior: 'smooth' });
+}
+
+// Change the page width, keep the same spot in view, then redraw pages at the new resolution.
+function setZoom(value) {
+  const panel = $('pdf-panel');
+  const next = Math.min(Math.max(value, 0.5), 3);
+  const ratio = next / zoom;
+  const center = panel.scrollTop + panel.clientHeight / 2;
+  zoom = next;
+  panel.style.setProperty('--zoom', zoom);
+  panel.scrollTop = center * ratio - panel.clientHeight / 2;
+  $('zoom-reset').textContent = `${Math.round(zoom * 100)}%`;
+  clearTimeout(redrawTimer);
+  redrawTimer = setTimeout(() => {
+    for (const pageEl of document.querySelectorAll('.page')) pageObserver?.observe(pageEl);
+  }, 200);
+}
+
+// ── Search ──
+// The text of each page with the position of every text run, read once from the PDF.
+let pageTextsLoading = null, hits = [], currentHit = -1;
+
+// Every caller gets the same promise, so a search that starts during the load waits for all pages.
+function loadPageTexts() {
+  return pageTextsLoading ??= readPageTexts();
+}
+
+async function readPageTexts() {
+  const pageTexts = [];
+  for (let n = 1; n <= pdfDoc.numPages; n++) {
+    const page = await pdfDoc.getPage(n);
+    const [, , width, height] = page.view;
+    const content = await page.getTextContent();
+    let text = '';
+    const runs = [];
+    for (const item of content.items) {
+      if (item.str) {
+        const size = item.height || Math.hypot(item.transform[2], item.transform[3]);
+        runs.push({ start: text.length, end: text.length + item.str.length,
+                    x: item.transform[4], y: height - item.transform[5] - size * 0.82, w: item.width, h: size * 1.05 });
+        text += item.str;
+      }
+      if (item.hasEOL && !text.endsWith(' ')) text += ' ';
+    }
+    pageTexts.push({ text: text.toLowerCase(), runs, width, height });
+  }
+  return pageTexts;
+}
+
+async function runSearch(query) {
+  for (const mark of document.querySelectorAll('.search-hit')) mark.remove();
+  hits = [];
+  currentHit = -1;
+  const needle = query.trim().toLowerCase().replace(/\s+/g, ' ');
+  if (needle.length < 2 || !pdfDoc) { $('search-count').textContent = ''; return; }
+  const pages = await loadPageTexts();
+  if ($('search-input').value !== query) return;
+  pages.forEach((pg, i) => {
+    const pageEl = document.querySelector(`.page[data-page="${i + 1}"]`);
+    for (let at = pg.text.indexOf(needle); at >= 0; at = pg.text.indexOf(needle, at + 1)) {
+      const marks = [];
+      for (const run of pg.runs) {
+        if (run.end <= at || run.start >= at + needle.length) continue;
+        // Place the mark over the matching share of the text run.
+        const from = (Math.max(at, run.start) - run.start) / (run.end - run.start);
+        const to = (Math.min(at + needle.length, run.end) - run.start) / (run.end - run.start);
+        const mark = document.createElement('div');
+        mark.className = 'search-hit';
+        mark.style.cssText = `left:${(run.x + run.w * from) / pg.width * 100}%;top:${run.y / pg.height * 100}%;` +
+          `width:${run.w * (to - from) / pg.width * 100}%;height:${run.h / pg.height * 100}%`;
+        pageEl.append(mark);
+        marks.push(mark);
+      }
+      if (marks.length) hits.push(marks);
+    }
+  });
+  if (hits.length) gotoHit(0);
+  else $('search-count').textContent = '0 results';
+}
+
+function gotoHit(index) {
+  if (!hits.length) return;
+  for (const mark of hits[currentHit] || []) mark.classList.remove('current');
+  currentHit = (index + hits.length) % hits.length;
+  for (const mark of hits[currentHit]) mark.classList.add('current');
+  $('search-count').textContent = `${currentHit + 1} of ${hits.length}`;
+  const panel = $('pdf-panel');
+  const top = hits[currentHit][0].getBoundingClientRect().top - panel.getBoundingClientRect().top + panel.scrollTop;
+  panel.scrollTo({ top: top - panel.clientHeight * 0.35 });
+}
+
+function setupSearch() {
+  const input = $('search-input');
+  let timer;
+  input.addEventListener('input', () => {
+    clearTimeout(timer);
+    timer = setTimeout(() => runSearch(input.value), 200);
+  });
+  input.addEventListener('keydown', e => {
+    if (e.key === 'Enter') gotoHit(currentHit + (e.shiftKey ? -1 : 1));
+    if (e.key === 'Escape') { input.value = ''; runSearch(''); input.blur(); }
+  });
+  $('search-next').onclick = () => gotoHit(currentHit + 1);
+  $('search-prev').onclick = () => gotoHit(currentHit - 1);
+  document.addEventListener('keydown', e => {
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'f') {
+      e.preventDefault();
+      input.focus();
+      input.select();
+    }
+  });
+}
+
+function setupZoom() {
+  $('jump-back').onclick = () => {
+    $('pdf-panel').scrollTo({ top: Number($('jump-back').dataset.top), behavior: 'smooth' });
+    $('jump-back').hidden = true;
+  };
+  $('zoom-in').onclick = () => setZoom(zoom * 1.2);
+  $('zoom-out').onclick = () => setZoom(zoom / 1.2);
+  $('zoom-reset').onclick = () => setZoom(1);
+  $('pdf-panel').addEventListener('wheel', e => {
+    if (!e.ctrlKey && !e.metaKey) return;
+    e.preventDefault();
+    // A trackpad pinch sends many small steps, and a mouse wheel sends a few large ones.
+    const step = Math.max(-30, Math.min(30, e.deltaY));
+    setZoom(zoom * Math.exp(-step * 0.003));
+  }, { passive: false });
+}
+
+// Select a comment. `scroll` names the panel that should move to show it.
+function activate(index, scroll) {
+  activeIndex = index;
+  if (index >= TOP_ISSUES) showAllIssues(true);
+  for (const card of document.querySelectorAll('.comment-card')) {
+    card.classList.toggle('active', Number(card.dataset.index) === index);
+  }
+  const marks = [...document.querySelectorAll('.hl')];
+  for (const hl of marks) {
+    const on = Number(hl.dataset.index) === index;
+    hl.classList.toggle('active', on);
+    hl.classList.remove('flash');
+    if (on) { void hl.offsetWidth; hl.classList.add('flash'); }
+  }
+  if (scroll === 'pdf') {
+    const first = marks.find(hl => Number(hl.dataset.index) === index);
+    if (first) {
+      const panel = $('pdf-panel');
+      const top = first.getBoundingClientRect().top - panel.getBoundingClientRect().top + panel.scrollTop;
+      panel.scrollTo({ top: top - panel.clientHeight * 0.3, behavior: 'smooth' });
+    }
+  } else {
+    document.querySelector(`.comment-card[data-index="${index}"]`)?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+}
+
+function setupResize() {
+  const handle = $('resize-handle');
+  const commentPanel = $('comment-panel');
+  let startX, startWidth;
+  handle.addEventListener('mousedown', (e) => {
+    startX = e.clientX;
+    startWidth = commentPanel.offsetWidth;
+    handle.classList.add('dragging');
+    document.body.style.cursor = 'col-resize';
+    document.body.style.userSelect = 'none';
+    function onMove(e) {
+      const delta = startX - e.clientX;
+      const newWidth = Math.min(Math.max(startWidth + delta, 280), window.innerWidth * 0.6);
+      commentPanel.style.flex = `0 0 ${newWidth}px`;
+    }
+    function onUp() {
+      handle.classList.remove('dragging');
+      document.body.style.cursor = '';
+      document.body.style.userSelect = '';
+      document.removeEventListener('mousemove', onMove);
+      document.removeEventListener('mouseup', onUp);
+    }
+    document.addEventListener('mousemove', onMove);
+    document.addEventListener('mouseup', onUp);
+  });
+}
+
+// ── Reviews that contributors uploaded ──
+// An uploaded review comes with no position in the PDF. The page shows the collection's own
+// PDF and finds each quoted passage in its text. ?contributed=1 shows the approved review of
+// the paper, and ?contributed=<upload id> shows one upload, which can still wait for our check.
+const RAW = 'https://raw.githubusercontent.com/openai/math/';
+
+async function loadContributedReview(id, upload, commit) {
+  const [catalog, result] = await Promise.all([
+    fetch('data/catalog.json').then(r => r.json()),
+    fetch(`${BACKEND_URL}/contributed-reviews/${FEEDBACK_COLLECTION}/${encodeURIComponent(id)}${/^[0-9a-f]{32}$/.test(upload) ? `?upload=${upload}` : ''}`).then(r => r.ok ? r.json() : Promise.reject()),
+  ]);
+  const entry = catalog.find(p => p.id === id);
+  const comments = result.issues
+    .map((c, i) => ({ ...c, severity: Object.hasOwn(SEVERITY_RANK, c.severity) ? c.severity : null, order: i, boxes: [] }))
+    .sort((a, b) => (SEVERITY_RANK[a.severity] ?? 9) - (SEVERITY_RANK[b.severity] ?? 9) || a.order - b.order);
+  return { ...entry, source_pdf: entry.pdf, pdf: `${RAW}${commit}/${entry.pdf}`, macros: '', comments,
+           review: { method: `${result.agent}, ${result.model}`, date: (result.created_at || '').slice(0, 10),
+                     contributor: result.contributor || 'a contributor', pending: result.status !== 'approved' } };
+}
+
+// The plain-text pieces of a LaTeX passage, longest first, with all spaces removed.
+// Math and commands do not match the text of a PDF, so they split the passage.
+function plainPieces(tex) {
+  return tex.replace(/\$\$[^]*?\$\$|\$[^$]*\$|\\\([^]*?\\\)|\\\[[^]*?\\\]/g, '\u0000')
+    .replace(/\\[a-zA-Z]+\*?(\[[^\]]*\])?(\{[^{}]*\})?|[{}~]/g, '\u0000')
+    .split('\u0000').map(piece => piece.toLowerCase().replace(/\s+/g, ''))
+    .filter(piece => piece.length >= 14).sort((a, b) => b.length - a.length);
+}
+
+// Find a quoted passage in the PDF text. Returns highlight boxes in PDF points, or [].
+function locateInPdf(quote, pages) {
+  for (const piece of plainPieces(quote)) {
+    for (let i = 0; i < pages.length; i++) {
+      const pg = pages[i];
+      if (!pg.squashed) {
+        pg.offsets = [];
+        pg.squashed = [...pg.text].filter((ch, at) => /\S/.test(ch) && pg.offsets.push(at)).join('');
+      }
+      const at = pg.squashed.indexOf(piece);
+      if (at < 0) continue;
+      const from = pg.offsets[at], to = pg.offsets[at + piece.length - 1] + 1;
+      return pg.runs.filter(run => run.end > from && run.start < to)
+        .map(run => ({ page: i + 1, x: run.x, y: run.y, w: run.w, h: run.h }));
+    }
+  }
+  return [];
+}
+
+async function main() {
+  setupResize();
+  setupZoom();
+  setupSearch();
+  const params = new URLSearchParams(location.search);
+  const index = await fetch('data/index.json').then(r => r.json());
+  const id = params.get('paper') || index.papers[0].id;
+  const upload = params.get('contributed');
+  const contributed = upload !== null;
+  // Feedback on an uploaded review opens when the review moves to the front page.
+  // TODO before a paper can have more than one review: store a review id with each vote.
+  // Votes are stored per paper, issue number, and visitor, and every review numbers its issues
+  // from 1, so a vote on issue 1 of one review would overwrite the vote on issue 1 of another.
+  document.body.classList.toggle('no-feedback', contributed);
+  try {
+    paper = contributed ? await loadContributedReview(id, upload, index.source.commit)
+                        : await fetch(`data/${encodeURIComponent(id)}.json`).then(r => r.json());
+  } catch (err) {
+    $('pdf-status').textContent = 'The review could not be loaded.';
+    return;
+  }
+  renderHeader(index);
+  if (paper.macros) await defineMacros(paper.macros);
+  try {
+    const url = contributed ? paper.pdf : paper.pdf.split('/').map(encodeURIComponent).join('/');
+    pdfDoc = await pdfjsLib.getDocument(url).promise;
+    if (contributed) {
+      const pages = await loadPageTexts();
+      paper.page_sizes = pages.map(pg => [pg.width, pg.height]);
+      for (const c of paper.comments) c.boxes = locateInPdf(c.quote || '', pages);
+    }
+    renderComments();
+    renderPages();
+    const wanted = Number(new URLSearchParams(location.search).get('comment')) - 1;
+    if (paper.comments.length) setTimeout(() => activate(paper.comments[wanted] ? wanted : 0, 'pdf'), 300);
+  } catch (err) {
+    $('pdf-status').textContent = 'The PDF could not be loaded.';
+    if (!document.querySelector('.comment-card')) renderComments();
+  }
+}
+main();
+</script>
+</body>
+</html>

@@ -1,0 +1,222 @@
+{
+ "id": "Existential-universal-real-sentences-in-the-counting-hierarchy-October-4-2026",
+ "title": "Existential–universal real sentences in the counting hierarchy",
+ "abstract": "We prove that the existential theory of the reals lies in the counting hierarchy. More generally, we show that the truth of existential–universal sentences over the reals can be decided in a fixed level of the counting hierarchy, even when the integer polynomials are given by arithmetic circuits.",
+ "result_id": "141",
+ "result_title": "Existential–universal real sentences in the counting hierarchy",
+ "subject": "Theoretical computer science",
+ "source_pdf": "preprints/Existential-universal-real-sentences-in-the-counting-hierarchy-October-4-2026/etr-counting-hierarchy.pdf",
+ "pdf": "pdf/Existential-universal-real-sentences-in-the-counting-hierarchy-October-4-2026.pdf",
+ "page_sizes": [
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ]
+ ],
+ "macros": "\\newcommand{\\R}{\\mathbb R}\n\\newcommand{\\C}{\\mathbb C}\n\\newcommand{\\Z}{\\mathbb Z}\n\\newcommand{\\Q}{\\mathbb Q}\n\\newcommand{\\N}{\\mathbb N}\n\\newcommand{\\F}{\\mathbb F}\n\\newcommand{\\ETR}{\\mathsf{ETR}}\n\\newcommand{\\EATR}{\\exists\\forall\\mathbb R_{\\mathrm{circ}}}\n\\newcommand{\\existsR}{\\exists\\mathbb R}\n\\newcommand{\\CH}{\\mathsf{CH}}\n\\newcommand{\\PP}{\\mathsf{PP}}\n\\newcommand{\\FP}{\\mathsf{FP}}\n\\newcommand{\\Pclass}{\\mathsf P}\n\\newcommand{\\PSPACE}{\\mathsf{PSPACE}}\n\\newcommand{\\NP}{\\mathsf{NP}}\n\\newcommand{\\Clevel}[1]{\\mathsf C_{#1}\\mathsf P}\n\\newcommand{\\Flevel}[1]{\\mathsf F_{#1}}\n\\newcommand{\\norm}[1]{\\left\\lVert#1\\right\\rVert_1}\n\\newcommand{\\abs}[1]{\\left|#1\\right|}\n\\newcommand{\\ceil}[1]{\\left\\lceil#1\\right\\rceil}\n\\newcommand{\\floor}[1]{\\left\\lfloor#1\\right\\rfloor}\n\\newcommand{\\sgn}{\\operatorname{sgn}}\n\\newcommand{\\tr}{\\operatorname{tr}}\n\\newcommand{\\diag}{\\operatorname{diag}}\n\\newcommand{\\Res}{\\operatorname{Res}}\n\\newcommand{\\dist}{\\operatorname{dist}}\n\\newcommand{\\lcm}{\\operatorname{lcm}}",
+ "review": {
+  "method": "OpenAIReview (Claude Opus 5.5)",
+  "effort": "high",
+  "date": "2026-10-08"
+ },
+ "overall_assessment": "The paper claims that $\\exists\\forall\\mathbb R_{\\mathrm{circ}}\\in\\mathsf C_j\\mathsf P$ for an absolute $j$ (Theorem 1.1) and that $\\mathsf{ETR}\\in\\mathsf C_{26}\\mathsf P$ (Theorem A.1). The second claim answers a known open problem, so each step needs an independent check by specialists.\n\nTwelve sub-agents reviewed the sections and the cross-cutting claims. Eleven reported no issue. One reported two citation issues with low confidence. The parent agent then checked the full proof chain against the source and found no mathematical error. The review has only these two minor issues. Both are about attribution in Section 1.1, and no proof uses the two sentences.\n\nThe parent agent checked these steps:\n- Section 2: the majority count $C(w)+2^b-t$ in Lemma 2.1, the discrete-logarithm product in Lemma 2.2 (level $\\mathsf F_{a+4}$), the coefficient identity (2.1) with cutoff $\\max(\\lambda,d+1)$, the derivative bound $2^{b+d^2+1}$, and Proposition 2.6 (prime count, $\\Pi\\ge 2^{3Z}$, error $2^{-10}$, first-flag argument, level $\\mathsf F_{\\max(a,5)+3}$).\n- Section 3: the truncation $|j|\\le\\deg_x v-n(\\ell-1)$, the triangular pairing matrix in Lemma 3.1, the trace formula, the real-eigenline argument for a simple real root, the degree bounds $\\ell L_0$ and $D^2<p-1$ in Proposition 3.4, and the bounds $d_Q$, $b_Q$ in Proposition 3.5.\n- Section 4: the range $2^{-B}\\le|g(\\alpha)|\\le 2^B$ in Lemma 4.2, the Thom separation, the count of forbidden $\\gamma$ (fewer than $d^3$), the error $2\\cdot 3^{-2s}$ of the rational sign approximation, and the dichotomy $L_a(\\alpha)\\ge 1/2$ or $L_a(\\alpha)\\le -1/2$.\n- Section 5: the critical values $a_i^{\\ell+1}((\\ell+1)-\\ell\\zeta_i)$ and their separation, the Sylvester-type determinant $\\Delta$ with $\\Delta(0)\\ne 0$ and its bound $H_\\Delta$, the choices $R=2^{H+4}$ and $U=2^\\sigma$, both directions of (5.8), and the sign of $X=\\prod_{q(\\alpha)=0}g(\\alpha)$ with $g=-4DL+e$.\n- Section 6: the quartic encoding, the growth test with $u=v^{D+1}$, the identity $E_D(x)=1$, local constancy on $A_d$, the closed lift $Z_d$, the compact-neighborhood argument of Proposition 6.3, and soundness and completeness of the tests (6.15) and (6.16).\n- Appendix A: $\\lceil\\log_2 D\\rceil\\le 3n$, the margins $-1+1/(16T)$ and $33/16$ for $\\Psi$, the bounds $d_g$, $l_*$, $E_*$, $m_X$, the cutoff $\\lambda=5L_0+4n+D^2+10$, and the level chain $\\mathsf F_8\\to\\mathsf F_9\\to\\mathsf F_{13}\\to\\mathsf F_{21}\\to\\mathsf F_{24}\\to\\mathsf F_{25}\\to\\mathsf C_{26}\\mathsf P$.\n\nLimits of this check: it is one reading of a long proof, and it does not replace a formal verification. The bibliography file and the cited papers were not available, so the two citation issues rely on knowledge of the literature. The uniformity claims (one fixed machine and one fixed oracle for each indexed family, with prime cutoffs that do not depend on the evaluation prime) are plausible and consistent, but the paper argues them in prose only. A specialist must examine them with the most care, together with the two nested uses of the determinant rule.",
+ "num_findings": 2,
+ "comments": [
+  {
+   "title": "Renegar citation: the cited theorem gives time bounds, and the locator is doubtful",
+   "quote": "Renegar's decision bounds yield a polynomial-space algorithm",
+   "explanation": "This sentence is background. No proof in the paper uses it. Two points need a correction or a short addition. (1) Renegar's decision theorem gives a bound on sequential bit operations of the form $L(\\log L)(\\log\\log L)(md)^{2^{O(\\omega)}\\prod_k n_k}$ and a parallel time bound of the form $(\\log L)^{O(1)}\\,[2^{\\omega}\\prod_k n_k\\log(md)]^{O(1)}$. It does not state a space bound. For a fixed number $\\omega$ of blocks, polynomial space follows only from the standard simulation of polynomial parallel time in polynomial space. The word `yield' permits this step, but the paper must name it, because the reader cannot find a space bound in the cited theorem. (2) The decision theorem is stated as Theorem 1.1 in the introduction of Part I of the series, and Part II completes its proof. The locator `Theorem 1.1' of Part II is thus probably incorrect. We could not check the cited paper in this review, so the authors must confirm the locator. The second claim of the sentence is correct: after Lemma 6.1 the sentence is $\\exists x\\,\\forall z\\,F(x,z)\\neq 0$ with $\\deg F\\le 4$ and an explicit coefficient list, so the parameters $m$, $d$ and $L$ are polynomial in $N$ and the circuit encoding is not an obstacle.",
+   "comment_type": "claim_accuracy",
+   "severity": "minor",
+   "source": {
+    "file": "sections/01-introduction.tex",
+    "lines": [
+     54,
+     54
+    ]
+   },
+   "boxes": [
+    {
+     "page": 2,
+     "x": 79.370071,
+     "y": 601.819339,
+     "w": 436.535431,
+     "h": 12.0452075
+    },
+    {
+     "page": 2,
+     "x": 79.370071,
+     "y": 614.701706,
+     "w": 436.535431,
+     "h": 13.63634125
+    }
+   ]
+  },
+  {
+   "title": "Modular-product and approximate Chinese-remainder methods are attributed to Allender et al. without their source",
+   "quote": "Their modular-product and approximate Chinese-remainder techniques are",
+   "explanation": "The paper attributes two tools to Allender, B\\\"urgisser, Kjeldgaard-Pedersen and Miltersen, here and in the first paragraph of Section 2 (`follow the arithmetic approach of Allender et al., Section 4'). The tools are: iterated products in $\\mathbb F_p$ through discrete logarithms (Lemma 2.2), and the sum $\\sum_p c_p/p \\bmod 1$ as an approximation of $X/\\Pi$ (Proposition 2.6). The cited section proves $\\mathsf{PosSLP}\\in\\mathsf P^{\\mathsf{PP}^{\\mathsf{PP}^{\\mathsf{PP}}}}$. Its proof takes the uniform $\\mathsf{TC}^0$ conversion from Chinese remainder representation to binary of Hesse, Allender and Barrington as a known result and scales it to exponential size. The two tools come from that earlier work on division and iterated multiplication. The paper does not cite it. Add the citation and change `Their' to wording that gives the origin. We could not check the cited papers in this review, so this point is from our knowledge of the literature. The mathematics is not affected. The paper proves Lemma 2.2 and Proposition 2.6 in full, and we checked them: the threshold count $C(w)+2^b-t$, the prime count that gives $\\Pi\\ge 2^{3Z}$ and $|X/\\Pi|<1/6$, the circular error $2^{-10}$, the flag window $[1/8,7/8]$, and the level $\\mathsf F_{\\max(a,5)+3}$ are all correct.",
+   "comment_type": "claim_accuracy",
+   "severity": "minor",
+   "source": {
+    "file": "sections/01-introduction.tex",
+    "lines": [
+     72,
+     72
+    ]
+   },
+   "boxes": [
+    {
+     "page": 2,
+     "x": 79.370071,
+     "y": 736.644455,
+     "w": 436.753601,
+     "h": 13.63634125
+    },
+    {
+     "page": 2,
+     "x": 79.370071,
+     "y": 750.860477,
+     "w": 436.939087,
+     "h": 12.0452075
+    }
+   ]
+  }
+ ]
+}

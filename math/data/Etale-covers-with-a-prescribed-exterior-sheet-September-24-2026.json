@@ -1,0 +1,172 @@
+{
+ "id": "Etale-covers-with-a-prescribed-exterior-sheet-September-24-2026",
+ "title": "Étale covers with a prescribed exterior sheet",
+ "abstract": "Let <i>X</i> be a smooth proper hyperbolic curve over an algebraic closure of a <i>p</i>-adic local field. Given finitely many disjoint small open disks, we construct one connected finite étale cover with a sheet isomorphic to their entire exterior and with degree divisible by <i>p</i> on every connected component above each disk.",
+ "result_id": "019",
+ "result_title": "The local <i>p</i>-adic section conjecture and global consequences",
+ "subject": "Number theory",
+ "source_pdf": "preprints/Etale-covers-with-a-prescribed-exterior-sheet-September-24-2026/main.pdf",
+ "pdf": "pdf/Etale-covers-with-a-prescribed-exterior-sheet-September-24-2026.pdf",
+ "page_sizes": [
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ]
+ ],
+ "macros": "\\newcommand{\\Gal}{\\operatorname{Gal}}",
+ "review": {
+  "method": "OpenAIReview (Claude Opus 5.5)",
+  "effort": "high",
+  "date": "2026-10-08"
+ },
+ "overall_assessment": "The paper proves that, for fixed disjoint disks $V_i$ in a hyperbolic curve $X$ over $\\bar k$, one connected finite \\'etale cover $g:Y\\to X$ has a sheet isomorphic to the exterior $U$ and has degree divisible by $p$ on each component above each $V_i$. I checked the proof step by step and found no false mathematical statement. Lemma 2.1, the torsor and Betti-number counts of Proposition 2.2 ($b_1\\ge\\ell-1$, then $b_1\\ge1$ after Galois refinement), the cut-graph cover of Lemma 3.1 with $\\tau^{-1}(\\eta_i)=\\{\\eta_i\\}$, and the group computation of Section 4 ($H\\cap P=1$, $p\\mid|B\\cap P|$, degree $[B:B\\cap H]$) are all correct.\n\nThe theorem depends fully on one cited input: a form of resolution of nonsingularities that gives a stable component of genus $\\ge1$ above a given closed point. The paper states that this is part of the Mochizuki--Tsujimura formulation, but it gives no exact locator, and the genus condition cannot be removed from the argument. This is the most important point to settle. The second gap is the base ring: the model with tubes inside $V_i$ is constructed over $\\mathcal O_\\Omega$, but the RNS input needs it over a finite extension of $k$. The descent is true but not written. The other points are minor: the RNS statement is quoted for a larger class of models than the source, the property \"above $V_i$\" is counted on dual graphs only, and Sections 3 and 4 work for each integer $n\\ge2$ and not only for $p$.\n\nSub-agent findings that I removed after verification: the SGA1 Expos\\'e IX, Th\\'eor\\`eme 1.10 locator (I believe it is correct), the word \"small\" in the abstract (it agrees with the condition $r_i<R_i$ in disjoint charts $B_i$), and two trivial remarks on the setup of $U$.",
+ "num_findings": 5,
+ "comments": [
+  {
+   "title": "The proof depends fully on a positive-genus form of RNS that the paper cites without an exact locator",
+   "quote": "of genus at least one maps to $x$. This is the alternative formulation",
+   "explanation": "I checked each later step with this input assumed, and each step holds: the retraction argument for $P_i$, the surjection $H^1(C,\\mathbb F_\\ell)\\to\\prod_j H^1(\\tilde C_j,\\mathbb F_\\ell)$, the count $b_1\\ge\\ell-1$, the count $b_1\\ge1$ above a circle, $H\\cap P=1$, $p\\mid|B\\cap P|$, and $[B:B\\cap H]=|N|\\,[B/N:\\operatorname{im}(B\\cap H)]$. Thus Theorem 1.1 is as strong as this one cited sentence. The genus condition is necessary. If an endpoint component $D$ of $P_i$ has genus $0$, then $H^1(D,\\mathbb F_\\ell)=0$, the endpoint can have $\\ell$ lifts, and the count gives only $b_1\\ge m\\ell-(m+1)\\ell+1=1-\\ell$, so no cycle is forced. The genus condition is also the only reason why the lifts of $x_{i1},x_{i2}$ are vertices of $\\Gamma_0$. The usual definition of $\\Sigma$-RNS only says that some stable component of a cover lies above $x$. The step from this form to genus $\\ge1$ is not formal: a genus-$0$ vertex stays genus $0$ under each cover that is \\'etale on the model. The paper gives no item number and no proof, only the sentence that the conclusion is part of the input. I cannot confirm the wording from the paper alone. The authors must give the exact numbered statement in Mochizuki--Tsujimura that contains genus $\\ge1$, or add the derivation.",
+   "comment_type": "missing_information",
+   "severity": "moderate",
+   "source": {
+    "file": "sections/02-cycles.tex",
+    "lines": [
+     24,
+     24
+    ]
+   },
+   "boxes": [
+    {
+     "page": 2,
+     "x": 71.999985,
+     "y": 671.55286,
+     "w": 451.275604,
+     "h": 12.0452075
+    }
+   ]
+  },
+  {
+   "title": "The model with tubes inside $V_i$ is constructed over $\\mathcal O_\\Omega$, but the RNS input needs a model over a finite extension of $k$",
+   "quote": "All the algebraic data descend to a finite extension of $k$.",
+   "explanation": "The model with the inserted vertices comes from the correspondence between semistable vertex sets and semistable models in Baker--Payne--Rabinoff. That correspondence is over an algebraically closed complete field, so it gives a formal model over $\\mathcal O_\\Omega$, which is not Noetherian. The RNS input is stated for a model over the integers of a finite extension $K/k$, and the later lifting step needs a complete Noetherian local base. The quoted sentence applies to $X$, $b_i$, $t_i$, but it does not apply to this model. The paper must show that the model descends to some $\\mathcal O_K$, and that the two residue directions are closed points of that model with the same tubes. I checked that this is true: take the inserted point as the Gauss point of $\\{|t_i|\\le s\\}$ with $s\\in p^{\\mathbb Q}$, $s<r_i$. This point and its retraction are fixed by Galois, and blow-ups of the stable model over a sufficiently ramified $K$ give the model. Thus this is a gap in the argument and not an error, but the step that connects the two base rings must be written.",
+   "comment_type": "methodology",
+   "severity": "moderate",
+   "source": {
+    "file": "sections/02-cycles.tex",
+    "lines": [
+     66,
+     66
+    ]
+   },
+   "boxes": [
+    {
+     "page": 3,
+     "x": 66.545433,
+     "y": 300.194735,
+     "w": 456.730164,
+     "h": 12.12116
+    }
+   ]
+  },
+  {
+   "title": "The quoted RNS statement is more general than the cited formulation, and the paper does not make the reduction",
+   "quote": "nonsingularities. For any proper flat normal model $\\mathcal X$ of a",
+   "explanation": "The paper calls this statement a precise consequence of the cited formulation, but it states it for each proper flat normal model $\\mathcal X$. The source formulation is, to my knowledge, for semistable models with split reduction. For a general normal $\\mathcal X$, a morphism $\\mathcal C\\to\\mathcal X$ from the stable model of the cover exists only if the vertex set of $\\mathcal C$ contains the inverse image of the vertex set of $\\mathcal X$. This is not automatic and needs an argument, for example: dominate $\\mathcal X$ by a semistable model $\\mathcal X'$ and apply the source to a point $x'$ above $x$. The proof is not affected, because Proposition 2.2 applies the input only at smooth closed points of a split semistable model. The authors must either restrict the statement to that class or give the reduction.",
+   "comment_type": "claim_accuracy",
+   "severity": "minor",
+   "source": {
+    "file": "sections/02-cycles.tex",
+    "lines": [
+     18,
+     18
+    ]
+   },
+   "boxes": [
+    {
+     "page": 2,
+     "x": 71.999985,
+     "y": 617.356083,
+     "w": 451.493774,
+     "h": 12.0452075
+    },
+    {
+     "page": 2,
+     "x": 71.999985,
+     "y": 630.844454,
+     "w": 451.275604,
+     "h": 12.12116
+    }
+   ]
+  },
+  {
+   "title": "The property \"entirely above $V_i$\" is counted on dual graphs and not shown in $Z^{\\rm an}$",
+   "quote": "It therefore contains an embedded circle, entirely above $V_i$.",
+   "explanation": "The counts $E=m\\ell$, $V\\le(m-1)\\ell+2$ and later $E=eq$, $V\\le eq$ are counts on dual graphs of special fibres. Lemma 3.1 needs an analytic statement: the type-three point $\\eta_i$ on an edge of the circle must lie in the inverse image of $V_i$ in $Z^{\\rm an}$, so that $\\eta_i\\notin U_Z$. The path $P_i$ lies above $V_i$ as a subset of $Z_0^{\\rm an}$. To transfer this to $Z_1$ and to $Z$, the proof must say that for a finite \\'etale morphism of semistable models the skeleton of the source is the analytic inverse image of the skeleton of the target. This holds: reduction maps commute with the model morphism, and the morphism is an isomorphism on completed local rings at each node, so each node annulus maps isomorphically to the node annulus below. The proposition is correct, but the words \"inverse graph\" carry this step two times without a sentence or a citation.",
+   "comment_type": "missing_information",
+   "severity": "minor",
+   "source": {
+    "file": "sections/02-cycles.tex",
+    "lines": [
+     176,
+     176
+    ]
+   },
+   "boxes": [
+    {
+     "page": 4,
+     "x": 71.999985,
+     "y": 572.384037,
+     "w": 451.275604,
+     "h": 12.0452075
+    }
+   ]
+  },
+  {
+   "title": "The prime $p$ has no special role in Sections 3 and 4: the proof gives divisibility by each integer $n\\ge2$",
+   "quote": "Beyond the resolution covers, the construction uses two primes with",
+   "explanation": "I checked where the degree-$p$ step uses that $p$ is the residue characteristic, and it does not. The cover of Lemma 3.1 is a topological cyclic cover of the graph $\\Gamma$ pulled back by $\\tau$; the cut at $\\eta_i$ with $n$ sheets and shift by $1$ works for each $n\\ge2$. In Section 4, let $P$ be a subgroup of a product of copies of $\\mathbb Z/n$. Then $H\\cap P=1$ still holds, $n$ divides $|B\\cap P|$ for each component above each $V_i$, and $[B:B\\cap H]=|B\\cap P|\\,[B/N:\\operatorname{im}(B\\cap H)]$ is divisible by $n$. This gives no contradiction, because the component $W$ above $V_i$ in $Z$ has a skeletal circle and thus has topological covers of each degree. But it shows that the divisibility by $p$ in assertion (ii) is not a $p$-adic property of the last step. The role of $p$ is only in the cited RNS theorem. The outline with two primes of different roles hides this. The authors should state the result for general $n$ or say why they restrict to $p$.",
+   "comment_type": "presentation",
+   "severity": "minor",
+   "source": {
+    "file": "sections/01-statement.tex",
+    "lines": [
+     62,
+     62
+    ]
+   },
+   "boxes": [
+    {
+     "page": 2,
+     "x": 71.999985,
+     "y": 274.099033,
+     "w": 451.275604,
+     "h": 12.0452075
+    }
+   ]
+  }
+ ]
+}

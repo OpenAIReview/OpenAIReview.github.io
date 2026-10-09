@@ -1,0 +1,350 @@
+{
+ "id": "The-curve-scaling-limit-of-half-plane-double-dimers-September-23-2026",
+ "title": "The curve scaling limit of half-plane double dimers",
+ "abstract": "We prove that the complete double-dimer loop ensemble for the Temperleyan square lattice in the upper half-plane converges to nested CLE<sub>4</sub>. The convergence holds along the full mesh limit and matches every macroscopic loop as an unparametrized curve. This resolves the half-plane Temperleyan form of the double-dimer CLE<sub>4</sub> scaling-limit conjecture.",
+ "result_id": "226",
+ "result_title": "The double-dimer loop ensemble converges to CLE<sub>4</sub>",
+ "subject": "Probability and statistical mechanics",
+ "source_pdf": "preprints/The-curve-scaling-limit-of-half-plane-double-dimers-September-23-2026/paper.pdf",
+ "pdf": "pdf/The-curve-scaling-limit-of-half-plane-double-dimers-September-23-2026.pdf",
+ "page_sizes": [
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ],
+  [
+   595.276,
+   841.89
+  ]
+ ],
+ "macros": "\\newcommand{\\HH}{\\mathbb H}\n\\newcommand{\\DD}{\\mathbb D}\n\\newcommand{\\CLE}{\\mathrm{CLE}}\n\\newcommand{\\PP}{\\mathbb P}\n\\newcommand{\\EE}{\\mathbb E}\n\\newcommand{\\eps}{\\varepsilon}\n\\newcommand{\\diam}{\\operatorname{diam}}\n\\newcommand{\\dist}{\\operatorname{dist}}\n\\newcommand{\\tr}{\\operatorname{tr}}\n\\newcommand{\\arsinh}{\\operatorname{arsinh}}",
+ "review": {
+  "method": "OpenAIReview (Claude Opus 5.5)",
+  "effort": "high",
+  "date": "2026-10-08"
+ },
+ "overall_assessment": "The manuscript claims that the double-dimer loops of the half-plane Temperleyan law converge as curves to nested $\\mathrm{CLE}_4$, $F(\\mathcal L_\\delta)\\Rightarrow F(\\mathcal L)$. The new work is two rectangle estimates (Propositions 2.1 and 3.1), their transfer to the half-plane by Wilson's algorithm (Section 4), and a pathwise identification (Section 5).\n\nResult of the review: no error was found in the internal mathematics. Nine of the eleven section reviews returned no finding, and the parent check recomputed the main formulas: the singular values $e^{\\pm u_l}$ with $\\lambda_l=2\\sinh u_l$, the sector penalty $\\exp(-ctk^2/n)$, the state sum $2\\prod_l(1+e^{-tu_l})^2$, the partition function $Z$ (checked against $Z=1$ for $n=3$, $m=1$), the cap normalization, the recursion with $k_j=k^{2^j}$, the insertion bound $C(|S(I)|/n)^2$, the colour ratios $uv/2$ and $-t_gt_{g'}/4$, the two-chain positivity bound $q^2/16$, the union bound $C_M(h+\\delta)^2/h$, and the constants of Lemma 4.5 and Proposition 4.6. This is a check of consistency, not a full referee verification of each topological step in Section 5.\n\nThe risk is in the imported inputs, not in the new estimates. The limit law comes only from Theorem 1.2, a paraphrase of one equation of an unrefereed preprint, and from the unproved equality of the law of Section 1.1 with the law of that preprint. These two points are moderate and decide if the main theorem is unconditional. The other five points are minor: the headline wording, two imprecise citations (no infinite paths; local finiteness of nested $\\mathrm{CLE}_4$), and two statements (Propositions 4.1 and 4.4) that are weaker or less exact than their uses. The sources could not be opened during this review, so the moderate points are dependencies to confirm, not demonstrated errors.",
+ "num_findings": 7,
+ "comments": [
+  {
+   "title": "The limit law comes only from a paraphrase of [BI, Theorem 4.2(2)], and the paper does not show that the source gives the strength that Lemma 5.1 uses",
+   "quote": "set away from collisions. We only need the weaker formulation above.",
+   "explanation": "Sections 2 to 4 give tightness and the short-interval estimate. They give no information on the law of a limit. All such information enters in Lemma 5.1 through Theorem 1.2, and Lemmas 5.3 and 5.5 depend on it through the signature of each $\\gamma_j$. Theorem 1.2 is the paper's own formulation; the text says that the real input is Eq. (4.17) of version 1 of a 2025 preprint. I compared the statement of Theorem 1.2 with each use in Section 5. The uses agree with the statement: each use is for a fixed finite set $\\{q_1,\\ldots,q_m\\}$ of distinct interior points, no uniformity in the punctures is used, and the step from point probabilities to total variation convergence on the countable state space is correct (Scheffe). The use needs four properties together: (1) the statement holds for the infinite-volume half-plane law of Section 1.1, not for a bounded Temperleyan domain; (2) it gives probabilities of full reduced laminations with all nested generations and multiplicities, not only correlators or expectations; (3) the limit weights are those of nested $\\mathrm{CLE}_4$ and have total mass $1$, which gives tightness of the records $\\mathcal R_m$; (4) the punctures are face punctures $z_j^\\delta\\to z_j$. The paper does not quote the source statement, so a reader cannot confirm (1) to (4) from the manuscript. If one of them fails, only Proposition 4.6 (tightness) and the rigidity statements stay proved. The source could not be opened during this review, so this is a dependency to confirm and not a demonstrated error. The authors should quote Eq. (4.17) and derive Theorem 1.2 from it in a short lemma.",
+   "comment_type": "missing_information",
+   "severity": "moderate",
+   "source": {
+    "file": "sections/10-introduction.tex",
+    "lines": [
+     218,
+     218
+    ]
+   },
+   "boxes": [
+    {
+     "page": 4,
+     "x": 76.535423,
+     "y": 311.704074,
+     "w": 444.321075,
+     "h": 12.0452075
+    },
+    {
+     "page": 4,
+     "x": 76.535423,
+     "y": 325.253269,
+     "w": 442.204712,
+     "h": 12.0452075
+    }
+   ]
+  },
+  {
+   "title": "The law of Section 1.1 is not shown to be the law of [BI] for which Theorem 1.2 is imported",
+   "quote": "infinity. We use this standard law, equivalently specified by the inverse",
+   "explanation": "The proof needs one law in three roles: (a) the local limit of Section 1.1 for arbitrary coarse-grid polygons with roots that go to infinity; (b) the limit of the corner-rooted rectangles $\\mathcal R_{\\delta,R'}$, $R'\\to\\infty$, in the proof of Proposition 4.1; (c) the law of [BI], specified by the inverse Kasteleyn operator that vanishes at infinity. Section 4 proves the geometric estimates for (b). Lemma 5.1 applies Theorem 1.2, a statement about (c), to the same loops. My check: the rectangles $\\mathcal R_{\\delta,R'}$ are coarse-grid polygons, and their root at $(-R',\\delta)$ goes to infinity, so (b) is a special case of (a) if the limit in (a) exists. The Wilson argument of Proposition 4.1 shows that the window laws agree for $R$ and each larger $R'$ with probability at least $1-\\epsilon$, so the limit along rectangles exists. The primal-direction step uses only that the root is outside each bounded pocket, so the argument extends to general remote roots. Thus (a) $=$ (b) is in reach of the paper. What stays without proof is (a) $=$ (c): one sentence with the word \"equivalently\" and a pointer to [BI, Section 2]. No step compares the rectangle limit with the Kasteleyn-inverse measure, and no step checks that the boundary convention is the same (here the bottom row holds coarse primal vertices, with a wired dual tree). The equality is probably true (the inverse Kasteleyn matrix of a rectangle is explicit and converges entrywise at fixed $\\delta$). But if the laws differ, the signature law in Lemma 5.1 is not the correct one. A short lemma with an exact reference is necessary. The general claim for arbitrary polygons is not used and can be replaced by a definition through rectangles.",
+   "comment_type": "missing_information",
+   "severity": "moderate",
+   "source": {
+    "file": "sections/10-introduction.tex",
+    "lines": [
+     24,
+     24
+    ]
+   },
+   "boxes": [
+    {
+     "page": 1,
+     "x": 76.535423,
+     "y": 584.276158,
+     "w": 442.204712,
+     "h": 12.0453975
+    },
+    {
+     "page": 1,
+     "x": 76.535423,
+     "y": 597.158737,
+     "w": 442.204712,
+     "h": 13.63634125
+    }
+   ]
+  },
+  {
+   "title": "The abstract and Theorem 1.1 give an unconditional result, but the identification is conditional on a preprint",
+   "quote": "This resolves the half-plane Temperleyan form",
+   "explanation": "The abstract says that the paper proves $F(\\mathcal L_\\delta)\\Rightarrow F(\\mathcal L)$ and that this resolves the conjecture. Theorem 1.1 has no hypothesis. The proof has the form: given cylindrical convergence (Theorem 1.2), the loops converge as curves. Section 1.4 does state the imported input, so the dependence is not hidden. But Section 1.2 describes [BC, Corollary 1.7] as \"subject to\" a tail estimate, and the paper does not apply the same standard to its own theorem, which is subject to one version of an unrefereed preprint. A correct headline is: assume [BI, Theorem 4.2(2)]; then the curves converge. The other scope phrases are correct: the full limit $\\delta\\downarrow0$ follows from the subsequence criterion, and \"macroscopic\" refers to the diameter after the map $F$.",
+   "comment_type": "claim_accuracy",
+   "severity": "minor",
+   "source": {
+    "file": "main.tex",
+    "lines": [
+     45,
+     45
+    ]
+   },
+   "boxes": [
+    {
+     "page": 1,
+     "x": 103.808212,
+     "y": 283.420864,
+     "w": 389.591919,
+     "h": 11.000218749999998
+    },
+    {
+     "page": 1,
+     "x": 103.808212,
+     "y": 295.37603299999995,
+     "w": 387.928131,
+     "h": 11.000218749999998
+    }
+   ]
+  },
+  {
+   "title": "Proposition 4.1 gives one $R$; Corollary 4.3 and Proposition 4.4 use each sufficiently large $R$ and interior cuts",
+   "quote": "There is an $R<\\infty$ such that, for every sufficiently small $\\delta$,",
+   "explanation": "The statement gives the existence of one $R$ for $K$ and $\\epsilon$. Corollary 4.3 says \"Take $R$ large enough that both cuts have positive longitudinal room\", and the proof of Proposition 4.4 says that the rectangle \"can be chosen with all required cuts longitudinally interior\". Lemma 2.3 needs this room: the constant $C_{\\eta,\\rho}$ exists only if $a\\ge\\eta n$ and $m-b\\ge\\eta n$. My check: the proof of Proposition 4.1 gives the stronger statement. It selects $R$ to contain the confinement window, and the same walk increments are used in each larger rectangle, so each larger $R$ also satisfies the conclusion. The dependence $R=R(\\epsilon)$ is harmless, because $R$ is fixed during the limits in $\\delta$, $h$ and $M$. The conclusions hold. The statement must say \"for all sufficiently large $R$\" to agree with its two uses.",
+   "comment_type": "presentation",
+   "severity": "minor",
+   "source": {
+    "file": "sections/40-localization.tex",
+    "lines": [
+     25,
+     25
+    ]
+   },
+   "boxes": [
+    {
+     "page": 18,
+     "x": 76.535423,
+     "y": 730.680147,
+     "w": 442.204712,
+     "h": 12.12116
+    }
+   ]
+  },
+  {
+   "title": "The absence of infinite paths in the half-plane superposition has only an imprecise citation",
+   "quote": "superposition consists of doubled edges and finite simple even cycles",
+   "explanation": "For two independent samples of an infinite-volume law, the absence of an infinite path in the superposition is not automatic. The paper cites the \"opening of Section 2\" of [BI] and a lemma of a second source, with no statement. The fact is used in three places: $\\mathcal L_\\delta$ is \"the collection of all cycles\"; Lemma 5.1 uses that discrete loops are disjoint or nested and that each has an inside indicator $a_{n,j}(q)$; the lamination of Theorem 1.2 must count the same objects as the source. My check: the paper's own estimates do not give the fact. Proposition 4.1 couples the matchings on a bounded window only, and Corollary 4.3 bounds the number of traversals of a slab in a window; neither excludes one infinite path. The sources could not be opened during this review. The authors should give the exact statement and its location, or a proof.",
+   "comment_type": "missing_information",
+   "severity": "minor",
+   "source": {
+    "file": "sections/10-introduction.tex",
+    "lines": [
+     30,
+     30
+    ]
+   },
+   "boxes": [
+    {
+     "page": 1,
+     "x": 76.535423,
+     "y": 624.923893,
+     "w": 442.204712,
+     "h": 12.0452075
+    },
+    {
+     "page": 1,
+     "x": 76.535423,
+     "y": 637.806259,
+     "w": 443.7211,
+     "h": 13.63634125
+    }
+   ]
+  },
+  {
+   "title": "Local finiteness of nested $\\mathrm{CLE}_4$ does not follow from the given argument and is sourced to an introduction page",
+   "quote": "entire nested ensemble is recorded explicitly in \\cite[p.~2788]{BC}.",
+   "explanation": "Proposition 1.3 says that nested $\\mathrm{CLE}_4$ in the disk has finitely many loops above each positive diameter. The argument in the text (conditional iteration in the successive interiors) gives infinitely many loops around a fixed point and avoidance of fixed points. It does not bound the number of generations that give loops of diameter larger than $\\epsilon$, so it does not give finiteness for the union of all generations. The citation is page 2788 of an article on pages 2787 to 2832, thus a remark in an introduction. The fact is standard (for example from the exponential decay of the conformal radii of successive loops around a point, with a covering argument), so this is a sourcing gap and not an error. It is used twice: the limit in Theorem 1.2 must have total mass $1$ on finite laminations, and $F(\\mathcal L)$ must be an element of the space $S$. The other parts of Proposition 1.3 are correct.",
+   "comment_type": "missing_information",
+   "severity": "minor",
+   "source": {
+    "file": "sections/10-introduction.tex",
+    "lines": [
+     242,
+     242
+    ]
+   },
+   "boxes": [
+    {
+     "page": 4,
+     "x": 76.535423,
+     "y": 546.423954,
+     "w": 442.204712,
+     "h": 12.0452075
+    },
+    {
+     "page": 4,
+     "x": 76.535423,
+     "y": 559.306259,
+     "w": 442.204712,
+     "h": 13.63634125
+    }
+   ]
+  },
+  {
+   "title": "Proposition 4.4 fixes a partition with endpoints off the graph, but such a partition does not exist for all $\\delta\\downarrow0$",
+   "quote": "into $O(h^{-1})$ intervals of length at most $h$, with endpoints off the",
+   "explanation": "The statement fixes one line $\\{u=c\\}$ and one deterministic partition, then takes $\\limsup_{\\delta\\downarrow0}$ over all meshes. On a seam, the graph meets the line at transverse coordinates in $\\delta\\mathbb Z$. An endpoint at transverse coordinate $t\\ne0$ is thus on the graph for each $\\delta=|t|/k$, $k\\ge1$, and the line contains lattice vertices for each $\\delta=|c|/k$. Then $\\iota_I(\\alpha)$ and $E_{\\delta,h}$ are not defined along the full limit for fixed data. The paper gives two repairs: seam perturbations of order $\\delta$, or a prescribed mesh sequence. With the first repair the intervals depend on $\\delta$, and the proposition must say this, as Proposition 3.1 does. I confirmed that the estimate does not change: the proof of Proposition 3.1 uses only $|S(I)|/n\\le C(h+\\delta)$ and the bound $C_M(h+\\delta)^2/h$. With the second repair the statement holds for one countable sequence; this is sufficient for Section 5, which fixes $\\delta_n$ first and selects lines and grid origins that avoid all lattices of the sequence. The mathematics is correct; the statement is not exact.",
+   "comment_type": "presentation",
+   "severity": "minor",
+   "source": {
+    "file": "sections/40-localization.tex",
+    "lines": [
+     280,
+     280
+    ]
+   },
+   "boxes": [
+    {
+     "page": 22,
+     "x": 76.535423,
+     "y": 168.66082,
+     "w": 442.204712,
+     "h": 14.77789875
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,282 @@
+{
+ "id": "Canonical-ampleness-of-compact-hyperbolic-Kahler-manifolds-September-23-2026",
+ "title": "Canonical ampleness of compact hyperbolic Kähler manifolds",
+ "abstract": "We prove that every compact connected Kähler manifold of positive complex dimension containing no nonconstant entire curve has ample canonical bundle and is projective. This resolves positively Kobayashi's canonical-ampleness conjecture in the smooth compact Kähler category.",
+ "result_id": "051",
+ "result_title": "Kobayashi’s canonical-ampleness conjecture",
+ "subject": "Algebraic and complex geometry",
+ "source_pdf": "preprints/Canonical-ampleness-of-compact-hyperbolic-Kahler-manifolds-September-23-2026/canonical-ampleness.pdf",
+ "pdf": "pdf/Canonical-ampleness-of-compact-hyperbolic-Kahler-manifolds-September-23-2026.pdf",
+ "page_sizes": [
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ]
+ ],
+ "macros": "\\newcommand{\\C}{\\mathbb C}\n\\newcommand{\\R}{\\mathbb R}\n\\newcommand{\\Z}{\\mathbb Z}\n\\newcommand{\\D}{\\mathbb D}\n\\newcommand{\\PP}{\\mathbb P}\n\\newcommand{\\dd}{\\mathrm d}\n\\newcommand{\\ddc}{i\\partial\\bar\\partial}\n\\newcommand{\\eps}{\\varepsilon}\n\\newcommand{\\cL}{\\mathcal L}\n\\newcommand{\\cO}{\\mathcal O}\n\\newcommand{\\Ric}{\\operatorname{Ric}}\n\\newcommand{\\tr}{\\operatorname{tr}}\n\\newcommand{\\osc}{\\operatorname{osc}}",
+ "review": {
+  "method": "OpenAIReview (Claude Opus 5.5)",
+  "effort": "high",
+  "date": "2026-10-08"
+ },
+ "overall_assessment": "The paper claims a proof of Kobayashi's canonical-ampleness conjecture for compact Kaehler manifolds. The claim is extraordinary, so the main chain (Sections 2-9 and Appendix A) was checked step by step. This check found no error in the proof of Theorem 1.1. That is not a certificate of correctness: the result needs verification by specialists before it is accepted.\n\nWhat was checked. The Brody bound, the existence of maximizers, the dilation inequality A_q(f) >= -d(f), and the exponents in the boundary regularity (|f'| <= C(1-|z|)^{-1/2}, W^{1,p} for 2 < p < 4) are correct. The Hardy-space factorization and its exponents (1/2 < s < 1 - 1/p, 2 < p_0 < 2/(3/2 - s)) are correct. In the variation construction, Q(z,0) = 0 and Q_xi(z,0) = 0 hold, so the implicit function theorem applies and dF/dt_j(0,z) = z b_j(z). The determinant identity and the three trace identities were recomputed. They were also tested on explicit models: a hemisphere disc in P^1 with the Fubini-Study metric (both sides of the area and Poisson identities agree) and linear discs in the unit disc with the Poincare metric (the maximum inequality of Corollary 5.3 equals the direct second derivative of J at the critical radius). Propositions 6.1 and 7.1 follow from Corollary 5.3 with the stated constants. The Poletsky-Rosay step, the smoothing appendix, the Aubin-Yau step (R_{h_t} = -h_t + tk), the Morse-inequality estimate, and the cone-theorem argument are correct.\n\nWhere a specialist check has the most value. The result depends most on three analytic steps that have little margin: the boundary regularity of maximizers (Proposition 3.4), the Sobolev implicit-function construction of center-fixed variations (Proposition 4.3), and the weak boundary limit in the area Hessian (Proposition 5.2). The volume estimate of Proposition 7.1 is the new input; it is consistent with the known case of ample K_X, where the maximum principle gives it directly.\n\nDefects found. The two corollaries of Section 10 are not supported. Corollary 10.1 applies Fujita's freeness conjecture, which is open for n >= 6, through a companion manuscript that is not available. Corollary 10.2 takes its full content from a second companion manuscript and does not state the hypotheses of the cited theorem. Both must be stated as conditional. Neither is used for Theorem 1.1. The other points are small: the introduction describes Kaehler hyperbolicity as distinct from Brody hyperbolicity although it is a stronger condition, Proposition 6.1 cites the wrong equation, and several citations use preprint numbering.\n\nCoverage note. Eight of the eleven sub-agents (all of the section reviewers for Sections 2-9 and the appendix, and the adversarial-test agent) returned no findings. The eleven raw comments all concern Section 1 and Section 10; they were merged into five issues.",
+ "num_findings": 5,
+ "comments": [
+  {
+   "title": "Corollary 10.1 assumes Fujita's freeness conjecture, which is open in dimension 6 and higher",
+   "quote": "Apply Fujita freeness in its all-powers form",
+   "explanation": "The proof has one step. It applies the statement \"$K_X + jL$ is globally generated for every ample $L$ and every $j \\ge n+1$\" with $L = K_X$ and $j = m-1$. The index arithmetic is correct: $K_X + (m-1)K_X = mK_X$, and $m-1 \\ge n+1$ is the same as $m \\ge n+2$. But the applied statement is Fujita's freeness conjecture. It is proved only for $n \\le 5$ (Reider, Ein-Lazarsfeld, Kawamata, Ye-Zhu). In general dimension the established bounds are of Angehrn-Siu type, $j \\ge n(n+1)/2 + 1$, and the later improvements are still not linear with constant 1. No established result uses $L = K_X$ or the absence of rational curves to get the exponent $n+2$. The only support is the citation key OpenAIFujita2026, a companion manuscript by the same author that is not available. Thus Corollary 10.1 is unconditional only for $n \\le 5$. For $n \\ge 6$, established results give global generation only for $m \\ge n(n+1)/2 + 2$. The corollary must be stated as conditional on Fujita's conjecture, or restricted to $n \\le 5$, or given the Angehrn-Siu exponent. Theorem 1.1 does not use this corollary, so the problem does not propagate.",
+   "comment_type": "claim_accuracy",
+   "severity": "major",
+   "source": {
+    "file": "sections/consequences.tex",
+    "lines": [
+     16,
+     16
+    ]
+   },
+   "boxes": [
+    {
+     "page": 26,
+     "x": 66.545433,
+     "y": 541.739627,
+     "w": 473.454559,
+     "h": 12.0452075
+    },
+    {
+     "page": 26,
+     "x": 71.999985,
+     "y": 554.621933,
+     "w": 468.403625,
+     "h": 13.63634125
+    }
+   ]
+  },
+  {
+   "title": "Corollary 10.2 depends fully on an unavailable classification theorem whose hypotheses are not stated",
+   "quote": "classification \\cite[Theorem~1.1]{OpenAISemialgebraicCovers2026} gives",
+   "explanation": "The decomposition of the universal cover as $D \\times \\mathbb{C}^m \\times F$, with $D$ a bounded symmetric domain, is taken from a companion manuscript that is not available. No published theorem has this statement. The nearest established result is Claudon-Hoering-Kollar for quasi-projective universal covers; it needs the abundance conjecture and gives a different conclusion. The paper does not state the hypotheses of the cited theorem, so the reader cannot check them at the point of use (for example, whether $F$ is compact by statement, and what regularity the semialgebraic set must have). The steps after the citation are correct: smoothness of $D \\times F$ gives smoothness of $F$; an entire curve in the cover or in a factor gives one in $X$, so $m = 0$ and $F$ is Brody hyperbolic; $\\operatorname{Aut}(F)$ is finite by Theorem 1.1 and Kobayashi (1959); a deck transformation maps each compact connected fiber to a point of the bounded domain $D$, so it is a product; the kernel $\\Gamma_0$ has finite index and acts freely and properly discontinuously on $D$. Thus all the content of the corollary is in the cited step. The corollary must be stated as conditional on that theorem, with its hypotheses written out. Theorem 1.1 is not affected.",
+   "comment_type": "missing_information",
+   "severity": "moderate",
+   "source": {
+    "file": "sections/consequences.tex",
+    "lines": [
+     38,
+     38
+    ]
+   },
+   "boxes": [
+    {
+     "page": 27,
+     "x": 66.545433,
+     "y": 74.777084,
+     "w": 473.454559,
+     "h": 13.63634125
+    },
+    {
+     "page": 27,
+     "x": 71.999985,
+     "y": 86.147766,
+     "w": 468.294556,
+     "h": 15.60187375
+    }
+   ]
+  },
+  {
+   "title": "Kaehler hyperbolicity is called 'distinct' from Brody hyperbolicity, but it implies Brody hyperbolicity",
+   "quote": "This condition is distinct from Brody hyperbolicity",
+   "explanation": "The sentence suggests that the two conditions are not related. A compact Kaehler hyperbolic manifold in the sense of Gromov is Kobayashi hyperbolic, thus Brody hyperbolic; Gromov states this and Chen-Yang (2018) prove it. The converse is false: a simply connected hyperbolic hypersurface is not Kaehler hyperbolic. The accurate statement is that Kaehler hyperbolicity is strictly stronger. This changes the positioning of the result: the Chen-Yang ampleness theorem is a known special case of Theorem 1.1, not a parallel result under a different hypothesis. The paper should say so. This affects the introduction only.",
+   "comment_type": "claim_accuracy",
+   "severity": "minor",
+   "source": {
+    "file": "sections/introduction.tex",
+    "lines": [
+     59,
+     59
+    ]
+   },
+   "boxes": [
+    {
+     "page": 2,
+     "x": 71.999985,
+     "y": 142.523056,
+     "w": 468.0,
+     "h": 13.63634125
+    }
+   ]
+  },
+  {
+   "title": "Proposition 6.1 cites the wrong equation for the inequality $A_{R_k}(f) \\ge -d(f)$",
+   "quote": "The dilation inequality, Equation~\\eqref{eq:tail}, gives",
+   "explanation": "Equation (eq:tail) bounds $\\delta(A_h(f) - A_{h,r}(f))$ by $(1-r^2)d(f) + 2 \\int_r^1 A_{q,s}(f)\\, ds/s$. It does not state $A_q(f) \\ge -d(f)$. That inequality is the first part of Equation (eq:extremal-area-tail) and needs the limit step in the proof of Lemma 3.3: divide the right-hand side by $1-r$, let $r$ go to $1$, and get $2d(f) + 2A_q(f) \\ge 0$. I checked this step, and it is applied with the correct parameters ($q = R_k$, $h = k$). The mathematics is correct; only the reference is wrong. Cite Equation (eq:extremal-area-tail) or Corollary 5.3, which states the inequality.",
+   "comment_type": "presentation",
+   "severity": "minor",
+   "source": {
+    "file": "sections/nefness.tex",
+    "lines": [
+     36,
+     36
+    ]
+   },
+   "boxes": [
+    {
+     "page": 19,
+     "x": 71.999985,
+     "y": 617.716953,
+     "w": 469.516357,
+     "h": 14.09541625
+    }
+   ]
+  },
+  {
+   "title": "Pinpoint citations use preprint numbering, and three references cannot be identified",
+   "quote": "\\cite[Proposition~8(i) and the proof of Lemma~6 in the authors' preprint]{WuYau2016}.",
+   "explanation": "Several citations give theorem numbers 'in the authors' preprint' and not in the published version: Wu-Yau 2016, Sukhov-Tumanov 2016 (Section 4.1), Gloeckner 2006 (Theorem 2.3), Namikawa 2002 (Theorem 6), and Kollar 2007 ('Theorem 35'; the published book numbers results as 3.35 and so on). The reference BroderStanfield2026 and the two OpenAI companion references are dated 2026 and cannot be identified without the bibliography. For the main chain this is a traceability defect only. Each cited result is classical and is applied within its range: $L^p$ and $W^{1,p}$ bounds for the solid Cauchy transform, the holomorphic implicit function theorem in Banach spaces with $D_gG(0,0) = I$, Moishezon's projectivity theorem for Kaehler Moishezon manifolds, Hironaka log resolution, and the Aubin-Yau theorem for $(\\gamma + dd^c w)^n = e^w \\Omega$ with $\\gamma$ Kaehler. The paper should give published theorem numbers and full references.",
+   "comment_type": "presentation",
+   "severity": "minor",
+   "source": {
+    "file": "sections/volume-ampleness.tex",
+    "lines": [
+     87,
+     87
+    ]
+   },
+   "boxes": [
+    {
+     "page": 23,
+     "x": 71.999985,
+     "y": 126.22752399999999,
+     "w": 468.0,
+     "h": 13.63634125
+    },
+    {
+     "page": 23,
+     "x": 71.999985,
+     "y": 139.776718,
+     "w": 468.0,
+     "h": 13.63634125
+    }
+   ]
+  }
+ ]
+}

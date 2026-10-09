@@ -1,0 +1,421 @@
+{
+ "source": {
+  "repo": "openai/math",
+  "commit": "adc7f1241b42e322a6451854ab7e4b4c146bf78a"
+ },
+ "reviewed": 25,
+ "reviewed_ids": [
+  "A-Gepner-stability-condition-on-every-smooth-quintic-threefold-September-24-2026",
+  "A-closed-Ricci-flow-with-bounded-scalar-curvature-and-finite-time-curvature-blowup-September-24-2026",
+  "A-counterexample-to-the-nearby-Lagrangian-conjecture-September-23-2026",
+  "Ambiently-homeomorphic-isolated-hypersurfaces-of-multiplicities-two-and-three-September-24-2026",
+  "An-Integral-Counterexample-to-Gerstens-Conjecture-September-25-2026",
+  "Anticanonical-nonvanishing-from-smooth-semipositivity-September-26-2026",
+  "Canonical-ampleness-of-compact-hyperbolic-Kahler-manifolds-September-23-2026",
+  "Continuous-Phase-Foliations-Create-Analytic-Caustic-Collars-September-24-2026",
+  "Cyclic-Length-and-Chromatic-Fixed-Point-Loss-September-24-2026",
+  "Etale-covers-with-a-prescribed-exterior-sheet-September-24-2026",
+  "Existential-universal-real-sentences-in-the-counting-hierarchy-October-4-2026",
+  "Filtered-products-and-boundary-preserving-compression-in-complex-cobordism-September-25-2026",
+  "Integral-points-on-character-varieties-of-curves-September-25-2026",
+  "Interior-regularity-of-planar-Mumford-Shah-minimizers-September-24-2026",
+  "Log-abundance-in-numerical-dimension-one-for-threefolds-in-positive-characteristic-October-5-2026",
+  "Pointwise-Multiple-Ergodic-Averages-for-Mixing-Transformations-October-4-2026",
+  "Positivity-of-Serres-Intersection-Multiplicity-September-23-2026",
+  "Spectral-scalar-curvature-and-uniform-Urysohn-width-October-5-2026",
+  "Subset-Sum-in-Time-2-power-0-49n-October-4-2026",
+  "The-Artinian-Lex-Plus-Powers-Betti-Theorem-September-23-2026",
+  "The-Campana-Peternell-conjecture-in-dimension-six-September-25-2026",
+  "The-Solomon-Yau-least-volume-theorem-September-23-2026",
+  "The-curve-scaling-limit-of-half-plane-double-dimers-September-23-2026",
+  "The-p-adic-section-conjecture-September-24-2026",
+  "Unrestricted-pro-modularity-at-the-prime-two-October-4-2026"
+ ],
+ "papers": [
+  {
+   "id": "Unrestricted-pro-modularity-at-the-prime-two-October-4-2026",
+   "title": "Unrestricted pro-modularity at the prime two",
+   "result_id": "010",
+   "result_title": "Unrestricted pro-modularity at the prime two",
+   "subject": "Number theory",
+   "num_findings": 21,
+   "severities": [
+    "major",
+    "major",
+    "major",
+    "major",
+    "moderate",
+    "moderate",
+    "moderate",
+    "moderate",
+    "moderate",
+    "moderate",
+    "minor",
+    "minor",
+    "minor",
+    "minor",
+    "minor",
+    "minor",
+    "minor",
+    "minor",
+    "minor",
+    "minor",
+    "minor"
+   ],
+   "pages": 29,
+   "summary": "Every continuous odd absolutely irreducible two-dimensional 2-adic representation of <span class=\"math\">G_{\\mathbb Q}</span> unramified outside finitely many primes occurs in a completed Hecke algebra at some odd tame level. Also proves classical modularity up to Tate twist for irreducible odd representations with these finiteness conditions that are de Rham at 2 with distinct Hodge–Tate weights, resolving the dyadic Fontaine–Mazur case without residual restrictions."
+  },
+  {
+   "id": "The-p-adic-section-conjecture-September-24-2026",
+   "title": "The p-adic section conjecture",
+   "result_id": "019",
+   "result_title": "The local <i>p</i>-adic section conjecture and global consequences",
+   "subject": "Number theory",
+   "num_findings": 5,
+   "severities": [
+    "major",
+    "moderate",
+    "moderate",
+    "minor",
+    "minor"
+   ],
+   "pages": 24,
+   "summary": "Proves that rational points on every smooth proper geometrically connected curve of genus at least two over a finite extension of ℚ<sub><i>p</i></sub> correspond bijectively to conjugacy classes of sections of its full arithmetic étale fundamental group. It also proves Grothendieck's section conjecture over ℚ for the modular curves <span class=\"math\">X_0(N)</span> and <span class=\"math\">X_1(N)</span> of genus at least two."
+  },
+  {
+   "id": "Log-abundance-in-numerical-dimension-one-for-threefolds-in-positive-characteristic-October-5-2026",
+   "title": "Log abundance in numerical dimension one for threefolds in positive characteristic",
+   "result_id": "035",
+   "result_title": "Log-canonical threefold abundance in numerical dimension one",
+   "subject": "Algebraic and complex geometry",
+   "num_findings": 5,
+   "severities": [
+    "major",
+    "moderate",
+    "moderate",
+    "minor",
+    "minor"
+   ],
+   "pages": 16,
+   "summary": "Proves log abundance for projective log canonical threefold pairs over algebraically closed fields of characteristic <i>p</i> &gt; 3 when the effective boundary is rational and the ℚ-Cartier adjoint is nef of numerical dimension one. The adjoint is semiample, without requiring the original variety to be terminal or ℚ-factorial."
+  },
+  {
+   "id": "Canonical-ampleness-of-compact-hyperbolic-Kahler-manifolds-September-23-2026",
+   "title": "Canonical ampleness of compact hyperbolic Kähler manifolds",
+   "result_id": "051",
+   "result_title": "Kobayashi’s canonical-ampleness conjecture",
+   "subject": "Algebraic and complex geometry",
+   "num_findings": 5,
+   "severities": [
+    "major",
+    "moderate",
+    "minor",
+    "minor",
+    "minor"
+   ],
+   "pages": 31,
+   "summary": "Every compact connected Kähler manifold of positive complex dimension with no nonconstant entire curve has ample canonical bundle and is therefore projective. This proves Kobayashi's canonical-ampleness conjecture in the smooth compact Kähler setting."
+  },
+  {
+   "id": "A-Gepner-stability-condition-on-every-smooth-quintic-threefold-September-24-2026",
+   "title": "A Gepner stability condition on every smooth quintic threefold",
+   "result_id": "055",
+   "result_title": "Gepner symmetry and large-volume stability on threefolds",
+   "subject": "Algebraic and complex geometry",
+   "num_findings": 2,
+   "severities": [
+    "major",
+    "minor"
+   ],
+   "pages": 22,
+   "summary": "Proves Toda's Gepner conjecture for every smooth complex quintic threefold, constructing a numerical Bridgeland stability condition with the prescribed phase shift 2/5. Also constructs numerical Bridgeland stability conditions at every sufficiently large volume on all smooth projective complex threefolds with trivial canonical bundle, with the exact ordinary and square-root-Todd central charges."
+  },
+  {
+   "id": "Pointwise-Multiple-Ergodic-Averages-for-Mixing-Transformations-October-4-2026",
+   "title": "Pointwise Multiple Ergodic Averages for Mixing Transformations",
+   "result_id": "154",
+   "result_title": "Pointwise multiple ergodic averages for mixing transformations",
+   "subject": "Dynamical systems and ergodic theory",
+   "num_findings": 9,
+   "severities": [
+    "major",
+    "major",
+    "major",
+    "moderate",
+    "moderate",
+    "moderate",
+    "moderate",
+    "minor",
+    "minor"
+   ],
+   "pages": 25,
+   "summary": "Proves almost-everywhere convergence of consecutive multiple ergodic averages of every finite length for invertible mixing probability-preserving transformations. For each fixed tuple of bounded functions, the limit is the product of their integrals, along all positive averaging lengths. No mixing rate or standardness assumption on the probability space is required."
+  },
+  {
+   "id": "Positivity-of-Serres-Intersection-Multiplicity-September-23-2026",
+   "title": "Positivity of Serre's Intersection Multiplicity",
+   "result_id": "193",
+   "result_title": "Serre’s intersection-multiplicity conjecture",
+   "subject": "Algebra",
+   "num_findings": 6,
+   "severities": [
+    "major",
+    "moderate",
+    "moderate",
+    "moderate",
+    "moderate",
+    "minor"
+   ],
+   "pages": 31,
+   "summary": "Proves strict positivity of Serre's intersection multiplicity <span class=\"math\">\\chi^R(M,N)</span> for nonzero finitely generated modules over any regular local ring, provided <span class=\"math\">M\\otimes_R N</span> has finite length and <span class=\"math\">\\dim M+\\dim N=\\dim R</span>. This resolves the positivity conjecture, including ramified mixed characteristic."
+  },
+  {
+   "id": "The-Artinian-Lex-Plus-Powers-Betti-Theorem-September-23-2026",
+   "title": "The Artinian Lex-Plus-Powers Betti Theorem",
+   "result_id": "200",
+   "result_title": "Eisenbud–Green–Harris and lex-plus-powers",
+   "subject": "Algebra",
+   "num_findings": 7,
+   "severities": [
+    "major",
+    "moderate",
+    "moderate",
+    "moderate",
+    "minor",
+    "minor",
+    "minor"
+   ],
+   "pages": 22,
+   "summary": "Proves the Eisenbud–Green–Harris and lex-plus-powers conjectures over every characteristic-zero field. Any homogeneous ideal containing a regular sequence, of arbitrary length and degrees at least two, admits a lex-plus-powers ideal with the same Hilbert function and no smaller graded Betti numbers."
+  },
+  {
+   "id": "Spectral-scalar-curvature-and-uniform-Urysohn-width-October-5-2026",
+   "title": "Spectral scalar curvature and uniform Urysohn width",
+   "result_id": "336",
+   "result_title": "Spectral scalar curvature, Urysohn width, and macroscopic dimension",
+   "subject": "Differential geometry",
+   "num_findings": 4,
+   "severities": [
+    "major",
+    "major",
+    "moderate",
+    "minor"
+   ],
+   "pages": 27,
+   "summary": "Every complete connected smooth boundaryless <i>n</i>-manifold, <i>n</i> ≥ 3, satisfying <span class=\"math\">-4\\Delta+\\mathrm{Scal}\\ge1</span> as a quadratic-form inequality admits a continuous map to a simplicial complex of dimension at most <span class=\"math\">n-2</span> whose entire fibers have diameter bounded only by <i>n</i> in the original metric. This strengthens Gromov's width conclusion to spectral scalar curvature. Universal covers of closed positive-scalar-curvature manifolds also have continuous macroscopic dimension at most <span class=\"math\">n-2</span> for every <i>n</i> ≥ 2."
+  },
+  {
+   "id": "A-counterexample-to-the-nearby-Lagrangian-conjecture-September-23-2026",
+   "title": "A counterexample to the nearby Lagrangian conjecture",
+   "result_id": "340",
+   "result_title": "A counterexample to the nearby Lagrangian conjecture",
+   "subject": "Differential geometry",
+   "num_findings": 4,
+   "severities": [
+    "major",
+    "moderate",
+    "moderate",
+    "minor"
+   ],
+   "pages": 28,
+   "summary": "Disproves the unrestricted nearby Lagrangian conjecture. For some sufficiently large even <i>N</i>, constructs a closed exact embedded Lagrangian in <span class=\"math\">T^*(S^9\\times S^{N-1})</span> that is diffeomorphic to the base but not Hamiltonian isotopic to its zero section."
+  },
+  {
+   "id": "A-closed-Ricci-flow-with-bounded-scalar-curvature-and-finite-time-curvature-blowup-September-24-2026",
+   "title": "A closed Ricci flow with bounded scalar curvature and finite-time curvature blowup",
+   "result_id": "351",
+   "result_title": "Scalar curvature and finite-time Ricci-flow singularities",
+   "subject": "Differential geometry",
+   "num_findings": 5,
+   "severities": [
+    "major",
+    "major",
+    "moderate",
+    "minor",
+    "minor"
+   ],
+   "pages": 20,
+   "summary": "Proves that a smooth Ricci flow on a closed four-manifold extends past any finite time at which scalar curvature remains uniformly bounded. A higher-dimensional counterexample has bounded scalar curvature but unbounded full curvature at its finite maximal time, disproving the unrestricted scalar-curvature extension conjecture."
+  },
+  {
+   "id": "Interior-regularity-of-planar-Mumford-Shah-minimizers-September-24-2026",
+   "title": "Interior regularity of planar Mumford–Shah minimizers",
+   "result_id": "366",
+   "result_title": "The planar Mumford–Shah regularity conjecture and local weak-<i>L</i><sup>4</sup> gradient bounds",
+   "subject": "Partial differential equations",
+   "num_findings": 7,
+   "severities": [
+    "major",
+    "moderate",
+    "minor",
+    "minor",
+    "minor",
+    "minor",
+    "minor"
+   ],
+   "pages": 20,
+   "summary": "Resolves the interior regularity conjecture for reduced absolute planar Mumford–Shah minimizers with bounded fidelity data. Locally, the closed discontinuity set is a <span class=\"math\">C^{1,\\alpha}</span> arc, a regular crack tip, or three arcs meeting at <span class=\"math\">120^\\circ</span>; only finitely many global connected components meet any compact interior region."
+  },
+  {
+   "id": "Etale-covers-with-a-prescribed-exterior-sheet-September-24-2026",
+   "title": "Étale covers with a prescribed exterior sheet",
+   "result_id": "019",
+   "result_title": "The local <i>p</i>-adic section conjecture and global consequences",
+   "subject": "Number theory",
+   "num_findings": 5,
+   "severities": [
+    "moderate",
+    "moderate",
+    "minor",
+    "minor",
+    "minor"
+   ],
+   "pages": 7,
+   "summary": "Proves that rational points on every smooth proper geometrically connected curve of genus at least two over a finite extension of ℚ<sub><i>p</i></sub> correspond bijectively to conjugacy classes of sections of its full arithmetic étale fundamental group. It also proves Grothendieck's section conjecture over ℚ for the modular curves <span class=\"math\">X_0(N)</span> and <span class=\"math\">X_1(N)</span> of genus at least two."
+  },
+  {
+   "id": "The-Campana-Peternell-conjecture-in-dimension-six-September-25-2026",
+   "title": "The Campana–Peternell conjecture in dimension six",
+   "result_id": "067",
+   "result_title": "The Campana–Peternell conjecture in dimension six",
+   "subject": "Algebraic and complex geometry",
+   "num_findings": 8,
+   "severities": [
+    "moderate",
+    "minor",
+    "minor",
+    "minor",
+    "minor",
+    "minor",
+    "minor",
+    "minor"
+   ],
+   "pages": 27,
+   "summary": "Proves the Campana–Peternell conjecture in complex dimension six: every smooth connected complex projective Fano sixfold with nef tangent bundle is rational homogeneous."
+  },
+  {
+   "id": "Continuous-Phase-Foliations-Create-Analytic-Caustic-Collars-September-24-2026",
+   "title": "Continuous Phase Foliations Create Analytic Caustic Collars",
+   "result_id": "147",
+   "result_title": "The near-boundary Birkhoff conjecture",
+   "subject": "Dynamical systems and ergodic theory",
+   "num_findings": 4,
+   "severities": [
+    "moderate",
+    "moderate",
+    "minor",
+    "minor"
+   ],
+   "pages": 27,
+   "summary": "Resolves the near-boundary Birkhoff conjecture for smooth strictly convex planar billiards of positive curvature. Such a billiard is an ellipse whenever a full grazing annulus is continuously foliated by individually invariant essential curves. A continuous physical collar of smooth closed convex caustics also suffices."
+  },
+  {
+   "id": "An-Integral-Counterexample-to-Gerstens-Conjecture-September-25-2026",
+   "title": "An integral counterexample to Gersten's conjecture",
+   "result_id": "209",
+   "result_title": "Integral counterexamples to Gersten’s conjecture",
+   "subject": "Algebra",
+   "num_findings": 3,
+   "severities": [
+    "moderate",
+    "minor",
+    "minor"
+   ],
+   "pages": 25,
+   "summary": "Disproves unrestricted integral Gersten injectivity in degrees 3 and 5. Two explicit two-dimensional ramified regular local rings of mixed characteristic <span class=\"math\">(0,5)</span> have nonzero integral <i>K</i>-theory classes that vanish over their fraction fields."
+  },
+  {
+   "id": "The-curve-scaling-limit-of-half-plane-double-dimers-September-23-2026",
+   "title": "The curve scaling limit of half-plane double dimers",
+   "result_id": "226",
+   "result_title": "The double-dimer loop ensemble converges to CLE<sub>4</sub>",
+   "subject": "Probability and statistical mechanics",
+   "num_findings": 7,
+   "severities": [
+    "moderate",
+    "moderate",
+    "minor",
+    "minor",
+    "minor",
+    "minor",
+    "minor"
+   ],
+   "pages": 33,
+   "summary": "Resolves the half-plane Temperleyan form of the double-dimer scaling-limit conjecture: the complete loop ensemble formed by two independent dimer coverings of the Temperleyan square lattice converges to nested CLE<sub>4</sub>. Convergence matches every macroscopic loop as an unparametrized curve, upgrading convergence of loop observables to convergence of the loops themselves."
+  },
+  {
+   "id": "Filtered-products-and-boundary-preserving-compression-in-complex-cobordism-September-25-2026",
+   "title": "Filtered products and boundary-preserving compression in complex cobordism",
+   "result_id": "302",
+   "result_title": "Radius of comparison equals half the mean dimension",
+   "subject": "Operator algebras",
+   "num_findings": 4,
+   "severities": [
+    "moderate",
+    "minor",
+    "minor",
+    "minor"
+   ],
+   "pages": 25,
+   "summary": "For every minimal homeomorphism <i>h</i> of an infinite compact metrizable space <i>X</i>, the radius of comparison of <span class=\"math\">C(X)\\rtimes_h\\mathbb Z</span> equals <span class=\"math\">\\tfrac12\\mathrm{mdim}(X,h)</span>, including infinite values. Zero mean dimension is equivalent to the small boundary property, Jiang–Su stability and finite nuclear dimension; in this case nuclear dimension is at most one."
+  },
+  {
+   "id": "The-Solomon-Yau-least-volume-theorem-September-23-2026",
+   "title": "The Solomon–Yau least-volume theorem",
+   "result_id": "349",
+   "result_title": "The Solomon–Yau least-volume conjecture",
+   "subject": "Differential geometry",
+   "num_findings": 3,
+   "severities": [
+    "moderate",
+    "minor",
+    "minor"
+   ],
+   "pages": 32,
+   "summary": "Proves the Solomon–Yau least-volume conjecture for minimal hypersurfaces of round spheres. For every <i>m</i> ≥ 2, a closed connected minimal immersion into the unit sphere <span class=\"math\">S^{m+1}</span> with non-totally-geodesic image has volume at least that of the smallest minimal Clifford product, counting covering multiplicity."
+  },
+  {
+   "id": "Ambiently-homeomorphic-isolated-hypersurfaces-of-multiplicities-two-and-three-September-24-2026",
+   "title": "Ambiently homeomorphic isolated hypersurfaces of multiplicities two and three",
+   "result_id": "059",
+   "result_title": "Counterexamples to Zariski’s multiplicity conjecture",
+   "subject": "Algebraic and complex geometry",
+   "num_findings": 2,
+   "severities": [
+    "minor",
+    "minor"
+   ],
+   "pages": 31,
+   "summary": "Disproves Zariski's multiplicity conjecture by constructing reduced holomorphic hypersurface germs that are ambiently homeomorphic but have different multiplicities. The examples include hypersurfaces in ℂ<sup>4</sup> with isolated critical points and multiplicities four and five."
+  },
+  {
+   "id": "Anticanonical-nonvanishing-from-smooth-semipositivity-September-26-2026",
+   "title": "Anticanonical nonvanishing from smooth semipositivity",
+   "result_id": "068",
+   "result_title": "Anticanonical nonvanishing in every dimension",
+   "subject": "Algebraic and complex geometry",
+   "num_findings": 3,
+   "severities": [
+    "minor",
+    "minor",
+    "minor"
+   ],
+   "pages": 27,
+   "summary": "If <i>X</i> is a smooth connected complex projective variety and <span class=\"math\">-K_X</span> admits a smooth Hermitian metric with nonnegative curvature, then <span class=\"math\">H^0(X,-mK_X)\\ne0</span> for some <i>m</i> &gt; 0. Thus smooth semipositivity forces a nonzero section of a positive tensor power of the anticanonical bundle in every dimension."
+  },
+  {
+   "id": "Existential-universal-real-sentences-in-the-counting-hierarchy-October-4-2026",
+   "title": "Existential–universal real sentences in the counting hierarchy",
+   "result_id": "141",
+   "result_title": "Existential–universal real sentences in the counting hierarchy",
+   "subject": "Theoretical computer science",
+   "num_findings": 2,
+   "severities": [
+    "minor",
+    "minor"
+   ],
+   "pages": 35,
+   "summary": "Proves that the existential theory of the reals lies in the counting hierarchy. More generally, truth of existential–universal real sentences can be decided at one fixed level of that hierarchy, even when their integer polynomials are specified by arithmetic circuits."
+  }
+ ]
+}
