@@ -77,6 +77,8 @@ a:hover { color: var(--accent-hover); }
 .header-links { margin-left: auto; display: flex; gap: 20px; font-size: 14px; font-weight: 500; }
 .header-links a { color: var(--text-secondary); transition: color 0.15s; }
 .header-links a:hover { color: var(--text); }
+.header-links a { white-space: nowrap; }
+@media (max-width: 480px) { div.header-links { gap: 12px; font-size: 12px; } }
 .header-links a.current { color: var(--text); font-weight: 600; }
 
 /* ── Hero ── */
@@ -103,6 +105,8 @@ a:hover { color: var(--accent-hover); }
 .collection-head h2 { font-family: 'Lora', Georgia, 'Times New Roman', serif; font-size: 27px; font-weight: 600; letter-spacing: -0.3px; line-height: 1.2; }
 .filters { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; margin-bottom: 20px; }
 .filters label { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; color: var(--text-secondary); }
+.filters label { min-width: 0; max-width: 100%; }
+.filters select { min-width: 0; max-width: 100%; text-overflow: ellipsis; }
 .filters .sort { margin-left: auto; }
 .filters select {
   font: inherit;

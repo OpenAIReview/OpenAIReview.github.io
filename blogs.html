@@ -77,6 +77,8 @@ a:hover { color: var(--accent-hover); }
 .header-links { margin-left: auto; display: flex; gap: 20px; font-size: 14px; font-weight: 500; }
 .header-links a { color: var(--text-secondary); transition: color 0.15s; }
 .header-links a:hover { color: var(--text); }
+.header-links a { white-space: nowrap; }
+@media (max-width: 480px) { div.header-links { gap: 12px; font-size: 12px; } }
 .header-links a.current { color: var(--text); font-weight: 600; }
 
 /* ── Hero ── */

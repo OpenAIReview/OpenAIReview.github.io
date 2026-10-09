@@ -84,6 +84,8 @@ a:hover { color: var(--accent-hover); }
   transition: color 0.15s;
 }
 .header-links a:hover { color: var(--text); }
+.header-links a { white-space: nowrap; }
+@media (max-width: 480px) { div.header-links { gap: 12px; font-size: 12px; } }
 .header-links a.current { color: var(--text); font-weight: 600; }
 
 /* ── Hero wrapper with dot pattern ── */

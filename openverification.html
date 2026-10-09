@@ -80,6 +80,8 @@ a:hover { color: var(--accent-hover); }
 }
 .header-links a { color: var(--text-secondary); transition: color 0.15s; }
 .header-links a:hover { color: var(--text); }
+.header-links a { white-space: nowrap; }
+@media (max-width: 480px) { div.header-links { gap: 12px; font-size: 12px; } }
 .header-links a.current { color: var(--text); font-weight: 600; }
 
 /* Blog layout */
@@ -266,10 +268,8 @@ a:hover { color: var(--accent-hover); }
 
 <p>In early October 2026, OpenAI released <a href="https://github.com/openai/math">a collection of 722 mathematical manuscripts</a> written by an unreleased internal model. The manuscripts are grouped into 372 families of results, and many of them claim solutions to well-known open problems. According to the release notes, the model was posed about 4,000 problems, and each result used about three hours of compute on average.</p>
 
-<!-- <p>One month earlier, OpenAI announced an analytical proof, with a formalization in the Lean proof assistant, that a smooth fluid at rest can develop a singularity in finite time under the three-dimensional Navier&ndash;Stokes equations with a smooth external force. This is one of the seven Millennium Prize Problems.</p> -->
 <p>One month earlier, OpenAI announced an analytical proof for the Navier-Stokes problem, with a formalization in Lean, showing that a smooth fluid at rest can develop a singularity in finite time under the three-dimensional Navier&ndash;Stokes equations with a smooth external force.</p>
 
-<!-- <p>These releases mark a real change. AI has the potential to accelerate science. But a result only counts when it meets the standard of the field, and somebody has to check that it does. In this post, we explain why verification is now the bottleneck, why it should be a collective effort, and what we are doing about it with OpenVerification.</p> -->
 <p>These releases show the potential of AI to accelerate science. But a result only counts when it meets the standard of the field, which only comes with careful validation. Without it, a large volume of research output will <a href="blog.html">degrade the quality of science</a>.</p>
 
 <h2>The first cracks are visible</h2>
@@ -278,7 +278,6 @@ a:hover { color: var(--accent-hover); }
 
 <p><strong>Formal proofs do not settle the question either.</strong> About 42% of the main results in the collection come with a Lean formalization. For the Navier&ndash;Stokes result, <a href="https://arxiv.org/abs/2610.08144">Bastounis, Circelli, and Hansen</a> argue that the Lean proof does not correspond to the proof written in natural language. A formal proof is only as good as the translation that produced its statement, and they show that a faithful translation is a very hard problem in general. A checked Lean file can therefore give no confidence in the written argument next to it.</p>
 
-<!-- <p>To be clear, OpenAI said from the start that some of the results without a formalization could have issues, and it fixed the first ones quickly. That is how this should work. The point is that nobody, including the authors, knows yet which of the remaining results are correct.</p> -->
 
 <h2>Verification is now the bottleneck</h2>
 
@@ -294,7 +293,7 @@ a:hover { color: var(--accent-hover); }
 
 <p><strong>AI review as the first pass.</strong> We use <a href="https://github.com/ChicagoHAI/OpenAIReview">OpenAIReview</a>, our open-source review tool, to read each paper and report potential issues. Each issue quotes the passage in question, explains the concern, and shows a severity label.</p>
 
-<p><strong>Potential issues are flagged.</strong> Every issue is shown on <a href="index.html">our website</a> next to the paper, with a link to the exact location in the PDF. So far we have reviewed 25 papers. The tool reported 125 potential issues in 23 of them, and it labeled 19 of those as major. Most of them are steps that rest on a cited result or on another paper in the collection that the paper does not prove. A few claim that a step is wrong.</p>
+<p><strong>Potential issues are flagged.</strong> Every issue is shown on <a href="index.html">our website</a> next to the paper, with a link to the exact location in the PDF. So far we have reviewed 25 papers. The tool reported 121 potential issues in 22 of them, and it labeled 19 of those as major. Most of them are steps that rest on a cited result or on another paper in the collection that the paper does not prove. A few claim that a step is wrong.</p>
 
 <p><strong>The community decides what is real.</strong> An AI review system can be wrong, and the issues have not been confirmed by human mathematicians. This is where we need help.</p>
 

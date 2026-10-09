@@ -81,6 +81,8 @@ a:hover { color: var(--accent-hover); }
 }
 .header-links a { color: var(--text-secondary); transition: color 0.15s; }
 .header-links a:hover { color: var(--text); }
+.header-links a { white-space: nowrap; }
+@media (max-width: 480px) { div.header-links { gap: 12px; font-size: 12px; } }
 .header-links a.current { color: var(--text); font-weight: 600; }
 
 /* Blog layout */
@@ -291,6 +293,7 @@ a:hover { color: var(--accent-hover); }
 
 <p>Real papers do not come with a list of their errors, so the first two tests cannot say how many errors a system misses. For that, we plant errors ourselves. We take 74 arXiv papers from eight fields, from econometrics to genomics, and inject four kinds of errors into their LaTeX source: local math edits such as a flipped sign, false claims, broken reasoning, and flawed experimental design. Then we check whether a review flags each one.</p>
 
+<div style="overflow-x:auto">
 <table>
   <thead>
     <tr><th>System (best model)</th><th>Weak vs. strong</th><th>Correct comments</th><th>Planted errors caught</th></tr>
@@ -302,6 +305,7 @@ a:hover { color: var(--accent-hover); }
     <tr><td>coarse</td><td>66%</td><td>64.0%</td><td>20.7%</td></tr>
   </tbody>
 </table>
+</div>
 
 <p>The strongest configuration catches 71.6% of the planted errors. That is a strong result, and it also means that more than one error in four gets through. Reviewer3 and coarse return only 5 to 10 comments per paper by design, so this test understates their value as reviewers.</p>
 

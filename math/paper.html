@@ -23,6 +23,8 @@ MathJax = {
     skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
     ignoreHtmlClass: 'no-mathjax',
   },
+  // Safe mode removes script links and unsafe styles from math, since review text can come from a visitor's review.
+  loader: { load: ['ui/safe'] },
   startup: { typeset: false }
 };
 </script>
@@ -428,7 +430,19 @@ body:not(.show-all) .extra { display: none; }
 pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
 const GITHUB = 'https://github.com/openai/math/blob/main/';
-const BACKEND_URL = 'https://openaireview-backend-947059889174.us-central1.run.app';
+// For testing, ?backendPort=<port> sends requests to a backend on the machine that serves this page.
+// The live site ignores it.
+// The port is remembered for the browser tab, so it stays on when you open another paper.
+const LOCAL_BACKEND_PORT = !/(^|\.)openaireview\.(org|github\.io)$/.test(location.hostname) && (() => {
+  const given = new URLSearchParams(location.search).get('backendPort');
+  try {
+    if (given) sessionStorage.setItem('backendPort', given);
+    return given || sessionStorage.getItem('backendPort');
+  } catch (err) { return given; }
+})();
+const BACKEND_URL = LOCAL_BACKEND_PORT
+  ? `http://${location.hostname}:${LOCAL_BACKEND_PORT}`
+  : 'https://openaireview-backend-947059889174.us-central1.run.app';
 const SEVERITY_RANK = { critical: 0, major: 1, moderate: 2, minor: 3 };
 const $ = id => document.getElementById(id);
 let paper, pdfDoc, pageObserver, activeIndex = -1, zoom = 1, redrawTimer;
@@ -463,7 +477,11 @@ function quoteHtml(tex) {
 
 // Load the paper's own macros into MathJax before any math is typeset.
 async function defineMacros(macros) {
-  while (!(window.MathJax && MathJax.typesetPromise)) await new Promise(r => setTimeout(r, 100));
+  // If MathJax does not load (a blocked or slow network), show the paper with plain math text.
+  for (let waited = 0; !(window.MathJax && MathJax.typesetPromise); waited += 100) {
+    if (waited >= 5000) return;
+    await new Promise(r => setTimeout(r, 100));
+  }
   for (const line of macros.split('\n')) {
     const holder = document.createElement('div');
     holder.style.display = 'none';
@@ -540,10 +558,17 @@ async function submitFeedback(index) {
 }
 
 async function castVote(index, vote) {
-  writeFeedback(index, 'vote', readFeedback(index, 'vote') === vote ? null : vote);
+  const previous = readFeedback(index, 'vote');
+  writeFeedback(index, 'vote', previous === vote ? null : vote);
   showVote(index);
-  const stored = await submitFeedback(index);
-  if (readFeedback(index, 'vote')) showToast(stored ? 'Feedback sent — thank you!' : 'Could not send feedback. Please try again later.');
+  if (await submitFeedback(index)) {
+    if (readFeedback(index, 'vote')) showToast('Feedback sent — thank you!');
+  } else {
+    // Show the buttons as they were, so the page agrees with what the server has.
+    writeFeedback(index, 'vote', previous);
+    showVote(index);
+    showToast('Could not send feedback. Please try again later.');
+  }
 }
 
 async function saveNote(index) {
@@ -760,11 +785,15 @@ function setZoom(value) {
 
 // ── Search ──
 // The text of each page with the position of every text run, read once from the PDF.
-let pageTexts = null, hits = [], currentHit = -1;
+let pageTextsLoading = null, hits = [], currentHit = -1;
 
-async function loadPageTexts() {
-  if (pageTexts) return pageTexts;
-  pageTexts = [];
+// Every caller gets the same promise, so a search that starts during the load waits for all pages.
+function loadPageTexts() {
+  return pageTextsLoading ??= readPageTexts();
+}
+
+async function readPageTexts() {
+  const pageTexts = [];
   for (let n = 1; n <= pdfDoc.numPages; n++) {
     const page = await pdfDoc.getPage(n);
     const [, , width, height] = page.view;
@@ -790,7 +819,7 @@ async function runSearch(query) {
   hits = [];
   currentHit = -1;
   const needle = query.trim().toLowerCase().replace(/\s+/g, ' ');
-  if (needle.length < 2) { $('search-count').textContent = ''; return; }
+  if (needle.length < 2 || !pdfDoc) { $('search-count').textContent = ''; return; }
   const pages = await loadPageTexts();
   if ($('search-input').value !== query) return;
   pages.forEach((pg, i) => {
@@ -924,6 +953,10 @@ function setupResize() {
 // shows the collection's own PDF and finds each quoted passage in its text.
 const RAW = 'https://raw.githubusercontent.com/openai/math/main/';
 
+// TODO before the visitor review feature is enabled: store the review token with each vote.
+// Votes are stored per paper, issue number, and visitor. Two reviews of one paper (two visitor
+// reviews, or a visitor review and a later review of ours) number their issues the same way,
+// so a vote on issue 1 of one review overwrites the vote on issue 1 of the other.
 async function loadVisitorReview(id, token) {
   const [catalog, result] = await Promise.all([
     fetch('data/catalog.json').then(r => r.json()),
@@ -989,7 +1022,7 @@ async function main() {
     if (token) {
       const pages = await loadPageTexts();
       paper.page_sizes = pages.map(pg => [pg.width, pg.height]);
-      for (const c of paper.comments) c.boxes = locateInPdf(c.quote, pages);
+      for (const c of paper.comments) c.boxes = locateInPdf(c.quote || '', pages);
     }
     renderComments();
     renderPages();
