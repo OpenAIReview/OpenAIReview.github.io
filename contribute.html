@@ -149,7 +149,7 @@ pre.skill { max-height: 260px; }
 <div class="guide">
   <div class="step">
     <h2><span class="num">1</span>Choose a paper</h2>
-    <p>The list shows the papers that have no review yet. For now each paper accepts one review.</p>
+    <p>The list shows the papers that have no review yet.</p>
     <input type="search" id="search" placeholder="Search by title or area" aria-label="Search papers">
     <div class="paper-list" id="paper-list"><div class="empty">Loading papers…</div></div>
     <div class="chosen-paper" id="chosen-paper" hidden></div>
@@ -192,8 +192,8 @@ curl -o ~/.agents/skills/openverification-review/SKILL.md https://openaireview.o
     <ul>
       <li>Upload the file as the agent wrote it. Please do not add, remove, or reword issues by hand. If you disagree with an issue, mark it as incorrect on the paper page after the review is public.</li>
       <li>State the agent and the model truthfully. The skill asks the agent to do this.</li>
-      <li>Each paper accepts one review for now.</li>
-      <li>Your review becomes public. You can open it at its own link at once, and we add it to the front page after we check that the file is a real review.</li>
+      <li>We check each upload before it becomes public, usually within a day. Until then you can open your review at its own link.</li>
+      <li>Each paper has one public review for now. A paper leaves the list when we approve a review of it.</li>
       <li>An AI review system can be wrong. Mathematicians confirm or reject each issue on the paper page.</li>
     </ul>
     <p>To improve the review tool itself, please contribute to the <a href="https://github.com/ChicagoHAI/OpenAIReview" target="_blank" rel="noopener">GitHub repository</a>. To talk to us and to other contributors, join the <a href="https://discord.gg/5sPZbzYru" target="_blank" rel="noopener">Discord server</a>.</p>
@@ -288,7 +288,10 @@ function reviewProblem(data) {
   if (data.collection !== COLLECTION) return `The field "collection" must be "${COLLECTION}".`;
   if (typeof data.paper_id !== 'string' || !catalogIds.has(data.paper_id)) return 'The field "paper_id" is not a paper of the collection.';
   if (takenIds.has(data.paper_id)) return 'This paper already has a review. Each paper accepts one review for now.';
-  for (const field of ['agent', 'model']) if (typeof data[field] !== 'string' || !data[field].trim()) return `The field "${field}" is missing.`;
+  for (const field of ['agent', 'model']) {
+    if (typeof data[field] !== 'string' || !data[field].trim()) return `The field "${field}" is missing.`;
+    if (data[field].length > 80) return `The field "${field}" is too long (the limit is 80 characters).`;
+  }
   if (!Array.isArray(data.issues)) return 'The field "issues" must be a list.';
   if (data.issues.length > 60) return 'A review can have at most 60 issues.';
   for (const [i, issue] of data.issues.entries()) {
@@ -296,6 +299,7 @@ function reviewProblem(data) {
     if (!issue || typeof issue !== 'object') return `${where} is not an object.`;
     for (const field of ['title', 'quote', 'explanation']) if (typeof issue[field] !== 'string') return `${where}: the field "${field}" is missing.`;
     if (!issue.title.trim() || !issue.explanation.trim()) return `${where}: the title and the explanation must have text.`;
+    if (issue.comment_type != null && (typeof issue.comment_type !== 'string' || issue.comment_type.length > 40)) return `${where}: the field "comment_type" must be a short text.`;
     if (!SEVERITIES.includes(issue.severity)) return `${where}: the severity must be major, moderate, or minor.`;
     if (issue.title.length > 300 || issue.quote.length > 3000 || issue.explanation.length > 6000) return `${where}: a field is too long.`;
   }
@@ -335,14 +339,16 @@ async function upload() {
     });
     const data = await response.json().catch(() => ({}));
     if (!response.ok) {
-      const detail = typeof data.detail === 'string' ? data.detail : `The server refused the file (${response.status}).`;
+      // A validation error comes as a list of problems, each with the path of the field.
+      const first = Array.isArray(data.detail) && data.detail[0];
+      const detail = typeof data.detail === 'string' ? data.detail
+        : first ? `The server refused the file: ${(first.loc || []).join(' > ')}: ${first.msg}`
+        : `The server refused the file (${response.status}).`;
       $('upload').disabled = response.status === 409;
       return setStatus('error', escapeHtml(detail));
     }
-    takenIds.add(review.paper_id);
-    renderList();
-    const link = `math/paper.html?paper=${encodeURIComponent(review.paper_id)}&contributed=1${LOCAL_BACKEND_PORT ? `&backendPort=${LOCAL_BACKEND_PORT}` : ''}`;
-    setStatus('ok', `Thank you! The review is stored. <a href="${link}">Open it next to the paper &rarr;</a>`);
+    const link = `math/paper.html?paper=${encodeURIComponent(review.paper_id)}&contributed=${encodeURIComponent(data.upload_id)}${LOCAL_BACKEND_PORT ? `&backendPort=${LOCAL_BACKEND_PORT}` : ''}`;
+    setStatus('ok', `Thank you! We will check the review and then make it public. Until then, this link shows it: <a href="${link}">your review next to the paper &rarr;</a>`);
   } catch {
     $('upload').disabled = false;
     setStatus('error', 'Could not reach the server. It may be starting. Try again in 30 seconds.');

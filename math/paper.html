@@ -599,7 +599,7 @@ function renderHeader(index) {
     `Result <strong>${paper.result_id}</strong>`,
     escapeHtml(paper.subject),
     `Reviewer <strong>${escapeHtml(model)}</strong>`,
-    paper.review.contributor ? `Contributed by <strong>${escapeHtml(paper.review.contributor)}</strong> on ${escapeHtml(paper.review.date)}`
+    paper.review.contributor ? `Contributed by <strong>${escapeHtml(paper.review.contributor)}</strong> on ${escapeHtml(paper.review.date)}${paper.review.pending ? ' (not public yet, waiting for our check)' : ''}`
       : `Reviewed <strong>${paper.review.date}</strong>`,
     `<a href="${GITHUB}${paper.source_pdf.split('/').map(encodeURIComponent).join('/')}" target="_blank" rel="noopener">Original PDF on GitHub &rarr;</a>`,
   ];
@@ -951,14 +951,15 @@ function setupResize() {
 }
 
 // ── Reviews that contributors uploaded ──
-// An uploaded review (?contributed=1) comes with no position in the PDF. The page shows
-// the collection's own PDF and finds each quoted passage in its text.
+// An uploaded review comes with no position in the PDF. The page shows the collection's own
+// PDF and finds each quoted passage in its text. ?contributed=1 shows the approved review of
+// the paper, and ?contributed=<upload id> shows one upload, which can still wait for our check.
 const RAW = 'https://raw.githubusercontent.com/openai/math/';
 
-async function loadContributedReview(id, commit) {
+async function loadContributedReview(id, upload, commit) {
   const [catalog, result] = await Promise.all([
     fetch('data/catalog.json').then(r => r.json()),
-    fetch(`${BACKEND_URL}/contributed-reviews/${FEEDBACK_COLLECTION}/${encodeURIComponent(id)}`).then(r => r.ok ? r.json() : Promise.reject()),
+    fetch(`${BACKEND_URL}/contributed-reviews/${FEEDBACK_COLLECTION}/${encodeURIComponent(id)}${/^[0-9a-f]{32}$/.test(upload) ? `?upload=${upload}` : ''}`).then(r => r.ok ? r.json() : Promise.reject()),
   ]);
   const entry = catalog.find(p => p.id === id);
   const comments = result.issues
@@ -966,7 +967,7 @@ async function loadContributedReview(id, commit) {
     .sort((a, b) => (SEVERITY_RANK[a.severity] ?? 9) - (SEVERITY_RANK[b.severity] ?? 9) || a.order - b.order);
   return { ...entry, source_pdf: entry.pdf, pdf: `${RAW}${commit}/${entry.pdf}`, macros: '', comments,
            review: { method: `${result.agent}, ${result.model}`, date: (result.created_at || '').slice(0, 10),
-                     contributor: result.contributor || 'a contributor' } };
+                     contributor: result.contributor || 'a contributor', pending: result.status !== 'approved' } };
 }
 
 // The plain-text pieces of a LaTeX passage, longest first, with all spaces removed.
@@ -1004,14 +1005,15 @@ async function main() {
   const params = new URLSearchParams(location.search);
   const index = await fetch('data/index.json').then(r => r.json());
   const id = params.get('paper') || index.papers[0].id;
-  const contributed = params.has('contributed');
+  const upload = params.get('contributed');
+  const contributed = upload !== null;
   // Feedback on an uploaded review opens when the review moves to the front page.
   // TODO before a paper can have more than one review: store a review id with each vote.
   // Votes are stored per paper, issue number, and visitor, and every review numbers its issues
   // from 1, so a vote on issue 1 of one review would overwrite the vote on issue 1 of another.
   document.body.classList.toggle('no-feedback', contributed);
   try {
-    paper = contributed ? await loadContributedReview(id, index.source.commit)
+    paper = contributed ? await loadContributedReview(id, upload, index.source.commit)
                         : await fetch(`data/${encodeURIComponent(id)}.json`).then(r => r.json());
   } catch (err) {
     $('pdf-status').textContent = 'The review could not be loaded.';
