@@ -171,6 +171,7 @@ Rules:
 - `quote` is an exact copy of the LaTeX source and at most 3,000 characters. One or two sentences is best.
 - `title` is at most 300 characters and `explanation` at most 6,000.
 - Write all mathematics in `title` and `explanation` in LaTeX between dollar signs.
+- Outside the dollar signs, write plain text in `title` and `explanation`. Do not use `\ref`, `\eqref`, `\cite`, or accent commands there, because the website does not resolve them. Name a theorem or an equation in words, and write accented letters directly (é).
 - In JSON, write each LaTeX backslash as two backslashes (`\\tau` for $\tau$). A single backslash before `t`, `n`, `b`, `f`, or `r` becomes an invisible character and breaks the mathematics.
 - At most 60 issues.
 - `commit` is the output of `git -C "<WORK>/math" rev-parse HEAD`.
