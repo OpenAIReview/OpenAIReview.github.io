@@ -963,40 +963,146 @@ async function loadContributedReview(id, upload, commit) {
     fetch(`${BACKEND_URL}/contributed-reviews/${FEEDBACK_COLLECTION}/${encodeURIComponent(id)}${/^[0-9a-f]{32}$/.test(upload) ? `?upload=${upload}` : ''}`).then(r => r.ok ? r.json() : Promise.reject()),
   ]);
   const entry = catalog.find(p => p.id === id);
+  const at = /^[0-9a-f]{40}$/.test(result.commit) ? result.commit : commit;
   const comments = result.issues
     .map((c, i) => ({ ...c, severity: Object.hasOwn(SEVERITY_RANK, c.severity) ? c.severity : null, order: i, boxes: [] }))
     .sort((a, b) => (SEVERITY_RANK[a.severity] ?? 9) - (SEVERITY_RANK[b.severity] ?? 9) || a.order - b.order);
-  return { ...entry, source_pdf: entry.pdf, pdf: `${RAW}${/^[0-9a-f]{40}$/.test(result.commit) ? result.commit : commit}/${entry.pdf}`, macros: '', comments,
+  return { ...entry, source_pdf: entry.pdf, pdf: `${RAW}${at}/${entry.pdf}`, macros: await sourceMacros(entry.tex, at), comments,
            review: { method: `${result.agent}, ${result.model}`, date: (result.created_at || '').slice(0, 10),
                      contributor: result.contributor || 'a contributor', pending: result.status !== 'approved' } };
 }
 
-// The plain-text pieces of a LaTeX passage, longest first, with all spaces removed.
-// Math and commands do not match the text of a PDF, so they split the passage.
-function plainPieces(tex) {
-  return tex.replace(/\$\$[^]*?\$\$|\$[^$]*\$|\\\([^]*?\\\)|\\\[[^]*?\\\]/g, '\u0000')
-    .replace(/\\[a-zA-Z]+\*?(\[[^\]]*\])?(\{[^{}]*\})?|[{}~]/g, '\u0000')
-    .split('\u0000').map(piece => piece.toLowerCase().replace(/\s+/g, ''))
-    .filter(piece => piece.length >= 14).sort((a, b) => b.length - a.length);
+// Letters and digits only, lower case, with accents and ligatures reduced to plain letters.
+// The PDF text and the LaTeX source agree on these characters even where spaces, hyphens at
+// line ends, quotation marks, and math symbols differ.
+const plainChars = text => text.normalize('NFKD').toLowerCase().replace(/[^a-z0-9]/g, '');
+
+// The plain-text pieces of a LaTeX passage in order. Math and commands do not match the text
+// of a PDF, so they split the passage. For the LaTeX removed before a piece, `gap` is its length
+// and `math` holds its letters and digits, which the PDF often shows in the same order.
+// `chunk` cuts long pieces into shorter ones, for a passage that the PDF text interrupts.
+function quotePieces(tex, chunk = Infinity) {
+  // The optional argument of a command such as \cite[Theorem~2]{key} is text that the PDF shows.
+  tex = tex.replace(/(\\[a-zA-Z]+\*?)\[([^\]]*)\](\{[^{}]*\})/g, '$1$3 $2 ');
+  const removed = /\$\$[^]*?\$\$|\$[^$]*\$|\\\([^]*?\\\)|\\\[[^]*?\\\]|\\[a-zA-Z]+\*?(?:\[[^\]]*\])?(?:\{[^{}]*\})?|\\./g;
+  const pieces = [];
+  let last = 0, gap = 0, math = '';
+  const add = plain => {
+    const text = plainChars(plain);
+    for (let at = 0; at < text.length; at += chunk) {
+      pieces.push({ text: text.slice(at, at + chunk), gap, math });
+      gap = 0;
+      math = '';
+    }
+  };
+  for (const m of tex.matchAll(removed)) {
+    add(tex.slice(last, m.index));
+    gap += m[0].length;
+    math += plainChars(m[0].replace(/\\[a-zA-Z]+/g, ''));
+    last = m.index + m[0].length;
+  }
+  add(tex.slice(last));
+  return pieces;
 }
 
 // Find a quoted passage in the PDF text. Returns highlight boxes in PDF points, or [].
+// The search starts from each place where one of the longest pieces occurs. From there it adds
+// the pieces before and after, each within the distance that the removed LaTeX allows. The place
+// that matches the most text wins, and the mark covers the whole passage, math included.
 function locateInPdf(quote, pages) {
-  for (const piece of plainPieces(quote)) {
-    for (let i = 0; i < pages.length; i++) {
-      const pg = pages[i];
-      if (!pg.squashed) {
+  const whole = locatePieces(quotePieces(quote), pages);
+  return whole.length ? whole : locatePieces(quotePieces(quote, 24), pages);
+}
+
+function locatePieces(pieces, pages) {
+  const room = gap => gap * 1.5 + 15;
+  const anchors = pieces.map((_, k) => k).filter(k => pieces[k].text.length >= 6)
+    .sort((a, b) => pieces[b].text.length - pieces[a].text.length).slice(0, 3);
+  let best = null;
+  for (const a of anchors) {
+    pages.forEach((pg, i) => {
+      if (pg.plain === undefined) {
         pg.offsets = [];
-        pg.squashed = [...pg.text].filter((ch, at) => /\S/.test(ch) && pg.offsets.push(at)).join('');
+        pg.plain = '';
+        [...pg.text].forEach((ch, at) => { for (const c of plainChars(ch)) { pg.plain += c; pg.offsets.push(at); } });
       }
-      const at = pg.squashed.indexOf(piece);
-      if (at < 0) continue;
-      const from = pg.offsets[at], to = pg.offsets[at + piece.length - 1] + 1;
-      return pg.runs.filter(run => run.end > from && run.start < to)
-        .map(run => ({ page: i + 1, x: run.x, y: run.y, w: run.w, h: run.h }));
-    }
+      const anchor = pieces[a].text;
+      for (let at = pg.plain.indexOf(anchor); at >= 0; at = pg.plain.indexOf(anchor, at + 1)) {
+        let start = at, end = at + anchor.length, score = anchor.length, allowed = 0;
+        for (let k = a + 1; k < pieces.length; k++) {
+          const { text, gap } = pieces[k];
+          allowed += room(gap);
+          const found = pg.plain.indexOf(text, end);
+          if (found >= 0 && found - end <= allowed) {
+            // Math that agrees with the PDF text decides between two places with the same words.
+            if (pieces[k].math && pg.plain.slice(end, found) === pieces[k].math) score += 0.5;
+            end = found + text.length; score += text.length; allowed = 0;
+          }
+          else allowed += text.length;
+        }
+        allowed = 0;
+        for (let k = a - 1; k >= 0; k--) {
+          const { text } = pieces[k];
+          allowed += room(pieces[k + 1].gap);
+          const found = start >= text.length ? pg.plain.lastIndexOf(text, start - text.length) : -1;
+          if (found >= 0 && start - found - text.length <= allowed) {
+            if (pieces[k + 1].math && pg.plain.slice(found + text.length, start) === pieces[k + 1].math) score += 0.5;
+            start = found; score += text.length; allowed = 0;
+          }
+          else allowed += text.length;
+        }
+        if (!best || score > best.score) best = { score, page: i, start, end };
+      }
+    });
   }
-  return [];
+  if (!best || best.score < 12) return [];
+  const pg = pages[best.page];
+  const from = pg.offsets[best.start], to = pg.offsets[best.end - 1] + 1;
+  // One box per line of text, so that the marks of neighbouring pieces of text do not overlap.
+  const lines = [];
+  for (const run of pg.runs.filter(run => run.end > from && run.start < to && run.w > 0)) {
+    const line = lines.find(l => Math.abs(l.y + l.h / 2 - run.y - run.h / 2) < Math.max(l.h, run.h) / 2);
+    if (!line) { lines.push({ page: best.page + 1, x: run.x, y: run.y, w: run.w, h: run.h }); continue; }
+    const right = Math.max(line.x + line.w, run.x + run.w), bottom = Math.max(line.y + line.h, run.y + run.h);
+    line.x = Math.min(line.x, run.x);
+    line.y = Math.min(line.y, run.y);
+    line.w = right - line.x;
+    line.h = bottom - line.y;
+  }
+  return lines;
+}
+
+// The index of the brace that closes the group that opens at text[start], or -1.
+function groupEnd(text, start) {
+  let depth = 0;
+  for (let i = start; i < text.length; i++) {
+    if (text[i] === '\\') i++;
+    else if (text[i] === '{') depth++;
+    else if (text[i] === '}' && --depth === 0) return i + 1;
+  }
+  return -1;
+}
+
+// Read the macro definitions of a paper from its LaTeX source, as LaTeX that MathJax can read.
+// An uploaded review writes its math with the paper's own macros.
+async function sourceMacros(mainTex, commit) {
+  const read = path => fetch(`${RAW}${commit}/${path}`).then(r => r.ok ? r.text() : '').catch(() => '');
+  const folder = mainTex.slice(0, mainTex.lastIndexOf('/') + 1);
+  let text = await read(mainTex);
+  const included = [...text.matchAll(/\\(?:input|include)\s*\{([^{}]+)\}/g)].slice(0, 12)
+    .map(m => folder + (m[1].endsWith('.tex') ? m[1] : m[1] + '.tex'));
+  text = [text, ...await Promise.all(included.map(read))].join('\n').replace(/(?<!\\)%.*/g, '');
+  const macros = new Map();
+  const collect = (pattern, build) => {
+    for (const m of text.matchAll(pattern)) {
+      const end = groupEnd(text, m.index + m[0].length);
+      if (end > 0) macros.set(m[1], build(m, text.slice(m.index + m[0].length, end)));
+    }
+  };
+  collect(/\\(?:re|provide)?newcommand\*?\s*\{?(\\[A-Za-z]+)\}?\s*(\[\d\])?\s*(?=\{)/g, (m, body) => `\\newcommand{${m[1]}}${m[2] || ''}${body}`);
+  collect(/\\def\s*(\\[A-Za-z]+)\s*(?=\{)/g, (m, body) => `\\newcommand{${m[1]}}${body}`);
+  collect(/\\DeclareMathOperator\*?\s*\{(\\[A-Za-z]+)\}\s*(?=\{)/g, (m, body) => `\\newcommand{${m[1]}}{\\operatorname${body}}`);
+  return [...macros.values()].join('\n');
 }
 
 async function main() {
