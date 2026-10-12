@@ -292,6 +292,7 @@ function reviewProblem(data) {
     if (typeof data[field] !== 'string' || !data[field].trim()) return `The field "${field}" is missing.`;
     if (data[field].length > 80) return `The field "${field}" is too long (the limit is 80 characters).`;
   }
+  if (data.commit != null && !/^[0-9a-f]{40}$/.test(data.commit)) return 'The field "commit" must be the full commit id of the collection (40 characters).';
   if (!Array.isArray(data.issues)) return 'The field "issues" must be a list.';
   if (data.issues.length > 60) return 'A review can have at most 60 issues.';
   for (const [i, issue] of data.issues.entries()) {

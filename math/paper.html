@@ -952,7 +952,8 @@ function setupResize() {
 
 // ── Reviews that contributors uploaded ──
 // An uploaded review comes with no position in the PDF. The page shows the collection's own
-// PDF and finds each quoted passage in its text. ?contributed=1 shows the approved review of
+// PDF and finds each quoted passage in its text. The PDF is the one at the commit that the review
+// names, or at the commit of our own reviews if it names none. ?contributed=1 shows the approved review of
 // the paper, and ?contributed=<upload id> shows one upload, which can still wait for our check.
 const RAW = 'https://raw.githubusercontent.com/openai/math/';
 
@@ -965,7 +966,7 @@ async function loadContributedReview(id, upload, commit) {
   const comments = result.issues
     .map((c, i) => ({ ...c, severity: Object.hasOwn(SEVERITY_RANK, c.severity) ? c.severity : null, order: i, boxes: [] }))
     .sort((a, b) => (SEVERITY_RANK[a.severity] ?? 9) - (SEVERITY_RANK[b.severity] ?? 9) || a.order - b.order);
-  return { ...entry, source_pdf: entry.pdf, pdf: `${RAW}${commit}/${entry.pdf}`, macros: '', comments,
+  return { ...entry, source_pdf: entry.pdf, pdf: `${RAW}${/^[0-9a-f]{40}$/.test(result.commit) ? result.commit : commit}/${entry.pdf}`, macros: '', comments,
            review: { method: `${result.agent}, ${result.model}`, date: (result.created_at || '').slice(0, 10),
                      contributor: result.contributor || 'a contributor', pending: result.status !== 'approved' } };
 }
