@@ -331,6 +331,7 @@ async function upload() {
   setStatus('', 'Uploading…');
   const body = {
     collection: review.collection, paper_id: review.paper_id, agent: review.agent, model: review.model,
+    commit: review.commit ?? null,
     contributor: $('contributor').value.trim() || null, email: $('email').value.trim() || null,
     issues: review.issues.map(({ title, quote, explanation, comment_type, severity }) => ({ title, quote, explanation, comment_type, severity })),
   };
