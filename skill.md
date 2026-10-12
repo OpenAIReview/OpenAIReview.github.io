@@ -4,7 +4,7 @@ description: >
   Review one paper of the OpenAI math collection (github.com/openai/math) for mathematical
   errors with parallel sub-agents, and write a JSON review to upload to OpenVerification
   (openaireview.org/contribute.html).
-  Usage: /openverification-review <paper id>
+  Usage: /openverification-review <paper id> in Claude Code, $openverification-review <paper id> in Codex.
 ---
 
 Review the paper that the user names, and write one JSON file that the user uploads to OpenVerification. Do every step below in order.
@@ -15,28 +15,48 @@ The paper is a pure mathematics manuscript written by an AI model. The review mu
 
 The user gives a paper id. It is the name of the paper's folder under `preprints/` in the repository `openai/math`, for example `The-p-adic-section-conjecture-September-24-2026`. If the user gives no id, ask for one and point them to https://openaireview.org/contribute.html, which lists the papers that have no review yet.
 
-Use this fixed version of the collection, so that your quotes match the PDF that the website shows:
+The work folder of this run is `openverification_review/<paper id>`, under the folder where you started. If it already exists, add a suffix such as `-2` to its name, so that this run starts in an empty folder. Below, `<WORK>` is this folder. Your shell can start each command in a different folder, so write every path in full.
 
-    COMMIT=adc7f1241b42e322a6451854ab7e4b4c146bf78a
+## Step 1. Check that the paper has no review, and get the LaTeX source
 
-## Step 1. Get the LaTeX source
-
-Make a work folder and download only this paper's folder:
+First check that the paper is still open:
 
 ```bash
-mkdir -p openverification_review && cd openverification_review
-git clone --filter=blob:none --no-checkout https://github.com/openai/math.git math
-git -C math sparse-checkout set "preprints/<paper id>"
-git -C math checkout $COMMIT
+python3 - "<paper id>" <<'EOF'
+import json, sys, urllib.request
+paper = sys.argv[1]
+load = lambda url: json.load(urllib.request.urlopen(url, timeout=30))
+try:
+    ours = load("https://openaireview.org/math/data/index.json")
+    uploads = load("https://openaireview-backend-947059889174.us-central1.run.app/contributed-reviews/openai-math")
+    taken = set(ours.get("reviewed_ids", [])) | {p["id"] for p in ours["papers"]} | {r["paper_id"] for r in uploads["reviews"]}
+    print("TAKEN" if paper in taken else "OPEN")
+except Exception as err:
+    print("UNKNOWN", err)
+EOF
 ```
+
+If the result is `TAKEN`, stop and tell the user that this paper already has a review, and that https://openaireview.org/contribute.html lists the open papers. If it is `UNKNOWN`, continue.
+
+Then download only this paper's folder, at the latest version of the collection:
+
+```bash
+mkdir -p "<WORK>"
+git clone --filter=blob:none --no-checkout https://github.com/openai/math.git "<WORK>/math"
+git -C "<WORK>/math" sparse-checkout set "preprints/<paper id>"
+git -C "<WORK>/math" checkout
+git -C "<WORK>/math" rev-parse HEAD
+```
+
+The last command prints the commit id (40 characters). Keep it for the review file, so that the website shows the PDF of the same version that you read.
 
 Find the main `.tex` file. It contains `\begin{document}`. If several files do, use the one that gives the longest paper after its `\input`, `\include`, and `\subfile` commands are followed. Read the main file and every file it includes. Do not edit any of these files, because every quote in your review must be an exact copy of the source.
 
-If the folder does not exist at this commit, stop and tell the user.
+If the paper's folder does not exist, stop and tell the user.
 
 ## Step 2. Understand the paper
 
-Read the complete source, including all appendices. Then write `summary.md` in the work folder with these parts:
+Read the complete source, including all appendices. Then write `<WORK>/summary.md` with these parts:
 
 - The main theorems, each with its exact statement and location.
 - The chain of the proof: which lemmas and propositions each main theorem uses, in order.
@@ -99,12 +119,15 @@ Write your findings as a JSON array to <WORK>/comments/<NAME>.json. Each issue i
   quote        an exact copy of a passage from the LaTeX source, character for character
   explanation  your reasoning
   confidence   "high", "medium", or "low"
-Write all mathematics in LaTeX between dollar signs in title and explanation, with no plain-text or Unicode math. If you find no issue, write [].
+Write all mathematics in LaTeX between dollar signs in title and explanation, with no plain-text or Unicode math. In JSON, write each LaTeX backslash as two backslashes. If you find no issue, write [].
+If you cannot write the file, give the same JSON array as your final answer.
 ```
+
+When the sub-agents end, check that `<WORK>/comments/` has one file per planned sub-agent. If a sub-agent gave its findings as an answer, write them to its file yourself. If a file is still missing, run that review again or do it yourself. Do not continue with a missing file.
 
 ## Step 4. Consolidate
 
-Read every file in `comments/`. Then:
+Read every file in `<WORK>/comments/`. Then:
 
 - **Verify.** For each finding, check the mathematics yourself against the paper before you keep it. Remove findings that the context, a standard convention, or a later section resolves.
 - **Merge by root cause.** Two findings share a root cause if one fix resolves both. Merge them into one issue that makes the strongest version of the argument. Keep findings separate when they need different fixes or affect different results.
@@ -121,12 +144,13 @@ Give each issue a `comment_type`: `methodology` (a proof step is wrong or has a 
 
 ## Step 5. Write the review file
 
-Write `openverification_review.json` in the work folder:
+Write `<WORK>/openverification_review.json`:
 
 ```json
 {
   "collection": "openai-math",
   "paper_id": "<paper id>",
+  "commit": "<the commit id from Step 1>",
   "agent": "<the coding agent you run in, for example Claude Code or Codex>",
   "model": "<the model you run as>",
   "issues": [
@@ -147,33 +171,51 @@ Rules:
 - `quote` is an exact copy of the LaTeX source and at most 3,000 characters. One or two sentences is best.
 - `title` is at most 300 characters and `explanation` at most 6,000.
 - Write all mathematics in `title` and `explanation` in LaTeX between dollar signs.
+- In JSON, write each LaTeX backslash as two backslashes (`\\tau` for $\tau$). A single backslash before `t`, `n`, `b`, `f`, or `r` becomes an invisible character and breaks the mathematics.
 - At most 60 issues.
+- `commit` is the output of `git -C "<WORK>/math" rev-parse HEAD`.
 - State `agent` and `model` truthfully. Ask the user if you do not know them.
 
-Then check the file. Run this from the work folder:
+Then check the file:
 
 ```bash
-python3 - <<'EOF'
-import json, pathlib, re
+python3 - "<WORK>" <<'EOF'
+import json, os, pathlib, re, sys
+os.chdir(sys.argv[1])
 review = json.load(open("openverification_review.json"))
+problems = []
+if not re.fullmatch(r"[0-9a-f]{40}", review.get("commit", "")):
+    problems.append("commit must be the full commit id (40 characters)")
+if len(review["issues"]) > 60:
+    problems.append("more than 60 issues")
 squash = lambda text: re.sub(r"\s+", "", text)
 source = squash("".join(p.read_text(errors="replace") for p in pathlib.Path("math/preprints", review["paper_id"]).rglob("*.tex")))
+limits = {"title": 300, "quote": 3000, "explanation": 6000}
+lost_backslash = re.compile(r"[\x00-\x09\x0b-\x1f]|\n(u|abla|eq|ot|otin|leq|geq)(?![a-z])")
 for number, issue in enumerate(review["issues"], 1):
-    assert issue["severity"] in ("major", "moderate", "minor"), f"issue {number}: bad severity"
-    assert issue["title"] and issue["explanation"], f"issue {number}: empty field"
-    if squash(issue["quote"]) not in source:
-        print(f"issue {number}: the quote is not in the source")
+    if issue.get("severity") not in ("major", "moderate", "minor"):
+        problems.append(f"issue {number}: bad severity")
+    for field, limit in limits.items():
+        if len(issue.get(field, "")) > limit:
+            problems.append(f"issue {number}: {field} is longer than {limit} characters")
+    if not issue.get("title", "").strip() or not issue.get("explanation", "").strip():
+        problems.append(f"issue {number}: empty title or explanation")
+    if lost_backslash.search(issue.get("title", "") + " " + issue.get("explanation", "")):
+        problems.append(f"issue {number}: a LaTeX backslash was lost (write two backslashes in JSON)")
+    if squash(issue.get("quote", "")) not in source:
+        problems.append(f"issue {number}: the quote is not in the source")
+print("\n".join(problems) or "no problems")
 print(len(review["issues"]), "issues checked")
 EOF
 ```
 
-Fix every quote that the check reports, and run the check again.
+Fix every problem that the check reports, and run the check again until it reports none.
 
 ## Step 6. Tell the user
 
 Give the user one or two sentences on what you found and the number of issues per severity. Then tell them:
 
 ```
-The review is in openverification_review/openverification_review.json.
+The review is in <WORK>/openverification_review.json.
 Upload it at https://openaireview.org/contribute.html
 ```
