@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Figure 1 (Twitter announcement) — OpenAIReview</title>
+<link rel="stylesheet" href="figure.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  /* Two-column landscape figure for the Twitter announcement thread.
+     Reuses section 1 (left) and section 3 (right) from the EMNLP figure;
+     the perturbation tiles (old section 2) are dropped. */
+  @page { size: 16.7in 7.5in; margin: 0; }
+
+  html, body {
+    margin: 0; padding: 0;
+    font-family: "Inter", "Source Sans Pro", system-ui, sans-serif;
+    color: #1f2937;
+    background: #fafafa;  /* the background of the blog page */
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .figure-root {
+    width: 1600px; height: 718px;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+  .serif {
+    font-family: "Source Serif Pro", "Charter", "Iowan Old Style", Georgia, serif;
+  }
+  .col-rule { border-color: #e5e7eb; }
+
+  :root {
+    --c-accepted: #4b5563;
+    --c-rejected: #d8602e;
+    --c-auc:      #f0a87f;   /* lighter orange bars for accuracy */
+    --c-auc-lbl:  #d8602e;   /* bolder orange for accuracy value labels */
+    --c-vol:      #6b7280;   /* grey bars for comments */
+    --chance:     #9ca3af;
+    --rule: #d1d5db;
+  }
+
+  .axis-label  { font-size: 26px; fill: #6b7280; }
+  .axis-tick   { font-size: 24px; fill: #6b7280; }
+  .bar-label   { font-size: 24px; font-weight: 500; }
+  .group-label { font-size: 19px; fill: #1f2937; font-weight: 600; }
+  .model-sub   { font-size: 16px; fill: #6b7280; font-style: italic; }
+  .legend-text { font-size: 17px; fill: #374151; }
+  .chance-label{ font-size: 21px; fill: #9ca3af; font-style: italic; }
+
+  .h-title {
+    font-size: 33px; font-weight: 600; line-height: 1.22; color: #111827;
+  }
+  .h-def {
+    font-size: 24px; line-height: 1.45; color: #6b7280;
+    margin-top: 12px;
+  }
+  .h-def strong { color: #1f2937; font-weight: 600; }
+</style>
+</head>
+<body>
+
+<div class="figure-root flex">
+
+  <!-- ============== LEFT COLUMN: section 1 ============== -->
+  <div class="flex-none pl-7 pr-3 py-5 border-r col-rule" style="width:736px">
+    <h1 class="h-title mt-0.5">AI review systems correlate with human quality signals</h1>
+    <p class="h-def">
+      <strong>Pairwise accuracy</strong> = do lower-quality papers get more comments?
+    </p>
+
+    <!-- Section 1: pairwise accuracy + mean comments per (method, best-model),
+         shown as two stacked plots that share the same x-axis (method groups). -->
+    <div class="mt-4">
+      <svg id="chart-comments" width="700" height="230" viewBox="0 0 700 230"></svg>
+      <svg id="chart-acc"      width="700" height="250" viewBox="0 0 700 250" style="margin-top:20px"></svg>
+    </div>
+  </div>
+
+  <!-- ============== RIGHT COLUMN: section 3 ============== -->
+  <div class="flex-none px-6 py-5" style="width:864px">
+    <h1 class="h-title mt-0.5">Models can detect a substantial number of errors in a paper</h1>
+
+    <!-- Section 3: recall by backend -->
+    <div class="mt-4">
+      <svg id="chart-recall" width="808" height="560" viewBox="0 0 808 560"></svg>
+    </div>
+  </div>
+
+</div>
+
+<script src="data.js"></script>
+<script>
+function loadData() { return Promise.resolve(window.__FIGURE_DATA); }
+function el(tag, attrs={}, text=undefined) {
+  const e = document.createElementNS("http://www.w3.org/2000/svg", tag);
+  for (const [k,v] of Object.entries(attrs)) e.setAttribute(k, v);
+  if (text !== undefined) e.textContent = text;
+  return e;
+}
+function clear(svg) { while (svg.firstChild) svg.removeChild(svg.firstChild); }
+
+// ---------------- Section 1b: pairwise accuracy bars (lower plot) ----------------
+// Owns the shared x-axis labels (method name + model italic).
+function drawAccuracy(svg, rows) {
+  clear(svg);
+  const W = +svg.getAttribute("width"), H = +svg.getAttribute("height");
+  const margin = { top: 28, right: 96, bottom: 74, left: 76 };
+  const innerW = W - margin.left - margin.right;
+  const innerH = H - margin.top - margin.bottom;
+  const baseY = margin.top + innerH;
+  const yAuc = v => baseY - v * innerH;
+
+  // Gridlines + y-axis ticks
+  for (const t of [0, 0.2, 0.4, 0.6, 0.8, 1.0]) {
+    svg.appendChild(el("line", {
+      x1: margin.left, x2: W - margin.right, y1: yAuc(t), y2: yAuc(t),
+      stroke: t === 0 ? "#9ca3af" : "#eef0f3", "stroke-width": t === 0 ? 0.8 : 0.6,
+      "shape-rendering": "crispEdges",
+    }));
+    svg.appendChild(el("text", {
+      x: margin.left - 6, y: yAuc(t) + 5, "text-anchor": "end", class: "axis-tick",
+    }, t.toFixed(1)));
+  }
+
+  // Y-axis label (rotated); center on the full svg height so the long text
+  // can't clip past the plot area.
+  svg.appendChild(el("text", {
+    x: 22, y: H/2,
+    transform: `rotate(-90 22 ${H/2})`,
+    "text-anchor": "middle", class: "axis-label",
+  }, "pairwise accuracy"));
+
+  // Chance line at AUC=0.5; label sits in the right margin (outside the plot
+   // area) so it can't be occluded by bars.
+  svg.appendChild(el("line", {
+    x1: margin.left, x2: W - margin.right, y1: yAuc(0.5), y2: yAuc(0.5),
+    stroke: "var(--chance)", "stroke-width": 1.2, "stroke-dasharray": "5 3",
+  }));
+  svg.appendChild(el("text", {
+    x: W - margin.right + 6, y: yAuc(0.5) + 5, "text-anchor": "start", class: "chance-label",
+  }, "chance"));
+
+  // Bars
+  const groupW = innerW / rows.length;
+  const barW = 80;
+  rows.forEach((row, i) => {
+    const cx = margin.left + groupW * i + groupW/2;
+    const xB = cx - barW/2;
+    const yT = yAuc(row.auc);
+    svg.appendChild(el("rect", {
+      x: xB, y: yT, width: barW, height: baseY - yT,
+      fill: "var(--c-auc)", rx: 2,
+    }));
+    svg.appendChild(el("text", {
+      x: cx, y: yT - 6, "text-anchor": "middle", class: "bar-label",
+      fill: "var(--c-auc-lbl)", "font-weight": "600",
+    }, row.auc.toFixed(2)));
+
+    // Shared x-axis labels for the section 1 pair: method on top, model italic below.
+    svg.appendChild(el("text", {
+      x: cx, y: baseY + 24, "text-anchor": "middle", class: "group-label",
+    }, row.method));
+    svg.appendChild(el("text", {
+      x: cx, y: baseY + 46, "text-anchor": "middle", class: "model-sub",
+    }, row.model));
+  });
+}
+
+// ---------------- Section 1a: mean-comments bars (upper plot) ----------------
+// No x-axis labels here; the lower accuracy chart owns the shared x-axis.
+function drawComments(svg, rows) {
+  clear(svg);
+  const W = +svg.getAttribute("width"), H = +svg.getAttribute("height");
+  const margin = { top: 28, right: 96, bottom: 18, left: 76 };
+  const innerW = W - margin.left - margin.right;
+  const innerH = H - margin.top - margin.bottom;
+  const baseY = margin.top + innerH;
+  const cMax = Math.max(20, Math.ceil(Math.max(...rows.map(r => r.mean_comments)) / 5) * 5);
+  const yC = v => baseY - (v / cMax) * innerH;
+
+  // Gridlines + y-axis ticks
+  const ticks = cMax <= 20 ? [0, 5, 10, 15, 20] : [0, 5, 10, 15, 20, cMax];
+  for (const t of ticks) {
+    svg.appendChild(el("line", {
+      x1: margin.left, x2: W - margin.right, y1: yC(t), y2: yC(t),
+      stroke: t === 0 ? "#9ca3af" : "#eef0f3", "stroke-width": t === 0 ? 0.8 : 0.6,
+      "shape-rendering": "crispEdges",
+    }));
+    svg.appendChild(el("text", {
+      x: margin.left - 6, y: yC(t) + 5, "text-anchor": "end", class: "axis-tick",
+    }, t.toString()));
+  }
+
+  // Y-axis label; center on the full svg height (see note in drawAccuracy).
+  svg.appendChild(el("text", {
+    x: 22, y: H/2,
+    transform: `rotate(-90 22 ${H/2})`,
+    "text-anchor": "middle", class: "axis-label",
+  }, "comments / paper"));
+
+  // Bars + shared x-axis labels (method name + model italic)
+  const groupW = innerW / rows.length;
+  const barW = 80;
+  rows.forEach((row, i) => {
+    const cx = margin.left + groupW * i + groupW/2;
+    const xB = cx - barW/2;
+    const yT = yC(row.mean_comments);
+    svg.appendChild(el("rect", {
+      x: xB, y: yT, width: barW, height: baseY - yT,
+      fill: "var(--c-vol)", rx: 2,
+    }));
+    svg.appendChild(el("text", {
+      x: cx, y: yT - 6, "text-anchor": "middle", class: "bar-label",
+      fill: "var(--c-vol)", "font-weight": "600",
+    }, row.mean_comments.toFixed(1)));
+  });
+}
+
+// ---------------- Section 3: recall by model (horizontal) ----------------
+function drawRecall(svg, recall) {
+  clear(svg);
+  const W = +svg.getAttribute("width"), H = +svg.getAttribute("height");
+  const margin = { top: 14, right: 16, bottom: 56, left: 60 };
+  const innerW = W - margin.left - margin.right;
+  const innerH = H - margin.top - margin.bottom;
+  const n = recall.length;
+  const rowH = innerH / n;
+  const labelH = 28;
+  const barH = Math.min(rowH - labelH - 4, 36);
+  const xMax = 80;
+  const xToPx = v => margin.left + (v / xMax) * innerW;
+
+  for (const t of [0, 20, 40, 60, 80]) {
+    svg.appendChild(el("line", {
+      x1: xToPx(t), x2: xToPx(t),
+      y1: margin.top, y2: margin.top + innerH,
+      stroke: "#e5e7eb", "stroke-width": 1, "shape-rendering": "crispEdges",
+    }));
+    svg.appendChild(el("text", {
+      x: xToPx(t), y: margin.top + innerH + 26,
+      "text-anchor": "middle", class: "axis-tick",
+    }, t + "%"));
+  }
+  svg.appendChild(el("text", {
+    x: margin.left + innerW/2, y: H - 8,
+    "text-anchor": "middle", class: "axis-label",
+  }, "recall (% of injected errors detected)"));
+
+  const logoMap = [
+    ["GPT",       "assets/model_logos/openai_icon.svg"],
+    ["Claude",    "assets/model_logos/claude_icon.png"],
+    ["Grok",      "assets/model_logos/xai.svg"],
+    ["DeepSeek",  "assets/model_logos/deepseek.png"],
+    ["Qwen",      "assets/model_logos/qwen.png"],
+    ["Gemini",    "assets/model_logos/gemini_icon.svg"],
+  ];
+  function logoFor(name) {
+    for (const [k, p] of logoMap) if (name.startsWith(k)) return p;
+    return null;
+  }
+
+  recall.forEach((row, i) => {
+    const slotY = margin.top + i * rowH;
+    const labelY = slotY + 19;
+    const barY = slotY + labelH;
+    const logoPath = logoFor(row.short);
+    const logoSize = row.short.startsWith("Gemini") ? 50 : 40;
+    if (logoPath) {
+      const logoY = slotY + (rowH - logoSize) / 2;
+      const logoX = (margin.left - logoSize) / 2;
+      const img = el("image", {
+        x: Math.max(0, logoX), y: logoY,
+        width: logoSize, height: logoSize,
+        preserveAspectRatio: "xMidYMid meet",
+      });
+      img.setAttribute("href", logoPath);
+      img.setAttributeNS("http://www.w3.org/1999/xlink", "xlink:href", logoPath);
+      svg.appendChild(img);
+    }
+    svg.appendChild(el("text", {
+      x: margin.left, y: labelY,
+      "text-anchor": "start", class: "axis-tick",
+      "font-size": "22", "font-weight": "600", fill: "#1f2937",
+    }, row.short));
+    svg.appendChild(el("rect", {
+      x: margin.left, y: barY, width: xToPx(row.recall) - margin.left, height: barH,
+      fill: row.color, rx: 2,
+    }));
+    svg.appendChild(el("text", {
+      x: xToPx(row.recall) + 6, y: barY + barH/2 + 5,
+      class: "bar-label", fill: "#1f2937",
+    }, row.recall.toFixed(1) + "%"));
+  });
+
+  // y baseline
+  svg.appendChild(el("line", {
+    x1: margin.left, x2: margin.left,
+    y1: margin.top, y2: margin.top + innerH,
+    stroke: "#9ca3af", "stroke-width": 1,
+  }));
+}
+
+// ---------------- Boot ----------------
+loadData().then(d => {
+  drawAccuracy(document.getElementById("chart-acc"),       d.outcomes_by_method);
+  drawComments(document.getElementById("chart-comments"),  d.outcomes_by_method);
+  drawRecall(document.getElementById("chart-recall"),      d.recall_by_model);
+});
+</script>
+
+</body>
+</html>
