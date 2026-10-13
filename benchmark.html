@@ -3,15 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Review Systems Can Catch Real Errors in Research Papers — OpenAIReview</title>
+<title>AI Review Systems Can Catch Errors in Research Papers — OpenAIReview</title>
 <meta name="description" content="We benchmark four AI review systems on real papers. The best one separates weak from strong papers 83% of the time, is right in 91% of its comments, and catches 72% of the errors we plant.">
-<meta property="og:title" content="AI Review Systems Can Catch Real Errors in Research Papers">
+<meta property="og:title" content="AI Review Systems Can Catch Errors in Research Papers">
 <meta property="og:description" content="We benchmark four AI review systems on real papers. The best one separates weak from strong papers 83% of the time, is right in 91% of its comments, and catches 72% of the errors we plant.">
 <meta property="og:url" content="https://openaireview.org/benchmark.html">
 <meta property="og:image" content="https://openaireview.org/assets/benchmark_overview.png">
 <meta property="og:type" content="article">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="AI Review Systems Can Catch Real Errors in Research Papers">
+<meta name="twitter:title" content="AI Review Systems Can Catch Errors in Research Papers">
 <meta name="twitter:description" content="We benchmark four AI review systems on real papers. The best one separates weak from strong papers 83% of the time, is right in 91% of its comments, and catches 72% of the errors we plant.">
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-P2VZL2X4NX"></script>
@@ -137,6 +137,26 @@ a:hover { color: var(--accent-hover); }
   line-height: 1.75;
   margin-bottom: 8px;
 }
+.figure-frame {
+  width: 100%;
+  aspect-ratio: 1600 / 718;
+  overflow: hidden;
+  margin: 24px 0;
+}
+.figure-frame iframe { width: 1600px; height: 718px; border: 0; transform-origin: 0 0; display: block; }
+.edit-example { display: flex; flex-direction: column; gap: 8px; margin: 20px 0 28px; }
+.edit-panel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 10px 14px 12px; }
+.edit-panel h4 { font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-secondary); margin: 0 0 4px; }
+.blog-body .edit-example p { font-size: 15px; line-height: 1.65; margin: 0; }
+.edit-example del { background: #fbd9d3; color: #8a1c10; text-decoration: none; border-radius: 2px; padding: 1px 2px; }
+.edit-example ins { background: #cdeccf; color: #0f5a1e; text-decoration: none; font-weight: 600; border-radius: 2px; padding: 1px 2px; }
+.blog-body .edit-example p.edit-why { color: var(--text-secondary); border-left: 2px solid var(--border); padding-left: 12px; margin-top: 4px; }
+.venn-pair { display: flex; gap: 24px; align-items: center; margin: 24px 0 8px; }
+.venn-pair figure { flex: 1; margin: 0; text-align: center; }
+.blog-body .venn-pair img { width: 100%; max-width: 260px; border: 0; border-radius: 0; margin: 0 auto 8px; display: block; mix-blend-mode: multiply; }
+.blog-body p.venn-note { font-size: 13px; line-height: 1.5; color: var(--text-secondary); }
+.blog-body p.venn-note { text-align: center; margin-bottom: 28px; }
+@media (max-width: 560px) { .venn-pair { flex-direction: column; align-items: center; } }
 .blog-body img {
   width: 100%;
   border-radius: var(--radius);
@@ -257,7 +277,7 @@ a:hover { color: var(--accent-hover); }
 
 <div class="blog-hero">
   <p class="byline" style="margin-bottom:18px;"><a href="blogs.html">&larr; All blogs</a></p>
-  <h1>AI Review Systems Can Catch Real Errors in Research Papers</h1>
+  <h1>AI Review Systems Can Catch Errors in Research Papers</h1>
   <p class="byline">September 2026 &nbsp;&middot;&nbsp; Dang Nguyen</p>
 </div>
 
@@ -265,34 +285,58 @@ a:hover { color: var(--accent-hover); }
 
 <div style="background:var(--accent-light);border-left:3px solid var(--accent);border-radius:var(--radius-sm);padding:16px 20px;margin-bottom:28px;">
   <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.6px;color:var(--accent);">TL;DR</span>
-  <p style="margin:6px 0 0;font-size:15px;line-height:1.6;">We benchmark four AI review systems across six models on real papers. The best configuration separates weak from strong papers 83% of the time, 91% of its comments flag a real issue, and it catches 72% of the errors we plant. AI review is useful today and still has clear room to improve.</p>
+  <p style="margin:6px 0 0;font-size:15px;line-height:1.6;">We benchmark four AI review systems across six models on real papers. The best configuration separates weak from strong papers 83% of the time, 91% of its comments flag a real issue, and it catches 72% of the errors we introduce. AI review is already useful today and will likely keep improving.</p>
 </div>
 
-<p>In <a href="blog.html">our first post</a>, we argued that AI-assisted reviewing is necessary, and we named one open problem above all: we had no good way to evaluate an AI review. How do we know whether a review is any good?</p>
+<p>In <a href="blog.html">our first post</a>, we argued that AI-assisted reviewing is necessary, and we named one main open problem: how do we know whether an AI-generated review is good?</p>
 
-<p>Since then, a new class of AI review systems has appeared. They do more than send one prompt to a model. They split the paper, keep track of context, run several agents, and return a list of comments, each tied to a passage of the paper. There are many stories about how helpful they are, and very few measurements. In this post, we describe our new paper, which measures them in three ways.</p>
+<p>Current AI review systems do more than send one prompt to a model. They split the paper, keep track of context, run several agents, and return a list of comments, each tied to a passage of the paper. Reports of their usefulness are mostly anecdotal, and few measurements exist. In this post, we describe <a href="https://arxiv.org/abs/2606.19749" target="_blank">our new paper</a>, which measures them in three ways.</p>
 
-<img src="assets/benchmark_overview.png" alt="Overview of the benchmark: comment volume on weak and strong papers, the error injection procedure, and detection recall.">
+<div class="figure-frame" id="overview-figure">
+  <iframe src="assets/benchmark_overview/index.html" title="Overview of the benchmark: comment volume on weak and strong papers, the error injection procedure, and detection recall." scrolling="no"></iframe>
+</div>
+<noscript><img src="assets/benchmark_overview.png" alt="Overview of the benchmark: comment volume on weak and strong papers, the error injection procedure, and detection recall."></noscript>
+<script>
+// The figure is a page of fixed size (1600 by 718). Scale it to the width of the text column.
+(() => {
+  const frame = document.getElementById('overview-figure');
+  const fit = () => { frame.firstElementChild.style.transform = `scale(${frame.clientWidth / 1600})`; };
+  new ResizeObserver(fit).observe(frame);
+  fit();
+})();
+</script>
 
-<h2>What we tested</h2>
+<h2>The AI review systems</h2>
 
-<p>We compare four systems. <strong>Zero-shot</strong> gives the whole paper to a model in a single prompt. <strong>OpenAIReview</strong>, our open-source system, reads the paper in order and keeps a running summary of its definitions, equations, and claims. <strong>coarse</strong> is an open-source system with one agent per section and a final editing pass. <strong>Reviewer3</strong> is a commercial system that we can only use as a whole.</p>
+<p>We compare four systems. <strong>Zero-shot</strong> gives the whole paper to a model in a single prompt. <strong>OpenAIReview</strong>, our open-source system, reads the paper in order and keeps a running summary of its definitions, equations, and claims. <strong><a href="https://github.com/Davidvandijcke/coarse" target="_blank">coarse</a></strong> is an open-source system with one agent per section and a final editing pass. <strong><a href="https://reviewer3.com" target="_blank">Reviewer3</a></strong> is a commercial system that we use as a black box.</p>
 
-<p>The three open systems can run on any model, so we test each of them on two frontier models (GPT-5.5 and Claude Opus 4.7) and four cheaper ones. This lets us separate two questions that are usually mixed: how much comes from the model, and how much comes from the system around it?</p>
-
-<p>One disclosure before the results. OpenAIReview is our own system. We release the benchmark so that others can check our numbers and add their systems.</p>
+<p>The three open systems can run on any model, so we test each of them on two frontier models (GPT-5.5 and Claude Opus 4.7) and four efficient ones. This lets us separate two questions: how much of a system's performance comes from the model, and how much comes from the system around it?</p>
 
 <h2>AI reviews can tell weak papers from strong ones</h2>
 
-<p>A paper has no gold label for quality. So we take papers from ICLR and NeurIPS at the two ends of four signals: citations, awards, review scores, and a combination of them. For example, we compare award papers with rejected papers that were never published elsewhere. We then ask a simple question. Given one weak and one strong paper, does the system write more comments on the weak one?</p>
+<p>Since a paper has no gold label for quality, we take papers from ICLR and NeurIPS at the two ends of four signals: citations, awards, review scores, and a combination of them. For example, we compare award papers with rejected papers that were never published elsewhere. Our hypothesis is that a review system that tracks real issues should comment more on lower-quality papers. We measure this with <strong>pairwise accuracy</strong>: among all pairs of one weak and one strong paper, the share of pairs in which the weak paper gets more comments.</p>
 
-<p><strong>Every system does better than chance.</strong> The best configuration, OpenAIReview with GPT-5.5, is right for 83% of the pairs. Reviewer3 and the best zero-shot setup both reach 80%, and coarse reaches 66%. The pattern also holds when we count only major and moderate comments. No system was trained for this task.</p>
+<p><strong>Every system does better than chance.</strong> The best configuration, OpenAIReview with GPT-5.5, is right for 83% of the pairs. Reviewer3 and the best zero-shot setup both reach 80%, and coarse reaches 66%. The pattern also holds when we count only major and moderate comments. Note that none of the systems was trained for this task.</p>
 
-<p><strong>The comments are mostly correct.</strong> A count says nothing about whether a comment is right. So we sampled 300 comments and had six models from different companies judge each one, with a human check on a sample and on every contested case. For OpenAIReview with GPT-5.5, 91% of the comments flag a real issue. Reviewer3 is at 83%, zero-shot at 70%, and coarse at 64%.</p>
+<p><strong>The comments are mostly correct.</strong> We sampled 300 comments and had six models from different vendors judge each one, with a human check on a sample and on every contested case. For OpenAIReview with GPT-5.5, 91% of the comments flag a real issue. Reviewer3 is at 83%, zero-shot at 70%, and coarse at 64%.</p>
 
-<h2>They catch most planted errors, and miss a good share</h2>
+<h2>The best systems catch most planted errors</h2>
 
-<p>Real papers do not come with a list of their errors, so the first two tests cannot say how many errors a system misses. For that, we plant errors ourselves. We take 74 arXiv papers from eight fields, from econometrics to genomics, and inject four kinds of errors into their LaTeX source: local math edits such as a flipped sign, false claims, broken reasoning, and flawed experimental design. Then we check whether a review flags each one.</p>
+<p>To measure error recall, we take 74 arXiv papers from eight fields, from econometrics to genomics, and inject four kinds of errors into their LaTeX source: local math edits such as a flipped sign, false claims, broken reasoning, and flawed experimental design. Then we check whether a review flags each one.</p>
+
+<p>Here is one planted error of the false-claim kind, from a paper on metabolic models of bacteria (<a href="https://arxiv.org/abs/2604.25233" target="_blank">arXiv:2604.25233</a>). The edit changes one word.</p>
+
+<div class="edit-example">
+  <div class="edit-panel">
+    <h4>Original</h4>
+    <p>Each candidate reaction <em>i</em> is assigned a cost <em>RC<sub>i</sub></em> reflecting its plausibility for the target organisms, computed from taxonomic distance [&hellip;]; <del>lower</del> cost reactions are supported by closer relatives and are preferred.</p>
+  </div>
+  <div class="edit-panel">
+    <h4>Edited</h4>
+    <p>Each candidate reaction <em>i</em> is assigned a cost <em>RC<sub>i</sub></em> reflecting its plausibility for the target organisms, computed from taxonomic distance [&hellip;]; <ins>higher</ins> cost reactions are supported by closer relatives and are preferred.</p>
+  </div>
+  <p class="edit-why"><strong>Why it is wrong.</strong> The cost grows with taxonomic distance, so reactions from closer relatives have a lower cost, and the method prefers low cost. The edited sentence reads well by itself. A reviewer must connect it with the definition of the cost to see the error.</p>
+</div>
 
 <div style="overflow-x:auto">
 <table>
@@ -308,29 +352,41 @@ a:hover { color: var(--accent-hover); }
 </table>
 </div>
 
-<p>The strongest configuration catches 71.6% of the planted errors. That is a strong result, and it also means that more than one error in four gets through. Reviewer3 and coarse return only 5 to 10 comments per paper by design, so this test understates their value as reviewers.</p>
+<p>The strongest configuration (OpenAIReview and GPT 5.5) catches 71.6% of the planted errors. Reviewer3 and coarse return only 5 to 10 comments per paper by design, so this test understates their value as reviewers.</p>
 
-<h2>What we learned</h2>
+<h2>Some more observations</h2>
 
-<p><strong>The system matters as much as the model.</strong> With the same model, GPT-5.5, a single prompt catches 59.8% of the errors and OpenAIReview catches 71.6%. A system can also hurt. On DeepSeek-V4-Flash, coarse lowers recall from 31.0% to 20.7%, while OpenAIReview raises it to 55.8%. A stronger model alone is therefore an incomplete answer.</p>
+<p><strong>The harness matters.</strong> With the same model, GPT-5.5, a single prompt catches 59.8% of the errors and OpenAIReview catches 71.6%. Yet the harness can also lower recall. On DeepSeek-V4-Flash, coarse lowers recall from 31.0% to 20.7%, while OpenAIReview raises it to 55.8%.</p>
 
-<p><strong>The gains come from errors that need context.</strong> OpenAIReview improves most on false claims, broken reasoning, and experimental flaws, which a reader can only catch with the rest of the paper in mind. On local math edits, it does about as well as a single prompt (47% against 46%). These small slips remain the hardest errors for every system.</p>
+<p><strong>Models find different errors.</strong> Different models under the same system comment on different paragraphs. Together, the six models catch 83.3% of the planted errors, 11.7 points more than the best single model. This is an upper bound, since it keeps every comment from every model, but it shows what is achievable in the near future.</p>
 
-<p><strong>Models find different errors.</strong> Different models under the same system comment on different paragraphs. Together, the six models catch 83.3% of the planted errors, 11.7 points more than the best single model. This is an upper bound, since it keeps every comment from every model, but it shows what a good ensemble could reach.</p>
+<p><strong>AI and human reviewers look at different things.</strong> On papers with public human reviews, AI and humans flag mostly different paragraphs. Humans write 80% of the comments on novelty, scope, and motivation. AI writes most of the comments on claims, experiments, and mathematics. The two are complementary, which supports using AI in peer review.</p>
 
-<p><strong>AI and human reviewers look at different things.</strong> On papers with public human reviews, AI and humans flag mostly different paragraphs. Humans write 80% of the comments on novelty, scope, and motivation. AI writes most of the comments on claims, experiments, and mathematics. The two are complementary, which supports using AI review next to human review.</p>
+<div class="venn-pair">
+  <figure>
+    <img src="assets/benchmark_venn_models.png" alt="Venn diagram of the paragraphs that Claude Opus 4.7, GPT-5.5, and the efficient models comment on under OpenAIReview. 9.43 paragraphs are shared by all three.">
+  </figure>
+  <figure>
+    <img src="assets/benchmark_venn_human_ai.png" alt="Venn diagram of the paragraphs that human reviewers and AI review systems comment on: 9.03 only human, 7.16 both, 14.67 only AI.">
+  </figure>
+</div>
+<p class="venn-note">The average count of paragraphs per paper that get a comment from the reviewers in a region.</p>
 
-<h2>What this does not show</h2>
+<h2>Next steps</h2>
 
-<p>Citations, awards, and review scores are noisy signals of quality. We compare only the two ends of each signal, so our results are about telling clearly weak papers from clearly strong ones. They say nothing about fine ranking, and they are no basis for accept or reject decisions.</p>
+<p>A year ago, the question was whether AI can review a paper. The question now is how much of a review AI should write, and for which parts. Models already pick up signals of paper quality and detect many errors. This opens a wide space for the design of the system around the model, which can be tailored to different readers, such as authors, area chairs, or one field. As more of them appear, we will need more benchmarks to measure them.</p>
 
-<p>Recall on planted errors rewards systems that write more comments, and it does not measure whether a system puts the most important issue first. The benchmark also leaves out everything that has no clear ground truth, such as novelty and significance.</p>
+<p>Like the systems tested, the benchmark is open-source! If you build an AI review system, you can run it on the same papers and see how yours perform.</p>
 
-<h2>What comes next</h2>
+<h2>Cite the paper</h2>
 
-<p>The benchmark is open, like the system. If you build an AI review system, you can run it on the same papers and compare. We will keep adding systems, models, and fields.</p>
-
-<p>A year ago, the question was whether AI can review a paper at all. The question now is how much of the review it should carry, and for which parts. That question finally has numbers behind it.</p>
+<pre style="background:#f4f4f5;border:1px solid var(--border);border-radius:var(--radius-sm);padding:20px 24px;font-size:13px;line-height:1.7;overflow-x:auto;color:#374151;font-family:'Courier New',Courier,monospace;">@article{nguyen2026benchmarking,
+  title     = {Benchmarking Agentic Review Systems},
+  author    = {Nguyen, Dang and Hao, Wanqing and Elazar, Yanai and Tan, Chenhao},
+  year      = {2026},
+  journal   = {arXiv preprint arXiv:2606.19749},
+  url       = {https://arxiv.org/abs/2606.19749}
+}</pre>
 
 </div><!-- .blog-body -->
 
