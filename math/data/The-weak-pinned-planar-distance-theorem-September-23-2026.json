@@ -1,0 +1,252 @@
+{
+ "id": "The-weak-pinned-planar-distance-theorem-September-23-2026",
+ "title": "The weak pinned planar distance theorem",
+ "abstract": "We prove the weak pinned Erdős distinct-distance conjecture. For every fixed <i>ε</i> &gt; 0, all but <span class=\"math\">o(n)</span> points of any <i>n</i>-point planar set determine at least <span class=\"math\">n^{1-\\varepsilon}</span> distinct nonzero distances.",
+ "result_id": "167",
+ "result_title": "Planar distinct distances and unit-distance bounds",
+ "subject": "Combinatorics",
+ "source_pdf": "preprints/The-weak-pinned-planar-distance-theorem-September-23-2026/paper.pdf",
+ "pdf": "pdf/The-weak-pinned-planar-distance-theorem-September-23-2026.pdf",
+ "page_sizes": [
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ],
+  [
+   612.0,
+   792.0
+  ]
+ ],
+ "macros": "\\newcommand{\\R}{\\mathbb R}\n\\newcommand{\\C}{\\mathbb C}\n\\newcommand{\\Q}{\\mathbb Q}\n\\newcommand{\\N}{\\mathbb N}\n\\newcommand{\\E}{\\mathbb E}\n\\newcommand{\\I}{\\mathcal I}\n\\newcommand{\\avg}[1]{\\left\\langle #1\\right\\rangle}\n\\newcommand{\\supp}{\\operatorname{supp}}\n\\newcommand{\\diam}{\\operatorname{diam}}\n\\newcommand{\\Var}{\\operatorname{Var}}\n\\newcommand{\\arraystretch}{1.2}",
+ "review": {
+  "method": "OpenAIReview (Claude Opus 5.5)",
+  "effort": "high",
+  "date": "2026-10-21"
+ },
+ "overall_assessment": "The manuscript claims the weak pinned Erdos distinct-distance conjecture. Theorem 1.1 states that $F_n(s)\\to0$ for every fixed $s>0$, and Corollary 1.2 deduces that all but $o(n)$ pins determine at least $n^{1-\\varepsilon}$ distances. The proof is by contradiction. Section 2 builds an extremal graph by real-closed-field transfer, vertex deletion and a subset estimate. Section 3 uses the product formula in a number field to obtain an exact additive overlap identity for nested partitions at every place. Section 4 gives a small-cell bound, and Section 5 gives a variance lemma obtained from the signed law $P_B-2R_B+\\pi$. The two remaining regimes are then excluded: $W\\to\\infty$ by a tree-transport and tree-fluctuation argument (Section 6), and bounded $W$ by a M\\\"obius-map obstruction for nonatomic weak limits at one selected complex embedding (Section 7).\n\nTen sub-agents reviewed the paper. Seven reported no issues, and the other three reported one low-severity item each. Before consolidating, I re-checked the main steps against the source myself. These included the vertex-deletion count and the subset estimate in Proposition 2.2; the law and tails of the grid error in Lemma 3.1; the four-case identity behind eq. depth; the derivation of eq. additive; the three cases of Lemma 4.1; the closed forms of $P_B(C^2)$, $R_B(C^2)$ and $H_B(C)$ in Lemma 5.1; the bound $W_2\\ge c_1W$; the projection formula; the fiber identity $i_{j'}(y,z)=i_j(y,z)-i_j(x,z)+h_e-i_j(x,y)$; the tree-fluctuation constant; the place selection and tightness bounds; and Lemma 7.1. I found no mathematical error in these steps. No issue below is classified as major.\n\nThe remaining concerns are about calibration and presentation, not correctness. The most important one (moderate) is that the argument never uses realness or complex conjugacy. It uses only injectivity of $Z_1,Z_2$ and the factorization $t=(\\Delta Z_1)(\\Delta Z_2)$, so word for word it also proves the corresponding statement for complex point sets with no isotropic differences, and for the Minkowski form. As far as I know, those statements are open. The paper should state this and explain which ingredient overcomes the known barriers. Section 1.1 also does not note that the Pach-Tardos isosceles-triangle bound $O(n^{(11e-3)/(5e-1)})$ already gives Theorem 1.1 for $s>0.1365$. Section 3 says it converts the distance equalities into the additive identity, but that identity holds for any finite set with injective coordinates. Two smaller points are an unstated metric normalization in $\\omega_\\varphi(\\sqrt2\\epsilon)$ and heavy reuse of notation across sections.\n\nBecause the result would settle a long-standing open problem by an unconventional arithmetic route, a specialist should verify it independently before it is accepted. That verification should focus on the interplay between eq. additive, Lemma 4.1 and Lemma 5.1, and on whether the method's apparent generality is consistent with what is known in related settings. Within this review, the written argument holds up at the level of detail I could check.",
+ "num_findings": 5,
+ "comments": [
+  {
+   "title": "The proof never uses complex conjugacy or realness, so it would also prove an unstated complex analogue",
+   "quote": "At another complex embedding the two coordinates need not be complex",
+   "explanation": "Lines 548-550 say that, at each embedding, the proof uses only two properties: the coordinates $Z_1,Z_2$ are injective, and $t(x,y)=(Z_1(y)-Z_1(x))(Z_2(y)-Z_2(x))$ factors in $K$. I checked Sections 3-7 and found nothing else used. The hierarchies, Lemma 4.1, the variance lemma, the tree argument, and the M\\\"obius obstruction all depend on the raw depths $i_j$ and on the fiber relation $i_1(x_e,y)+i_2(x_e,y)=h_e$. The selected embedding in Section 7 can be any complex place, and there $Z_1,Z_2$ need not be conjugate. Realness enters only through the definition of $F_n(s)$ and through the transfer in Proposition 2.2.\n\nThe same transfer works from $\\C$ to $\\overline{\\Q}$, since an existential system of polynomial equalities and disequalities that is solvable over $\\C$ is solvable over $\\overline{\\Q}$. So, word for word, the argument also proves the following. Let $P\\subset\\C^2$ be a finite set such that $u\\pm\\mathrm i v$ (or any two coordinates with split product $\\Delta z_1\\,\\Delta z_2$) are injective on $P$. Then, for every fixed $s>0$, the fraction of pairs whose pinned class under $\\Delta z_1\\,\\Delta z_2$ has size at least $n^s$ tends to $0$. This is the weak pinned statement for complex point sets with no isotropic differences, and the corresponding statement for the real Minkowski form with no light-like differences. As far as I know, both are open and lie beyond current incidence and entropy methods.\n\nThis consequence does not show that the paper is wrong, because I know of no counterexample. But a manuscript claiming a famous open problem should state this scope explicitly. It should also identify which step gets past the barriers that stop the methods cited in Section 1.1. That is the obvious consistency check for the argument, and the paper does not discuss it.",
+   "comment_type": "missing_information",
+   "severity": "moderate",
+   "source": {
+    "file": "sections/hierarchies.tex",
+    "lines": [
+     19,
+     19
+    ]
+   },
+   "boxes": [
+    {
+     "page": 9,
+     "x": 75.600212,
+     "y": 92.593319,
+     "w": 460.799591,
+     "h": 12.0452075
+    },
+    {
+     "page": 9,
+     "x": 75.600212,
+     "y": 106.142521,
+     "w": 460.799591,
+     "h": 12.0452075
+    }
+   ]
+  },
+  {
+   "title": "Theorem 1.1 is not placed against known isosceles-triangle bounds, which already give it for $s>0.1365$",
+   "quote": "Theorem~\\ref{thm:main} controls the multiplicity of a distance chosen",
+   "explanation": "Let $I(P)=\\sum_{x\\ne y}(k_P(x,y)-1)$ count isosceles triangles with a marked apex. Each pair with $k_P(x,y)\\ge n^s$ contributes at least $n^s-1$ to $I(P)$, so $F_n(s)\\le \\sup_P I(P)/[(n^s-1)n(n-1)]$. Pach and Tardos proved $I(P)=O(n^{(11e-3)/(5e-1)})$, and $(11e-3)/(5e-1)=2.13646\\ldots$. This already gives $F_n(s)\\to0$ for every $s>0.13646\\ldots$, so the new content of Theorem 1.1 is the range $0<s\\le 0.1365$. In the other direction, the conjectured bound $I(P)=n^{2+o(1)}$ would imply Theorem 1.1. Theorem 1.1 has no rate, so it does not give $I(P)=o(n^{2+s})$: splitting at $n^s$ gives only $I(P)\\le n^{2+s}+F_n(s)n^3$.\n\nSection 1.1 discusses only pinned-distance exponents (Solymosi-T\\'oth, Tardos, Katz-Tardos). It cites neither the isosceles-triangle literature nor this reduction. I checked every displayed statement in Section 1, including Corollary 1.2, its arithmetic, and the value $\\frac{48-14e}{55-16e}=0.864137\\ldots$, and all of them are correct. The gap is only one of context. The reader is not told which range of $s$ is new, or how the result relates to the isosceles-triangle problem, which is closely related.",
+   "comment_type": "missing_information",
+   "severity": "minor",
+   "source": {
+    "file": "sections/introduction.tex",
+    "lines": [
+     94,
+     94
+    ]
+   },
+   "boxes": [
+    {
+     "page": 3,
+     "x": 75.600212,
+     "y": 258.127903,
+     "w": 460.799591,
+     "h": 12.0452075
+    }
+   ]
+  },
+  {
+   "title": "The 'exact overlap identity' does not use any distance equality; Section 3's framing overstates its role",
+   "quote": "We now turn the distance equalities in the prepared graph into an exact",
+   "explanation": "The derivation of eq. (additive) at lines 784-796 uses three facts: Lemma 3.2 (eq. depth); $\\E\\,\\Delta_j=\\kappa$ at complex places, with $\\Delta_j=0$ at finite places; and the product formula $\\sum_v\\sigma_v\\log|Z_j(x)-Z_j(y)|_v=0$. Together with $\\sum_{v\\mid\\infty}\\sigma_v=1$, these give $\\avg{d_j(x,y)}=\\kappa$ separately for each $j$ and each distinct pair. Hence $\\avg{L_j}(x,y)=(\\kappa-\\avg{M_j})+\\avg{S_j}(x)+\\avg{S_j}(y)$ holds for each coordinate separately. I re-derived the pointwise identity for $o(r)-g(r)$ in all four giant cases and confirmed eq. depth. Neither eq. hier-factor, nor eq. hier-fiber, nor the graph $E$ enters. The identity therefore holds for any finite set of points of $K^2$ on which $Z_1$ and $Z_2$ are injective, including sets with no repeated distances.\n\nThe mathematics of Section 3 is correct. The problem is the framing. Line 532 says the section turns the distance equalities into the identity, and line 810 says it relates the scales to the graph and fiber laws. Neither is accurate. The distance structure enters only later: through eq. hier-fiber in Lemma 4.1, Section 6.2 and Section 7.3, and through eq. subset. The variance lemma (Lemma 5.1) is likewise configuration-free apart from its input $W_{2,\\mathrm{sm}}=o(W+1)$. The paper should say so plainly. Readers can then see where the information about large distance classes actually enters the contradiction.",
+   "comment_type": "presentation",
+   "severity": "minor",
+   "source": {
+    "file": "sections/hierarchies.tex",
+    "lines": [
+     3,
+     3
+    ]
+   },
+   "boxes": [
+    {
+     "page": 8,
+     "x": 75.600212,
+     "y": 580.700199,
+     "w": 460.799591,
+     "h": 12.0452075
+    }
+   ]
+  },
+  {
+   "title": "Oscillation bound $\\omega_\\varphi(\\sqrt2\\epsilon)$ depends on an unstated normalization of the spherical metric",
+   "quote": "$\\omega_\\varphi(\\sqrt2\\epsilon)$, where $\\omega_\\varphi$ is a uniform",
+   "explanation": "At normalized levels in $I_\\epsilon$ the squares have side in $(\\epsilon/(2e),\\epsilon]$, so their Euclidean diameter is at most $\\sqrt2\\epsilon$. The modulus $\\omega_\\varphi$ is taken in the spherical metric on $S=\\widehat{\\C}$, and the paper does not fix its normalization. With the unit-sphere chordal metric $\\chi(z,w)=2|z-w|/\\sqrt{(1+|z|^2)(1+|w|^2)}$, one has only $\\chi(z,w)\\le2|z-w|$, which is sharp near $0$. The geodesic metric is larger still, by a factor of at most $\\pi/2$. So the oscillation on a square is bounded by $\\omega_\\varphi(2\\sqrt2\\epsilon)$, or by $\\omega_\\varphi(\\sqrt2\\pi\\epsilon)$ for the geodesic metric. The stated value $\\omega_\\varphi(\\sqrt2\\epsilon)$ holds only for the diameter-one chordal normalization. The constant sits inside a modulus that tends to $0$ as $\\epsilon\\downarrow0$, so eq. (bounded-test-bound) and the limit order ($n\\to\\infty$, then $R\\to\\infty$, then $\\epsilon\\downarrow0$) are unaffected. The fix is to state the normalization or to write $\\omega_\\varphi(C\\epsilon)$ with an absolute constant $C$.",
+   "comment_type": "presentation",
+   "severity": "minor",
+   "source": {
+    "file": "sections/bounded.tex",
+    "lines": [
+     132,
+     132
+    ]
+   },
+   "boxes": [
+    {
+     "page": 24,
+     "x": 75.600212,
+     "y": 338.934139,
+     "w": 460.799591,
+     "h": 16.22383625
+    }
+   ]
+  },
+  {
+   "title": "Several symbols are reused with different meanings across sections",
+   "quote": "Let $S=\\widehat{\\C}$ be the Riemann sphere with its chordal metric,",
+   "explanation": "The proof spans several long chains of estimates, and a number of symbols are overloaded. $S_j$ and $S=S_1+S_2$ (Section 6.1) are giant-exit times, while $S=\\widehat{\\C}$ is the Riemann sphere (Section 7.1). $\\eta_N=\\sqrt{t_N}$ is a cleanup parameter in Section 2, while $\\eta_n=\\sum_{v\\mid\\infty}\\sigma_vV_v$ is a variance sum in Section 7.1. $B$ is the support set in Lemma 5.1 and an arbitrary tree cell in Section 6, but a domination constant in Section 7.2 ($\\E_{\\mathcal F}\\nu\\le B\\alpha$). $C$ denotes cells throughout, but is a bound on $\\sum_v\\sigma_vT_v$ at line 1600. $M$ is the domination constant in Lemma 5.1, but $M_j$ is the giant endpoint, and $M$ is also the number of walk intervals in Lemma 6.1. $T(\\lambda)$, $T_n$, $T_v$ and $\\mathsf T_j$ are four unrelated quantities. None of these collisions produces a mathematical error that I could find. They do make the cross-section dependencies harder to audit, which matters for a proof of this length and ambition.",
+   "comment_type": "presentation",
+   "severity": "minor",
+   "source": {
+    "file": "sections/bounded.tex",
+    "lines": [
+     74,
+     74
+    ]
+   },
+   "boxes": [
+    {
+     "page": 23,
+     "x": 75.600212,
+     "y": 520.789555,
+     "w": 461.203217,
+     "h": 16.43523625
+    }
+   ]
+  }
+ ]
+}

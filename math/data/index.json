@@ -3,7 +3,7 @@
   "repo": "openai/math",
   "commit": "adc7f1241b42e322a6451854ab7e4b4c146bf78a"
  },
- "reviewed": 25,
+ "reviewed": 26,
  "reviewed_ids": [
   "A-Gepner-stability-condition-on-every-smooth-quintic-threefold-September-24-2026",
   "A-closed-Ricci-flow-with-bounded-scalar-curvature-and-finite-time-curvature-blowup-September-24-2026",
@@ -29,6 +29,7 @@
   "The-Solomon-Yau-least-volume-theorem-September-23-2026",
   "The-curve-scaling-limit-of-half-plane-double-dimers-September-23-2026",
   "The-p-adic-section-conjecture-September-24-2026",
+  "The-weak-pinned-planar-distance-theorem-September-23-2026",
   "Unrestricted-pro-modularity-at-the-prime-two-October-4-2026"
  ],
  "papers": [
@@ -308,6 +309,23 @@
    ],
    "pages": 27,
    "summary": "Resolves the near-boundary Birkhoff conjecture for smooth strictly convex planar billiards of positive curvature. Such a billiard is an ellipse whenever a full grazing annulus is continuously foliated by individually invariant essential curves. A continuous physical collar of smooth closed convex caustics also suffices."
+  },
+  {
+   "id": "The-weak-pinned-planar-distance-theorem-September-23-2026",
+   "title": "The weak pinned planar distance theorem",
+   "result_id": "167",
+   "result_title": "Planar distinct distances and unit-distance bounds",
+   "subject": "Combinatorics",
+   "num_findings": 5,
+   "severities": [
+    "moderate",
+    "minor",
+    "minor",
+    "minor",
+    "minor"
+   ],
+   "pages": 27,
+   "summary": "Proves the weak pinned Erdős distance conjecture: for every fixed <i>ε</i> &gt; 0, all but <span class=\"math\">o(n)</span> points of any <i>n</i>-point planar set determine at least <span class=\"math\">n^{1-\\varepsilon}</span> distinct nonzero distances. A complementary theorem bounds the number of unit-distance pairs by <span class=\"math\">O(n^{4/3-\\delta})</span> for an absolute <i>δ</i> &gt; 0."
   },
   {
    "id": "An-Integral-Counterexample-to-Gerstens-Conjecture-September-25-2026",
